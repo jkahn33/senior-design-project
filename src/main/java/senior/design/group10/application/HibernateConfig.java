@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -22,16 +21,15 @@ public class HibernateConfig {
     @Bean
     @Primary
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em
+        LocalContainerEntityManagerFactoryBean emf
                 = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan("senior.design.group10.objects");
+        emf.setDataSource(dataSource());
+        emf.setPackagesToScan("senior.design.group10.objects");
 
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-        em.setJpaProperties(additionalProperties());
+        emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        emf.setJpaProperties(additionalProperties());
 
-        return em;
+        return emf;
     }
 
     @Bean
@@ -39,8 +37,8 @@ public class HibernateConfig {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/user_logging_system");
-        dataSource.setUsername( "root" );
-        dataSource.setPassword( "root" );
+        dataSource.setUsername("root");
+        dataSource.setPassword("root");
         return dataSource;
     }
 
