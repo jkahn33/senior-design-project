@@ -17,9 +17,12 @@ public class TestWrap {
     @Column
     private String val;
 
+    public TestWrap(){}
+
     public TestWrap(String val){
         this.val = val;
     }
+
     public String getVal(){
         return val;
     }
