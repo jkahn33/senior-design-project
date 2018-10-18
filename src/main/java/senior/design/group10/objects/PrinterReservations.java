@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class PrinterReservations
 {
-	private String username;
+	private String username1;
 	private String fiveDigExt;
 	private String jobDescription;
 	private String jobDuration;
