@@ -29,5 +29,4 @@ public class WindowsController {
         List<TestWrap> wraps = hibernateTest.getUserDetails();
         return wraps.get(0);
     }
-
 }

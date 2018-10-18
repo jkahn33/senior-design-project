@@ -12,7 +12,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
     "senior.design.group10.application"})
 @SpringBootApplication
 @EnableJpaRepositories("senior.design.group10.dao")
-@EntityScan("senior.design.group10.objects")
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
