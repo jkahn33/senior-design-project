@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import senior.design.group10.objects.UserCredentials;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,14 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/android")
 public class AndroidController {
 
-    @PostMapping("/entranceCredentials")
-    public void entranceCredentials(@RequestBody UserCredentials credentials){
+    @PostMapping("/registerUser")
+    public void registerUser(/*@RequestBody User user*/){
 
     }
-    @PostMapping("/printerCredentials")
-    public void printerCredentials(HttpServletRequest request){
 
-    }
     @PostMapping("/schedulePrint")
     public void schedulePrint(HttpServletRequest request){
 
