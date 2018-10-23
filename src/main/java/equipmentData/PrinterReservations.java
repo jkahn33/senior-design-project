@@ -1,4 +1,4 @@
-package equipmentData;
+package main.java.equipmentData;
 import java.sql.Timestamp;
 
 

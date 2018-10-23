@@ -1,4 +1,4 @@
-package equipmentData;
+package main.java.equipmentData;
 
 public class Equipment
 {
