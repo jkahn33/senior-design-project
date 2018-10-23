@@ -1,15 +1,16 @@
-package senior.design.group10.objects;
+package equipmentData;
 import java.sql.Timestamp;
 
 
-public class PrinterReservations
+public class BreakoutReservation 
 {
+
+
 	private String username;
 	private String fiveDigExt;
 	private String jobDescription;
 	private String jobDuration;
 	private Timestamp jobSchedule;
 	private String additionalComments;
-	private String PrinterID;
-	
+	private String roomID;
 }

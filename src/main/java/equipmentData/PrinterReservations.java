@@ -1,4 +1,4 @@
-package senior.design.group10.objects;
+package equipmentData;
 import java.sql.Timestamp;
 
 
