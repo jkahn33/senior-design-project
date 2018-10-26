@@ -1,4 +1,4 @@
-package tvData;
+package senior.design.group10.objects.tv;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,9 +23,11 @@ public class Videos
 	private String videoPath;
 	@Column
 	private Timestamp uploadDate;
-	@Column;
+	@Column
 	private String adminID;
-	
+
+	public Videos(){}
+
 	public Videos(String videoName, String videoPath, Timestamp uploadDate, String adminID)
 	{
 		this.videoName = videoName;

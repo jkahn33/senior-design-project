@@ -1,6 +1,5 @@
-package main.java.tvData;
+package tvData;
 import java.sql.Timestamp;
-
 
 public class videoData 
 {

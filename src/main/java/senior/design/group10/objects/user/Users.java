@@ -1,32 +1,23 @@
-package main.java.userData;
+package senior.design.group10.objects.user;
 import java.sql.Timestamp;
 
-<<<<<<< HEAD
-
-public class Users 
-{
-	private String name;
-	private Timestamp creationDate;
-	private String fiveDigExt;
-	private String depCode;
-=======
 import javax.persistence.*;
-
-
 
 @Entity
 @Table(name = "users")
 public class Users 
 {
-	
 	@Column
 	private String name;
 	@Column
 	private Timestamp creationDate;
+	@Id
 	@Column
 	private String fiveDigExt;
 	@Column
 	private String depCode;
+
+	public Users(){}
 	
 	public Users( String name, Timestamp creationDate, String fiveDigExt, String depCode)
 	{
@@ -35,5 +26,4 @@ public class Users
 		this.fiveDigExt = fiveDigExt;
 		this.depCode = depCode;
 	}
->>>>>>> master
 }

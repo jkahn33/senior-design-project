@@ -1,15 +1,4 @@
-package main.java.userData;
-<<<<<<< HEAD
-
-public class Admin 
-{
-	private String username;
-	private String password;
-	private String name;
-	private String adminID;
-=======
-import org.hibernate.annotations.GenericGenerator;
-
+package senior.design.group10.objects.user;
 
 import javax.persistence.*;
 
@@ -18,7 +7,6 @@ import javax.persistence.*;
 public class Admin 
 {
 	@Id
-	
 	@Column
 	private String adminID;
 	@Column
@@ -27,6 +15,8 @@ public class Admin
 	private String password;
 	@Column
 	private String name;
+
+	public Admin(){}
 	
 	public Admin( String adminID, String username, String password, String name)
 	{
@@ -35,5 +25,4 @@ public class Admin
 		this.password = password;
 		this.name = name;
 	}
->>>>>>> master
 }

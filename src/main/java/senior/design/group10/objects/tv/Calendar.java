@@ -1,13 +1,4 @@
-package main.java.tvData;
-<<<<<<< HEAD
-import java.sql.Timestamp;
-
-public class Calendar 
-{
-	private String eventName;
-	private Timestamp eventDate;
-	private String adminID;
-=======
+package senior.design.group10.objects.tv;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -31,6 +22,8 @@ public class Calendar
 	private Timestamp eventDate;
 	@Column
 	private String adminID;
+
+	public Calendar(){}
 	
 	public Calendar( String eventName, Timestamp eventDate, String adminID)
 	{
@@ -38,5 +31,4 @@ public class Calendar
 		this.eventDate = eventDate;
 		this.adminID = adminID;
 	}
->>>>>>> master
 }

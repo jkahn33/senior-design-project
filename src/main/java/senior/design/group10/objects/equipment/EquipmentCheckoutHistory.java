@@ -1,31 +1,20 @@
-<<<<<<< HEAD
-package main.java.equipmentData;
+package senior.design.group10.objects.equipment;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import java.sql.Timestamp;
 
-
-public class EquipmentCheckoutHistory
-{
-	private String barcode;
-	private String username;
-	private String goingToLocation;
-	private Timestamp CheckoutDate;
-	private Timestamp CheckingDate;
-	private String AdminID;
-=======
-package equipmentData;
-
-import java.sql.Timestamp;
-
-import senior.design.group10.objects.Column;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "equipment_checkout")
-
 public class EquipmentCheckoutHistory
 {
 	@Id
-	
+	@Column(name="checkout_id")
+	@GenericGenerator(name="generator", strategy="increment")
+	@GeneratedValue(generator="generator")
+	private int id;
 	@Column
 	private String barcode;
 	@Column
@@ -36,6 +25,10 @@ public class EquipmentCheckoutHistory
 	private Timestamp checkingDate;
 	@Column
 	private String adminID;
+
+	public EquipmentCheckoutHistory(){
+
+	}
 	
 	public EquipmentCheckoutHistory(String barcode, String username, Timestamp checkoutDate,Timestamp checkingDate, String adminID)
 	{
@@ -45,6 +38,5 @@ public class EquipmentCheckoutHistory
 		this.checkoutDate = checkoutDate;
 		this.adminID = adminID;
 	}
->>>>>>> master
 	
 }

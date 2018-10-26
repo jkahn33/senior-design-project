@@ -1,14 +1,4 @@
-package main.java.equipmentData;
-<<<<<<< HEAD
-
-public class Equipment
-{
-	private String barcode;
-	private String equipmentName;
-	private boolean inStock;
-	private String location;
-=======
-import org.hibernate.annotations.GenericGenerator;
+package senior.design.group10.objects.equipment;
 
 import javax.persistence.*;
 
@@ -17,13 +7,14 @@ import javax.persistence.*;
 public class Equipment
 {
 	@Id
-	
 	@Column
 	private String barcode;
 	@Column
 	private String equipmentName;
 	@Column
 	private boolean inStock;
+
+	public Equipment(){}
 	
 	public Equipment(String barcode, String equipmentName, boolean inStock)
 	{
@@ -31,5 +22,4 @@ public class Equipment
 		this.equipmentName = equipmentName;
 		this.inStock = inStock;
 	}
->>>>>>> master
 }

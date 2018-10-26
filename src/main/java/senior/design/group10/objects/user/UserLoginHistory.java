@@ -1,21 +1,9 @@
-package main.java.userData;
-<<<<<<< HEAD
-import java.sql.Timestamp;
-
-
-public class UserLoginHistory 
-{
-	private String username;
-	private Timestamp loginDateTime;
-	
-=======
-
+package senior.design.group10.objects.user;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 import java.sql.Timestamp;
-
 
 @Entity
 @Table(name="user_login_hist")
@@ -31,12 +19,12 @@ public class UserLoginHistory
 	private String username;
 	@Column
 	private Timestamp loginDateTime;
+
+	public UserLoginHistory(){}
 	
 	public UserLoginHistory(String username, Timestamp loginDateTime)
 	{
 		this.username = username;
 		this.loginDateTime = loginDateTime;
 	}
-	
->>>>>>> master
 }

@@ -1,4 +1,4 @@
-package senior.design.group10.objects;
+package senior.design.group10.objects.equipment;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -29,7 +29,9 @@ public class PrinterReservations
 	@Column
 	private String printerID;
 
-	public PrinterReservations(){}
+	public PrinterReservations(){
+
+	}
 
 	public PrinterReservations(String username, String fiveDigExt, String jobDescription, String jobDuration, Timestamp jobSchedule, String additionalComments, String printerID) {
 		this.username = username;

@@ -1,4 +1,4 @@
-package tvData;
+package senior.design.group10.objects.tv;
 import org.hibernate.annotations.GenericGenerator;
 
 
@@ -16,10 +16,15 @@ public class Messages
 	@GenericGenerator(name="generator", strategy="increment")
 	@GeneratedValue(generator="generator")
 	private int id;
-	
+
+	@Column
 	private String message;
+	@Column
 	private Timestamp messageDate;
+	@Column
 	private String adminID;
+
+	public Messages(){}
 	
 	public Messages(String message, Timestamp messageDate, String adminID)
 	{
