@@ -3,7 +3,13 @@
 *.ipr
 *.iws
 /.idea
+#eclipse files
+/.settings
+.DS_Store
+.classpath
+.project
 #gradle
 /.gradle
 #misc
 /out
+/bin/
