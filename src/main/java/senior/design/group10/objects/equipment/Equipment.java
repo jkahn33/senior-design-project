@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Equipment
 {
 	@Id
-	@Column
+	@Column(length=50)
 	private String barcode;
 	@Column
 	private String equipmentName;

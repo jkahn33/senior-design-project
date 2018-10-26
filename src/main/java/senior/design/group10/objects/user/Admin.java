@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Admin 
 {
 	@Id
-	@Column
+	@Column(length=5)
 	private String adminID;
 	@Column
 	private String username;

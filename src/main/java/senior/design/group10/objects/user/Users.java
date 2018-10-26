@@ -12,7 +12,7 @@ public class Users
 	@Column
 	private Timestamp creationDate;
 	@Id
-	@Column
+	@Column(length=5)
 	private String fiveDigExt;
 	@Column
 	private String depCode;
