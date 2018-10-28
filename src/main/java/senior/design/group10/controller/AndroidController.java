@@ -24,10 +24,10 @@ public class AndroidController {
         this.userService = userService;
     }
 
-    @GetMapping("/newUser")
+    //API endpoint for creating a new user.
+    @PostMapping("/newUser")
     @ResponseBody
     public NewUserResponse newUser(SentUser sentUser){
-        sentUser = new SentUser("test", "12346", "12");
         return userService.saveNewUser(sentUser);
     }
 
