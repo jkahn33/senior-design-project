@@ -9,7 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages={"senior.design.group10.objects",
     "senior.design.group10.controller",
     "senior.design.group10.dao",
-    "senior.design.group10.application"})
+    "senior.design.group10.application",
+    "senior.design.group10.service"})
 @SpringBootApplication
 @EnableJpaRepositories("senior.design.group10.dao")
 public class Application {
