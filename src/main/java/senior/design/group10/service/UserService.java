@@ -3,7 +3,7 @@ package senior.design.group10.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import senior.design.group10.dao.UsersDAO;
-import senior.design.group10.objects.response.NewUserResponse;
+import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.objects.user.Users;
 
@@ -26,7 +26,7 @@ public class UserService {
     * This method will check to make sure the 5 digit extension does not already exist in the database and if it doesn't,
     * save the new user object to the database.
     */
-    public NewUserResponse saveNewUser(SentUser sentUser){
+    public ResponseObject saveNewUser(SentUser sentUser){
         //Creates a new date object to get exact time of creation of user
         Date date = new Date();
         Timestamp currentTime = new Timestamp(date.getTime());
@@ -34,7 +34,7 @@ public class UserService {
         //checks to make sure the extension has not been used before.
         //If the extension already exists, a message will be sent to the client
         if(usersDAO.existsById(sentUser.getExt())){
-            return new NewUserResponse(false, "A user with extension " + sentUser.getExt() + " already exists.");
+            return new ResponseObject(false, "A user with extension " + sentUser.getExt() + " already exists.");
         }
 
         //creates a new Users object which is the database entity. This object has the user data sent from the front end
@@ -43,6 +43,6 @@ public class UserService {
 
         //accesses the DAO class and uses Spring's CrudRepository class to save the new user.
         usersDAO.save(userToSave);
-        return new NewUserResponse(true, null);
+        return new ResponseObject(true, null);
     }
 }
