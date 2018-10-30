@@ -13,8 +13,6 @@ import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 @RequestMapping("/android")
 public class AndroidController {
