@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.AdminInQuestion;
-import senior.design.group10.objects.sent.NewAdmin;
 import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.UserService;
@@ -33,12 +32,6 @@ public class AndroidController {
     @ResponseBody
     public ResponseObject newUser(SentUser sentUser){
         return userService.saveNewUser(sentUser);
-    }
-
-    @GetMapping("/newAdmin")
-    @ResponseBody
-    public ResponseObject newAdmin(NewAdmin sentAdmin){
-        return adminService.createNewAdmin(sentAdmin);
     }
 
     @GetMapping("/validateAdmin")
