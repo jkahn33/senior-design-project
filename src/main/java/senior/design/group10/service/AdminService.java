@@ -29,9 +29,11 @@ public class AdminService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    /**Method to save new admins.
-     * This method will check to make sure the 5 digit extension does not already exist in the database and if it doesn't,
-     * save the new admin object to the database. Additionally, the admin password will be hashed before saving.
+    /**
+     * Checks to make sure the 5 digit extension does not already exist in the database and if it doesn't,
+     * saves the new admin object to the database. Additionally, the admin password will be hashed before saving.
+     * @param sentAdmin NewAdmin object containing name, extension, and password.
+     * @return ResponseObject containing a success boolean and an error message if necessary.
      */
     public ResponseObject createNewAdmin(NewAdmin sentAdmin){
         //creates a new Date object to save the current time of creation
@@ -52,8 +54,15 @@ public class AdminService {
         adminDAO.save(adminToSave);
         return new ResponseObject(true, null);
     }
-    public boolean validate(AdminInQuestion adminInQuestion){
+
+    /**
+     *
+     * @param adminInQuestion An object containing just an extension and password.
+     * @return true if extension exists and password matches
+     */
+    public boolean isAdminValid(AdminInQuestion adminInQuestion){
         Optional<Admin> adminOptional = adminDAO.findById(adminInQuestion.getExt());
+        //checks to make sure the admin even exists by the ext. If it does, checks to make sure password matches.
         if(adminOptional.isPresent()){
             Admin admin = adminOptional.get();
             return passwordEncoder.matches(adminInQuestion.getPassword(), admin.getPassword());

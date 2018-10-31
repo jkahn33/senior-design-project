@@ -31,6 +31,6 @@ public class WindowsController {
     @GetMapping("/validateAdmin")
     @ResponseBody
     public boolean validateAdmin(AdminInQuestion adminInQuestion){
-        return adminService.validate(adminInQuestion);
+        return adminService.isAdminValid(adminInQuestion);
     }
 }

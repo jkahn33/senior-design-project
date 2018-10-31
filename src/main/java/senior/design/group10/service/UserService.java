@@ -22,10 +22,12 @@ public class UserService {
         this.usersDAO = usersDAO;
     }
 
-    /**Method to save new users.
-    * This method will check to make sure the 5 digit extension does not already exist in the database and if it doesn't,
-    * save the new user object to the database.
-    */
+    /**
+     * This method will check to make sure the 5 digit extension does not already exist in the database and if it doesn't,
+     * save the new user object to the database.
+     * @param sentUser a SentUser object which contains name, extension, and department code.
+     * @return a ResponseObject with a success boolean value and an error message if necessary.
+     */
     public ResponseObject saveNewUser(SentUser sentUser){
         //Creates a new date object to get exact time of creation of user
         Date date = new Date();
