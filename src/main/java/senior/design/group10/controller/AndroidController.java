@@ -34,7 +34,7 @@ public class AndroidController {
         return userService.saveNewUser(sentUser);
     }
 
-    @GetMapping("/validateAdmin")
+    @PostMapping("/validateAdmin")
     @ResponseBody
     public boolean validateAdmin(AdminInQuestion adminInQuestion){
         return adminService.isAdminValid(adminInQuestion);
