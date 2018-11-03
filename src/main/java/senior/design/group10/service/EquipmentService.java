@@ -67,6 +67,7 @@ public class EquipmentService {
         equipmentCheckoutDAO.save(history);
 
         equipment.setInStock(false);
+        equipmentDAO.save(equipment);
 
         return new ResponseObject(true, null);
     }
