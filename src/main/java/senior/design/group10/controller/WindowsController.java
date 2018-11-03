@@ -3,6 +3,7 @@ package senior.design.group10.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import senior.design.group10.objects.response.ResponseObject;
@@ -22,13 +23,13 @@ public class WindowsController {
         this.adminService = adminService;
     }
 
-    @GetMapping("/newAdmin")
+    @PostMapping("/newAdmin")
     @ResponseBody
     public ResponseObject newAdmin(NewAdmin sentAdmin){
         return adminService.createNewAdmin(sentAdmin);
     }
 
-    @GetMapping("/validateAdmin")
+    @PostMapping("/validateAdmin")
     @ResponseBody
     public boolean validateAdmin(AdminInQuestion adminInQuestion){
         return adminService.isAdminValid(adminInQuestion);

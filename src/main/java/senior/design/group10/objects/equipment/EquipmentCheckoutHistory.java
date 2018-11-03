@@ -1,6 +1,8 @@
 package senior.design.group10.objects.equipment;
 
 import org.hibernate.annotations.GenericGenerator;
+import senior.design.group10.objects.user.Admin;
+import senior.design.group10.objects.user.Users;
 
 import java.sql.Timestamp;
 
@@ -15,28 +17,56 @@ public class EquipmentCheckoutHistory
 	@GenericGenerator(name="generator", strategy="increment")
 	@GeneratedValue(generator="generator")
 	private int id;
-	@Column
-	private String barcode;
-	@Column
-	private String username;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="barcode")
+	private Equipment equipment;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="user_ext")
+	private Users user;
 	@Column
 	private Timestamp checkoutDate;
 	@Column
-	private Timestamp checkingDate;
-	@Column
-	private String adminID;
+	private Timestamp checkinDate;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="admin_ext")
+	private Admin admin;
 
 	public EquipmentCheckoutHistory(){
 
 	}
-	
-	public EquipmentCheckoutHistory(String barcode, String username, Timestamp checkoutDate,Timestamp checkingDate, String adminID)
-	{
-		this.barcode = barcode;
-		this.username = username;
-		this.checkingDate = checkingDate;
+
+	public EquipmentCheckoutHistory(Equipment equipment, Users user, Timestamp checkoutDate, Admin admin) {
+		this.equipment = equipment;
+		this.user = user;
 		this.checkoutDate = checkoutDate;
-		this.adminID = adminID;
+		this.admin = admin;
 	}
-	
+
+	public int getId(){
+		return id;
+	}
+
+	public Equipment getEquipment() {
+		return equipment;
+	}
+
+	public Users getUser() {
+		return user;
+	}
+
+	public Timestamp getCheckinDate() {
+		return checkinDate;
+	}
+
+	public void setCheckinDate(Timestamp checkinDate) {
+		this.checkinDate = checkinDate;
+	}
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public Timestamp getCheckoutDate() {
+		return checkoutDate;
+	}
 }
