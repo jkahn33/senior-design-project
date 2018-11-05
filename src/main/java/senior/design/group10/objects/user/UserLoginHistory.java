@@ -16,15 +16,15 @@ public class UserLoginHistory
 	private int id;
 	
 	@Column
-	private String username;
+	private String fiveDigExt;
 	@Column
 	private Timestamp loginDateTime;
 
 	public UserLoginHistory(){}
 	
-	public UserLoginHistory(String username, Timestamp loginDateTime)
+	public UserLoginHistory(String fiveDigExt, Timestamp loginDateTime)
 	{
-		this.username = username;
+		this.fiveDigExt = fiveDigExt;
 		this.loginDateTime = loginDateTime;
 	}
 }
