@@ -6,4 +6,5 @@ import senior.design.group10.objects.user.Users;
 
 @Repository
 public interface UsersDAO extends CrudRepository<Users, String> {
+    
 }
