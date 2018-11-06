@@ -15,16 +15,17 @@ public class UserLoginHistory
 	@GeneratedValue(generator="generator")
 	private int id;
 	
-	@Column
-	private String fiveDigExt;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_ext")
+	private Users user;
 	@Column
 	private Timestamp loginDateTime;
 
 	public UserLoginHistory(){}
 	
-	public UserLoginHistory(String fiveDigExt, Timestamp loginDateTime)
+	public UserLoginHistory(Users user, Timestamp loginDateTime)
 	{
-		this.fiveDigExt = fiveDigExt;
+		this.user = user;
 		this.loginDateTime = loginDateTime;
 	}
 }

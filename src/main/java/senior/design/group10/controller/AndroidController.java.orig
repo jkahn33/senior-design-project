@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import senior.design.group10.objects.response.ResponseObject;
+import senior.design.group10.objects.response.NewUserResponse;
 import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.objects.sent.SentLoginHistory;
 import senior.design.group10.service.LoginService;
@@ -29,10 +29,9 @@ public class AndroidController {
     }
     
     //API endpoint for creating a new user.
-    @GetMapping("/newUser")
+    @PostMapping("/newUser")
     @ResponseBody
-    public ResponseObject newUser(SentUser sentUser){
-    	sentUser = new SentUser("name", "11111", "0123");
+    public NewUserResponse newUser(SentUser sentUser){
         return userService.saveNewUser(sentUser);
     }
 
@@ -54,9 +53,8 @@ public class AndroidController {
 
     }
     @GetMapping("/storeLogin")
-    @ResponseBody
-    public ResponseObject storeLogin(SentLoginHistory login) {
-    	login = new SentLoginHistory("11111");
+    public NewUserResponse storeLogin(SentLoginHistory login) {
+    	login = new SentLoginHistory("55555");
     	return loginService.saveNewLogin(login);
     }
 }
