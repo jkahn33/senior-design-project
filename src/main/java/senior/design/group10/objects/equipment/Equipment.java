@@ -22,4 +22,20 @@ public class Equipment
 		this.equipmentName = equipmentName;
 		this.inStock = inStock;
 	}
+
+	public String getBarcode() {
+		return barcode;
+	}
+
+	public String getEquipmentName() {
+		return equipmentName;
+	}
+
+	public boolean isInStock() {
+		return inStock;
+	}
+
+	public void setInStock(boolean inStock){
+		this.inStock = inStock;
+	}
 }
