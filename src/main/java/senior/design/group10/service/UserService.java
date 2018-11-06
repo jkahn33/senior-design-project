@@ -47,6 +47,9 @@ public class UserService {
         return new ResponseObject(true, null);
     }
     
+/**Method to get a list of all users in the database.
+ * This method returns a List of all users.
+ */
     public List<Users> getAllUsers() {
     	return (List<Users>)usersDAO.findAll();
     }
