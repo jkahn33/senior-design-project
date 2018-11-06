@@ -7,4 +7,5 @@ import senior.design.group10.objects.user.UserLoginHistory;
 
 @Repository
 public interface UserLoginHistoryDAO extends CrudRepository<UserLoginHistory, String> {
+	
 }

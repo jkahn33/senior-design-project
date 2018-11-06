@@ -13,6 +13,7 @@ import senior.design.group10.service.LoginService;
 import senior.design.group10.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/android")
@@ -58,5 +59,11 @@ public class AndroidController {
     public ResponseObject storeLogin(SentLoginHistory login) {
     	login = new SentLoginHistory("11111");
     	return loginService.saveNewLogin(login);
+    }
+    //Just for testing. UserService.getAllUsers() returns a list of all users
+    @GetMapping("/printAllUsers")
+    @ResponseBody
+    public void printAllUsers() {
+    	System.out.println(userService.getAllUsers());
     }
 }
