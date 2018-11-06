@@ -38,7 +38,8 @@ public class HibernateConfig {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/user_logging_system");
         dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        //remember to change this password depending on what computer the program is running on
+        dataSource.setPassword("neverforgetme");
         return dataSource;
     }
 
