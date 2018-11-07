@@ -18,7 +18,8 @@ public class UserService {
     private final UsersDAO usersDAO;
 
     @Autowired
-    public UserService(UsersDAO usersDAO) {
+    public UserService(UsersDAO usersDAO)
+    {
         this.usersDAO = usersDAO;
     }
 

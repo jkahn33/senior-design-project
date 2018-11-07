@@ -1,3 +1,7 @@
+/*
+ * This contains hibernate configuration and will not be modified for application functionality
+ */
+
 package senior.design.group10.application;
 
 import org.hibernate.SessionFactory;

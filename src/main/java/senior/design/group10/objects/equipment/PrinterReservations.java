@@ -1,6 +1,8 @@
 package senior.design.group10.objects.equipment;
 import org.hibernate.annotations.GenericGenerator;
 
+import senior.design.group10.objects.user.Users;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -14,16 +16,17 @@ public class PrinterReservations
 	@GeneratedValue(generator="generator")
 	private int id;
 
-	@Column
-	private String username;
-	@Column
-	private String fiveDigExt;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="user_ext")
+	private Users user;
 	@Column
 	private String jobDescription;
 	@Column
 	private String jobDuration;
 	@Column
 	private Timestamp jobSchedule;
+	@Column
+	private Timestamp jobScheduleEnd;
 	@Column
 	private String additionalComments;
 	@Column
@@ -33,12 +36,12 @@ public class PrinterReservations
 
 	}
 
-	public PrinterReservations(String username, String fiveDigExt, String jobDescription, String jobDuration, Timestamp jobSchedule, String additionalComments, String printerID) {
-		this.username = username;
-		this.fiveDigExt = fiveDigExt;
+	public PrinterReservations(Users user, String fiveDigExt, String jobDescription, String jobDuration, Timestamp jobSchedule, Timestamp jobScheduleEnd, String additionalComments, String printerID) {
+		this.user = user;
 		this.jobDescription = jobDescription;
 		this.jobDuration = jobDuration;
 		this.jobSchedule = jobSchedule;
+		this.jobScheduleEnd = jobScheduleEnd;
 		this.additionalComments = additionalComments;
 		this.printerID = printerID;
 	}
