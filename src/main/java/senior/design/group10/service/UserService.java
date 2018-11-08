@@ -9,6 +9,7 @@ import senior.design.group10.objects.user.Users;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 /**
 Service class used to handle business logic for user objects.
@@ -46,5 +47,13 @@ public class UserService {
         //accesses the DAO class and uses Spring's CrudRepository class to save the new user.
         usersDAO.save(userToSave);
         return new ResponseObject(true, null);
+    }
+    
+	/**Method to get a list of all users in the database.
+	 * This method returns a List of all users.
+	 * @return a list of all Users objects
+	 */
+    public List<Users> getAllUsers() {
+    	return (List<Users>)usersDAO.findAll();
     }
 }
