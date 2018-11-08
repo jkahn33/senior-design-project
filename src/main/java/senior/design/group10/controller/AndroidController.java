@@ -59,4 +59,10 @@ public class AndroidController {
         equipment = new SentEquipment("thisisabarcode", "11111", "12345");
         return equipmentService.checkout(equipment);
     }
+    @GetMapping("/checkinEquipment")
+    @ResponseBody
+    public ResponseObject checkinEquipment(String barcode){
+        barcode = "thisisabarcode";
+        return equipmentService.checkin(barcode);
+    }
 }

@@ -8,6 +8,7 @@ import senior.design.group10.dao.EquipmentDAO;
 import senior.design.group10.dao.UsersDAO;
 import senior.design.group10.objects.equipment.Equipment;
 import senior.design.group10.objects.equipment.EquipmentCheckoutHistory;
+import senior.design.group10.objects.equipment.EquipmentCheckoutPK;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentEquipment;
 import senior.design.group10.objects.user.Admin;
@@ -16,9 +17,12 @@ import senior.design.group10.objects.user.Users;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Service
 public class EquipmentService {
+    private static final Logger log = Logger.getLogger(Equipment.class.getName());
+
     private final EquipmentDAO equipmentDAO;
     private final UsersDAO usersDAO;
     private final AdminDAO adminDAO;
@@ -63,11 +67,32 @@ public class EquipmentService {
             return new ResponseObject(false, "Equipment is currently checked out. Please check equipment in before checking out again.");
         }
 
+        EquipmentCheckoutPK pk = new EquipmentCheckoutPK(equipment, currentTime);
+
         EquipmentCheckoutHistory history = new EquipmentCheckoutHistory(equipment, user, currentTime, admin);
+        history.setId(pk);
+
         equipmentCheckoutDAO.save(history);
 
         equipment.setInStock(false);
         equipmentDAO.save(equipment);
+
+        return new ResponseObject(true, null);
+    }
+    public ResponseObject checkin(String barcode){
+        //Creates a new date object to get exact time of creation of user
+        Date date = new Date();
+        Timestamp currentTime = new Timestamp(date.getTime());
+
+        Optional<Equipment> equipmentOptional = equipmentDAO.findById(barcode);
+        if(!equipmentOptional.isPresent()){
+            return new ResponseObject(false, "Equipment with barcode " + barcode + " cannot be found");
+        }
+        EquipmentCheckoutPK id = new EquipmentCheckoutPK(equipmentOptional.get());
+
+        for(EquipmentCheckoutHistory e : equipmentCheckoutDAO.findByBarcode(barcode)){
+            log.info(e.getEquipment().getEquipmentName());
+        }
 
         return new ResponseObject(true, null);
     }

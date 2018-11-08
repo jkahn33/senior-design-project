@@ -1,6 +1,5 @@
 package senior.design.group10.objects.equipment;
 
-import org.hibernate.annotations.GenericGenerator;
 import senior.design.group10.objects.user.Admin;
 import senior.design.group10.objects.user.Users;
 
@@ -10,19 +9,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "equipment_checkout")
+@IdClass(EquipmentCheckoutPK.class)
 public class EquipmentCheckoutHistory
 {
 	@Id
-	@Column(name="checkout_id")
-	@GenericGenerator(name="generator", strategy="increment")
-	@GeneratedValue(generator="generator")
-	private int id;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="barcode")
 	private Equipment equipment;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_ext")
 	private Users user;
+	@Id
 	@Column
 	private Timestamp checkoutDate;
 	@Column
@@ -42,8 +39,13 @@ public class EquipmentCheckoutHistory
 		this.admin = admin;
 	}
 
-	public int getId(){
-		return id;
+	public EquipmentCheckoutPK getId() {
+		return new EquipmentCheckoutPK(equipment, checkoutDate);
+	}
+
+	public void setId(EquipmentCheckoutPK id) {
+		this.equipment = id.getEquipment();
+		this.checkoutDate = id.getCheckoutDate();
 	}
 
 	public Equipment getEquipment() {
