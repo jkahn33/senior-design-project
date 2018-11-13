@@ -33,6 +33,10 @@ public class savedUsers extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //List<Users> listOfUsers = null;
+
+        
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_users);
 
