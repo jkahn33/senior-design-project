@@ -15,22 +15,11 @@
         android:fitsSystemWindows="true"
         android:background="#ffffffff">
 
-        <Button android:id="@+id/newUser" style="?metaButtonBarButtonStyle"
-            android:layout_width="358.85dp" android:layout_height="320.85dp"
-            android:layout_marginTop="391dp"
-            android:layout_marginLeft="0dp"
-            android:drawableBottom="@drawable/new_user"
-            android:paddingBottom="10dp"
-            android:paddingLeft="-90dp"
-            android:background="@drawable/new_user"
-            android:layout_gravity="center_horizontal"
-            />
         <Button android:id="@+id/savedUser" style="?metaButtonBarButtonStyle"
-            android:layout_width="358.85dp" android:layout_height="320.85dp"
+            android:layout_width="322dp" android:layout_height="79dp"
             android:layout_marginTop="391dp"
             android:layout_marginLeft="60dp"
-            android:background="@drawable/triangle_right"
-            android:drawableTop="@drawable/saved_user"
+            android:background="@drawable/saved_user"
             android:paddingTop="10dp"
             android:paddingLeft="40dp"
             android:layout_gravity="center_horizontal"
@@ -50,6 +39,16 @@
             android:id="@+id/uswric"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/uswric" />
+
+        <Button android:id="@+id/newUser" style="?metaButtonBarButtonStyle"
+            android:layout_width="322dp" android:layout_height="79dp"
+            android:layout_marginTop="391dp"
+            android:layout_marginLeft="0dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="-90dp"
+            android:background="@drawable/new_user"
+            android:layout_gravity="center"
+            />
 
 
     </FrameLayout>
