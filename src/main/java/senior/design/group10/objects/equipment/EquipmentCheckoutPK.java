@@ -5,13 +5,14 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 public class EquipmentCheckoutPK implements Serializable {
-    private Equipment equipment;
+    private String equipment;
     private Timestamp checkoutDate;
 
-    public EquipmentCheckoutPK(Equipment equipment){
+    public EquipmentCheckoutPK(){}
+    public EquipmentCheckoutPK(String equipment){
         this.equipment = equipment;
     }
-    public EquipmentCheckoutPK(Equipment equipment, Timestamp checkoutDate){
+    public EquipmentCheckoutPK(String equipment, Timestamp checkoutDate){
         this.equipment = equipment;
         this.checkoutDate = checkoutDate;
     }
@@ -33,7 +34,7 @@ public class EquipmentCheckoutPK implements Serializable {
         return Objects.hash(equipment, checkoutDate);
     }
 
-    public Equipment getEquipment() {
+    public String getEquipment() {
         return equipment;
     }
 

@@ -15,9 +15,12 @@ import senior.design.group10.service.AdminService;
 import senior.design.group10.service.EquipmentService;
 import senior.design.group10.service.UserService;
 
+import java.util.logging.Logger;
+
 @Controller
 @RequestMapping("/android")
 public class AndroidController {
+    private final static Logger log = Logger.getLogger(AndroidController.class.getName());
 
     private final
     UserService userService;
@@ -34,9 +37,10 @@ public class AndroidController {
     }
 
     //API endpoint for creating a new user.
-    @PostMapping("/newUser")
+    @GetMapping("/newUser")
     @ResponseBody
     public ResponseObject newUser(SentUser sentUser){
+        sentUser = new SentUser("John Doe", "12345", "22");
         return userService.saveNewUser(sentUser);
     }
 
@@ -56,7 +60,8 @@ public class AndroidController {
     @GetMapping("/checkoutEquipment")
     @ResponseBody
     public ResponseObject checkoutEquipment(SentEquipment equipment){
-        equipment = new SentEquipment("thisisabarcode", "11111", "12345");
+        log.info("saving");
+        equipment = new SentEquipment("thisisabarcode", "12345", "12334");
         return equipmentService.checkout(equipment);
     }
     @GetMapping("/checkinEquipment")

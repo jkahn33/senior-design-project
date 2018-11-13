@@ -1,7 +1,6 @@
 package senior.design.group10.objects.equipment;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name ="equipment")
