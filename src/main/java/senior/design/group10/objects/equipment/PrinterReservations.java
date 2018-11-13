@@ -5,6 +5,7 @@ import senior.design.group10.objects.user.Users;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name="printer_res")
@@ -24,9 +25,11 @@ public class PrinterReservations
 	@Column
 	private String jobDuration;
 	@Column
-	private Timestamp jobSchedule;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date jobSchedule;
 	@Column
-	private Timestamp jobScheduleEnd;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date jobScheduleEnd;
 	@Column
 	private String additionalComments;
 	@Column
@@ -36,7 +39,7 @@ public class PrinterReservations
 
 	}
 
-	public PrinterReservations(Users user, String fiveDigExt, String jobDescription, String jobDuration, Timestamp jobSchedule, Timestamp jobScheduleEnd, String additionalComments, String printerID) {
+	public PrinterReservations(Users user, String jobDescription, String jobDuration, Timestamp jobSchedule, Timestamp jobScheduleEnd, String additionalComments, String printerID) {
 		this.user = user;
 		this.jobDescription = jobDescription;
 		this.jobDuration = jobDuration;

@@ -79,20 +79,10 @@ public class AndroidController {
 	@ResponseBody
 	public ResponseObject newPrinterReservation(SentPrinterReservation printerReservation)
 	{
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Date date;
-		try {
-			date = dateFormat.parse("23/09/2007");
-			long time = date.getTime();
-			Timestamp time2 = new Timestamp(time);
-			printerReservation = new SentPrinterReservation("2121","",time2,"","","");
+		Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-23 10:10:10");
+	
+		printerReservation = new SentPrinterReservation("1234","print boat today",timestamp,"24:00","THis is the additional comment","A");
 
-
-
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		return printerService.addPrintRes(printerReservation);
 	}
