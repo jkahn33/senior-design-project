@@ -3,6 +3,7 @@ package nuwc.userloginsystem;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,13 +34,15 @@ public class newUser extends AppCompatActivity{
 
     savedUsers users = new savedUsers();
 
+    public static newUser userInsta;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_user);
-
+        userInsta = this;
         submit = (ImageButton) findViewById(R.id.submit);
 
         nameText = (EditText) findViewById(R.id.nameText);
@@ -48,6 +51,8 @@ public class newUser extends AppCompatActivity{
         idText = (EditText) findViewById(R.id.idText);
 
         welcomeUser = (TextView) findViewById(R.id.welcomeUser);
+
+
 
 
 
@@ -72,15 +77,7 @@ public class newUser extends AppCompatActivity{
                 submit.setVisibility(View.INVISIBLE);
                 //confirm user creation
                 welcomeUser.setText("Welcome " + firstName + "!");
-                //
-                users.addUser(firstName,lastname,badge,eID);
 
-
-
-
-
-//              Intent myIntent = new Intent(newUser.this, savedUsers.class);
-//              newUser.this.startActivity(myIntent);
             }
         });
 
