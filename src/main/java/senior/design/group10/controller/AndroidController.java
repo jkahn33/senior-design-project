@@ -24,67 +24,69 @@ import senior.design.group10.service.EquipmentService;
 import senior.design.group10.service.UserService;
 import senior.design.group10.service.PrinterService;
 
+import senior.design.group10.objects.sent.SentUser;
+import senior.design.group10.objects.sent.SentLoginHistory;
+import senior.design.group10.service.LoginService;
+import senior.design.group10.service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 @Controller
 @RequestMapping("/android")
 public class AndroidController {
+    private final
+    UserService userService;
+    private final
+    AdminService adminService;
+    private final
+    LoginService loginService;
+    private final
+    PrinterService printerService;
 
-	private final
-	UserService userService;
-	private final
-	AdminService adminService;
-	private final
-	EquipmentService equipmentService;
-	private final
-	PrinterService printerService;
+    @Autowired
+    public AndroidController(UserService userService, AdminService adminService, LoginService loginService, PrinterService printerService) {
+        this.userService = userService;
+        this.adminService = adminService;
+        this.loginService = loginService;
+        this.printerService = printerService;
+    }
+    
+    //API endpoint for creating a new user.
+    @GetMapping("/newUser")
+    @ResponseBody
+    public ResponseObject newUser(SentUser sentUser){
+    	sentUser = new SentUser("name", "11111", "0123");
+        return userService.saveNewUser(sentUser);
+    }
 
-	@Autowired
-	public AndroidController(UserService userService, AdminService adminService, EquipmentService equipmentService, PrinterService printerService) {
-		this.userService = userService;
-		this.adminService = adminService;
-		this.equipmentService = equipmentService;
-		this.printerService = printerService;
-	}
-
-	//API endpoint for creating a new user.
-	@GetMapping("/newUser")
-	@ResponseBody
-	public ResponseObject newUser(SentUser sentUser)
-	{
-		SentUser testing = new SentUser("pat","1234","123");
-		return userService.saveNewUser(testing);
-	}
-
-	@PostMapping("/validateAdmin")
-	@ResponseBody
-	public boolean validateAdmin(AdminInQuestion adminInQuestion){
-		return adminService.isAdminValid(adminInQuestion);
-	}
-
-	@GetMapping("/newEquipment")
-	@ResponseBody
-	public ResponseObject newEquipment(Equipment equipment){
-		equipment = new Equipment("thisisabarcode", "Raspberry Pi", true);
-		return equipmentService.addNewEquipment(equipment);
-	}
-
-
-	@GetMapping("/checkoutEquipment")
-	@ResponseBody
-	public ResponseObject checkoutEquipment(SentEquipment equipment){
-		equipment = new SentEquipment("thisisabarcode", "11111", "12345");
-		return equipmentService.checkout(equipment);
-	}
-
-	@GetMapping("/newPrinterReservation")
+    @PostMapping("/validateAdmin")
+    @ResponseBody
+    public boolean validateAdmin(AdminInQuestion adminInQuestion){
+        return adminService.isAdminValid(adminInQuestion);
+    }
+    @GetMapping("/storeLogin")
+    @ResponseBody
+    public ResponseObject storeLogin(SentLoginHistory login) {
+    	login = new SentLoginHistory("11111");
+    	return loginService.saveNewLogin(login);
+    }
+    //Just for testing. UserService.getAllUsers() returns a list of all users
+    @GetMapping("/printAllUsers")
+    @ResponseBody
+    public void printAllUsers() {
+    	System.out.println(userService.getAllUsers());
+    }
+    
+    @GetMapping("/newPrinterReservation")
 	@ResponseBody
 	public ResponseObject newPrinterReservation(SentPrinterReservation printerReservation)
 	{
-		Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-23 10:10:10");
+		Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-23 10:09:10");
 	
-		printerReservation = new SentPrinterReservation("1234","print boat today",timestamp,"24:00","THis is the additional comment","A");
+		printerReservation = new SentPrinterReservation("1234","print boat today",timestamp,"1:00","THis is the additional comment","A");
 
-		
+		//printerReservation.ch
 		return printerService.addPrintRes(printerReservation);
 	}
-
 }

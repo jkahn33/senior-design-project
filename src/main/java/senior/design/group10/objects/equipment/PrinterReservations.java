@@ -48,4 +48,14 @@ public class PrinterReservations
 		this.additionalComments = additionalComments;
 		this.printerID = printerID;
 	}
+	
+	public Date getJobSchedule()
+	{
+		return this.jobSchedule;
+	}
+	
+	public Date getJobScheduleEnd()
+	{
+		return this.jobScheduleEnd;
+	}
 }

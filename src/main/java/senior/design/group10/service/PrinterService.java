@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Optional;
 
+import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,14 +66,19 @@ public class PrinterService
         
         
         //Check to assure that the printer/ timeslot are available
-        
+        java.util.List<PrinterReservations> checking = printerDAO.checkTimeAvailable(printer.getJobSchedule(),jobScheduleEnd);
+
+        if(!checking.isEmpty())
+        {
+        		return new ResponseObject(false, "Conflicting times, timeslot "+ checking.get(1).getJobSchedule()+ " to "+ checking.get(1).getJobScheduleEnd() + " being used");
+        }
         
         //Saving the printjob to the db
         Users user = usersOptional.get();
         
         PrinterReservations newReservation = new PrinterReservations(user,printer.getJobDescription(),printer.getJobDuration(), printer.getJobSchedule(), jobScheduleEnd,printer.getAdditionalCom(),printer.getPrinterID());
-        printerDAO.save(newReservation);
         
+        printerDAO.save(newReservation);
 
 		return new ResponseObject(true,null);
 	}
