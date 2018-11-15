@@ -82,9 +82,9 @@ public class AndroidController {
 	@ResponseBody
 	public ResponseObject newPrinterReservation(SentPrinterReservation printerReservation)
 	{
-		Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-23 10:09:10");
+		Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-22 10:19:10");
 	
-		printerReservation = new SentPrinterReservation("1234","print boat today",timestamp,"1:00","THis is the additional comment","A");
+		printerReservation = new SentPrinterReservation("1234","print boat today",timestamp,"23:00","THis is the additional comment","A");
 
 		//printerReservation.ch
 		return printerService.addPrintRes(printerReservation);

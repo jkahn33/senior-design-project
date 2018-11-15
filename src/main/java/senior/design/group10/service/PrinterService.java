@@ -29,7 +29,7 @@ public class PrinterService
 		this.usersDAO = usersDAO;
 		this.printerDAO = printerDAO;
 	}
-	
+
 	/**
 	 * Adding a printer reservation based on the user ext, time and duration
 	 * This function checks for valid user ext and valid printer ID
@@ -43,42 +43,56 @@ public class PrinterService
 	public ResponseObject addPrintRes(SentPrinterReservation printer)
 	{
 		//Checking for user existance
-        Optional<Users> usersOptional = usersDAO.findById(printer.getUserExt());
-        if(!usersOptional.isPresent()){
-            return new ResponseObject(false, "User with extension " + printer.getUserExt() + " cannot be found");
-        }
-        
-        
-        //Calculate the end time
-        
-        Timestamp jobScheduleEnd = printer.getJobSchedule();
-        //Splitting the time by : for hours and mins
-        String hourMin [] = printer.getJobDuration().split(":");
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(jobScheduleEnd.getTime());
-        // add number of hours
-        cal.add(Calendar.MINUTE, Integer.parseInt(hourMin[1]) );
-        cal.add(Calendar.HOUR, Integer.parseInt(hourMin[0]) );
-        jobScheduleEnd = new Timestamp(cal.getTime().getTime());
-        //Where end time finishes calculating
-        
-        
-        
-        
-        //Check to assure that the printer/ timeslot are available
-        java.util.List<PrinterReservations> checking = printerDAO.checkTimeAvailable(printer.getJobSchedule(),jobScheduleEnd);
+		Optional<Users> usersOptional = usersDAO.findById(printer.getUserExt());
+		if(!usersOptional.isPresent()){
+			return new ResponseObject(false, "User with extension " + printer.getUserExt() + " cannot be found");
+		}
 
-        if(!checking.isEmpty())
-        {
-        		return new ResponseObject(false, "Conflicting times, timeslot "+ checking.get(1).getJobSchedule()+ " to "+ checking.get(1).getJobScheduleEnd() + " being used");
-        }
-        
-        //Saving the printjob to the db
-        Users user = usersOptional.get();
-        
-        PrinterReservations newReservation = new PrinterReservations(user,printer.getJobDescription(),printer.getJobDuration(), printer.getJobSchedule(), jobScheduleEnd,printer.getAdditionalCom(),printer.getPrinterID());
-        
-        printerDAO.save(newReservation);
+		//Calculate the end time
+
+		Timestamp jobScheduleEnd = printer.getJobSchedule();
+		//Splitting the time by : for hours and mins
+		String hourMin [] = printer.getJobDuration().split(":");
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(jobScheduleEnd.getTime());
+		// add number of hours
+		cal.add(Calendar.MINUTE, Integer.parseInt(hourMin[1]) );
+		cal.add(Calendar.HOUR, Integer.parseInt(hourMin[0]) );
+		jobScheduleEnd = new Timestamp(cal.getTime().getTime());
+		//Where end time finishes calculating
+
+
+
+
+		//Check to assure that the printer/ timeslot are available
+		java.util.List<PrinterReservations> checking = printerDAO.checkTimeAvailable(printer.getJobSchedule(),jobScheduleEnd);
+
+		Optional <PrinterReservations> precedingRes = printerDAO.checkNestedReservation(printer.getJobSchedule());
+
+
+		if(precedingRes.isPresent())
+		{
+			if(precedingRes.get().getJobScheduleEnd().after(printer.getJobSchedule()))
+			{
+				return new ResponseObject(false, "Conflicting times, timeslot "+ precedingRes.get().getJobSchedule()+ " to "+ precedingRes.get().getJobScheduleEnd() + " being used");
+
+			}	
+		}
+		//check time available only checks if the times are within the selected timeslot
+		//now try to find a way to find if the select time is not with another time
+		if(!checking.isEmpty())
+		{
+			return new ResponseObject(false, "Conflicting times, timeslot "+ checking.get(0).getJobSchedule()+ " to "+ checking.get(0).getJobScheduleEnd() + " being used");
+		}
+
+
+
+		//Saving the printjob to the db
+		Users user = usersOptional.get();
+
+		PrinterReservations newReservation = new PrinterReservations(user,printer.getJobDescription(),printer.getJobDuration(), printer.getJobSchedule(), jobScheduleEnd,printer.getAdditionalCom(),printer.getPrinterID());
+
+		printerDAO.save(newReservation);
 
 		return new ResponseObject(true,null);
 	}
