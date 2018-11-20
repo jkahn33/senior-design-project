@@ -18,12 +18,13 @@ import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.AdminInQuestion;
 import senior.design.group10.objects.sent.SentEquipment;
 import senior.design.group10.objects.sent.SentPrinterReservation;
+import senior.design.group10.objects.sent.SentReservable;
 import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.EquipmentService;
 import senior.design.group10.service.UserService;
 import senior.design.group10.service.PrinterService;
-
+import senior.design.group10.service.ReservablesService;
 import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.objects.sent.SentLoginHistory;
 import senior.design.group10.service.LoginService;
@@ -43,13 +44,16 @@ public class AndroidController {
     LoginService loginService;
     private final
     PrinterService printerService;
+    private final
+    ReservablesService reservablesService;
 
     @Autowired
-    public AndroidController(UserService userService, AdminService adminService, LoginService loginService, PrinterService printerService) {
+    public AndroidController(UserService userService, AdminService adminService, LoginService loginService, PrinterService printerService, ReservablesService reservablesService) {
         this.userService = userService;
         this.adminService = adminService;
         this.loginService = loginService;
         this.printerService = printerService;
+        this.reservablesService = reservablesService; 
     }
     
     //API endpoint for creating a new user.
@@ -89,4 +93,13 @@ public class AndroidController {
 		//printerReservation.ch
 		return printerService.addPrintRes(printerReservation);
 	}
+    
+    @GetMapping("/newReservable")
+    @ResponseBody
+    public ResponseObject newReservable(SentReservable sentReservable)
+    {
+    		
+    		sentReservable = new SentReservable("Printer","B");
+    		return reservablesService.saveNewReservable(sentReservable);
+    }
 }
