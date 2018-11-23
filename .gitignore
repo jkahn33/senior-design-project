@@ -3,6 +3,10 @@
 *.ipr
 *.iws
 /.idea
+/windows/*.iml
+/windows/*.ipr
+/windows/*.iws
+/windows/.idea
 #eclipse files
 /.settings
 .DS_Store
@@ -14,3 +18,4 @@
 /out
 /bin/
 /build
+/windows/out

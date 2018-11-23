@@ -1,13 +1,8 @@
 package senior.design.group10.objects.sent;
 
-import javax.xml.bind.annotation.XmlElement;
-
 public class SentUser {
-    @XmlElement
     private String name;
-    @XmlElement
     private String ext;
-    @XmlElement
     private String dep;
 
     public SentUser(){}
