@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import senior.design.group10.dao.*;
 import senior.design.group10.objects.equipment.Equipment;
 import senior.design.group10.objects.equipment.EquipmentCheckoutHistory;
-import senior.design.group10.objects.equipment.EquipmentCheckoutPK;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentEquipment;
 import senior.design.group10.objects.user.Admin;
@@ -63,8 +62,6 @@ public class EquipmentService {
             return new ResponseObject(false, "Equipment is currently checked out. Please check equipment in before checking out again.");
         }
 
-        EquipmentCheckoutPK pk = new EquipmentCheckoutPK(equipment.getBarcode(), currentTime);
-
         EquipmentCheckoutHistory history = new EquipmentCheckoutHistory(equipment, user, currentTime, admin);
 
         equipmentCheckoutDAO.save(history);
@@ -98,7 +95,7 @@ public class EquipmentService {
         EquipmentCheckoutHistory recent = Collections.max(historyList, cmp);
 
         recent.setCheckinDate(currentTime);
-        equipmentCheckoutDAO.update(recent);
+        equipmentCheckoutDAO.save(recent);
         return new ResponseObject(true, null);
     }
 }
