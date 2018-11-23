@@ -12,8 +12,11 @@ import senior.design.group10.dao.AdminDAO;
 import senior.design.group10.dao.EquipmentCheckoutDAO;
 import senior.design.group10.dao.EquipmentDAO;
 import senior.design.group10.dao.PrinterReservationDAO;
+import senior.design.group10.dao.ReservablesDAO;
 import senior.design.group10.dao.UsersDAO;
 import senior.design.group10.objects.equipment.PrinterReservations;
+import senior.design.group10.objects.equipment.ReservableKey;
+import senior.design.group10.objects.equipment.Reservables;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentPrinterReservation;
 import senior.design.group10.objects.user.Users;
@@ -23,11 +26,13 @@ public class PrinterService
 {
 	private final PrinterReservationDAO printerDAO;
 	private final UsersDAO usersDAO;
+	private final ReservablesDAO reservablesDAO;
 	@Autowired
-	public PrinterService( UsersDAO usersDAO, PrinterReservationDAO printerDAO)
+	public PrinterService( UsersDAO usersDAO, PrinterReservationDAO printerDAO, ReservablesDAO reservablesDAO)
 	{
 		this.usersDAO = usersDAO;
 		this.printerDAO = printerDAO;
+		this.reservablesDAO = reservablesDAO;
 	}
 
 	/**
@@ -44,9 +49,15 @@ public class PrinterService
 	{
 		//Checking for user existance
 		Optional<Users> usersOptional = usersDAO.findById(printer.getUserExt());
+		Optional <Reservables> reservableOptional = reservablesDAO.findById(new ReservableKey(printer.getReservableType(),printer.getReservableId()));
+
 		if(!usersOptional.isPresent()){
 			return new ResponseObject(false, "User with extension " + printer.getUserExt() + " cannot be found");
 		}
+		if(!reservableOptional.isPresent()){
+			return new ResponseObject(false, "Reservable with type " + printer.getReservableType() + printer.getReservableId() + " cannot be found");
+		}
+		
 
 		//Calculate the end time
 
@@ -65,16 +76,16 @@ public class PrinterService
 
 
 		//Check to assure that the printer/ timeslot are available
-		java.util.List<PrinterReservations> checking = printerDAO.checkTimeAvailable(printer.getJobSchedule(),jobScheduleEnd);
+		java.util.List<PrinterReservations> checking = printerDAO.checkTimeAvailable(printer.getJobSchedule(),jobScheduleEnd,printer.getReservableId());
 
-		Optional <PrinterReservations> precedingRes = printerDAO.checkNestedReservation(printer.getJobSchedule());
+		Optional <PrinterReservations> precedingRes = printerDAO.checkNestedReservation(printer.getJobSchedule(),printer.getReservableId());
 
 
 		if(precedingRes.isPresent())
 		{
 			if(precedingRes.get().getJobScheduleEnd().after(printer.getJobSchedule()))
 			{
-				return new ResponseObject(false, "Conflicting times, timeslot "+ precedingRes.get().getJobSchedule()+ " to "+ precedingRes.get().getJobScheduleEnd() + " being used");
+				return new ResponseObject(false, "1 Conflicting times, timeslot "+ precedingRes.get().getJobSchedule()+ " to "+ precedingRes.get().getJobScheduleEnd() + " being used by Printer");
 
 			}	
 		}
@@ -82,15 +93,16 @@ public class PrinterService
 		//now try to find a way to find if the select time is not with another time
 		if(!checking.isEmpty())
 		{
-			return new ResponseObject(false, "Conflicting times, timeslot "+ checking.get(0).getJobSchedule()+ " to "+ checking.get(0).getJobScheduleEnd() + " being used");
+			return new ResponseObject(false, "2 Conflicting times, timeslot "+ checking.get(0).getJobSchedule()+ " to "+ checking.get(0).getJobScheduleEnd() + " being used");
 		}
 
 
 
 		//Saving the printjob to the db
 		Users user = usersOptional.get();
+		Reservables reservable = reservableOptional.get();
 
-		PrinterReservations newReservation = new PrinterReservations(user,printer.getJobDescription(),printer.getJobDuration(), printer.getJobSchedule(), jobScheduleEnd,printer.getAdditionalCom(),printer.getPrinterID());
+		PrinterReservations newReservation = new PrinterReservations(user,reservable,printer.getJobDescription(),printer.getJobDuration(), printer.getJobSchedule(), jobScheduleEnd,printer.getAdditionalCom());
 
 		printerDAO.save(newReservation);
 

@@ -86,13 +86,16 @@ public class AndroidController {
 	@ResponseBody
 	public ResponseObject newPrinterReservation(SentPrinterReservation printerReservation)
 	{
-		Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-22 10:19:10");
+		Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-24 10:19:10");
 	
-		printerReservation = new SentPrinterReservation("1234","print boat today",timestamp,"23:00","THis is the additional comment","A");
+		printerReservation = new SentPrinterReservation("1234","Printer","A","print boat today",timestamp,"23:00","THis is the additional comment");
 
 		//printerReservation.ch
 		return printerService.addPrintRes(printerReservation);
 	}
+    
+    
+    //Working with reservables
     
     @GetMapping("/newReservable")
     @ResponseBody
@@ -101,5 +104,14 @@ public class AndroidController {
     		
     		sentReservable = new SentReservable("Printer","B");
     		return reservablesService.saveNewReservable(sentReservable);
+    }
+    
+    @GetMapping("/removeReservable")
+    @ResponseBody
+    public ResponseObject removeReservable(SentReservable sentReservable)
+    {
+    		
+    		sentReservable = new SentReservable("Printer","B");
+    		return reservablesService.removeReservable(sentReservable);
     }
 }

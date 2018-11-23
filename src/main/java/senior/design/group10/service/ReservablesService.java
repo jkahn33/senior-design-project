@@ -24,14 +24,27 @@ public class ReservablesService
 
 	public ResponseObject saveNewReservable( SentReservable sentReservable)
 	{
-		Optional <Reservables> reservableOptional = reservablesDAO.findById(sentReservable.getRerservableKey());
+		//Optional <Reservables> reservableOptional = reservablesDAO.findById(sentReservable.getRerservableKey());
 		if(reservablesDAO.existsById(sentReservable.getRerservableKey())){
-			return new ResponseObject(false, "A reservable with parametres " + sentReservable.getRerservableKey().getType() + " already exists.");
+			return new ResponseObject(false, "A reservable with parametres " + sentReservable.getRerservableKey().getType() + sentReservable.getRerservableKey().getID() +" already exists.");
 		}
 		
 		Reservables reservableToSave = new Reservables(sentReservable.getRerservableKey());
 		reservablesDAO.save(reservableToSave);
 		return new ResponseObject(true,null);
 	}
+	
+	public ResponseObject removeReservable(SentReservable sentReservable)
+	{
+		if(!reservablesDAO.existsById(sentReservable.getRerservableKey())){
+			return new ResponseObject(false, "A reservable with parametres " + sentReservable.getRerservableKey().getType() + " does not exists.");
+		}
+		
+		
+		reservablesDAO.deleteById(sentReservable.getRerservableKey());
+		return new ResponseObject(true,null);
+	}
+	
+	
 
 }

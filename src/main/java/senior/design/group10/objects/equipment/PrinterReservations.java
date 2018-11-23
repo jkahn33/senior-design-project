@@ -20,6 +20,10 @@ public class PrinterReservations
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_ext")
 	private Users user;
+	//@MapsId("reserable")
+	@ManyToOne
+	//@JoinColumn(name = "reservable")
+	private Reservables reservable;
 	@Column
 	private String jobDescription;
 	@Column
@@ -32,21 +36,19 @@ public class PrinterReservations
 	private Date jobScheduleEnd;
 	@Column
 	private String additionalComments;
-	@Column
-	private String printerID;
 
 	public PrinterReservations(){
 
 	}
 
-	public PrinterReservations(Users user, String jobDescription, String jobDuration, Timestamp jobSchedule, Timestamp jobScheduleEnd, String additionalComments, String printerID) {
+	public PrinterReservations(Users user, Reservables reservable, String jobDescription, String jobDuration, Timestamp jobSchedule, Timestamp jobScheduleEnd, String additionalComments) {
 		this.user = user;
+		this.reservable = reservable;
 		this.jobDescription = jobDescription;
 		this.jobDuration = jobDuration;
 		this.jobSchedule = jobSchedule;
 		this.jobScheduleEnd = jobScheduleEnd;
 		this.additionalComments = additionalComments;
-		this.printerID = printerID;
 	}
 	
 	public Date getJobSchedule()
