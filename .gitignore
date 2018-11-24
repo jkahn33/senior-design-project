@@ -3,11 +3,12 @@
 *.ipr
 *.iws
 /.idea
-/windows/*.iml
-/windows/*.ipr
-/windows/*.iws
-/windows/.idea
+/windows-gui/*.iml
+/windows-gui/*.ipr
+/windows-gui/*.iws
+/windows-gui/.idea
 #eclipse files
+/windows-gui/.recommenders
 /.settings
 .DS_Store
 .classpath
@@ -18,4 +19,4 @@
 /out
 /bin/
 /build
-/windows/out
+/windows-gui/out
