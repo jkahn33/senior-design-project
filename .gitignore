@@ -8,6 +8,8 @@
 /windows-gui/*.iws
 /windows-gui/.idea
 #eclipse files
+/windows-gui/user-logging-system-windows/.settings
+/windows-gui/user-logging-system-windows/build
 /windows-gui/.recommenders
 /.settings
 .DS_Store
