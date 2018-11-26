@@ -1,4 +1,4 @@
-package windows.client.utils;
+package windows.client.objects;
 
 public class ResponseObject {
 	private boolean success;

@@ -1,12 +1,16 @@
 package windows.client;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import org.apache.http.HttpResponse;
@@ -16,32 +20,28 @@ import org.json.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import windows.client.objects.ResponseObject;
+import windows.client.objects.StaticValues;
+import windows.client.objects.ReturnAdmin;
 import windows.client.utils.RequestUtils;
 
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.awt.event.ActionEvent;
-
-public class NewAdmin {
+public class EditAdmin {
 
 	private JFrame frame;
 	private JTextField txtExt;
-	private JPasswordField passInit;
-	private JPasswordField passConfirm;
 	private JLabel lblExtension;
-	private JLabel lblPassword;
-	private JLabel lblConfirmPassword;
 	private JLabel lblName;
 	private JTextField txtName;
 	private JButton btnCancel;
+	private JButton btnEditPassword;
+	
+	private ReturnAdmin admin;
 
 	/**
 	 * Create the application.
 	 */
-	public NewAdmin() {
+	public EditAdmin() {
 		initialize();
+		fillInfo();
 		frame.setVisible(true);
 	}
 
@@ -54,13 +54,13 @@ public class NewAdmin {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewAdmin = new JLabel("New Administrator");
-		lblNewAdmin.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblNewAdmin.setBounds(56, 25, 169, 21);
-		frame.getContentPane().add(lblNewAdmin);
+		JLabel lblEditAdmin = new JLabel("Edit Administrator");
+		lblEditAdmin.setFont(new Font("Tahoma", Font.BOLD, 17));
+		lblEditAdmin.setBounds(56, 78, 169, 21);
+		frame.getContentPane().add(lblEditAdmin);
 		
 		txtExt = new JTextField();
-		txtExt.setBounds(56, 192, 275, 28);
+		txtExt.setBounds(56, 309, 275, 28);
 		frame.getContentPane().add(txtExt);
 		txtExt.setColumns(10);
 		
@@ -70,27 +70,27 @@ public class NewAdmin {
 				if(txtExt.getText().length() != 5) {
 					JOptionPane.showMessageDialog(frame, "Extension must be 5 digits.");
 				}
+				else if(txtName.getText().equals("")) {
+					JOptionPane.showMessageDialog(frame, "Name must not be blank");
+				}
 				else {
-					if(!Arrays.equals(passInit.getPassword(), passConfirm.getPassword())) {
-						JOptionPane.showMessageDialog(frame, "Passwords do not match.");
-					}
-					else {
+					int input = JOptionPane.showOptionDialog(null, "Are you sure you want to make these changes?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+					if(input == JOptionPane.YES_OPTION) {
 						JSONObject object = new JSONObject();
 						try {
+							object.put("oldExt", admin.getFiveDigExt());
 							object.put("name", txtName.getText());
 							object.put("ext", txtExt.getText());
-							object.put("password", String.valueOf(passInit.getPassword()));
 							
-							HttpResponse response = RequestUtils.doPost(object, "/newAdmin");
+							HttpResponse response = RequestUtils.doPost(object, "/editAdmin");
 							
 							ObjectMapper mapper = new ObjectMapper();
 							ResponseObject responseObject = mapper.readValue(EntityUtils.toString(response.getEntity()), ResponseObject.class);
 							
 							if(responseObject.isSuccess()) {
-								
-								int input = JOptionPane.showOptionDialog(null, "Sucessfully created administrator.", "Success", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+								int successInput = JOptionPane.showOptionDialog(null, "Sucessfully modified administrator.", "Success", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
-								if(input == JOptionPane.OK_OPTION || input == JOptionPane.CANCEL_OPTION || input == JOptionPane.CLOSED_OPTION)
+								if(successInput == JOptionPane.OK_OPTION || successInput == JOptionPane.CANCEL_OPTION || successInput == JOptionPane.CLOSED_OPTION)
 								{
 								    frame.dispose();
 								    new Homepage();
@@ -110,37 +110,19 @@ public class NewAdmin {
 		btnSubmit.setBounds(56, 517, 85, 21);
 		frame.getContentPane().add(btnSubmit);
 		
-		passInit = new JPasswordField();
-		passInit.setBounds(56, 306, 275, 28);
-		frame.getContentPane().add(passInit);
-		
-		passConfirm = new JPasswordField();
-		passConfirm.setBounds(56, 424, 275, 28);
-		frame.getContentPane().add(passConfirm);
-		
 		lblExtension = new JLabel("Extension");
 		lblExtension.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblExtension.setBounds(56, 169, 67, 13);
+		lblExtension.setBounds(56, 286, 67, 13);
 		frame.getContentPane().add(lblExtension);
-		
-		lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPassword.setBounds(56, 283, 67, 13);
-		frame.getContentPane().add(lblPassword);
-		
-		lblConfirmPassword = new JLabel("Confirm Password");
-		lblConfirmPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblConfirmPassword.setBounds(56, 401, 121, 13);
-		frame.getContentPane().add(lblConfirmPassword);
 		
 		lblName = new JLabel("Name");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblName.setBounds(56, 70, 49, 13);
+		lblName.setBounds(56, 166, 49, 13);
 		frame.getContentPane().add(lblName);
 		
 		txtName = new JTextField();
 		txtName.setColumns(10);
-		txtName.setBounds(56, 93, 275, 28);
+		txtName.setBounds(56, 189, 275, 28);
 		frame.getContentPane().add(txtName);
 		
 		btnCancel = new JButton("Cancel");
@@ -152,5 +134,39 @@ public class NewAdmin {
 		});
 		btnCancel.setBounds(246, 517, 85, 21);
 		frame.getContentPane().add(btnCancel);
+		
+		btnEditPassword = new JButton("Edit Password");
+		btnEditPassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				new EditPassword(admin);
+			}
+		});
+		btnEditPassword.setBounds(96, 407, 191, 21);
+		frame.getContentPane().add(btnEditPassword);
 	}
+	public void fillInfo() {
+		JSONObject object = new JSONObject();
+		try {
+			object.put("oldExt", StaticValues.id);
+			
+			HttpResponse response = RequestUtils.doPost(object, "/getAdmin");
+			
+			ObjectMapper mapper = new ObjectMapper();
+			admin = mapper.readValue(EntityUtils.toString(response.getEntity()), ReturnAdmin.class);
+			
+			if(admin != null) {
+				txtExt.setText(admin.getFiveDigExt());
+				txtName.setText(admin.getName());
+			}
+			else {
+				JOptionPane.showMessageDialog(frame, "Unknown error.");
+			}
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(frame, "Unknown error.");
+			e.printStackTrace();
+		}
+	}
+
 }

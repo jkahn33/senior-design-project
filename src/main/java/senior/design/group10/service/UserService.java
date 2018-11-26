@@ -9,6 +9,7 @@ import senior.design.group10.objects.user.Users;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Optional;
 
 /**
 Service class used to handle business logic for user objects.

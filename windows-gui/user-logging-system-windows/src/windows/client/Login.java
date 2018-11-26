@@ -9,6 +9,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import windows.client.objects.StaticValues;
 import windows.client.utils.RequestUtils;
 
 import java.awt.Font;
@@ -98,6 +99,7 @@ public class Login {
 						
 						HttpResponse response = RequestUtils.doPost(object, "/validateAdmin");
 						if(response == null) {
+							//TODO display error
 							System.out.println(":(");
 						}
 						else {
@@ -106,6 +108,7 @@ public class Login {
 	                        	 JOptionPane.showMessageDialog(frame, "Incorrect extension or password.");
 	                         }
 	                         else {
+	                        	 StaticValues.id = txtExt.getText();
 	                        	 frame.dispose();
 	                        	 new Homepage();
 	                         }
