@@ -43,7 +43,7 @@ public class HibernateConfig {
         dataSource.setUrl("jdbc:mysql://localhost:3306/user_logging_system");
         dataSource.setUsername("root");
         //remember to change this password depending on what computer the program is running on
-        dataSource.setPassword("neverforgetme");
+        dataSource.setPassword("root");
         return dataSource;
     }
 
