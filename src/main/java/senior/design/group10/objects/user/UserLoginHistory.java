@@ -14,6 +14,7 @@ public class UserLoginHistory
 	@GenericGenerator(name="generator", strategy="increment")
 	@GeneratedValue(generator="generator")
 	private int id;
+
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_ext")
