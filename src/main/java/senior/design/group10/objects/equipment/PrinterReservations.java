@@ -1,3 +1,9 @@
+/*
+ * Class handling the printer reservations table and data manipulation
+ * 
+ */
+
+
 package senior.design.group10.objects.equipment;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -20,9 +26,7 @@ public class PrinterReservations
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_ext")
 	private Users user;
-	//@MapsId("reserable")
 	@ManyToOne
-	//@JoinColumn(name = "reservable")
 	private Reservables reservable;
 	@Column
 	private String jobDescription;

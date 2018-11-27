@@ -88,21 +88,30 @@ public class AndroidController {
     	System.out.println(userService.getAllUsers());
     }
     
-    @GetMapping("/newPrinterReservation")
+    
+    /*
+     * Printer reservation takes in a sent printer reservation which is composed of the following variables
+     * String for user extension, String for type of reservable, string for reservable id, string for job description
+     * TimeStamp for the start date
+     * String for job duration in the following format: "HH:MM" since the time is parsed base on the colon
+     * String for the additional comments
+     */
+    @PostMapping("/newPrinterReservation")
 	@ResponseBody
 	public ResponseObject newPrinterReservation(SentPrinterReservation printerReservation)
-	{
-		Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-24 10:19:10");
-	
-		printerReservation = new SentPrinterReservation("1234","Printer","A","print boat today",timestamp,"23:00","THis is the additional comment");
-
-		//printerReservation.ch
+	{	
 		return printerService.addPrintRes(printerReservation);
 	}
     
-    
-    //Working with breakout reservations
-    @GetMapping("/newBreakoutReservation")
+    /*
+     * Breakout reservation takes in a sent breakout reservation which is composed of the following variables
+     * String for user extension, String for type of reservable, string for reservable id, string for job description
+     * TimeStamp for the start date
+     * String for reservation duration in the following format: "HH:MM" since the time is parsed base on the colon
+     * String for the number of people
+     * String for the additional comments
+     */
+    @PostMapping("/newBreakoutReservation")
 	@ResponseBody
     public ResponseObject newBreakoutReservation(SentBreakoutReservation breakoutReservation)
     {
@@ -114,18 +123,26 @@ public class AndroidController {
     }
     
     
-    //Working with reservables
+    /*
+     * Making a new reservable to be used for reservation
+     * such as printers and breakout rooms
+     * Composed of a sent reservable which contain two strings
+     * String for reservable type, String for reservable Id
+     */
     
-    @GetMapping("/newReservable")
+    @PostMapping("/newReservable")
     @ResponseBody
     public ResponseObject newReservable(SentReservable sentReservable)
     {
-    		
-    		sentReservable = new SentReservable("Breakout","A");
     		return reservablesService.saveNewReservable(sentReservable);
     }
     
-    @GetMapping("/removeReservable")
+    
+    /*
+     * Removing unwanted reservable by taking in type and id
+     */
+    
+    @PostMapping("/removeReservable")
     @ResponseBody
     public ResponseObject removeReservable(SentReservable sentReservable)
     {

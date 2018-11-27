@@ -4,13 +4,9 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Optional;
 
-import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import senior.design.group10.dao.AdminDAO;
-import senior.design.group10.dao.EquipmentCheckoutDAO;
-import senior.design.group10.dao.EquipmentDAO;
 import senior.design.group10.dao.PrinterReservationDAO;
 import senior.design.group10.dao.ReservablesDAO;
 import senior.design.group10.dao.UsersDAO;
