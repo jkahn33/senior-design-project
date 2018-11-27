@@ -11,7 +11,6 @@ public class SentPrinterReservation
 	private Timestamp jobSchedule;
 	private String jobDuration;
 	private String additionalCom;
-	private String printerID;
 	
 	public SentPrinterReservation(String userExt, String reservableType, String reservableId, String jobDescription, Timestamp jobSchedule, String jobDuration, String additionalCom)
 	{

@@ -16,11 +16,13 @@ import senior.design.group10.objects.equipment.Equipment;
 import senior.design.group10.objects.equipment.PrinterReservations;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.AdminInQuestion;
+import senior.design.group10.objects.sent.SentBreakoutReservation;
 import senior.design.group10.objects.sent.SentEquipment;
 import senior.design.group10.objects.sent.SentPrinterReservation;
 import senior.design.group10.objects.sent.SentReservable;
 import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.service.AdminService;
+import senior.design.group10.service.BreakoutService;
 import senior.design.group10.service.EquipmentService;
 import senior.design.group10.service.UserService;
 import senior.design.group10.service.PrinterService;
@@ -45,14 +47,18 @@ public class AndroidController {
     private final
     PrinterService printerService;
     private final
+    BreakoutService breakoutService;
+    private final
     ReservablesService reservablesService;
+    
 
     @Autowired
-    public AndroidController(UserService userService, AdminService adminService, LoginService loginService, PrinterService printerService, ReservablesService reservablesService) {
+    public AndroidController(UserService userService, AdminService adminService, LoginService loginService, PrinterService printerService, BreakoutService breakoutService, ReservablesService reservablesService) {
         this.userService = userService;
         this.adminService = adminService;
         this.loginService = loginService;
         this.printerService = printerService;
+        this.breakoutService = breakoutService;
         this.reservablesService = reservablesService; 
     }
     
@@ -95,6 +101,19 @@ public class AndroidController {
 	}
     
     
+    //Working with breakout reservations
+    @GetMapping("/newBreakoutReservation")
+	@ResponseBody
+    public ResponseObject newBreakoutReservation(SentBreakoutReservation breakoutReservation)
+    {
+		Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-24 10:19:10");
+		String numPeep = "23";
+		breakoutReservation = new SentBreakoutReservation("1234","Breakout","A","print boat today",timestamp,"23:00",numPeep,"THis is the additional comment");
+		return breakoutService.addBreakRes(breakoutReservation);
+
+    }
+    
+    
     //Working with reservables
     
     @GetMapping("/newReservable")
@@ -102,7 +121,7 @@ public class AndroidController {
     public ResponseObject newReservable(SentReservable sentReservable)
     {
     		
-    		sentReservable = new SentReservable("Printer","B");
+    		sentReservable = new SentReservable("Breakout","A");
     		return reservablesService.saveNewReservable(sentReservable);
     }
     
