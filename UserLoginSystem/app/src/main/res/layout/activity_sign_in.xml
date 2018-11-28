@@ -15,15 +15,16 @@
         android:fitsSystemWindows="true"
         android:background="#ffffffff">
 
-        <Button android:id="@+id/savedUser" style="?metaButtonBarButtonStyle"
-            android:layout_width="322dp" android:layout_height="79dp"
-            android:layout_marginTop="391dp"
-            android:layout_marginLeft="60dp"
-            android:background="@drawable/saved_user"
-            android:paddingTop="10dp"
-            android:paddingLeft="40dp"
+        <Button
+            android:id="@+id/savedUser"
+            style="?metaButtonBarButtonStyle"
+            android:layout_width="322dp"
+            android:layout_height="79dp"
             android:layout_gravity="center_horizontal"
-            android:onClick="onSavedUser" />
+            android:layout_marginTop="391dp"
+            android:background="@drawable/saved_user"
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -40,15 +41,14 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/uswric" />
 
-        <Button android:id="@+id/newUser" style="?metaButtonBarButtonStyle"
-            android:layout_width="322dp" android:layout_height="79dp"
-            android:layout_marginTop="391dp"
-            android:layout_marginLeft="0dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="-90dp"
-            android:background="@drawable/new_user"
-            android:layout_gravity="center"
-            />
+        <Button
+            android:id="@+id/newUser"
+            style="?metaButtonBarButtonStyle"
+            android:layout_width="322dp"
+            android:layout_height="79dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="600dp"
+            android:background="@drawable/new_user" />
 
 
     </FrameLayout>

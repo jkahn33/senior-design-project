@@ -67,7 +67,7 @@ public class newUser extends AppCompatActivity{
                 //save badge and employee id
                 badgeString= badgeText.getText().toString();
                 badge=Integer.parseInt(badgeString);
-                eIDString= badgeText.getText().toString();
+                eIDString= idText.getText().toString();
                 eID=Integer.parseInt(eIDString);
                 //make editTexts disappear
                 nameText.setVisibility(View.INVISIBLE);
