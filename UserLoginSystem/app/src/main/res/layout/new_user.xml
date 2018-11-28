@@ -46,24 +46,24 @@
             android:textSize="40dp" />
 
         <EditText
+            android:id="@+id/idText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/idText"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/first_name"
             android:layout_marginTop="450dp"
-            android:textSize="40dp"
-            android:hint="Employee ID" />
+            android:background="@drawable/first_name"
+            android:hint="Extension"
+            android:textSize="40dp" />
 
         <EditText
+            android:id="@+id/badgeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/badgeText"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/first_name"
             android:layout_marginTop="600dp"
-            android:textSize="40dp"
-            android:hint="Badge Number" />
+            android:background="@drawable/first_name"
+            android:hint="Department Code"
+            android:textSize="40dp" />
 
         <ImageButton
             android:layout_width="wrap_content"

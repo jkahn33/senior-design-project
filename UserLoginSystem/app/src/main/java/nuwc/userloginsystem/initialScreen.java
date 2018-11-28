@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class initialScreen extends AppCompatActivity {
 
     public Button loginButton;
-    //public Button reserveButton;
+    public Button reserveButton;
     public Button checkoutButton;
 
     public void login(){
@@ -31,19 +31,19 @@ public class initialScreen extends AppCompatActivity {
         });
     }
 
-/*    public void reserve(){
+    public void reserve(){
 
         reserveButton = (Button)findViewById(R.id.reserveButton);
         reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent reserve = new Intent(initialScreen.this, reserve.class);
+                Intent reserve = new Intent(initialScreen.this, Reservations.class);
                 startActivity(reserve);
 
             }
         });
-    }*/
+    }
 
     public void checkout(){
 
@@ -65,7 +65,7 @@ public class initialScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial_screen);
         login();
-        //reserve();
+        reserve();
         checkout();
     }
 }

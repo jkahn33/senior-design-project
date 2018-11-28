@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Reservations">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="320dp"
+            android:layout_height="320dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/timeSlots"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp">
+
+        <LinearLayout
+            android:id="@+id/times"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+    </ScrollView>
+
+    <EditText
+        android:id="@+id/printName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="400dp"
+        android:layout_marginTop="300dp"
+        android:hint="Name of Print" />
+
+    <EditText
+        android:id="@+id/printNumber"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="400dp"
+        android:layout_marginTop="350dp"
+        android:hint="Printer number" />
+
+    <EditText
+        android:id="@+id/startsTime"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="400dp"
+        android:layout_marginTop="400dp"
+        android:hint="StartsTime" />
+    <EditText
+        android:id="@+id/startsDate"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="400dp"
+        android:layout_marginTop="450dp"
+        android:hint="StartsDate" />
+
+    <EditText
+        android:id="@+id/endsTime"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="400dp"
+        android:layout_marginTop="500dp"
+        android:hint="endsTime" />
+
+    <EditText
+        android:id="@+id/endsDate"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="400dp"
+        android:layout_marginTop="550dp"
+        android:hint="endsDate" />
+    <EditText
+        android:id="@+id/ext"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="400dp"
+        android:layout_marginTop="600dp"
+        android:hint="Extension" />
+    <TextView
+        android:id="@+id/startsAt"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="320dp"
+        android:layout_marginTop="410dp"
+        android:textSize="20dp"
+        android:text="Starts at" />
+    <TextView
+        android:id="@+id/endsAt"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="330dp"
+        android:layout_marginTop="510dp"
+        android:textSize="20dp"
+        android:text="Ends at" />
+    <EditText
+        android:id="@+id/details"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="400dp"
+        android:layout_marginTop="650dp"
+        android:hint="Print details..." />
+
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

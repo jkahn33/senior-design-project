@@ -10,7 +10,6 @@
         <activity
             android:name=".savedUsers"
             android:label="@string/app_name" />
-
         <activity
             android:name=".signIn"
             android:exported="true"
@@ -27,6 +26,11 @@
             android:exported="true" />
 
         <activity
+            android:name=".Reservations"
+            android:label="@string/title_activity_reservations"
+            android:theme="@style/AppTheme"/>
+
+        <activity
             android:name=".initialScreen" >
 
             <intent-filter>
@@ -36,6 +40,7 @@
             </intent-filter>
 
         </activity>
+
     </application>
 
 </manifest>
