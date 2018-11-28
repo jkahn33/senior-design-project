@@ -23,9 +23,10 @@ public class WindowsController {
         this.adminService = adminService;
     }
 
-    @PostMapping("/newAdmin")
+    @GetMapping("/newAdmin")
     @ResponseBody
     public ResponseObject newAdmin(NewAdmin sentAdmin){
+        sentAdmin = new NewAdmin("Jacob Kahn", "12334", "password");
         return adminService.createNewAdmin(sentAdmin);
     }
 

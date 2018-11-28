@@ -8,10 +8,10 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ReservableKey implements Serializable 
 {
-	@Column(name = "type", nullable = false)
+	@Column(name = "type", nullable = false, length=20)
 	private String type;
 	
-	@Column(name = "id", nullable = false)
+	@Column(name = "id", nullable = false, length=20)
 	private String id;
 	
 	public ReservableKey()

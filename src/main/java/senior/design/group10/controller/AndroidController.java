@@ -1,21 +1,14 @@
 package senior.design.group10.controller;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import senior.design.group10.objects.equipment.Equipment;
-import senior.design.group10.objects.equipment.PrinterReservations;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.AdminInQuestion;
+import senior.design.group10.objects.sent.EquipmentWrapper;
 import senior.design.group10.objects.sent.SentBreakoutReservation;
 import senior.design.group10.objects.sent.SentEquipment;
 import senior.design.group10.objects.sent.SentPrinterReservation;
@@ -27,17 +20,13 @@ import senior.design.group10.service.EquipmentService;
 import senior.design.group10.service.UserService;
 import senior.design.group10.service.PrinterService;
 import senior.design.group10.service.ReservablesService;
-import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.objects.sent.SentLoginHistory;
 import senior.design.group10.service.LoginService;
-import senior.design.group10.service.UserService;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 @RequestMapping("/android")
 public class AndroidController {
+
     private final
     UserService userService;
     private final
@@ -50,35 +39,49 @@ public class AndroidController {
     BreakoutService breakoutService;
     private final
     ReservablesService reservablesService;
+    private final
+    EquipmentService equipmentService;
     
 
     @Autowired
-    public AndroidController(UserService userService, AdminService adminService, LoginService loginService, PrinterService printerService, BreakoutService breakoutService, ReservablesService reservablesService) {
+    public AndroidController(UserService userService,
+                             AdminService adminService,
+                             LoginService loginService,
+                             PrinterService printerService,
+                             BreakoutService breakoutService,
+                             ReservablesService reservablesService,
+                             EquipmentService equipmentService) {
         this.userService = userService;
         this.adminService = adminService;
         this.loginService = loginService;
         this.printerService = printerService;
         this.breakoutService = breakoutService;
-        this.reservablesService = reservablesService; 
+        this.reservablesService = reservablesService;
+        this.equipmentService = equipmentService;
     }
     
     //API endpoint for creating a new user.
-    @GetMapping("/newUser")
+    @PostMapping("/newUser")
     @ResponseBody
-    public ResponseObject newUser(SentUser sentUser){
-    	sentUser = new SentUser("name", "11111", "0123");
+    public ResponseObject newUser(@RequestBody SentUser sentUser){
         return userService.saveNewUser(sentUser);
     }
 
     @PostMapping("/validateAdmin")
     @ResponseBody
-    public boolean validateAdmin(AdminInQuestion adminInQuestion){
+    public boolean validateAdmin(@RequestBody AdminInQuestion adminInQuestion){
         return adminService.isAdminValid(adminInQuestion);
     }
-    @GetMapping("/storeLogin")
+
+    @PostMapping("/newEquipment")
     @ResponseBody
-    public ResponseObject storeLogin(SentLoginHistory login) {
-    	login = new SentLoginHistory("11111");
+    public ResponseObject newEquipment(@RequestBody Equipment equipment) {
+        return equipmentService.addNewEquipment(equipment);
+    }
+
+    @PostMapping("/storeLogin")
+    @ResponseBody
+    public ResponseObject storeLogin(@RequestBody SentLoginHistory login) {
     	return loginService.saveNewLogin(login);
     }
     //Just for testing. UserService.getAllUsers() returns a list of all users
@@ -113,15 +116,17 @@ public class AndroidController {
      */
     @PostMapping("/newBreakoutReservation")
 	@ResponseBody
-    public ResponseObject newBreakoutReservation(SentBreakoutReservation breakoutReservation)
-    {
-		Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-24 10:19:10");
-		String numPeep = "23";
-		breakoutReservation = new SentBreakoutReservation("1234","Breakout","A","print boat today",timestamp,"23:00",numPeep,"THis is the additional comment");
-		return breakoutService.addBreakRes(breakoutReservation);
-
+    public ResponseObject newBreakoutReservation(SentBreakoutReservation breakoutReservation) {
+        Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-24 10:19:10");
+        String numPeep = "23";
+        breakoutReservation = new SentBreakoutReservation("1234", "Breakout", "A", "print boat today", timestamp, "23:00", numPeep, "THis is the additional comment");
+        return breakoutService.addBreakRes(breakoutReservation);
     }
-    
+    @PostMapping("/checkoutEquipment")
+    @ResponseBody
+    public ResponseObject checkoutEquipment(@RequestBody SentEquipment equipment){
+        return equipmentService.checkout(equipment);
+    }
     
     /*
      * Making a new reservable to be used for reservation
@@ -129,15 +134,12 @@ public class AndroidController {
      * Composed of a sent reservable which contain two strings
      * String for reservable type, String for reservable Id
      */
-    
     @PostMapping("/newReservable")
     @ResponseBody
     public ResponseObject newReservable(SentReservable sentReservable)
     {
     		return reservablesService.saveNewReservable(sentReservable);
     }
-    
-    
     /*
      * Removing unwanted reservable by taking in type and id
      */
@@ -149,5 +151,10 @@ public class AndroidController {
     		
     		sentReservable = new SentReservable("Printer","B");
     		return reservablesService.removeReservable(sentReservable);
+    }
+    @PostMapping("/checkinEquipment")
+    @ResponseBody
+    public ResponseObject checkinEquipment(EquipmentWrapper barcode){
+        return equipmentService.checkin(barcode.getBarcode());
     }
 }
