@@ -1,3 +1,7 @@
+/*
+ * This contains hibernate configuration and will not be modified for application functionality
+ */
+
 package senior.design.group10.application;
 
 import org.hibernate.SessionFactory;
@@ -38,6 +42,7 @@ public class HibernateConfig {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/user_logging_system");
         dataSource.setUsername("root");
+        //remember to change this password depending on what computer the program is running on
         dataSource.setPassword("root");
         return dataSource;
     }
@@ -59,9 +64,9 @@ public class HibernateConfig {
     private Properties additionalProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        properties.setProperty(
-                "hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-
+        //properties.setProperty("show_sql", "true");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.current_session_context_class", "org.springframework.orm.hibernate5.SpringSessionContext");
         return properties;
     }
 
