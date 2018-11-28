@@ -1,0 +1,136 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:2:1-18:12
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.0-alpha1.aar/6ec29197f64b23499868036b7934fa15/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-v4-26.0.0-alpha1.aar/02087311bd4820df9253b3c3f9cc67fc/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.0.0-alpha1.aar/729091c9deb765819252e7526789f338/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.0.0-alpha1.aar/e22abc60eee35354fbdf6387e282646d/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.0.0-alpha1.aar/301c35eb4f09c9934c5226d613b9fc3e/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-fragment-26.0.0-alpha1.aar/42da0734b89c641917f1d56baec88fe6/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.0.0-alpha1.aar/a4ca46e825a6b0750dbcbbb8d2f87084/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.0.0-alpha1.aar/8a6447b39e841e3e37b6d4868500ab12/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-compat-26.0.0-alpha1.aar/2034fff3f080b76fda59f183daeceea4/AndroidManifest.xml:17:1-31:12
+INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:2:1-18:12
+	package
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:3:5-35
+		INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:2:1-18:12
+		INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:2:1-18:12
+		INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:5:5-16:19
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.0-alpha1.aar/6ec29197f64b23499868036b7934fa15/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.0-alpha1.aar/6ec29197f64b23499868036b7934fa15/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-v4-26.0.0-alpha1.aar/02087311bd4820df9253b3c3f9cc67fc/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-v4-26.0.0-alpha1.aar/02087311bd4820df9253b3c3f9cc67fc/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.0.0-alpha1.aar/729091c9deb765819252e7526789f338/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.0.0-alpha1.aar/729091c9deb765819252e7526789f338/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.0.0-alpha1.aar/e22abc60eee35354fbdf6387e282646d/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.0.0-alpha1.aar/e22abc60eee35354fbdf6387e282646d/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.0.0-alpha1.aar/301c35eb4f09c9934c5226d613b9fc3e/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.0.0-alpha1.aar/301c35eb4f09c9934c5226d613b9fc3e/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-fragment-26.0.0-alpha1.aar/42da0734b89c641917f1d56baec88fe6/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-fragment-26.0.0-alpha1.aar/42da0734b89c641917f1d56baec88fe6/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.0.0-alpha1.aar/a4ca46e825a6b0750dbcbbb8d2f87084/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.0.0-alpha1.aar/a4ca46e825a6b0750dbcbbb8d2f87084/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.0.0-alpha1.aar/8a6447b39e841e3e37b6d4868500ab12/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.0.0-alpha1.aar/8a6447b39e841e3e37b6d4868500ab12/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-compat-26.0.0-alpha1.aar/2034fff3f080b76fda59f183daeceea4/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-compat-26.0.0-alpha1.aar/2034fff3f080b76fda59f183daeceea4/AndroidManifest.xml:29:5-20
+	android:label
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:8:9-41
+	android:icon
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:9:9-40
+activity#nuwc.userloginsystem.savedUsers
+ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:10:9-80
+	android:label
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:10:19-51
+	android:name
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:10:52-78
+activity#nuwc.userloginsystem.signIn
+ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:11:9-100
+	android:label
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:11:19-51
+	android:exported
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:11:75-98
+	android:name
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:11:52-74
+activity#nuwc.userloginsystem.newUser
+ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:12:9-78
+	android:label
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:12:19-51
+	android:name
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml:12:52-75
+uses-sdk
+INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.0-alpha1.aar/6ec29197f64b23499868036b7934fa15/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.0-alpha1.aar/6ec29197f64b23499868036b7934fa15/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-v4-26.0.0-alpha1.aar/02087311bd4820df9253b3c3f9cc67fc/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-v4-26.0.0-alpha1.aar/02087311bd4820df9253b3c3f9cc67fc/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.0.0-alpha1.aar/729091c9deb765819252e7526789f338/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.0.0-alpha1.aar/729091c9deb765819252e7526789f338/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.0.0-alpha1.aar/e22abc60eee35354fbdf6387e282646d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.0.0-alpha1.aar/e22abc60eee35354fbdf6387e282646d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.0.0-alpha1.aar/301c35eb4f09c9934c5226d613b9fc3e/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.0.0-alpha1.aar/301c35eb4f09c9934c5226d613b9fc3e/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-fragment-26.0.0-alpha1.aar/42da0734b89c641917f1d56baec88fe6/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-fragment-26.0.0-alpha1.aar/42da0734b89c641917f1d56baec88fe6/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.0.0-alpha1.aar/a4ca46e825a6b0750dbcbbb8d2f87084/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.0.0-alpha1.aar/a4ca46e825a6b0750dbcbbb8d2f87084/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.0.0-alpha1.aar/8a6447b39e841e3e37b6d4868500ab12/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.0.0-alpha1.aar/8a6447b39e841e3e37b6d4868500ab12/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-compat-26.0.0-alpha1.aar/2034fff3f080b76fda59f183daeceea4/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-compat-26.0.0-alpha1.aar/2034fff3f080b76fda59f183daeceea4/AndroidManifest.xml:21:5-23:58
+INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.0-alpha1.aar/6ec29197f64b23499868036b7934fa15/AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+		ADDED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/bhargav/Documents/Capstone/senior-design-project/UserLoginSystem copy/app/src/main/AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.0-alpha1.aar/6ec29197f64b23499868036b7934fa15/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-v4-26.0.0-alpha1.aar/02087311bd4820df9253b3c3f9cc67fc/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-v4-26.0.0-alpha1.aar/02087311bd4820df9253b3c3f9cc67fc/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.0.0-alpha1.aar/729091c9deb765819252e7526789f338/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.0.0-alpha1.aar/729091c9deb765819252e7526789f338/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.0.0-alpha1.aar/e22abc60eee35354fbdf6387e282646d/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.0.0-alpha1.aar/e22abc60eee35354fbdf6387e282646d/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.0.0-alpha1.aar/301c35eb4f09c9934c5226d613b9fc3e/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.0.0-alpha1.aar/301c35eb4f09c9934c5226d613b9fc3e/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-fragment-26.0.0-alpha1.aar/42da0734b89c641917f1d56baec88fe6/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-fragment-26.0.0-alpha1.aar/42da0734b89c641917f1d56baec88fe6/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.0.0-alpha1.aar/a4ca46e825a6b0750dbcbbb8d2f87084/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.0.0-alpha1.aar/a4ca46e825a6b0750dbcbbb8d2f87084/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.0.0-alpha1.aar/8a6447b39e841e3e37b6d4868500ab12/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.0.0-alpha1.aar/8a6447b39e841e3e37b6d4868500ab12/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-compat-26.0.0-alpha1.aar/2034fff3f080b76fda59f183daeceea4/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/support-compat-26.0.0-alpha1.aar/2034fff3f080b76fda59f183daeceea4/AndroidManifest.xml:25:5-27:41
+	android:value
+		ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.0-alpha1.aar/6ec29197f64b23499868036b7934fa15/AndroidManifest.xml:27:9-38
+	android:name
+		ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/bhargav/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.0-alpha1.aar/6ec29197f64b23499868036b7934fa15/AndroidManifest.xml:26:9-47
