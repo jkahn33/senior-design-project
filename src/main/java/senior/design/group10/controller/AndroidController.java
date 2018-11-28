@@ -2,13 +2,11 @@ package senior.design.group10.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import senior.design.group10.objects.equipment.Equipment;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.AdminInQuestion;
+import senior.design.group10.objects.sent.EquipmentWrapper;
 import senior.design.group10.objects.sent.SentEquipment;
 import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.service.AdminService;
@@ -37,37 +35,32 @@ public class AndroidController {
     }
 
     //API endpoint for creating a new user.
-    @GetMapping("/newUser")
+    @PostMapping("/newUser")
     @ResponseBody
-    public ResponseObject newUser(SentUser sentUser){
-        sentUser = new SentUser("John Doe", "12345", "22");
+    public ResponseObject newUser(@RequestBody SentUser sentUser){
         return userService.saveNewUser(sentUser);
     }
 
     @PostMapping("/validateAdmin")
     @ResponseBody
-    public boolean validateAdmin(AdminInQuestion adminInQuestion){
+    public boolean validateAdmin(@RequestBody AdminInQuestion adminInQuestion){
         return adminService.isAdminValid(adminInQuestion);
     }
 
-    @GetMapping("/newEquipment")
+    @PostMapping("/newEquipment")
     @ResponseBody
-    public ResponseObject newEquipment(Equipment equipment){
-        equipment = new Equipment("thisisabarcode", "Raspberry Pi", true);
+    public ResponseObject newEquipment(@RequestBody Equipment equipment){
         return equipmentService.addNewEquipment(equipment);
     }
 
-    @GetMapping("/checkoutEquipment")
+    @PostMapping("/checkoutEquipment")
     @ResponseBody
-    public ResponseObject checkoutEquipment(SentEquipment equipment){
-        log.info("saving");
-        equipment = new SentEquipment("thisisabarcode", "12345", "12334");
+    public ResponseObject checkoutEquipment(@RequestBody SentEquipment equipment){
         return equipmentService.checkout(equipment);
     }
-    @GetMapping("/checkinEquipment")
+    @PostMapping("/checkinEquipment")
     @ResponseBody
-    public ResponseObject checkinEquipment(String barcode){
-        barcode = "thisisabarcode";
-        return equipmentService.checkin(barcode);
+    public ResponseObject checkinEquipment(EquipmentWrapper barcode){
+        return equipmentService.checkin(barcode.getBarcode());
     }
 }
