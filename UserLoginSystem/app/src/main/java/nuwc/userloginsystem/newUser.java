@@ -90,9 +90,9 @@ public class newUser extends AppCompatActivity{
                     addNewUser();
                 }
                 catch(JSONException e){
-                    Log.d("EXCEPTION", e.toString());
+                    showError("JSON Format Error");
+                    Log.e("EXCEPTION", e.toString());
                 }
-
             }
         });
     }

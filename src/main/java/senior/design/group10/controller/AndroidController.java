@@ -1,6 +1,7 @@
 package senior.design.group10.controller;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import senior.design.group10.objects.sent.SentEquipment;
 import senior.design.group10.objects.sent.SentPrinterReservation;
 import senior.design.group10.objects.sent.SentReservable;
 import senior.design.group10.objects.sent.SentUser;
+import senior.design.group10.objects.user.Users;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.BreakoutService;
 import senior.design.group10.service.EquipmentService;
@@ -82,15 +84,16 @@ public class AndroidController {
     @PostMapping("/storeLogin")
     @ResponseBody
     public ResponseObject storeLogin(@RequestBody SentLoginHistory login) {
-    	return loginService.saveNewLogin(login);
+    	ResponseObject response = loginService.saveNewLogin(login);
+    	System.out.println(response.isSuccess() + " " + response.getMessage());
+        return response;
     }
     //Just for testing. UserService.getAllUsers() returns a list of all users
     @GetMapping("/printAllUsers")
     @ResponseBody
-    public void printAllUsers() {
-    	System.out.println(userService.getAllUsers());
+    public List<Users> printAllUsers() {
+        return userService.getAllUsers();
     }
-    
     
     /*
      * Printer reservation takes in a sent printer reservation which is composed of the following variables
