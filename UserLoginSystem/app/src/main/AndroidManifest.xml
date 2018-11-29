@@ -37,7 +37,8 @@
         <activity android:name=".checkoutOptions" />
         <activity android:name=".equipmentCheckin" />
         <activity android:name=".barcodeScreen2" />
-        <activity android:name=".addEquipment"></activity>
+        <activity android:name=".addEquipment" />
+        <activity android:name=".adminCheckout"></activity>
     </application>
 
 </manifest>

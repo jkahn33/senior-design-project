@@ -27,7 +27,7 @@ public class addEquipment extends AppCompatActivity {
         submitButton2 = (Button) findViewById(R.id.submitButton2);
         barcodeBox = (EditText) findViewById(R.id.barcodeBox);
         equipmentName = (EditText) findViewById(R.id.equipmentName);
-        commandBox2 = (TextView) findViewById(R.id.commandBox2);
+        commandBox2 = (TextView) findViewById(R.id.commandBox);
 
         submitButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

@@ -8,13 +8,14 @@
 
     <TextView
         android:id="@+id/commandBox"
-        android:layout_width="259dp"
-        android:layout_height="28dp"
+        android:layout_width="639dp"
+        android:layout_height="64dp"
         android:layout_marginStart="55dp"
         android:layout_marginTop="114dp"
         android:layout_marginEnd="70dp"
         android:layout_marginBottom="10dp"
         android:text="Please enter the barcode below:"
+        android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/enterBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,8 +24,8 @@
 
     <EditText
         android:id="@+id/enterBox"
-        android:layout_width="261dp"
-        android:layout_height="49dp"
+        android:layout_width="620dp"
+        android:layout_height="80dp"
         android:layout_marginStart="55dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="68dp"
@@ -32,6 +33,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Barcode #"
+        android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/submitButton2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,13 +41,14 @@
 
     <Button
         android:id="@+id/submitButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
         android:layout_marginStart="148dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="148dp"
         android:layout_marginBottom="296dp"
         android:text="Submit"
+        android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

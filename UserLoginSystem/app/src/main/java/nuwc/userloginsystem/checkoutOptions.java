@@ -38,7 +38,7 @@ public class checkoutOptions extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent checkout = new Intent(checkoutOptions.this, equipmentCheckout.class);
+                Intent checkout = new Intent(checkoutOptions.this, adminCheckout.class);
                 checkoutOptions.this.startActivity(checkout);
 
             }
