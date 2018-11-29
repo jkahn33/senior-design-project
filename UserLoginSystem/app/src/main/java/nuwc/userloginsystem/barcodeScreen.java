@@ -1,14 +1,10 @@
 package nuwc.userloginsystem;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class barcodeScreen extends AppCompatActivity {
@@ -25,7 +21,7 @@ public class barcodeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_screen);
 
-        submitButton = (Button) findViewById(R.id.submitButton);
+        submitButton = (Button) findViewById(R.id.submitButton2);
         enterBox = (EditText) findViewById(R.id.enterBox);
         commandBox = (TextView) findViewById(R.id.commandBox);
 

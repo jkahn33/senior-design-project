@@ -4,35 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".barcodeScreen">
+    tools:context=".barcodeScreen2">
 
     <TextView
         android:id="@+id/commandBox"
-        android:layout_width="639dp"
+        android:layout_width="587dp"
         android:layout_height="64dp"
         android:layout_marginStart="55dp"
-        android:layout_marginTop="114dp"
+        android:layout_marginTop="105dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
         android:text="Please enter the barcode below:"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/enterBox"
+        app:layout_constraintBottom_toTopOf="@+id/enterBox2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/enterBox"
+        android:id="@+id/enterBox2"
         android:layout_width="620dp"
         android:layout_height="80dp"
         android:layout_marginStart="55dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="68dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="47dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Barcode #"
+        android:inputType="textPersonName"
         android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/submitButton2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,13 +43,13 @@
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:layout_marginStart="148dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="148dp"
-        android:layout_marginBottom="296dp"
+        android:layout_marginBottom="245dp"
         android:text="Submit"
-        android:textSize="35sp"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterBox" />
+        app:layout_constraintTop_toBottomOf="@+id/enterBox2" />
 </android.support.constraint.ConstraintLayout>

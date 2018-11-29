@@ -8,12 +8,13 @@
 
     <Button
         android:id="@+id/checkoutButton"
-        android:layout_width="226dp"
-        android:layout_height="61dp"
+        android:layout_width="450dp"
+        android:layout_height="100dp"
         android:layout_marginStart="78dp"
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="75dp"
         android:text="Equipment Checkout"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,11 +22,13 @@
 
     <Button
         android:id="@+id/reserveButton"
-        android:layout_width="226dp"
-        android:layout_height="61dp"
+        android:layout_width="450dp"
+        android:layout_height="100dp"
         android:layout_marginStart="78dp"
         android:layout_marginEnd="80dp"
+        android:layout_marginBottom="8dp"
         android:text="Make Reservation"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/checkoutButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,8 +36,8 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="420dp"
+        android:layout_height="395dp"
         android:layout_gravity="left|top"
         android:layout_marginStart="78dp"
         android:layout_marginEnd="83dp"
@@ -46,11 +49,11 @@
 
     <ImageView
         android:id="@+id/uswricLetters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="668dp"
+        android:layout_height="113dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="22dp"
         android:background="@drawable/uswric"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,12 +62,14 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="226dp"
-        android:layout_height="61dp"
+        android:layout_width="450dp"
+        android:layout_height="100dp"
         android:layout_marginStart="78dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="80dp"
+        android:layout_marginBottom="8dp"
         android:text="User Login"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/reserveButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
