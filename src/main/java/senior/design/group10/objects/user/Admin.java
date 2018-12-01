@@ -41,4 +41,16 @@ public class Admin
 	public Timestamp getCreationDate() {
 		return creationDate;
 	}
+
+	public void setExt(String ext) {
+		this.ext = ext;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }
