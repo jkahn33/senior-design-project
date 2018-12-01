@@ -2,12 +2,14 @@ package senior.design.group10.controller;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import senior.design.group10.objects.equipment.Equipment;
 import senior.design.group10.objects.response.ResponseObject;
+import senior.design.group10.objects.response.ValidateWrapper;
 import senior.design.group10.objects.sent.AdminInQuestion;
 import senior.design.group10.objects.sent.EquipmentWrapper;
 import senior.design.group10.objects.sent.SentBreakoutReservation;
@@ -28,6 +30,7 @@ import senior.design.group10.service.LoginService;
 @Controller
 @RequestMapping("/android")
 public class AndroidController {
+    private final static Logger log = Logger.getLogger(AndroidController.class.getName());
 
     private final
     UserService userService;
@@ -71,8 +74,8 @@ public class AndroidController {
 
     @PostMapping("/validateAdmin")
     @ResponseBody
-    public boolean validateAdmin(@RequestBody AdminInQuestion adminInQuestion){
-        return adminService.isAdminValid(adminInQuestion);
+    public ValidateWrapper validateAdmin(@RequestBody AdminInQuestion adminInQuestion){
+        return new ValidateWrapper(adminService.isAdminValid(adminInQuestion));
     }
 
     @PostMapping("/newEquipment")
@@ -157,7 +160,7 @@ public class AndroidController {
     }
     @PostMapping("/checkinEquipment")
     @ResponseBody
-    public ResponseObject checkinEquipment(EquipmentWrapper barcode){
+    public ResponseObject checkinEquipment(@RequestBody EquipmentWrapper barcode){
         return equipmentService.checkin(barcode.getBarcode());
     }
 }

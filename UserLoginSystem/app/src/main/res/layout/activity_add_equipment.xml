@@ -68,5 +68,6 @@
         app:layout_constraintBottom_toTopOf="@+id/barcodeBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textColor="@android:color/background_dark" />/>
 </android.support.constraint.ConstraintLayout>

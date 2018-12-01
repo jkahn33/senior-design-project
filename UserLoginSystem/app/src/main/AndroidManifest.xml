@@ -19,7 +19,7 @@
             android:name=".newUser"
             android:label="@string/app_name" />
         <activity
-            android:name=".barcodeScreen"
+            android:name=".checkoutBarcode"
             android:exported="true" />
         <activity
             android:name=".equipmentCheckout"
@@ -37,7 +37,7 @@
         </activity>
         <activity android:name=".checkoutOptions" />
         <activity android:name=".equipmentCheckin" />
-        <activity android:name=".barcodeScreen2" />
+        <activity android:name=".checkinBarcode" />
         <activity android:name=".addEquipment" />
         <activity android:name=".adminCheckout"></activity>
     </application>

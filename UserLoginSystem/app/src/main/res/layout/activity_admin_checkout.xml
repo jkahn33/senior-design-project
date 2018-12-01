@@ -7,7 +7,7 @@
     tools:context=".adminCheckout">
 
     <EditText
-        android:id="@+id/extensionBox"
+        android:id="@+id/barcodeBox"
         android:layout_width="450dp"
         android:layout_height="100dp"
         android:layout_marginStart="159dp"
@@ -38,7 +38,7 @@
         app:layout_constraintBottom_toTopOf="@+id/submitBut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extensionBox" />
+        app:layout_constraintTop_toBottomOf="@+id/barcodeBox" />
 
     <TextView
         android:id="@+id/commandBox"
@@ -48,12 +48,14 @@
         android:layout_marginTop="179dp"
         android:layout_marginEnd="42dp"
         android:layout_marginBottom="78dp"
-        android:text="Please enter the following information"
+        android:text="Administrator Login"
+        android:textAllCaps="false"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/extensionBox"
+        app:layout_constraintBottom_toTopOf="@+id/barcodeBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textColor="@android:color/background_dark" />
 
     <Button
         android:id="@+id/submitBut"

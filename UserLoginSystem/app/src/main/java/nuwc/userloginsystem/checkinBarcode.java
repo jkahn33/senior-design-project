@@ -2,7 +2,6 @@ package nuwc.userloginsystem;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -23,73 +22,61 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import nuwc.userloginsystem.objects.ValidateWrapper;
+import nuwc.userloginsystem.objects.ResponseObject;
 import nuwc.userloginsystem.util.RequestUtil;
 
-public class adminCheckout extends AppCompatActivity {
+public class checkinBarcode extends AppCompatActivity {
 
-    String password;
-    String extension;
+    String barcode;
 
-    TextView directions;
-    EditText passwordBox;
-    EditText extensionBox;
-    Button submitBut;
+    EditText enterBox2;
+    TextView commandBox2;
 
-    public void checkoutScreen(){
-
-        Intent sub = new Intent(adminCheckout.this, equipmentCheckout.class);
-        sub.putExtra("adminExt", extension);
-        adminCheckout.this.startActivity(sub);
-    }
+    Button submitButton2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_checkout);
+        setContentView(R.layout.activity_checkin_barcode_screen);
 
+        submitButton2 = (Button) findViewById(R.id.submitButton2);
+        enterBox2 = (EditText) findViewById(R.id.enterBox2);
+        commandBox2 = (TextView) findViewById(R.id.commandBox);
 
-        submitBut = (Button) findViewById(R.id.submitBut);
-        passwordBox = (EditText) findViewById(R.id.passwordBox);
-        extensionBox = (EditText) findViewById(R.id.barcodeBox);
-        directions = (TextView) findViewById(R.id.commandBox);
-
-        submitBut.setOnClickListener(new View.OnClickListener() {
+        submitButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                //get the password and extension from admin
-                password = passwordBox.getText().toString();
-                extension = extensionBox.getText().toString();
-
+                //get the barcode from user
+                barcode = enterBox2.getText().toString();
                 try {
-                    verifyAdmin();
+                    sendCheckin();
                 }
-                catch(JSONException e){
-                    Log.e("EXCPEPTION", e.toString());
+                catch(JSONException e ){
+                    Log.e("EXCEPTION", e.toString());
                 }
+
 
             }
         });
     }
-    public void verifyAdmin() throws JSONException {
+    public void sendCheckin() throws JSONException {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
 
         JSONObject body = new JSONObject();
 
-        body.put("ext", extension);
-        body.put("password", password);
+        body.put("barcode", barcode);
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
-                RequestUtil.BASE_URL + "/validateAdmin",
+                RequestUtil.BASE_URL + "/checkinEquipment",
                 body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             ObjectMapper mapper = new ObjectMapper();
-                            ValidateWrapper success = mapper.readValue(response.toString(), ValidateWrapper.class);
-                            verifyResponse(success.isSuccess());
+                            ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
+                            verifyResponse(responseObject);
                         }
                         catch(Exception e){
                             Log.d("EXCEPTION", e.toString());
@@ -108,13 +95,16 @@ public class adminCheckout extends AppCompatActivity {
 
         requestQueue.add(request);
     }
-    public void verifyResponse(boolean success){
-        if(success){
-
-            checkoutScreen();
+    public void verifyResponse(ResponseObject response){
+        if(response.isSuccess()){
+            //make editTexts disappear
+            enterBox2.setVisibility(View.INVISIBLE);
+            submitButton2.setVisibility(View.INVISIBLE);
+            //confirm user request
+            commandBox2.setText("Equipment successfully checked in.");
         }
         else{
-            showError("Extension or password is incorrect.");
+            showError(response.getMessage());
         }
     }
     public void showError(String message){

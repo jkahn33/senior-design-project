@@ -3,13 +3,8 @@ package nuwc.userloginsystem;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 public class equipmentCheckout extends AppCompatActivity {
 
@@ -21,8 +16,10 @@ public class equipmentCheckout extends AppCompatActivity {
         manualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent prev = getIntent();
 
-                Intent next = new Intent(equipmentCheckout.this, barcodeScreen.class);
+                Intent next = new Intent(equipmentCheckout.this, checkoutBarcode.class);
+                next.putExtra("adminExt", prev.getStringExtra("adminExt"));
                 startActivity(next);
             }
         });
