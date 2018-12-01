@@ -22,6 +22,6 @@
 /windows-gui/.gradle
 #misc
 /out
-/bin/
+/bin
 /build
 /windows-gui/out
