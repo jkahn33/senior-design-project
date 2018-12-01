@@ -17,6 +17,7 @@
 .project
 /.metadata
 #gradle
+/gradle
 /.gradle
 /windows-gui/.gradle
 #misc
