@@ -11,6 +11,7 @@
 /windows-gui/user-logging-system-windows/.settings
 /windows-gui/user-logging-system-windows/build
 /windows-gui/.recommenders
+/windows-gui/.settings
 /.settings
 .DS_Store
 .classpath
@@ -25,3 +26,4 @@
 /bin
 /build
 /windows-gui/out
+/windows-gui/bin
