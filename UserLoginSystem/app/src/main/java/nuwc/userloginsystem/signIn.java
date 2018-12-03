@@ -26,7 +26,7 @@ public class signIn extends AppCompatActivity{
 
         savedUsers.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(signIn.this, Reservations.class);
+                Intent myIntent = new Intent(signIn.this, PickReservationType.class);
                 signIn.this.startActivity(myIntent);
             }
         });

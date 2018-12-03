@@ -20,6 +20,14 @@
         <activity
             android:name=".Reservations"
             android:label="@string/title_activity_reservations"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PickReservationType"
+            android:label="@string/title_activity_pick_reservation_type"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".BreakoutReservation"
+            android:label="@string/title_activity_breakout_reservation"
             android:theme="@style/AppTheme"></activity>
     </application>
 
