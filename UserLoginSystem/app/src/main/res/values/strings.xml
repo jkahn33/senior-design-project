@@ -5,4 +5,6 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_equipment_checkout">equipmentCheckout</string>
     <string name="title_activity_reservations">Reservations</string>
+    <string name="title_activity_pick_reservation_type">PickReservationType</string>
+    <string name="title_activity_breakout_reservation">BreakoutReservation</string>
 </resources>

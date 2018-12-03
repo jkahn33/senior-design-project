@@ -1,9 +1,11 @@
 package nuwc.userloginsystem;
 
-import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,23 +14,18 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.lang.*;
-
-
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
-public class Reservations extends AppCompatActivity  {
+public class BreakoutReservation extends AppCompatActivity {
 
     private CalendarView calendarView;
     private LinearLayout times;
+    boolean startEnd = false;
 
     private EditText printName;
     private EditText employeeExt;
@@ -39,6 +36,7 @@ public class Reservations extends AppCompatActivity  {
     private NumberPicker startsTimeHour;
     private NumberPicker startsTimeMin;
     private EditText printDetails;
+    private EditText guestNumber;
     private CheckBox printerA;
     private CheckBox printerB;
     private CheckBox printerC;
@@ -46,8 +44,7 @@ public class Reservations extends AppCompatActivity  {
     private CheckBox printerE;
 
 
-
-    Button [] slot = new Button[24];
+    Button[] slot = new Button[24];
 
     Button submitRes;
 
@@ -69,6 +66,7 @@ public class Reservations extends AppCompatActivity  {
     String eDate;
     int eTimeHour, eTimeMin;
     String details;
+    int numberGuests;
 
     SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
     Date startDate = new Date();
@@ -78,10 +76,12 @@ public class Reservations extends AppCompatActivity  {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reservations);
+        setContentView(R.layout.activity_breakout_reservation);
 
         //All fields in reservation page
         printName = (EditText) findViewById(R.id.printName);
@@ -90,8 +90,10 @@ public class Reservations extends AppCompatActivity  {
         startsDate = (EditText) findViewById(R.id.startsDate);
         endsDate = (EditText) findViewById(R.id.endsDate);
 
+        guestNumber =(EditText) findViewById(R.id.guestNumber);
+
         endsTimeHour = (NumberPicker) findViewById(R.id.endsTimeHour);
-        endsTimeHour.setMaxValue(100);
+        endsTimeHour.setMaxValue(24);
         endsTimeHour.setMinValue(0);
         endsTimeHour.setWrapSelectorWheel(true);
 
@@ -129,7 +131,6 @@ public class Reservations extends AppCompatActivity  {
 
 
 
-
         //gives access to current time
         Calendar now = Calendar.getInstance();
         int year1 = now.get(Calendar.YEAR);
@@ -139,7 +140,6 @@ public class Reservations extends AppCompatActivity  {
         int minute1 = now.get(Calendar.MINUTE);
 
         final String current = (Integer.toString(month1) + "/" + Integer.toString(day1) + "/" + Integer.toString(year1));
-
         startsDate.setText(current);
 
         SimpleDateFormat f = new SimpleDateFormat("MM-dd-yyy");
@@ -164,24 +164,17 @@ public class Reservations extends AppCompatActivity  {
                 String dateString = month + "/" + day + "/" + year;
                 //show time slots for day changed to
                 showTimeSlots(month, day, year);
-                try {
-                    startDate = df.parse(dateString);
-                    Log.d("startsDate",startsDate.toString());
 
-                }catch (ParseException e){
+                if(startEnd || startsDate.getText().toString() == dateString){
+                    startsDate.setText(dateString);
+                    startEnd = false;
+                    Log.d("StartEnd True",Boolean.toString(startEnd));
+                }else if(!startEnd){
+                    endsDate.setText(dateString);
+                    startEnd = true;
+                    Log.d("StartEnd False",Boolean.toString(startEnd));
 
                 }
-
-                startsDate.setText(dateString);
-
-                Calendar cal = Calendar.getInstance(); // creates calendar
-                cal.setTime(startDate); // sets calendar time/date
-                cal.add(Calendar.HOUR_OF_DAY, startsTimeHour.getValue()); // adds one hour
-                cal.add(Calendar.HOUR_OF_DAY, endsTimeHour.getValue()); // adds one hour
-                cal.getTime(); // returns new date object, one hour in the future
-
-
-                endsDate.setText(cal.getTime().toString());
             }
         });
 
@@ -195,17 +188,24 @@ public class Reservations extends AppCompatActivity  {
                 if(pName.length() > 16 || pName.length() == 0){
                     printName.getText().clear();
                     printName.setHintTextColor(getResources().getColor(R.color.red));
-                    printName.setHint("Name must be below 16 characters");
+                    printName.setHint("Name under 16 characters!");
                     ready = false;
                 }
-
 
                 if(isInteger(employeeExt.getText().toString())){
                     ext = Integer.parseInt(employeeExt.getText().toString());
                 }else{
                     employeeExt.getText().clear();
                     employeeExt.setHintTextColor(getResources().getColor(R.color.red));
-                    employeeExt.setHint("Enter employee enxtension");
+                    employeeExt.setHint("Enter employee extension!");
+                    ready = false;
+                }
+                if(isInteger(guestNumber.getText().toString())){
+                    numberGuests = Integer.parseInt(guestNumber.getText().toString());
+                }else{
+                    guestNumber.getText().clear();
+                    guestNumber.setHintTextColor(getResources().getColor(R.color.red));
+                    guestNumber.setHint("Enter number of guests!");
                     ready = false;
                 }
 
@@ -242,6 +242,7 @@ public class Reservations extends AppCompatActivity  {
                 }
 
 
+
                 sTimeHour = startsTimeHour.getValue();
                 sTimeMin = startsTimeMin.getValue();
 
@@ -252,7 +253,7 @@ public class Reservations extends AppCompatActivity  {
 
 
                 if(!ready){
-                    Toast.makeText(Reservations.this, "Reservation for " + pName + " has been made! ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BreakoutReservation.this, "Reservation for " + pName + " has been made! ", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -260,104 +261,52 @@ public class Reservations extends AppCompatActivity  {
         });
 
 
-        endsTimeHour.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                Calendar cal = Calendar.getInstance(); // creates calendar
-                cal.setTime(startDate); // sets calendar time/date
-                cal.add(Calendar.HOUR_OF_DAY, startsTimeHour.getValue()); // adds one hour
-                cal.add(Calendar.HOUR_OF_DAY, endsTimeHour.getValue()); // adds one hour
-                cal.add(Calendar.MINUTE, startsTimeMin.getValue()); // adds one hour
-                cal.add(Calendar.MINUTE, endsTimeMin.getValue()); // adds one hour
-                cal.getTime(); // returns new date object, one hour in the future
-
-
-                endsDate.setText(cal.getTime().toString());
-
-
-            }
-        });
-        endsTimeMin.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                Calendar cal = Calendar.getInstance(); // creates calendar
-                cal.setTime(startDate); // sets calendar time/date
-                cal.add(Calendar.HOUR_OF_DAY, startsTimeHour.getValue()); // adds one hour
-                cal.add(Calendar.HOUR_OF_DAY, endsTimeHour.getValue()); // adds one hour
-                cal.add(Calendar.MINUTE, startsTimeMin.getValue()); // adds one hour
-                cal.add(Calendar.MINUTE, endsTimeMin.getValue()); // adds one hour
-                cal.getTime(); // returns new date object, one hour in the future
-
-
-                endsDate.setText(cal.getTime().toString());
-
-
-            }
-        });
-        startsTimeMin.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                Calendar cal = Calendar.getInstance(); // creates calendar
-                cal.setTime(startDate); // sets calendar time/date
-                cal.add(Calendar.HOUR_OF_DAY, startsTimeHour.getValue()); // adds one hour
-                cal.add(Calendar.HOUR_OF_DAY, endsTimeHour.getValue()); // adds one hour
-                cal.add(Calendar.MINUTE, startsTimeMin.getValue()); // adds one hour
-                cal.add(Calendar.MINUTE, endsTimeMin.getValue()); // adds one hour
-                cal.getTime(); // returns new date object, one hour in the future
-
-
-                endsDate.setText(cal.getTime().toString());
-
-
-            }
-        });
-        startsTimeHour.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                Calendar cal = Calendar.getInstance(); // creates calendar
-                cal.setTime(startDate); // sets calendar time/date
-                cal.add(Calendar.HOUR_OF_DAY, startsTimeHour.getValue()); // adds one hour
-                cal.add(Calendar.HOUR_OF_DAY, endsTimeHour.getValue()); // adds one hour
-                cal.add(Calendar.MINUTE, startsTimeMin.getValue()); // adds one hour
-                cal.add(Calendar.MINUTE, endsTimeMin.getValue()); // adds one hour
-                cal.getTime(); // returns new date object, one hour in the future
-
-
-                endsDate.setText(cal.getTime().toString());
-
-            }
-        });
-
     }
     public void showTimeSlots(int month, int day, int year){
         times.removeAllViews();
 
 
         monthD = month;
-    dayD = day;
-    yearD = year;
-    m = 0;
-    dayNnite = "am";
+        dayD = day;
+        yearD = year;
+        m = 0;
+        dayNnite = "am";
         for( count = 0; count < 24; count ++){
 
-        slot[count] = new Button(this);
-        slot[count].setText(m + ":00");
-        slot[count].setId(count);
-        slot[count].setTextSize(40);
-        slot[count].setBackgroundResource(R.drawable.time_slot);
-        slot[count].setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                    startsTimeHour.setValue(view.getId());
-            }
-        });
+            slot[count] = new Button(this);
+            slot[count].setText(m + ":00");
+            slot[count].setId(count);
+            slot[count].setTextSize(40);
+            slot[count].setBackgroundResource(R.drawable.time_slot);
+            slot[count].setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    String starts = startsDate.getText().toString();
+                    String ends = endsDate.getText().toString();
+                    String thisString = Integer.toString(monthD) + "/" + Integer.toString(dayD) + "/" + Integer.toString(yearD);
+
+                    Log.d("getText",starts);
+
+                    int time = view.getId();
+
+                    if(starts.equals(thisString)){
+                        startsTimeHour.setValue(time);
+                        Log.d("this",thisString);
+
+                    }else if(ends.equals(thisString)){
+                        endsTimeHour.setValue(time);
+
+                    }
+
+                }
+            });
 
 
-        m++;
+            m++;
 
-        times.addView(slot[count]);
+            times.addView(slot[count]);
+        }
+
     }
-
-}
 
 
     public static boolean isInteger(String s) {

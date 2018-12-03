@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Reservations">
+    tools:context=".BreakoutReservation">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -40,12 +40,12 @@
             android:layout_height="38dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="48dp"
+            android:layout_marginBottom="24dp"
             android:text="Submit
     "
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.728"
+            app:layout_constraintHorizontal_bias="0.73"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
@@ -54,11 +54,11 @@
             android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="20dp"
             android:hint="Print details..."
             app:layout_constraintBottom_toTopOf="@+id/submitRes"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.782"
+            app:layout_constraintHorizontal_bias="0.963"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
@@ -75,12 +75,25 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
+            android:id="@+id/guestNumber"
+            android:layout_width="200dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Number of guests"
+            app:layout_constraintBottom_toTopOf="@+id/submitRes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.586"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
             android:id="@+id/startsDate"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="208dp"
+            android:layout_marginBottom="216dp"
             android:hint="Starts Date"
             app:layout_constraintBottom_toTopOf="@+id/endsDate"
             app:layout_constraintEnd_toEndOf="parent"
@@ -104,11 +117,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
-            android:layout_marginEnd="8dp"
             android:text="Print"
             android:textSize="20dp"
-            app:layout_constraintEnd_toStartOf="@+id/endsAt4"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/endsTimeHour"
             app:layout_constraintTop_toTopOf="@+id/endsTimeHour" />
 
@@ -116,7 +126,8 @@
             android:id="@+id/startsTimeHour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="420dp"
+            android:layout_marginStart="424dp"
+            android:layout_marginBottom="64dp"
             android:text="Print"
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/startsDate"
@@ -126,7 +137,7 @@
             android:id="@+id/startsTimeMin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="108dp"
             android:layout_marginBottom="8dp"
             android:text="Print"
             android:textSize="20dp"
@@ -142,25 +153,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="76dp"
             android:layout_marginEnd="8dp"
-            android:text="Print for"
+            android:text="Ends at"
             android:textSize="20dp"
             app:layout_constraintEnd_toStartOf="@+id/endsTimeHour"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/endsTimeHour" />
-
-        <TextView
-            android:id="@+id/endDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="28dp"
-            android:textSize="20dp"
-            android:text="Ends at"
-            app:layout_constraintBottom_toTopOf="@+id/ext"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/timeSlots" />
 
         <TextView
             android:id="@+id/endsAt7"
@@ -181,12 +179,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="76dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="8dp"
-            android:text="hours"
-            android:textSize="20dp"
+            android:text=":"
+            android:textSize="50dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.069"
+            app:layout_constraintHorizontal_bias="0.14"
             app:layout_constraintStart_toEndOf="@+id/endsTimeHour"
             app:layout_constraintTop_toTopOf="@+id/endsTimeHour" />
 
@@ -204,20 +202,6 @@
             app:layout_constraintStart_toEndOf="@+id/startsTimeHour"
             app:layout_constraintTop_toTopOf="@+id/startsTimeHour" />
 
-        <TextView
-            android:id="@+id/endsAt4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="76dp"
-            android:layout_marginEnd="8dp"
-            android:text="minutes"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.809"
-            app:layout_constraintStart_toEndOf="@+id/endsAt3"
-            app:layout_constraintTop_toTopOf="@+id/endsTimeHour" />
-
         <EditText
             android:id="@+id/printName"
             android:layout_width="200dp"
@@ -225,7 +209,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:hint="Name of Print"
+            android:hint="Name of Event"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.782"
             app:layout_constraintStart_toStartOf="parent"
@@ -265,64 +249,48 @@
         </ScrollView>
 
         <CheckBox
-            android:id="@+id/printerA"
+            android:id="@+id/roomA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="300dp"
-            android:layout_marginBottom="70dp"
-            android:text="Printer A"
-            app:layout_constraintBottom_toTopOf="@+id/startsTimeHour"
+            android:layout_marginEnd="320dp"
+            android:text="Room A"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/printName" />
 
         <CheckBox
-            android:id="@+id/printerB"
+            android:id="@+id/roomB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="200dp"
-            android:layout_marginBottom="70dp"
-            android:text="Printer B"
-            app:layout_constraintBottom_toTopOf="@+id/startsTimeHour"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="12dp"
+            android:text="Room B"
+            app:layout_constraintEnd_toStartOf="@+id/roomC"
+            app:layout_constraintStart_toEndOf="@+id/roomA"
             app:layout_constraintTop_toBottomOf="@+id/printName" />
 
         <CheckBox
-            android:id="@+id/printerC"
+            android:id="@+id/roomC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="70dp"
-            android:text="Printer C"
-            app:layout_constraintBottom_toTopOf="@+id/startsTimeHour"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Room C"
+            app:layout_constraintStart_toEndOf="@+id/roomA"
             app:layout_constraintTop_toBottomOf="@+id/printName" />
 
         <CheckBox
-            android:id="@+id/printerD"
+            android:id="@+id/roomD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="300dp"
-            android:layout_marginBottom="20dp"
-            android:text="Printer D"
-            app:layout_constraintBottom_toTopOf="@+id/startsTimeHour"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="Room D"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/printerA" />
-
-        <CheckBox
-            android:id="@+id/printerE"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="20dp"
-            android:text="Printer E"
-            app:layout_constraintBottom_toTopOf="@+id/startsTimeHour"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/printerC" />
+            app:layout_constraintStart_toStartOf="@+id/roomB"
+            app:layout_constraintTop_toBottomOf="@+id/printName" />
 
     </android.support.constraint.ConstraintLayout>
 
