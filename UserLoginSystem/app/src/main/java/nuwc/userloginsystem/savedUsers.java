@@ -1,10 +1,12 @@
 package nuwc.userloginsystem;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -30,6 +32,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import nuwc.userloginsystem.objects.ResponseObject;
@@ -47,10 +51,11 @@ public class savedUsers extends AppCompatActivity{
     ScrollView buttonView;
     LinearLayout buttonLayout;
     String name;
+    String ext;
 
     TextView welcomeUser;
 
-    int userCount = 10;
+    private List<Users> userList = null;
 
     public static savedUsers savedInsta;
 
@@ -73,8 +78,11 @@ public class savedUsers extends AppCompatActivity{
         welcomeUser = (TextView) findViewById(R.id.welcomeUser);
     }
 
-    public void addUser(List<Users> userList) {
+    @TargetApi(24)
+    public void addUser() {
         if(userList != null) {
+            userList.sort(Comparator.comparing(Users::getName));
+
             for (int i = 0; i < userList.size(); i++) {
                 final Button userButton = new Button(this);
 
@@ -107,7 +115,8 @@ public class savedUsers extends AppCompatActivity{
         if(response.isSuccess()){
             //confirm user creation
             Log.d("RESPONSE", "creating welcome user");
-            welcomeUser.setText("Welcome " + "dummy" + "!");
+            welcomeUser.setText("Welcome " + ext + "!");
+            buttonLayout.setVisibility(View.INVISIBLE);
         }
         else{
             showError(response.getMessage());
@@ -127,8 +136,8 @@ public class savedUsers extends AppCompatActivity{
                     public void onResponse(JSONArray response) {
                         try {
                             ObjectMapper mapper = new ObjectMapper();
-                            List<Users> userList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
-                            addUser(userList);
+                            userList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
+                            addUser();
                         }
                         catch(Exception e){
                             Log.e("EXCEPTION", e.toString());
@@ -155,6 +164,8 @@ public class savedUsers extends AppCompatActivity{
         JSONObject body = new JSONObject();
 
         body.put("ext", id);
+
+        ext = id;
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
