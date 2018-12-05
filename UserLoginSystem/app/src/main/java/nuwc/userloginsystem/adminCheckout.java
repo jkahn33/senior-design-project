@@ -35,6 +35,7 @@ public class adminCheckout extends AppCompatActivity {
     EditText passwordBox;
     EditText extensionBox;
     Button submitBut;
+    Button cancel;
 
     public void checkoutScreen(){
 
@@ -53,6 +54,7 @@ public class adminCheckout extends AppCompatActivity {
         passwordBox = (EditText) findViewById(R.id.passwordBox);
         extensionBox = (EditText) findViewById(R.id.barcodeBox);
         directions = (TextView) findViewById(R.id.commandBox);
+        cancel = (Button) findViewById(R.id.btnAdminLoginCancel);
 
         submitBut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -67,6 +69,12 @@ public class adminCheckout extends AppCompatActivity {
                     Log.e("EXCPEPTION", e.toString());
                 }
 
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent sub = new Intent(adminCheckout.this, checkoutOptions.class);
+                adminCheckout.this.startActivity(sub);
             }
         });
     }

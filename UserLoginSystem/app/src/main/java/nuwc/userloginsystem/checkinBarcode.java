@@ -2,6 +2,7 @@ package nuwc.userloginsystem;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,8 @@ public class checkinBarcode extends AppCompatActivity {
     TextView commandBox2;
 
     Button submitButton2;
+    Button cancel;
+    Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,11 @@ public class checkinBarcode extends AppCompatActivity {
         setContentView(R.layout.activity_checkin_barcode_screen);
 
         submitButton2 = (Button) findViewById(R.id.submitButton2);
+        cancel = (Button) findViewById(R.id.btnCheckinCancel);
         enterBox2 = (EditText) findViewById(R.id.enterBox2);
         commandBox2 = (TextView) findViewById(R.id.commandBox);
+        back = (Button) findViewById(R.id.btnCheckinHome);
+        back.setVisibility(View.INVISIBLE);
 
         submitButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -55,6 +61,18 @@ public class checkinBarcode extends AppCompatActivity {
                 }
 
 
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent cancelIntent = new Intent(checkinBarcode.this, checkoutOptions.class);
+                checkinBarcode.this.startActivity(cancelIntent);
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent cancelIntent = new Intent(checkinBarcode.this, checkoutOptions.class);
+                checkinBarcode.this.startActivity(cancelIntent);
             }
         });
     }
@@ -100,6 +118,8 @@ public class checkinBarcode extends AppCompatActivity {
             //make editTexts disappear
             enterBox2.setVisibility(View.INVISIBLE);
             submitButton2.setVisibility(View.INVISIBLE);
+            back.setVisibility(View.VISIBLE);
+            cancel.setVisibility(View.INVISIBLE);
             //confirm user request
             commandBox2.setText("Equipment successfully checked in.");
         }

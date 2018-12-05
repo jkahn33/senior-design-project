@@ -60,29 +60,29 @@ public class BreakoutService
 
 		//Calculate the end time
 
-		Timestamp jobScheduleEnd = breakout.getResSchedule();
+		Timestamp jobScheduleEnd = Timestamp.valueOf(breakout.getResStart());
 		//Splitting the time by : for hours and mins
-		String hourMin [] = breakout.getResDuration().split(":");
-		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(jobScheduleEnd.getTime());
-		// add number of hours
-		cal.add(Calendar.MINUTE, Integer.parseInt(hourMin[1]) );
-		cal.add(Calendar.HOUR, Integer.parseInt(hourMin[0]) );
-		jobScheduleEnd = new Timestamp(cal.getTime().getTime());
+//		String hourMin [] = breakout.getResDuration().split(":");
+//		Calendar cal = Calendar.getInstance();
+//		cal.setTimeInMillis(jobScheduleEnd.getTime());
+//		// add number of hours
+//		cal.add(Calendar.MINUTE, Integer.parseInt(hourMin[1]) );
+//		cal.add(Calendar.HOUR, Integer.parseInt(hourMin[0]) );
+		jobScheduleEnd = Timestamp.valueOf(breakout.getResEnd());
 		//Where end time finishes calculating
 
 
 
 
 		//Check to assure that the printer/ timeslot are available
-		java.util.List<BreakoutReservations> checking = breakoutDAO.checkTimeAvailable(breakout.getResSchedule(),jobScheduleEnd,breakout.getReservableId());
+		java.util.List<BreakoutReservations> checking = breakoutDAO.checkTimeAvailable(Timestamp.valueOf(breakout.getResStart()),Timestamp.valueOf(breakout.getResEnd()),breakout.getReservableId());
 
-		Optional <BreakoutReservations> precedingRes = breakoutDAO.checkNestedReservation(breakout.getResSchedule(),breakout.getReservableId());
+		Optional <BreakoutReservations> precedingRes = breakoutDAO.checkNestedReservation(Timestamp.valueOf(breakout.getResStart()),breakout.getReservableId());
 
 
 		if(precedingRes.isPresent())
 		{
-			if(precedingRes.get().getResScheduleEnd().after(breakout.getResSchedule()))
+			if(precedingRes.get().getResScheduleEnd().after(Timestamp.valueOf(breakout.getResStart())))
 			{
 				return new ResponseObject(false, "1 Conflicting times, timeslot "+ precedingRes.get().getResSchedule()+ " to "+ precedingRes.get().getResScheduleEnd() + " being used by Printer");
 
@@ -101,7 +101,7 @@ public class BreakoutService
 		Users user = usersOptional.get();
 		Reservables reservable = reservableOptional.get();
 
-		BreakoutReservations newReservation = new BreakoutReservations(user,reservable,breakout.getResDescription(),breakout.getResDuration(), breakout.getResSchedule(), jobScheduleEnd,breakout.getNumPeople(),breakout.getAdditionalCom());
+		BreakoutReservations newReservation = new BreakoutReservations(user,reservable,breakout.getResDescription(), Timestamp.valueOf(breakout.getResStart()), Timestamp.valueOf(breakout.getResEnd()),breakout.getNumPeople(),breakout.getAdditionalCom());
 
 		
 		breakoutDAO.save(newReservation);

@@ -38,8 +38,8 @@ public class BreakoutReservations
 	private Reservables reservable;
 	@Column
 	private String resDescription;
-	@Column
-	private String resDuration;
+//	@Column
+//	private String resDuration;
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date resSchedule;
@@ -55,11 +55,10 @@ public class BreakoutReservations
 
 	}
 
-	public BreakoutReservations(Users user, Reservables reservable, String resDescription, String resDuration, Timestamp resSchedule, Timestamp resScheduleEnd, String numPeople, String additionalComments) {
+	public BreakoutReservations(Users user, Reservables reservable, String resDescription, Timestamp resSchedule, Timestamp resScheduleEnd, String numPeople, String additionalComments) {
 		this.user = user;
 		this.reservable = reservable;
 		this.resDescription = resDescription;
-		this.resDuration = resDuration;
 		this.resSchedule = resSchedule;
 		this.resScheduleEnd = resScheduleEnd;
 		this.numPeople = numPeople;

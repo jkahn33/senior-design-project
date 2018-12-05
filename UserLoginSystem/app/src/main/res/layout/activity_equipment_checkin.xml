@@ -11,9 +11,8 @@
         android:layout_width="450dp"
         android:layout_height="100dp"
         android:layout_marginStart="39dp"
-        android:layout_marginTop="21dp"
         android:layout_marginEnd="39dp"
-        android:layout_marginBottom="134dp"
+        android:layout_marginBottom="300dp"
         android:text="Scan barcode"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,9 +25,8 @@
         android:layout_width="450dp"
         android:layout_height="100dp"
         android:layout_marginStart="39dp"
-        android:layout_marginTop="58dp"
         android:layout_marginEnd="39dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="100dp"
         android:text="Enter manually"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/scanButton2"
@@ -50,4 +48,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnCheckinChoiceCancel"
+        android:layout_width="244dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="340dp"
+        android:layout_marginTop="198dp"
+        android:layout_marginEnd="340dp"
+        android:text="Cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scanButton2" />
 </android.support.constraint.ConstraintLayout>

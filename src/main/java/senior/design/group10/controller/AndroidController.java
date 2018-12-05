@@ -107,7 +107,7 @@ public class AndroidController {
      */
     @PostMapping("/newPrinterReservation")
 	@ResponseBody
-	public ResponseObject newPrinterReservation(SentPrinterReservation printerReservation)
+	public ResponseObject newPrinterReservation(@RequestBody SentPrinterReservation printerReservation)
 	{	
 		return printerService.addPrintRes(printerReservation);
 	}
@@ -122,10 +122,7 @@ public class AndroidController {
      */
     @PostMapping("/newBreakoutReservation")
 	@ResponseBody
-    public ResponseObject newBreakoutReservation(SentBreakoutReservation breakoutReservation) {
-        Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-24 10:19:10");
-        String numPeep = "23";
-        breakoutReservation = new SentBreakoutReservation("1234", "Breakout", "A", "print boat today", timestamp, "23:00", numPeep, "THis is the additional comment");
+    public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation) {
         return breakoutService.addBreakRes(breakoutReservation);
     }
     @PostMapping("/checkoutEquipment")
@@ -142,9 +139,9 @@ public class AndroidController {
      */
     @PostMapping("/newReservable")
     @ResponseBody
-    public ResponseObject newReservable(SentReservable sentReservable)
+    public ResponseObject newReservable(@RequestBody SentReservable sentReservable)
     {
-    		return reservablesService.saveNewReservable(sentReservable);
+        return reservablesService.saveNewReservable(sentReservable);
     }
     /*
      * Removing unwanted reservable by taking in type and id
@@ -152,10 +149,8 @@ public class AndroidController {
     
     @PostMapping("/removeReservable")
     @ResponseBody
-    public ResponseObject removeReservable(SentReservable sentReservable)
+    public ResponseObject removeReservable(@RequestBody SentReservable sentReservable)
     {
-    		
-    		sentReservable = new SentReservable("Printer","B");
     		return reservablesService.removeReservable(sentReservable);
     }
     @PostMapping("/checkinEquipment")

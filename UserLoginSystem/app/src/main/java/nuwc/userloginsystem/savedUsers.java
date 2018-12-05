@@ -89,7 +89,7 @@ public class savedUsers extends AppCompatActivity{
                 userButton.setId(Integer.parseInt(userList.get(i).getFiveDigExt()));
                 userButton.setText(userList.get(i).getName());
                 userButton.setTag(i);
-                userButton.setTextSize(40);
+                userButton.setTextSize(30);
                 userButton.setBackgroundResource(R.drawable.name_plate);
 
                 buttonLayout.addView(userButton);
@@ -115,7 +115,7 @@ public class savedUsers extends AppCompatActivity{
         if(response.isSuccess()){
             //confirm user creation
             Log.d("RESPONSE", "creating welcome user");
-            welcomeUser.setText("Welcome " + ext + "!");
+            welcomeUser.setText("Welcome " + response.getMessage() + "!");
             buttonLayout.setVisibility(View.INVISIBLE);
         }
         else{

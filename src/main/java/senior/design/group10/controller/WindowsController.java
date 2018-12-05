@@ -24,7 +24,7 @@ public class WindowsController {
     @PostMapping("/newAdmin")
     @ResponseBody
     public ResponseObject newAdmin(@RequestBody NewAdmin sentAdmin){
-        return adminService.createNewAdmin(sentAdmin);
+	return adminService.createNewAdmin(sentAdmin);
     }
 
     @PostMapping("/validateAdmin")

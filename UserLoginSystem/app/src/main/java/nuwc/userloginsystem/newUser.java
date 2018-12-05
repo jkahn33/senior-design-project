@@ -2,7 +2,6 @@ package nuwc.userloginsystem;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -34,13 +32,11 @@ import nuwc.userloginsystem.util.RequestUtil;
 public class newUser extends AppCompatActivity{
 
     String firstName;
-    String lastname;
-    String badgeString;
-    String eIDString;
-    int badge;
-    int eID;
+    String lastName;
+    String depCode;
+    String ext;
 
-    ImageButton submit;
+    Button submit;
 
     EditText nameText;
     EditText lastNameText;
@@ -60,7 +56,7 @@ public class newUser extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_user);
         userInsta = this;
-        submit = (ImageButton) findViewById(R.id.submit);
+        submit = (Button) findViewById(R.id.submit);
 
         nameText = (EditText) findViewById(R.id.nameText);
         lastNameText = (EditText) findViewById(R.id.lastNameText);
@@ -73,25 +69,30 @@ public class newUser extends AppCompatActivity{
             public void onClick(View view) {
                 //save first and last name
                 firstName = nameText.getText().toString();
-                lastname = lastNameText.getText().toString();
-                //save badge and employee id
-                badgeString = badgeText.getText().toString();
-                badge = Integer.parseInt(badgeString);
-                eIDString = idText.getText().toString();
-                eID = Integer.parseInt(eIDString);
-                //make editTexts disappear
-                nameText.setVisibility(View.INVISIBLE);
-                lastNameText.setVisibility(View.INVISIBLE);
-                badgeText.setVisibility(View.INVISIBLE);
-                idText.setVisibility(View.INVISIBLE);
-                submit.setVisibility(View.INVISIBLE);
+                lastName = lastNameText.getText().toString();
+                //save department code and employee extension
+                depCode = badgeText.getText().toString();
+                ext = idText.getText().toString();
 
-                try {
-                    addNewUser();
+                if(firstName.equals("")){
+                    showError("First name cannot be empty.");
                 }
-                catch(JSONException e){
-                    showError("JSON Format Error");
-                    Log.e("EXCEPTION", e.toString());
+                else if(lastName.equals("")){
+                    showError("Last name cannot empty");
+                }
+                else if(ext.length() != 5){
+                    showError("Extension must be 5 digits.");
+                }
+                else if(depCode.length() != 2 && depCode.length() != 4){
+                    showError("Deparment code must be either 2 or 4 digits.");
+                }
+                else {
+                    try {
+                        addNewUser();
+                    } catch (JSONException e) {
+                        showError("JSON Format Error");
+                        Log.e("EXCEPTION", e.toString());
+                    }
                 }
             }
         });
@@ -99,6 +100,12 @@ public class newUser extends AppCompatActivity{
 
         public void verifyResponse(ResponseObject response){
             if(response.isSuccess()){
+                //make editTexts disappear
+                nameText.setVisibility(View.INVISIBLE);
+                lastNameText.setVisibility(View.INVISIBLE);
+                badgeText.setVisibility(View.INVISIBLE);
+                idText.setVisibility(View.INVISIBLE);
+                submit.setVisibility(View.INVISIBLE);
                 //confirm user creation
                 welcomeUser.setText("Welcome " + firstName + "!");
             }
@@ -113,9 +120,9 @@ public class newUser extends AppCompatActivity{
 
             JSONObject body = new JSONObject();
 
-            body.put("name", firstName + " " + lastname);
-            body.put("ext", eIDString);
-            body.put("dep", badgeString);
+            body.put("name", firstName + " " + lastName);
+            body.put("ext", ext);
+            body.put("dep", depCode);
 
             JsonObjectRequest request = new JsonObjectRequest(
                     Request.Method.POST,
@@ -154,11 +161,6 @@ public class newUser extends AppCompatActivity{
                     .setMessage(message)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            nameText.setVisibility(View.VISIBLE);
-                            lastNameText.setVisibility(View.VISIBLE);
-                            badgeText.setVisibility(View.VISIBLE);
-                            idText.setVisibility(View.VISIBLE);
-                            submit.setVisibility(View.VISIBLE);
                         }
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert)

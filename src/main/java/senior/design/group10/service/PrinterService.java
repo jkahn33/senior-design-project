@@ -3,6 +3,7 @@ package senior.design.group10.service;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import senior.design.group10.objects.user.Users;
 @Service
 public class PrinterService 
 {
+	private final static Logger log = Logger.getLogger(PrinterService.class.getName());
 	private final PrinterReservationDAO printerDAO;
 	private final UsersDAO usersDAO;
 	private final ReservablesDAO reservablesDAO;
@@ -57,7 +59,8 @@ public class PrinterService
 
 		//Calculate the end time
 
-		Timestamp jobScheduleEnd = printer.getJobSchedule();
+		Timestamp jobScheduleEnd = Timestamp.valueOf(printer.getJobSchedule());
+
 		//Splitting the time by : for hours and mins
 		String hourMin [] = printer.getJobDuration().split(":");
 		Calendar cal = Calendar.getInstance();
@@ -72,14 +75,14 @@ public class PrinterService
 
 
 		//Check to assure that the printer/ timeslot are available
-		java.util.List<PrinterReservations> checking = printerDAO.checkTimeAvailable(printer.getJobSchedule(),jobScheduleEnd,printer.getReservableId());
+		java.util.List<PrinterReservations> checking = printerDAO.checkTimeAvailable(Timestamp.valueOf(printer.getJobSchedule()),jobScheduleEnd,printer.getReservableId());
 
-		Optional <PrinterReservations> precedingRes = printerDAO.checkNestedReservation(printer.getJobSchedule(),printer.getReservableId());
+		Optional <PrinterReservations> precedingRes = printerDAO.checkNestedReservation(Timestamp.valueOf(printer.getJobSchedule()),printer.getReservableId());
 
 
 		if(precedingRes.isPresent())
 		{
-			if(precedingRes.get().getJobScheduleEnd().after(printer.getJobSchedule()))
+			if(precedingRes.get().getJobScheduleEnd().after(Timestamp.valueOf(printer.getJobSchedule())))
 			{
 				return new ResponseObject(false, "1 Conflicting times, timeslot "+ precedingRes.get().getJobSchedule()+ " to "+ precedingRes.get().getJobScheduleEnd() + " being used by Printer");
 
@@ -98,7 +101,7 @@ public class PrinterService
 		Users user = usersOptional.get();
 		Reservables reservable = reservableOptional.get();
 
-		PrinterReservations newReservation = new PrinterReservations(user,reservable,printer.getJobDescription(),printer.getJobDuration(), printer.getJobSchedule(), jobScheduleEnd,printer.getAdditionalCom());
+		PrinterReservations newReservation = new PrinterReservations(user,reservable,printer.getJobDescription(),printer.getJobDuration(), Timestamp.valueOf(printer.getJobSchedule()), jobScheduleEnd,printer.getAdditionalCom());
 
 		printerDAO.save(newReservation);
 

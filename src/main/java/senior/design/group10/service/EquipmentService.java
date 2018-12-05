@@ -33,6 +33,7 @@ public class EquipmentService {
 
     public ResponseObject addNewEquipment(Equipment equipment){
         if(!equipmentDAO.existsById(equipment.getBarcode())){
+            equipment.setInStock(true);
             equipmentDAO.save(equipment);
             return new ResponseObject(true, null);
         }

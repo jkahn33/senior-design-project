@@ -8,11 +8,14 @@ import android.widget.Button;
 
 public class equipmentCheckout extends AppCompatActivity {
 
-    public Button manualButton;
+    private Button manualButton;
+    private Button cancel;
 
     public void init() {
 
         manualButton = (Button)findViewById(R.id.manualButton);
+        cancel = (Button) findViewById(R.id.btnCheckoutChoiceCancel);
+
         manualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -20,7 +23,14 @@ public class equipmentCheckout extends AppCompatActivity {
 
                 Intent next = new Intent(equipmentCheckout.this, checkoutBarcode.class);
                 next.putExtra("adminExt", prev.getStringExtra("adminExt"));
-                startActivity(next);
+                equipmentCheckout.this.startActivity(next);
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cancel = new Intent(equipmentCheckout.this, checkoutOptions.class);
+                equipmentCheckout.this.startActivity(cancel);
             }
         });
 

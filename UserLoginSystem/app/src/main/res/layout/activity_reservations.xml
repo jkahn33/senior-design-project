@@ -11,6 +11,19 @@
         android:layout_height="match_parent">
 
         <EditText
+            android:id="@+id/printName"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:hint="Name of Print"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.782"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
             android:id="@+id/ext"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -39,14 +52,28 @@
             android:layout_width="wrap_content"
             android:layout_height="38dp"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="48dp"
+            android:layout_marginTop="850dp"
+            android:layout_marginEnd="120dp"
             android:text="Submit
     "
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.728"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/printName" />
+
+        <Button
+            android:id="@+id/btnPrintResCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="848dp"
+            android:layout_marginEnd="120dp"
+            android:text="Cancel
+    "
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.996"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/printName" />
 
         <EditText
             android:id="@+id/details"
@@ -156,8 +183,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="28dp"
-            android:textSize="20dp"
             android:text="Ends at"
+            android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/ext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/timeSlots" />
@@ -218,19 +245,6 @@
             app:layout_constraintStart_toEndOf="@+id/endsAt3"
             app:layout_constraintTop_toTopOf="@+id/endsTimeHour" />
 
-        <EditText
-            android:id="@+id/printName"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:hint="Name of Print"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.782"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="323dp"
@@ -264,65 +278,81 @@
             </LinearLayout>
         </ScrollView>
 
-        <CheckBox
-            android:id="@+id/printerA"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/printerHomeButton"
+            android:layout_width="234dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="300dp"
-            android:layout_marginBottom="70dp"
-            android:text="Printer A"
-            app:layout_constraintBottom_toTopOf="@+id/startsTimeHour"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/printName" />
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="70dp"
+            android:layout_marginBottom="200dp"
+            android:text="Back"
+            app:layout_constraintBottom_toTopOf="@+id/endsDate"
+            app:layout_constraintEnd_toStartOf="@+id/endsTimeMin"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/timeSlots"
+            app:layout_constraintTop_toBottomOf="@+id/endsTimeHour"
+            app:layout_constraintVertical_bias="0.6" />
 
-        <CheckBox
-            android:id="@+id/printerB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="200dp"
-            android:layout_marginBottom="70dp"
-            android:text="Printer B"
-            app:layout_constraintBottom_toTopOf="@+id/startsTimeHour"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/printName" />
-
-        <CheckBox
-            android:id="@+id/printerC"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="70dp"
-            android:text="Printer C"
-            app:layout_constraintBottom_toTopOf="@+id/startsTimeHour"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/printName" />
-
-        <CheckBox
-            android:id="@+id/printerD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="300dp"
-            android:layout_marginBottom="20dp"
-            android:text="Printer D"
-            app:layout_constraintBottom_toTopOf="@+id/startsTimeHour"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/printerA" />
-
-        <CheckBox
-            android:id="@+id/printerE"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+        <RadioGroup
+            android:id="@+id/radioPrinters"
+            android:layout_width="329dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="22dp"
             android:layout_marginEnd="100dp"
             android:layout_marginBottom="20dp"
-            android:text="Printer E"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/startsTimeMin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.579"
+            app:layout_constraintStart_toEndOf="@+id/startsTimeHour"
+            app:layout_constraintTop_toBottomOf="@+id/printName"
+            app:layout_constraintVertical_bias="1.0">
+
+            <RadioButton
+                android:id="@+id/radioA"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="A" />
+
+            <RadioButton
+                android:id="@+id/radioB"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:text="B" />
+
+            <RadioButton
+                android:id="@+id/radioC"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:text="C" />
+
+            <RadioButton
+                android:id="@+id/radioD"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:text="D" />
+
+            <RadioButton
+                android:id="@+id/radioE"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:text="E" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/txtPrintSuccess"
+            android:layout_width="721dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="7dp"
+            android:text="Successfully reserved printer."
+            android:textSize="40sp"
             app:layout_constraintBottom_toTopOf="@+id/startsTimeHour"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/printerC" />
+            app:layout_constraintStart_toEndOf="@+id/calendarView"
+            app:layout_constraintTop_toBottomOf="@+id/radioPrinters" />
 
     </android.support.constraint.ConstraintLayout>
 

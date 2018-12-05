@@ -16,6 +16,7 @@ public class checkoutOptions extends AppCompatActivity {
     public Button addEquipment;
     public Button checkoutEquipment;
     public Button checkinEquipment;
+    public Button back;
 
     public void add(){
 
@@ -60,6 +61,20 @@ public class checkoutOptions extends AppCompatActivity {
         });
     }
 
+    public void cancel(){
+
+        back = (Button)findViewById(R.id.btnCheckoutBack);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent back = new Intent(checkoutOptions.this, initialScreen.class);
+                checkoutOptions.this.startActivity(back);
+
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,5 +82,6 @@ public class checkoutOptions extends AppCompatActivity {
         add();
         checkout();
         checkin();
+        cancel();
     }
 }

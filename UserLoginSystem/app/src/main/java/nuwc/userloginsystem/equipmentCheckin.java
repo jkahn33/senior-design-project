@@ -9,6 +9,7 @@ import android.widget.Button;
 public class equipmentCheckin extends AppCompatActivity {
 
     public Button manualButton2;
+    public Button cancel;
 
     public void init2() {
 
@@ -23,6 +24,18 @@ public class equipmentCheckin extends AppCompatActivity {
         });
 
     }
+    public void cancel() {
+
+        cancel = (Button)findViewById(R.id.btnCheckinChoiceCancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cancel = new Intent(equipmentCheckin.this, checkoutOptions.class);
+                startActivity(cancel);
+            }
+        });
+
+    }
 
 
     @Override
@@ -30,5 +43,6 @@ public class equipmentCheckin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipment_checkin);
         init2();
+        cancel();
     }
 }

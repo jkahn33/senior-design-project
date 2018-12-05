@@ -40,6 +40,6 @@ public class LoginService {
         UserLoginHistory loginToSave = new UserLoginHistory(usersOptional.get(), currentTime);
         log.info("ext: " + login.getExt() + ", time: " + currentTime);
         userLoginHistoryDAO.save(loginToSave);
-        return new ResponseObject(true, null);
+        return new ResponseObject(true, usersOptional.get().getName());
     }
 }

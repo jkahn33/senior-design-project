@@ -24,14 +24,14 @@
             android:background="@drawable/saved_users"
             android:layout_marginLeft="10dp" />
 
-        <EditText
+        <!--<EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/editText"
             android:layout_gravity="right|top"
             android:background="@drawable/search"
             android:layout_marginTop="30dp"
-            android:layout_marginRight="100dp" />
+            android:layout_marginRight="100dp" />-->
 
         <ScrollView
             android:layout_width="wrap_content"
