@@ -8,19 +8,21 @@ public class SentBreakoutReservation
 	private String reservableType;
 	private String reservableId;
 	private String resDescription;
-	private Timestamp resSchedule;
-	private String resDuration;
+	private String resStart;
+	private String resEnd;
 	private String numPeople;
 	private String additionalCom;
+
+	public SentBreakoutReservation(){}
 	
-	public SentBreakoutReservation(String userExt, String reservableType, String reservableId, String resDescription, Timestamp resSchedule, String resDuration,String numPeople, String additionalCom)
+	public SentBreakoutReservation(String userExt, String reservableType, String reservableId, String resDescription, String resStart, String resEnd,String numPeople, String additionalCom)
 	{
 		this.userExt = userExt;
 		this.reservableId = reservableId;
 		this.reservableType = reservableType;
 		this.resDescription= resDescription;
-		this.resSchedule = resSchedule;
-		this.resDuration = resDuration;
+		this.resStart = resStart;
+		this.resEnd = resEnd;
 		this.numPeople = numPeople;
 		this.additionalCom=additionalCom;
 	}
@@ -34,15 +36,12 @@ public class SentBreakoutReservation
 		return resDescription;
 	}
 
-
-
-	public Timestamp getResSchedule() {
-		return resSchedule;
+	public String getResStart() {
+		return resStart;
 	}
 
-
-	public String getResDuration() {
-		return resDuration;
+	public String getResEnd() {
+		return resEnd;
 	}
 
 	public String getNumPeople() 

@@ -38,7 +38,7 @@ public class initialScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent reserve = new Intent(initialScreen.this, Reservations.class);
+                Intent reserve = new Intent(initialScreen.this, PickReservationType.class);
                 startActivity(reserve);
 
             }
@@ -52,7 +52,7 @@ public class initialScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent checkout = new Intent(initialScreen.this, equipmentCheckout.class);
+                Intent checkout = new Intent(initialScreen.this, checkoutOptions.class);
                 initialScreen.this.startActivity(checkout);
 
             }

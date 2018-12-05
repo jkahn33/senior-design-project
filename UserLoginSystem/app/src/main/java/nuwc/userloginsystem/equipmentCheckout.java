@@ -3,27 +3,34 @@ package nuwc.userloginsystem;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 public class equipmentCheckout extends AppCompatActivity {
 
-    public Button manualButton;
+    private Button manualButton;
+    private Button cancel;
 
     public void init() {
 
         manualButton = (Button)findViewById(R.id.manualButton);
+        cancel = (Button) findViewById(R.id.btnCheckoutChoiceCancel);
+
         manualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent prev = getIntent();
 
-                Intent next = new Intent(equipmentCheckout.this, barcodeScreen.class);
-                startActivity(next);
+                Intent next = new Intent(equipmentCheckout.this, checkoutBarcode.class);
+                next.putExtra("adminExt", prev.getStringExtra("adminExt"));
+                equipmentCheckout.this.startActivity(next);
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cancel = new Intent(equipmentCheckout.this, checkoutOptions.class);
+                equipmentCheckout.this.startActivity(cancel);
             }
         });
 

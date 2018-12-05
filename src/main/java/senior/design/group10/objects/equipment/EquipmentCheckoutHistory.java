@@ -42,7 +42,7 @@ public class EquipmentCheckoutHistory
         this.admin = admin;
     }
 
-//    public EquipmentCheckoutPK getId() {
+//    public EquipmentCheckoutPK getExt() {
 //        return new EquipmentCheckoutPK(equipment.getBarcode(), checkoutDate);
 //    }
 //

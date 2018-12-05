@@ -8,11 +8,14 @@ public class SentPrinterReservation
 	private String reservableType;
 	private String reservableId;
 	private String jobDescription;
-	private Timestamp jobSchedule;
+	//must be sent as a string because sent JSON string cannot be deserialized
+	private String jobSchedule;
 	private String jobDuration;
 	private String additionalCom;
+
+	public SentPrinterReservation(){}
 	
-	public SentPrinterReservation(String userExt, String reservableType, String reservableId, String jobDescription, Timestamp jobSchedule, String jobDuration, String additionalCom)
+	public SentPrinterReservation(String userExt, String reservableType, String reservableId, String jobDescription, String jobSchedule, String jobDuration, String additionalCom)
 	{
 		this.userExt = userExt;
 		this.reservableId = reservableId;
@@ -34,7 +37,7 @@ public class SentPrinterReservation
 
 
 
-	public Timestamp getJobSchedule() {
+	public String getJobSchedule() {
 		return jobSchedule;
 	}
 

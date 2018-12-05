@@ -5,6 +5,8 @@ public class SentEquipment {
     private String userExt;
     private String adminExt;
 
+    public SentEquipment(){}
+
     public SentEquipment(String barcode, String userExt, String adminExt) {
         this.barcode = barcode;
         this.userExt = userExt;

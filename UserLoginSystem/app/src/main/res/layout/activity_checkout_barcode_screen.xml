@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".checkoutBarcode">
+
+    <EditText
+        android:id="@+id/barcodeBox"
+        android:layout_width="620dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="17dp"
+        android:ems="10"
+        android:hint="Barcode"
+        android:inputType="textPersonName"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toTopOf="@+id/submitButton2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commandBox"
+        app:layout_constraintVertical_bias="0.366" />
+
+    <TextView
+        android:id="@+id/commandBox"
+        android:layout_width="639dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="114dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="10dp"
+        android:text="Please enter the information below:"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/extensionBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:textColor="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/extensionBox"
+        android:layout_width="620dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="68dp"
+        android:ems="10"
+        android:hint="Checkout User Extension"
+        android:inputType="textPersonName"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toTopOf="@+id/submitButton2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commandBox" />
+
+    <Button
+        android:id="@+id/submitButton2"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="296dp"
+        android:text="Submit"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extensionBox" />
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="296dp"
+        android:text="Home"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extensionBox" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="50dp"
+        android:text="Cancel"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submitButton2" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,12 +1,15 @@
 package senior.design.group10.controller;
 
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import senior.design.group10.objects.equipment.Equipment;
 import senior.design.group10.objects.response.ResponseObject;
+import senior.design.group10.objects.response.ValidateWrapper;
 import senior.design.group10.objects.sent.AdminInQuestion;
 import senior.design.group10.objects.sent.EquipmentWrapper;
 import senior.design.group10.objects.sent.SentBreakoutReservation;
@@ -14,6 +17,7 @@ import senior.design.group10.objects.sent.SentEquipment;
 import senior.design.group10.objects.sent.SentPrinterReservation;
 import senior.design.group10.objects.sent.SentReservable;
 import senior.design.group10.objects.sent.SentUser;
+import senior.design.group10.objects.user.Users;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.BreakoutService;
 import senior.design.group10.service.EquipmentService;
@@ -26,6 +30,7 @@ import senior.design.group10.service.LoginService;
 @Controller
 @RequestMapping("/android")
 public class AndroidController {
+    private final static Logger log = Logger.getLogger(AndroidController.class.getName());
 
     private final
     UserService userService;
@@ -69,8 +74,8 @@ public class AndroidController {
 
     @PostMapping("/validateAdmin")
     @ResponseBody
-    public boolean validateAdmin(@RequestBody AdminInQuestion adminInQuestion){
-        return adminService.isAdminValid(adminInQuestion);
+    public ValidateWrapper validateAdmin(@RequestBody AdminInQuestion adminInQuestion){
+        return new ValidateWrapper(adminService.isAdminValid(adminInQuestion));
     }
 
     @PostMapping("/newEquipment")
@@ -82,15 +87,16 @@ public class AndroidController {
     @PostMapping("/storeLogin")
     @ResponseBody
     public ResponseObject storeLogin(@RequestBody SentLoginHistory login) {
-    	return loginService.saveNewLogin(login);
+    	ResponseObject response = loginService.saveNewLogin(login);
+    	System.out.println(response.isSuccess() + " " + response.getMessage());
+        return response;
     }
     //Just for testing. UserService.getAllUsers() returns a list of all users
     @GetMapping("/printAllUsers")
     @ResponseBody
-    public void printAllUsers() {
-    	System.out.println(userService.getAllUsers());
+    public List<Users> printAllUsers() {
+        return userService.getAllUsers();
     }
-    
     
     /*
      * Printer reservation takes in a sent printer reservation which is composed of the following variables
@@ -101,7 +107,7 @@ public class AndroidController {
      */
     @PostMapping("/newPrinterReservation")
 	@ResponseBody
-	public ResponseObject newPrinterReservation(SentPrinterReservation printerReservation)
+	public ResponseObject newPrinterReservation(@RequestBody SentPrinterReservation printerReservation)
 	{	
 		return printerService.addPrintRes(printerReservation);
 	}
@@ -116,10 +122,7 @@ public class AndroidController {
      */
     @PostMapping("/newBreakoutReservation")
 	@ResponseBody
-    public ResponseObject newBreakoutReservation(SentBreakoutReservation breakoutReservation) {
-        Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-24 10:19:10");
-        String numPeep = "23";
-        breakoutReservation = new SentBreakoutReservation("1234", "Breakout", "A", "print boat today", timestamp, "23:00", numPeep, "THis is the additional comment");
+    public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation) {
         return breakoutService.addBreakRes(breakoutReservation);
     }
     @PostMapping("/checkoutEquipment")
@@ -136,9 +139,9 @@ public class AndroidController {
      */
     @PostMapping("/newReservable")
     @ResponseBody
-    public ResponseObject newReservable(SentReservable sentReservable)
+    public ResponseObject newReservable(@RequestBody SentReservable sentReservable)
     {
-    		return reservablesService.saveNewReservable(sentReservable);
+        return reservablesService.saveNewReservable(sentReservable);
     }
     /*
      * Removing unwanted reservable by taking in type and id
@@ -146,15 +149,13 @@ public class AndroidController {
     
     @PostMapping("/removeReservable")
     @ResponseBody
-    public ResponseObject removeReservable(SentReservable sentReservable)
+    public ResponseObject removeReservable(@RequestBody SentReservable sentReservable)
     {
-    		
-    		sentReservable = new SentReservable("Printer","B");
     		return reservablesService.removeReservable(sentReservable);
     }
     @PostMapping("/checkinEquipment")
     @ResponseBody
-    public ResponseObject checkinEquipment(EquipmentWrapper barcode){
+    public ResponseObject checkinEquipment(@RequestBody EquipmentWrapper barcode){
         return equipmentService.checkin(barcode.getBarcode());
     }
 }

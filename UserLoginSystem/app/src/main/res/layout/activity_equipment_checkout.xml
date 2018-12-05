@@ -8,13 +8,14 @@
 
     <Button
         android:id="@+id/ScanButton"
-        android:layout_width="306dp"
-        android:layout_height="74dp"
+        android:layout_width="450dp"
+        android:layout_height="100dp"
         android:layout_marginStart="39dp"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="39dp"
         android:layout_marginBottom="282dp"
         android:text="Scan barcode"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,13 +23,14 @@
 
     <Button
         android:id="@+id/manualButton"
-        android:layout_width="306dp"
-        android:layout_height="74dp"
+        android:layout_width="450dp"
+        android:layout_height="100dp"
         android:layout_marginStart="39dp"
         android:layout_marginTop="23dp"
         android:layout_marginEnd="39dp"
         android:layout_marginBottom="22dp"
         android:text="Enter manually"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/ScanButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,16 +38,29 @@
 
     <TextView
         android:id="@+id/optionText"
-        android:layout_width="204dp"
-        android:layout_height="32dp"
+        android:layout_width="541dp"
+        android:layout_height="69dp"
         android:layout_marginStart="99dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="81dp"
         android:layout_marginBottom="23dp"
         android:text="Choose the following option"
+        android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/manualButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnCheckoutChoiceCancel"
+        android:layout_width="450dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="159dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="159dp"
+        android:text="Cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ScanButton" />
 
 </android.support.constraint.ConstraintLayout>

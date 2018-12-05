@@ -26,7 +26,7 @@ public class ReservablesService
 	{
 		//Optional <Reservables> reservableOptional = reservablesDAO.findById(sentReservable.getRerservableKey());
 		if(reservablesDAO.existsById(sentReservable.getRerservableKey())){
-			return new ResponseObject(false, "A reservable with parametres " + sentReservable.getRerservableKey().getType() + sentReservable.getRerservableKey().getID() +" already exists.");
+			return new ResponseObject(false, "A reservable with parameters " + sentReservable.getRerservableKey().getType() + sentReservable.getRerservableKey().getID() +" already exists.");
 		}
 		
 		Reservables reservableToSave = new Reservables(sentReservable.getRerservableKey());

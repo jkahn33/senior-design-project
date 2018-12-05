@@ -5,7 +5,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import senior.design.group10.dao.AdminDAO;
 import senior.design.group10.objects.response.ResponseObject;
+import senior.design.group10.objects.response.ReturnAdmin;
 import senior.design.group10.objects.sent.AdminInQuestion;
+import senior.design.group10.objects.sent.EditAdmin;
 import senior.design.group10.objects.sent.NewAdmin;
 import senior.design.group10.objects.user.Admin;
 
@@ -33,7 +35,7 @@ public class AdminService {
      * Checks to make sure the 5 digit extension does not already exist in the database and if it doesn't,
      * saves the new admin object to the database. Additionally, the admin password will be hashed before saving.
      * @param sentAdmin NewAdmin object containing name, extension, and password.
-     * @return ResponseObject containing a success boolean and an error message if necessary.
+     * @return {@code ResponseObject} containing a success boolean and an error message if necessary.
      */
     public ResponseObject createNewAdmin(NewAdmin sentAdmin){
         //creates a new Date object to save the current time of creation
@@ -56,9 +58,9 @@ public class AdminService {
     }
 
     /**
-     *
+     * Validate an admin's password against the given extension.
      * @param adminInQuestion An object containing just an extension and password.
-     * @return true if extension exists and password matches
+     * @return {@code true} if extension exists and password matches
      */
     public boolean isAdminValid(AdminInQuestion adminInQuestion){
         Optional<Admin> adminOptional = adminDAO.findById(adminInQuestion.getExt());
@@ -68,5 +70,37 @@ public class AdminService {
             return passwordEncoder.matches(adminInQuestion.getPassword(), admin.getPassword());
         }
         return false;
+    }
+
+    /**
+     * Edit an admin's information based on the provided fields.
+     * @param editAdmin An object containing the desired information to edit.
+     * @return {@code true} if extension exists and password matches
+     */
+    public ResponseObject editAdmin(EditAdmin editAdmin){
+        Optional<Admin> adminOptional = adminDAO.findById(editAdmin.getOldExt());
+        if(!adminOptional.isPresent()){
+            return new ResponseObject(false, "Admin cannot be found");
+        }
+        Admin adminToEdit = adminOptional.get();
+        if(editAdmin.getExt() != null){
+            adminToEdit.setExt(editAdmin.getExt());
+        }
+        if(editAdmin.getName() != null){
+            adminToEdit.setName(editAdmin.getName());
+        }
+        if(editAdmin.getNewPass() != null){
+            adminToEdit.setPassword(passwordEncoder.encode(editAdmin.getNewPass()));
+        }
+        adminDAO.save(adminToEdit);
+        return new ResponseObject(true, null);
+    }
+    public ReturnAdmin getAdminById(String id){
+        Optional<Admin> adminOptional = adminDAO.findById(id);
+        if(adminOptional.isPresent()){
+            Admin admin = adminOptional.get();
+            return new ReturnAdmin(admin.getName(), admin.getExt());
+        }
+        return null;
     }
 }

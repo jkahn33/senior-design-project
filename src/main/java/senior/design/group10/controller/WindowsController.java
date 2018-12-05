@@ -2,12 +2,11 @@ package senior.design.group10.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import senior.design.group10.objects.response.ResponseObject;
+import senior.design.group10.objects.response.ReturnAdmin;
 import senior.design.group10.objects.sent.AdminInQuestion;
+import senior.design.group10.objects.sent.EditAdmin;
 import senior.design.group10.objects.sent.NewAdmin;
 import senior.design.group10.service.AdminService;
 
@@ -15,24 +14,34 @@ import senior.design.group10.service.AdminService;
 @RequestMapping("/windows")
 public class WindowsController {
 
-    private final
-    AdminService adminService;
+    private final AdminService adminService;
 
     @Autowired
     public WindowsController(AdminService adminService) {
         this.adminService = adminService;
     }
 
-    @GetMapping("/newAdmin")
+    @PostMapping("/newAdmin")
     @ResponseBody
-    public ResponseObject newAdmin(NewAdmin sentAdmin){
-        sentAdmin = new NewAdmin("Jacob Kahn", "12334", "password");
-        return adminService.createNewAdmin(sentAdmin);
+    public ResponseObject newAdmin(@RequestBody NewAdmin sentAdmin){
+	return adminService.createNewAdmin(sentAdmin);
     }
 
     @PostMapping("/validateAdmin")
     @ResponseBody
-    public boolean validateAdmin(AdminInQuestion adminInQuestion){
+    public boolean validateAdmin(@RequestBody AdminInQuestion adminInQuestion){
         return adminService.isAdminValid(adminInQuestion);
+    }
+
+    @PostMapping("/getAdmin")
+    @ResponseBody
+    public ReturnAdmin getAdmin(@RequestBody EditAdmin editAdmin){
+        return adminService.getAdminById(editAdmin.getOldExt());
+    }
+
+    @PostMapping("/editAdmin")
+    @ResponseBody
+    public ResponseObject editAdmin(@RequestBody EditAdmin editAdmin){
+        return adminService.editAdmin(editAdmin);
     }
 }
