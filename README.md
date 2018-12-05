@@ -14,3 +14,16 @@ The server is exported to a .jar located in the *runnables* folder. To run the j
 
 ### Using custom database url or login credentials
 Download the poject and import it into your preferred IDE as a Gradle project. The correct file to import from is the *build.gradle* file located in the senior-design-project folder. If you want to use a different DB url or username/password, these values must be changed in the database configuration located in the file *src/main/java/senior/design/group10/application/HibernateConfig.java*. Once in this file, modify the required values in the `dataSource()` method. The application can be run from *src/main/java/senior/design/group10/application/Application.java*.
+
+## Running the Client
+### Import into Android Studio
+Currently, the only way to run the Android application is to use Android Studio. Import the project into Android Studio. The Android application is contained in the *UserLoginSystem* folder. Once imported, open up the ***Edit Configurations*** by navigating to Run -> Edit Configurations. Click the green + symbol in the top lefthand corner to add an Android App if one does not exist already. Within this app, the following settings are required:
+* Module should be **app**
+* Deploy should be **Default APK**
+* Launch should be **Specified Activity**
+* Activity should be **nuwc.userloginsystem.initialScreen**
+* Target should be **Open Select Deployment Target Dialog**
+
+Once these settings are correct, click the **Apply** button at the bottom right hand corner. Clicking the green triangle in the top right side of the screen should open the emulator and our application will display.
+
+**The server must be running in order for the application to fully work.**
