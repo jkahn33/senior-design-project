@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import senior.design.group10.dao.*;
 import senior.design.group10.objects.equipment.Equipment;
 import senior.design.group10.objects.equipment.EquipmentCheckoutHistory;
+import senior.design.group10.objects.response.EquipmentUsageResponse;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentEquipment;
 import senior.design.group10.objects.user.Admin;
@@ -137,5 +138,9 @@ public class EquipmentService {
         recent.setCheckinDate(currentTime);
         equipmentCheckoutDAO.save(recent);
         return new ResponseObject(true, null);
+    }
+
+    public List<EquipmentUsageResponse> getUsageStatistics(){
+        return equipmentDAO.getEquipmentUsage();
     }
 }

@@ -3,6 +3,7 @@ package senior.design.group10.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import senior.design.group10.objects.response.EquipmentUsageResponse;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.response.ReturnAdmin;
 import senior.design.group10.objects.response.UsersStatisticResponse;
@@ -12,6 +13,7 @@ import senior.design.group10.objects.sent.StatisticsRequest;
 import senior.design.group10.objects.sent.NewAdmin;
 import senior.design.group10.objects.user.Users;
 import senior.design.group10.service.AdminService;
+import senior.design.group10.service.EquipmentService;
 import senior.design.group10.service.UserService;
 
 import java.util.List;
@@ -22,11 +24,13 @@ public class WindowsController {
 
     private final AdminService adminService;
     private final UserService userService;
+    private final EquipmentService equipmentService;
 
     @Autowired
-    public WindowsController(AdminService adminService, UserService userService) {
+    public WindowsController(AdminService adminService, UserService userService, EquipmentService equipmentService) {
         this.adminService = adminService;
         this.userService = userService;
+        this.equipmentService = equipmentService;
     }
 
     @PostMapping("/newAdmin")
@@ -53,13 +57,13 @@ public class WindowsController {
         return adminService.editAdmin(editAdmin);
     }
 
-    @PostMapping("/equipment-statistics")
+    @GetMapping("/equipmentUsage")
     @ResponseBody
-    public void getEquipmentStatistics(@RequestBody StatisticsRequest request){
-
+    public List<EquipmentUsageResponse> getEquipmentStatistics(){
+        return equipmentService.getUsageStatistics();
     }
 
-    @PostMapping("/user-statistics")
+    @PostMapping("/userStatistics")
     @ResponseBody
     public List<UsersStatisticResponse> getUserStatistics(@RequestBody StatisticsRequest request){
         //StatisticsRequest request = new StatisticsRequest("2018-12-04 00:00:00", "2018-12-18 11:59:59");
