@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import senior.design.group10.dao.UsersDAO;
 import senior.design.group10.objects.response.ResponseObject;
+import senior.design.group10.objects.response.UsersStatisticResponse;
 import senior.design.group10.objects.sent.SentUser;
+import senior.design.group10.objects.sent.StatisticsRequest;
+import senior.design.group10.objects.user.UserLoginHistory;
 import senior.design.group10.objects.user.Users;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,5 +60,17 @@ public class UserService {
 	 */
     public List<Users> getAllUsers() {
     	return (List<Users>)usersDAO.findAll();
+    }
+
+    /**
+     * This method is used to query user logins between two different datetimes
+     * @param request The two Timestamp objects to search between
+     * @return a list of all users' name, badge_id, and time of login who logged into the USWRIC between the query times
+     */
+    public List<UsersStatisticResponse> getUsersBetweenDates(StatisticsRequest request){
+        Timestamp start = Timestamp.valueOf(request.getStart());
+        Timestamp end = Timestamp.valueOf(request.getEnd());
+
+        return usersDAO.getUsersBetweenDates(start, end);
     }
 }

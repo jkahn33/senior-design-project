@@ -5,20 +5,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.response.ReturnAdmin;
+import senior.design.group10.objects.response.UsersStatisticResponse;
 import senior.design.group10.objects.sent.AdminInQuestion;
 import senior.design.group10.objects.sent.EditAdmin;
+import senior.design.group10.objects.sent.StatisticsRequest;
 import senior.design.group10.objects.sent.NewAdmin;
+import senior.design.group10.objects.user.Users;
 import senior.design.group10.service.AdminService;
+import senior.design.group10.service.UserService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/windows")
 public class WindowsController {
 
     private final AdminService adminService;
+    private final UserService userService;
 
     @Autowired
-    public WindowsController(AdminService adminService) {
+    public WindowsController(AdminService adminService, UserService userService) {
         this.adminService = adminService;
+        this.userService = userService;
     }
 
     @PostMapping("/newAdmin")
@@ -43,5 +51,18 @@ public class WindowsController {
     @ResponseBody
     public ResponseObject editAdmin(@RequestBody EditAdmin editAdmin){
         return adminService.editAdmin(editAdmin);
+    }
+
+    @PostMapping("/equipment-statistics")
+    @ResponseBody
+    public void getEquipmentStatistics(@RequestBody StatisticsRequest request){
+
+    }
+
+    @PostMapping("/user-statistics")
+    @ResponseBody
+    public List<UsersStatisticResponse> getUserStatistics(@RequestBody StatisticsRequest request){
+        //StatisticsRequest request = new StatisticsRequest("2018-12-04 00:00:00", "2018-12-18 11:59:59");
+        return userService.getUsersBetweenDates(request);
     }
 }

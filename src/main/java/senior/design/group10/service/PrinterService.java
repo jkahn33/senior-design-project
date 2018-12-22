@@ -36,7 +36,7 @@ public class PrinterService
 	/**
 	 * Adding a printer reservation based on the user ext, time and duration
 	 * This function checks for valid user ext and valid printer ID
-	 *  if both are valid, check if time slot for start and end time interfer
+	 *  if both are valid, check if time slot for start and end time interferes
 	 *  with other print jobs
 	 *  if interferes send message that time slot unavailable
 	 *  If  time slot valid, update db to reflect reservation with
