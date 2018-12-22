@@ -2,10 +2,10 @@ package senior.design.group10.objects.response;
 
 import java.sql.Timestamp;
 
-public interface EquipmentUsageResponse {
+public interface CheckedOutEquipment {
     String getEquipmentName();
     String getBarcode();
-    int getAmtUsed();
-    Timestamp getDateAdded();
-    Timestamp getLastCheckedOut();
+    String getAdminName();
+    String getUserName();
+    Timestamp getCheckoutDate();
 }

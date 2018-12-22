@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import senior.design.group10.dao.*;
 import senior.design.group10.objects.equipment.Equipment;
 import senior.design.group10.objects.equipment.EquipmentCheckoutHistory;
+import senior.design.group10.objects.response.CheckedOutEquipment;
 import senior.design.group10.objects.response.EquipmentUsageResponse;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentEquipment;
@@ -140,7 +141,21 @@ public class EquipmentService {
         return new ResponseObject(true, null);
     }
 
+    /**
+     * Generates a list of every piece of equipment and relevant statistics about each piece of equipment.
+     * @return List of equipment which contains equipment name, its barcode, the amount of times it has been used, and
+     * the last time it was checked out.
+     */
     public List<EquipmentUsageResponse> getUsageStatistics(){
         return equipmentDAO.getEquipmentUsage();
+    }
+
+    /**
+     * Generates a list of every piece of equipment currently checked out of the room.
+     * @return List of equipment which contains equipment name, its barcode, the administrator that checked it out, the
+     * user that checked it out, and the date that it was checked out.
+     */
+    public List<CheckedOutEquipment> getCheckedOutEquipment(){
+        return equipmentDAO.getCheckedOutEquipment();
     }
 }
