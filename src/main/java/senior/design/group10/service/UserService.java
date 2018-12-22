@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
-Service class used to handle business logic for user objects.
+ * Service class to handle business logic for Users
  */
 @Service
 public class UserService {

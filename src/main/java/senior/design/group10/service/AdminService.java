@@ -16,6 +16,9 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+/**
+ * Service class to handle business logic for administrators
+ */
 @Service
 public class AdminService {
     private final
@@ -95,6 +98,12 @@ public class AdminService {
         adminDAO.save(adminToEdit);
         return new ResponseObject(true, null);
     }
+
+    /**
+     * Returns the administrator located by the given badge id
+     * @param id the badge id to search by
+     * @return the ReturnAdmin object which contains the name and badge_id
+     */
     public ReturnAdmin getAdminById(String id){
         Optional<Admin> adminOptional = adminDAO.findById(id);
         if(adminOptional.isPresent()){

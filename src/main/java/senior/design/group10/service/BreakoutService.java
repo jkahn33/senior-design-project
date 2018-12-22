@@ -20,6 +20,9 @@ import senior.design.group10.objects.sent.SentBreakoutReservation;
 import senior.design.group10.objects.sent.SentPrinterReservation;
 import senior.design.group10.objects.user.Users;
 
+/**
+ * Service class to handle business logic for breakout room reservations
+ */
 @Service
 public class BreakoutService
 {

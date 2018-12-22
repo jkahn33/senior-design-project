@@ -18,6 +18,9 @@ import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentPrinterReservation;
 import senior.design.group10.objects.user.Users;
 
+/**
+ * Service class to handle business logic for 3D printer reservations
+ */
 @Service
 public class PrinterService 
 {
