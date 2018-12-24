@@ -14,11 +14,14 @@ import senior.design.group10.service.AdminService;
 import senior.design.group10.service.EquipmentService;
 import senior.design.group10.service.UserService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/windows")
 public class WindowsController {
+    private final static Logger log = Logger.getLogger(WindowsController.class.getName());
 
     private final AdminService adminService;
     private final UserService userService;
@@ -39,8 +42,15 @@ public class WindowsController {
 
     @PostMapping("/validateAdmin")
     @ResponseBody
-    public boolean validateAdmin(@RequestBody AdminInQuestion adminInQuestion){
-        return adminService.isAdminValid(adminInQuestion);
+    public boolean validateAdmin(@RequestBody AdminInQuestion adminInQuestion, HttpServletResponse response){
+        log.info(adminInQuestion.getExt() + " " +  adminInQuestion.getPassword());
+        if(adminService.isAdminValid(adminInQuestion)) {
+            return adminService.isAdminValid(adminInQuestion);
+        }
+        else{
+            response.setStatus(401);
+            return false;
+        }
     }
 
     @PostMapping("/getAdmin")
