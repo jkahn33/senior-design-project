@@ -23,6 +23,7 @@
 /windows-gui/.gradle
 #Visual Studio
 /admin_application/USWRIC_Admin_Application/.vs
+/.vs
 #misc
 /out
 /bin

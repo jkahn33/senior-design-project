@@ -43,7 +43,6 @@ public class WindowsController {
     @PostMapping("/validateAdmin")
     @ResponseBody
     public boolean validateAdmin(@RequestBody AdminInQuestion adminInQuestion, HttpServletResponse response){
-        log.info(adminInQuestion.getExt() + " " +  adminInQuestion.getPassword());
         if(adminService.isAdminValid(adminInQuestion)) {
             return adminService.isAdminValid(adminInQuestion);
         }
@@ -56,7 +55,6 @@ public class WindowsController {
     @PostMapping("/getAdmin")
     @ResponseBody
     public ReturnAdmin getAdmin(@RequestBody EditAdmin editAdmin){
-        log.info(editAdmin.getOldExt());
         return adminService.getAdminById(editAdmin.getOldExt());
     }
 
