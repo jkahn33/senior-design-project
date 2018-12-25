@@ -17,3 +17,11 @@ C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Appl
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\Newtonsoft.Json.xml
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\USWRIC_Admin_Application.csproj.CopyComplete
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\Homepage.g.cs
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\Homepage.baml
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\EditAdmin.g.cs
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\NewAdmin.g.cs
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\StatisticsHome.g.cs
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\StatisticsHome.baml
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\EditAdmin.baml
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\NewAdmin.baml

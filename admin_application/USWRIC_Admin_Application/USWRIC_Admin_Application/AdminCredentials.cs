@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace USWRIC_Admin_Application.objects
 {
-    class AdminCredentials
+    class ResponseObject
     {
-        public string ext;
-        public string password;
+        public bool Success { get; private set; }
+        public string Message { get; private set; }
+
+        public ResponseObject(bool success, string message)
+        {
+            Success = success;
+            Message = message;
+        }
     }
 }

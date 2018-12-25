@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net.Http;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using USWRIC_Admin_Application.objects;
 
 namespace USWRIC_Admin_Application
 {
@@ -31,32 +32,26 @@ namespace USWRIC_Admin_Application
         {
             HttpClient client = Globals.GetHttpClient();
 
-            //var values = new Dictionary<string, string>
-            //{
-            //   { "ext", txtBadgeId.Text },
-            //   { "password", txtPass.Password }
-            //};
+            JObject o = new JObject();
+            o.Add("ext", txtBadgeId.Text);
+            o.Add("password", txtPass.Password);
 
-            //string myJson = "{\"ext\": \"" + txtBadgeId.Text + "\",\"password\":\"" + txtPass.Password + "\"}";
+            var response = await client.PostAsync(
+                    Globals.GetBaseUrl() + "/validateAdmin",
+                     new StringContent(o.ToString(), Encoding.UTF8, "application/json"));
 
-            objects.AdminCredentials adminCredentials = new objects.AdminCredentials();
-            adminCredentials.ext = txtBadgeId.Text;
-            adminCredentials.password = txtPass.Password;
-
-            string json = JsonConvert.SerializeObject(adminCredentials);
-
-            using (client)
+            var responseString = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
             {
-                var response = await client.PostAsync(
-                    "http://localhost:8080/windows/validateAdmin",
-                     new StringContent(json, Encoding.UTF8, "application/json"));
+                Globals.BadgeId = txtBadgeId.Text;
 
-                var responseString = await response.Content.ReadAsStringAsync();
-
-                System.Diagnostics.Debug.WriteLine(responseString);
-
-
-
+                Homepage homepage = new Homepage();
+                homepage.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Incorrect Badge Id or Password", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

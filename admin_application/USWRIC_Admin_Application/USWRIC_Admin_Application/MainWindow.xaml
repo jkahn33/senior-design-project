@@ -17,6 +17,6 @@
         <Label x:Name="lblPass" Content="Password" HorizontalAlignment="Left" Height="31" Margin="148,229,0,0" VerticalAlignment="Top" Width="140" FontFamily="Arial Black"/>
         <Label x:Name="lblTitle" Grid.ColumnSpan="2" Content="USWRIC -- Administrator Login" HorizontalAlignment="Left" HorizontalContentAlignment="Center"  Height="61" Margin="148,38,0,0" VerticalAlignment="Top" Width="498" FontFamily="Arial Black" FontSize="20"/>
         <Button x:Name="btnLoginSubmit" Grid.ColumnSpan="2" Content="Submit" HorizontalAlignment="Left" Height="42" Margin="267,351,0,0" VerticalAlignment="Top" Width="260" Click="BtnLoginSubmit_Click"/>
-
     </Grid>
+    
 </Window>
