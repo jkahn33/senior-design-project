@@ -87,6 +87,9 @@ public class AdminService {
         }
         Admin adminToEdit = adminOptional.get();
         if(editAdmin.getExt() != null){
+            if(adminDAO.findById(editAdmin.getExt()).isPresent()){
+                return new ResponseObject(false, "Another admin with Badge ID " + editAdmin.getExt() + " already exists.");
+            }
             adminToEdit.setExt(editAdmin.getExt());
         }
         if(editAdmin.getName() != null){

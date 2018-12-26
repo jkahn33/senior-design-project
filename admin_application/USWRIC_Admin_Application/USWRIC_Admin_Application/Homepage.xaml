@@ -8,8 +8,9 @@
         Title="Homepage" Height="450" Width="800">
     <Grid>
         <Label Content="Administrator Homepage" HorizontalAlignment="Left" HorizontalContentAlignment="center" Height="37" Margin="192,47,0,0" VerticalAlignment="Top" Width="415" FontFamily="Arial Black" FontSize="20"/>
-        <Button x:Name="btnStatistics" Content="Statistics" HorizontalAlignment="Left" Height="39" Margin="258,127,0,0" VerticalAlignment="Top" Width="281" Click="BtnStatistics_Click"/>
-        <Button x:Name="btnEdit" Content="Edit Information" HorizontalAlignment="Left" Height="39" Margin="258,209,0,0" VerticalAlignment="Top" Width="281" Click="BtnEdit_Click"/>
-        <Button x:Name="btnNewAdmin"  Content="Add New Admin" HorizontalAlignment="Left" Height="39" Margin="258,290,0,0" VerticalAlignment="Top" Width="281" Click="BtnNewAdmin_Click"/>
+        <Button x:Name="btnStatistics" Content="Statistics" HorizontalAlignment="Left" Height="39" Margin="60,193,0,0" VerticalAlignment="Top" Width="281" Click="BtnStatistics_Click"/>
+        <Button x:Name="btnEdit" Content="Edit Personal Information" HorizontalAlignment="Left" Height="39" Margin="450,193,0,0" VerticalAlignment="Top" Width="281" Click="BtnEdit_Click"/>
+        <Button x:Name="btnUserAdminMgmt"  Content="User and Admin Management" HorizontalAlignment="Left" Height="39" Margin="450,274,0,0" VerticalAlignment="Top" Width="281" Click="BtnUserAdminMgmt_Click"/>
+        <Button x:Name="btnDisplayMgmt" Content="Display Management" HorizontalAlignment="Left" Height="39" Margin="60,274,0,0" VerticalAlignment="Top" Width="281" Click="BtnDisplayMgmt_Click"/>
     </Grid>
 </Window>

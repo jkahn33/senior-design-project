@@ -25,3 +25,7 @@ C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Appl
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\StatisticsHome.baml
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\EditAdmin.baml
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\NewAdmin.baml
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\ChangePassword.g.cs
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\ChangePassword.baml
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\UserAdminMgmt.g.cs
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\UserAdminMgmt.baml

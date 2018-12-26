@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditAdmin.xaml.cs">
       <DependentUpon>EditAdmin.xaml</DependentUpon>
     </Compile>
@@ -68,6 +71,13 @@
     <Compile Include="StatisticsHome.xaml.cs">
       <DependentUpon>StatisticsHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserAdminMgmt.xaml.cs">
+      <DependentUpon>UserAdminMgmt.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -98,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StatisticsHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserAdminMgmt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

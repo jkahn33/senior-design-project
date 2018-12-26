@@ -36,7 +36,14 @@ namespace USWRIC_Admin_Application
             this.Close();
         }
 
-        private void BtnNewAdmin_Click(object sender, RoutedEventArgs e)
+        private void BtnUserAdminMgmt_Click(object sender, RoutedEventArgs e)
+        {
+            UserAdminMgmt userAdminMgmt = new UserAdminMgmt();
+            userAdminMgmt.Show();
+            this.Close();
+        }
+
+        private void BtnDisplayMgmt_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -104,5 +104,12 @@ namespace USWRIC_Admin_Application
             homepage.Show();
             this.Close();
         }
+
+        private void BtnChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePassword changePassword = new ChangePassword();
+            changePassword.Show();
+            this.Close();
+        }
     }
 }
