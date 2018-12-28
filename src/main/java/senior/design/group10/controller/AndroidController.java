@@ -12,6 +12,7 @@ import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.response.ValidateWrapper;
 import senior.design.group10.objects.sent.AdminInQuestion;
 import senior.design.group10.objects.sent.EquipmentWrapper;
+import senior.design.group10.objects.sent.NewAdmin;
 import senior.design.group10.objects.sent.SentBreakoutReservation;
 import senior.design.group10.objects.sent.SentEquipment;
 import senior.design.group10.objects.sent.SentPrinterReservation;
@@ -25,7 +26,9 @@ import senior.design.group10.service.UserService;
 import senior.design.group10.service.PrinterService;
 import senior.design.group10.service.ReservablesService;
 import senior.design.group10.objects.sent.SentLoginHistory;
+import senior.design.group10.objects.sent.SentMessage;
 import senior.design.group10.service.LoginService;
+import senior.design.group10.service.MessageService;
 
 @Controller
 @RequestMapping("/android")
@@ -46,6 +49,8 @@ public class AndroidController {
     ReservablesService reservablesService;
     private final
     EquipmentService equipmentService;
+    private final
+    MessageService messageService;
     
 
     @Autowired
@@ -55,7 +60,8 @@ public class AndroidController {
                              PrinterService printerService,
                              BreakoutService breakoutService,
                              ReservablesService reservablesService,
-                             EquipmentService equipmentService) {
+                             EquipmentService equipmentService,
+                             MessageService messageService) {
         this.userService = userService;
         this.adminService = adminService;
         this.loginService = loginService;
@@ -63,6 +69,7 @@ public class AndroidController {
         this.breakoutService = breakoutService;
         this.reservablesService = reservablesService;
         this.equipmentService = equipmentService;
+        this.messageService = messageService;
     }
     
     //API endpoint for creating a new user.
@@ -91,6 +98,7 @@ public class AndroidController {
     	System.out.println(response.isSuccess() + " " + response.getMessage());
         return response;
     }
+    
     //Just for testing. UserService.getAllUsers() returns a list of all users
     @GetMapping("/printAllUsers")
     @ResponseBody
@@ -157,5 +165,26 @@ public class AndroidController {
     @ResponseBody
     public ResponseObject checkinEquipment(@RequestBody EquipmentWrapper barcode){
         return equipmentService.checkin(barcode.getBarcode());
+    }
+    
+    /*
+     * Saves a new message to the database.
+     * Messages contain:
+     * -a string (the message)
+     * -a timestamp of creation
+     * -an associated administrator account
+     */
+    @GetMapping("/newMessage")
+    @ResponseBody
+    public ResponseObject newMessage(SentMessage sentMessage) {
+    	SentMessage testMsg = new SentMessage("this is a test", "77777");
+        return messageService.createNewMessage(testMsg);
+    }
+    
+    @GetMapping("/createTestAdmin")
+    @ResponseBody
+    public ResponseObject createTestAdmin() {
+    	NewAdmin testAdmin = new NewAdmin("test", "11111", "password");
+        return adminService.createNewAdmin(testAdmin);
     }
 }

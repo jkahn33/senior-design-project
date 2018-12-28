@@ -103,7 +103,6 @@ public class BreakoutService
 
 		BreakoutReservations newReservation = new BreakoutReservations(user,reservable,breakout.getResDescription(), Timestamp.valueOf(breakout.getResStart()), Timestamp.valueOf(breakout.getResEnd()),breakout.getNumPeople(),breakout.getAdditionalCom());
 
-		
 		breakoutDAO.save(newReservation);
 
 		return new ResponseObject(true,null);
