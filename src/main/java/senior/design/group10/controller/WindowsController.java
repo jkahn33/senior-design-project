@@ -5,10 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import senior.design.group10.objects.equipment.Equipment;
 import senior.design.group10.objects.response.*;
-import senior.design.group10.objects.sent.AdminInQuestion;
-import senior.design.group10.objects.sent.EditAdmin;
-import senior.design.group10.objects.sent.StatisticsRequest;
-import senior.design.group10.objects.sent.NewAdmin;
+import senior.design.group10.objects.sent.*;
 import senior.design.group10.objects.user.Users;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.EquipmentService;
@@ -93,5 +90,29 @@ public class WindowsController {
     @ResponseBody
     public List<CheckedOutEquipment> getCheckedOutEquipment(){
         return equipmentService.getCheckedOutEquipment();
+    }
+
+    @PostMapping("/getUser")
+    @ResponseBody
+    public Users getUserById(@RequestBody StringWrapper stringWrapper){
+        return userService.getUserById(stringWrapper.getString());
+    }
+
+    @PostMapping("/removeUser")
+    @ResponseBody
+    public ResponseObject removeUser(@RequestBody StringWrapper stringWrapper){
+        return userService.removeUser(stringWrapper.getString());
+    }
+
+    @PostMapping("/getAdminName")
+    @ResponseBody
+    public String getAdminName(@RequestBody StringWrapper stringWrapper){
+        return adminService.getAdminName(stringWrapper.getString());
+    }
+
+    @PostMapping("/removeAdmin")
+    @ResponseBody
+    public ResponseObject removeAdmin(@RequestBody StringWrapper stringWrapper){
+
     }
 }

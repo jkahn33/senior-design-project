@@ -115,4 +115,29 @@ public class AdminService {
         }
         return null;
     }
+
+    /**
+     * Gets the name of the administrator by the given badge ID
+     * @param id the badge ID to search by
+     * @return a String containing the name or {@code null} if the badge ID does not belong to an admin
+     */
+    public String getAdminName(String id){
+        return adminDAO.findById(id).map(Admin::getName).orElse(null);
+    }
+
+    /**
+     * Removes a user by the given badge ID.
+     * <br>TODO: The method currently removes completely from the system but in the future it should only remove it from
+     *  the active admin table and the entity should remain in another table for all users that ever were in the system
+     * @param id The badge ID of the user to remove from the system.
+     * @return a ResponseObject with a success boolean value and an error message if necessary.
+     */
+    public ResponseObject removeAdmin(String id){
+        Optional<Admin> adminOptional = adminDAO.findById(id);
+        if(!adminOptional.isPresent()){
+            return new ResponseObject(false, "Admin with badge ID " + id + " does not exist.");
+        }
+        adminDAO.delete(adminOptional.get());
+        return new ResponseObject(true, null);
+    }
 }

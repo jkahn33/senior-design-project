@@ -67,10 +67,17 @@
     <Compile Include="NewAdmin.xaml.cs">
       <DependentUpon>NewAdmin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RemoveAdmin.xaml.cs">
+      <DependentUpon>RemoveAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RemoveUser.xaml.cs">
+      <DependentUpon>RemoveUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReturnAdmin.cs" />
     <Compile Include="StatisticsHome.xaml.cs">
       <DependentUpon>StatisticsHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
     <Compile Include="UserAdminMgmt.xaml.cs">
       <DependentUpon>UserAdminMgmt.xaml</DependentUpon>
     </Compile>
@@ -104,6 +111,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NewAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RemoveAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RemoveUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
