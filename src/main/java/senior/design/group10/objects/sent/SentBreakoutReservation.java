@@ -1,12 +1,14 @@
 package senior.design.group10.objects.sent;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SentBreakoutReservation 
 {
 	private String userExt;
 	private String reservableType;
-	private String reservableId;
+	private List <String> reservableIdList;
 	private String resDescription;
 	private String resStart;
 	private String resEnd;
@@ -15,10 +17,10 @@ public class SentBreakoutReservation
 
 	public SentBreakoutReservation(){}
 	
-	public SentBreakoutReservation(String userExt, String reservableType, String reservableId, String resDescription, String resStart, String resEnd,String numPeople, String additionalCom)
+	public SentBreakoutReservation(String userExt, String reservableType, List <String> reservableIdList, String resDescription, String resStart, String resEnd,String numPeople, String additionalCom)
 	{
 		this.userExt = userExt;
-		this.reservableId = reservableId;
+		this.reservableIdList = new ArrayList<String>(reservableIdList);
 		this.reservableType = reservableType;
 		this.resDescription= resDescription;
 		this.resStart = resStart;
@@ -59,7 +61,7 @@ public class SentBreakoutReservation
 	}
 
 
-	public String getReservableId() {
-		return reservableId;
+	public List <String> getReservableIdList() {
+		return reservableIdList;
 	}
 }
