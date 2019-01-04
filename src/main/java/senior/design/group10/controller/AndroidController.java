@@ -1,6 +1,7 @@
 package senior.design.group10.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -120,11 +121,17 @@ public class AndroidController {
 	 * String for the number of people
 	 * String for the additional comments
 	 */
-	@PostMapping("/newBreakoutReservation")
+	@GetMapping("/newBreakoutReservation")
 	@ResponseBody
-	public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation)
+	public ResponseObject newBreakoutReservation( SentBreakoutReservation breakoutReservation)
 	{
-		return breakoutService.addBreakRes(breakoutReservation);
+		List <String> rooms = new ArrayList<String>();
+		rooms.add("A");
+		rooms.add("B");
+		rooms.add("C");
+		
+		SentBreakoutReservation test = new SentBreakoutReservation("11111", "Breakout",rooms,"","2007-09-24 11:11:11","2018-12-12 11:11:11","2","");
+		return breakoutService.addBreakRes(test);
 	}
 
 

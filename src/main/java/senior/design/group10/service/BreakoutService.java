@@ -49,17 +49,18 @@ public class BreakoutService
 	public ResponseObject checkRoomsAvailable(SentBreakoutReservation breakout)
 	{
 		boolean roomsAvailable[] = roomAvailable(breakout);
-		String roomString = null;
+		String roomString = "";
 		
+		//Check that all rooms are available
 		for(int x = 0; x < breakout.getReservableIdList().size();x++)
 		{
+			//if one room is unavailable send the list of availability and return false
 			if(!roomsAvailable[x])
 			{
-				List <String> room = breakout.getReservableIdList();
 				//Print the list of available and unavailble room
 				for(int y = 0; y < breakout.getReservableIdList().size();y++)
 				{
-					roomString += "Room " + room.get(y) + "is ";
+					roomString += "Room " + breakout.getReservableIdList().get(y) + " is ";
 					if (roomsAvailable[y])
 						roomString += "Available| ";
 					else
@@ -88,14 +89,13 @@ public class BreakoutService
 		Users user = usersOptional.get();
 		
 		boolean roomsAvailable[] = roomAvailable(breakout);
-		String roomString = null;
+		String roomString = " Room";
 		
 		for(int x = 0; x < breakout.getReservableIdList().size();x++)
 		{
 			if(!roomsAvailable[x])
 			{
-				//Do nothing if its unavailable
-				//Add to room string that it not reserved due to unavailability
+				roomString += breakout.getReservableIdList().get(x)+ " ";
 			}
 			else
 			{
@@ -103,11 +103,11 @@ public class BreakoutService
 				
 				BreakoutReservations newReservation = new BreakoutReservations(user,reservable,breakout.getResDescription(), Timestamp.valueOf(breakout.getResStart()), Timestamp.valueOf(breakout.getResEnd()),breakout.getNumPeople(),breakout.getAdditionalCom());
 				breakoutDAO.save(newReservation);
-
-
 			}
 		}
 
+		roomString += "Unavailable";
+		
 		return new ResponseObject(true,roomString);
 	}
 	
