@@ -121,17 +121,12 @@ public class AndroidController {
 	 * String for the number of people
 	 * String for the additional comments
 	 */
-	@GetMapping("/newBreakoutReservation")
+	@PostMapping("/newBreakoutReservation")
 	@ResponseBody
-	public ResponseObject newBreakoutReservation( SentBreakoutReservation breakoutReservation)
+	public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation)
 	{
-		List <String> rooms = new ArrayList<String>();
-		rooms.add("A");
-		rooms.add("B");
-		rooms.add("C");
 		
-		SentBreakoutReservation test = new SentBreakoutReservation("11111", "Breakout",rooms,"","2007-09-24 11:11:11","2018-12-12 11:11:11","2","");
-		return breakoutService.addBreakRes(test);
+		return breakoutService.addBreakRes(breakoutReservation);
 	}
 
 
