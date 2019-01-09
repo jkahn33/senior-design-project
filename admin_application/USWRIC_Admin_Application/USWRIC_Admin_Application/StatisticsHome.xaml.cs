@@ -23,5 +23,27 @@ namespace USWRIC_Admin_Application
         {
             InitializeComponent();
         }
+
+        private void BtnEqueipmentUsage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnCheckedOutEquipment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnRoomUsage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnStatisticsCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Homepage homepage = new Homepage();
+            homepage.Show();
+            this.Close();
+        }
     }
 }

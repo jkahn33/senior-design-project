@@ -68,8 +68,8 @@ namespace USWRIC_Admin_Application
 
         private void BtnRemoveUserCancel_Click(object sender, RoutedEventArgs e)
         {
-            Homepage homepage = new Homepage();
-            homepage.Show();
+            UserAdminMgmt userAdminMgmt = new UserAdminMgmt();
+            userAdminMgmt.Show();
             this.Close();
         }
 

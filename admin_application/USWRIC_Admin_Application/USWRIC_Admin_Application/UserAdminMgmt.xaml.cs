@@ -37,5 +37,18 @@ namespace USWRIC_Admin_Application
             removeUser.Show();
             this.Close();
         }
+
+        private void BtnRemoveAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveAdmin removeAdmin = new RemoveAdmin();
+            removeAdmin.Show();
+            this.Close();
+        }
+        private void BtnUserAdminMgmtCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Homepage homepage = new Homepage();
+            homepage.Show();
+            this.Close();
+        }
     }
 }

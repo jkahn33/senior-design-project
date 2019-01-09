@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="Statistics Home" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="User and Administrator Management" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="186,50,0,0" VerticalAlignment="Top" Height="35" Width="423" FontFamily="Arial Black" FontSize="20"/>
+        <Button x:Name="btnEqueipmentUsage" Content="Equipment Usage" HorizontalAlignment="Left" Height="39" Margin="257,127,0,0" VerticalAlignment="Top" Width="281" Click="BtnEqueipmentUsage_Click"/>
+        <Button x:Name="btnCheckedOutEquipment" Content="View Checked Out Equipment" HorizontalAlignment="Left" Height="39" Margin="257,206,0,0" VerticalAlignment="Top" Width="281" Click="BtnCheckedOutEquipment_Click"/>
+        <Button x:Name="btnRoomUsage" Content="USWRIC Login Statistics" HorizontalAlignment="Left" Height="39" Margin="257,285,0,0" VerticalAlignment="Top" Width="281" Click="BtnRoomUsage_Click"/>
+        <Button x:Name="btnStatisticsCancel" Content="Cancel" HorizontalAlignment="Left" Margin="360,364,0,0" VerticalAlignment="Top" Width="75" Click="BtnStatisticsCancel_Click"/>
+
     </Grid>
 </Window>

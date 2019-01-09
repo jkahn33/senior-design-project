@@ -36,16 +36,17 @@ namespace USWRIC_Admin_Application
             };
 
             var response = await Globals.GetHttpClient().PostAsync(
-                        Globals.GetBaseUrl() + "/getUser",
+                        Globals.GetBaseUrl() + "/getAdminName",
                         new StringContent(validPassObject.ToString(), Encoding.UTF8, "application/json"));
 
             var responseString = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
             {
-                if (responseString != null)
+                ResponseObject responseObject = JsonConvert.DeserializeObject<ResponseObject>(responseString);
+                if (responseObject.Success)
                 {
-                    MessageBoxResult result = MessageBox.Show("Are you sure you want to remove " + responseString + " (badge ID " + txtRemoveAdminId.Text + ") as an administrator?",
+                    MessageBoxResult result = MessageBox.Show("Are you sure you want to remove " + responseObject.Message + " (badge ID " + txtRemoveAdminId.Text + ") as an administrator?",
                         "Confirm",
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Question);
@@ -57,7 +58,7 @@ namespace USWRIC_Admin_Application
                 }
                 else
                 {
-                    MessageBoxResult result = MessageBox.Show("User with badge ID " + txtRemoveAdminId.Text + " does not exist.",
+                    MessageBoxResult result = MessageBox.Show("Admin with badge ID " + txtRemoveAdminId.Text + " does not exist.",
                        "Error",
                        MessageBoxButton.OK,
                        MessageBoxImage.Error);
@@ -67,8 +68,8 @@ namespace USWRIC_Admin_Application
 
         private void BtnRemoveAdminCancel_Click(object sender, RoutedEventArgs e)
         {
-            Homepage homepage = new Homepage();
-            homepage.Show();
+            UserAdminMgmt userAdminMgmt = new UserAdminMgmt();
+            userAdminMgmt.Show();
             this.Close();
         }
 

@@ -106,13 +106,13 @@ public class WindowsController {
 
     @PostMapping("/getAdminName")
     @ResponseBody
-    public String getAdminName(@RequestBody StringWrapper stringWrapper){
+    public ResponseObject getAdminName(@RequestBody StringWrapper stringWrapper){
         return adminService.getAdminName(stringWrapper.getString());
     }
 
     @PostMapping("/removeAdmin")
     @ResponseBody
     public ResponseObject removeAdmin(@RequestBody StringWrapper stringWrapper){
-
+        return adminService.removeAdmin(stringWrapper.getString());
     }
 }

@@ -81,12 +81,15 @@ public class AdminService {
      * @return {@code true} if extension exists and password matches
      */
     public ResponseObject editAdmin(EditAdmin editAdmin){
+        //first verify that the admin even exists
         Optional<Admin> adminOptional = adminDAO.findById(editAdmin.getOldExt());
         if(!adminOptional.isPresent()){
             return new ResponseObject(false, "Admin cannot be found");
         }
         Admin adminToEdit = adminOptional.get();
+        //this is if the admin is trying to change the badge ID they are are represented by.
         if(editAdmin.getExt() != null){
+            //verify that we are not setting two admins to the same badge ID
             if(adminDAO.findById(editAdmin.getExt()).isPresent()){
                 return new ResponseObject(false, "Another admin with Badge ID " + editAdmin.getExt() + " already exists.");
             }
@@ -95,9 +98,11 @@ public class AdminService {
         if(editAdmin.getName() != null){
             adminToEdit.setName(editAdmin.getName());
         }
+        //do not need to verify correctness of old password as that was already done that before the request was sent
         if(editAdmin.getNewPass() != null){
             adminToEdit.setPassword(passwordEncoder.encode(editAdmin.getNewPass()));
         }
+        //save the changed admin back to database
         adminDAO.save(adminToEdit);
         return new ResponseObject(true, null);
     }
@@ -119,10 +124,14 @@ public class AdminService {
     /**
      * Gets the name of the administrator by the given badge ID
      * @param id the badge ID to search by
-     * @return a String containing the name or {@code null} if the badge ID does not belong to an admin
+     * @return a ResponseObject containing the name in the message attribute if the admin exists
      */
-    public String getAdminName(String id){
-        return adminDAO.findById(id).map(Admin::getName).orElse(null);
+    public ResponseObject getAdminName(String id){
+        Optional<Admin> adminOptional = adminDAO.findById(id);
+        if(adminOptional.isPresent()){
+            return new ResponseObject(true, adminOptional.get().getName());
+        }
+        return new ResponseObject(false, null);
     }
 
     /**

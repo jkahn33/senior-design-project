@@ -64,6 +64,9 @@
     <Compile Include="EditAdmin.xaml.cs">
       <DependentUpon>EditAdmin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EquipmentUsage.xaml.cs">
+      <DependentUpon>EquipmentUsage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NewAdmin.xaml.cs">
       <DependentUpon>NewAdmin.xaml</DependentUpon>
     </Compile>
@@ -77,6 +80,9 @@
     <Compile Include="StatisticsHome.xaml.cs">
       <DependentUpon>StatisticsHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TestPage.xaml.cs">
+      <DependentUpon>TestPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="UserAdminMgmt.xaml.cs">
       <DependentUpon>UserAdminMgmt.xaml</DependentUpon>
@@ -86,6 +92,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EquipmentUsage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StatisticsHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
