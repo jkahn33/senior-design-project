@@ -70,7 +70,6 @@ namespace USWRIC_Admin_Application
         {
             UserAdminMgmt userAdminMgmt = new UserAdminMgmt();
             userAdminMgmt.Show();
-            this.Close();
         }
 
         private async void SendDeletion()
@@ -94,7 +93,6 @@ namespace USWRIC_Admin_Application
                     MessageBox.Show("Successfully removed administrator.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     Homepage homepage = new Homepage();
                     homepage.Show();
-                    this.Close();
                 }
                 else
                 {

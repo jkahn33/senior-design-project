@@ -33,3 +33,7 @@ C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Appl
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\RemoveUser.baml
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\RemoveAdmin.g.cs
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\RemoveAdmin.baml
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\EquipmentUsage.g.cs
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\TestPage.g.cs
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\EquipmentUsage.baml
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\TestPage.baml

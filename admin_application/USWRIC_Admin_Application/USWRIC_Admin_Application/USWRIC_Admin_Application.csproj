@@ -67,6 +67,7 @@
     <Compile Include="EquipmentUsage.xaml.cs">
       <DependentUpon>EquipmentUsage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EquipmentUsageResponse.cs" />
     <Compile Include="NewAdmin.xaml.cs">
       <DependentUpon>NewAdmin.xaml</DependentUpon>
     </Compile>

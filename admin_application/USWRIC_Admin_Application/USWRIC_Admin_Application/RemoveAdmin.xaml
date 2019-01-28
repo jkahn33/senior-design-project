@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:USWRIC_Admin_Application"
-        mc:Ignorable="d"
-        Title="Remove Administrator" Height="450" Width="800">
+        mc:Ignorable="d">
     <Grid>
         <Label Content="Remove Administrator" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="266,50,0,0" VerticalAlignment="Top" Height="35" Width="261" FontFamily="Arial Black" FontSize="20"/>
         <TextBox x:Name="txtRemoveAdminId"  HorizontalAlignment="Left" Height="23" Margin="246,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304"/>
