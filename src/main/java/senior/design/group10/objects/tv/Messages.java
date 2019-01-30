@@ -1,6 +1,7 @@
 package senior.design.group10.objects.tv;
 import org.hibernate.annotations.GenericGenerator;
 
+import senior.design.group10.objects.user.Admin;
 
 import javax.persistence.*;
 
@@ -21,15 +22,16 @@ public class Messages
 	private String message;
 	@Column
 	private Timestamp messageDate;
-	@Column
-	private String adminID;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn
+	private Admin admin;
 
 	public Messages(){}
 	
-	public Messages(String message, Timestamp messageDate, String adminID)
+	public Messages(String message, Timestamp messageDate, Admin admin)
 	{
 		this.message = message;
 		this.messageDate = messageDate;
-		this.adminID = adminID;
+		this.admin = admin;
 	}
 }
