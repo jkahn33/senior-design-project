@@ -13,6 +13,7 @@ public class PickReservationType extends AppCompatActivity {
 
     Button printerRes;
     Button breakoutRes;
+    Button home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +22,7 @@ public class PickReservationType extends AppCompatActivity {
 
         printerRes = (Button) findViewById(R.id.printerRes);
         breakoutRes = (Button) findViewById(R.id.breakoutRes);
-
+        home = (Button) findViewById(R.id.btnResChoiceHome);
 
 
         printerRes.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +37,12 @@ public class PickReservationType extends AppCompatActivity {
                 PickReservationType.this.startActivity(myIntent);
             }
         });
-
+        home.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent myIntent = new Intent(PickReservationType.this, initialScreen.class);
+                PickReservationType.this.startActivity(myIntent);
+            }
+        });
 
     }
 

@@ -1,8 +1,17 @@
+/*
+ * Class handling the printer reservations table and data manipulation
+ * 
+ */
+
+
 package senior.design.group10.objects.equipment;
 import org.hibernate.annotations.GenericGenerator;
 
+import senior.design.group10.objects.user.Users;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name="printer_res")
@@ -14,32 +23,45 @@ public class PrinterReservations
 	@GeneratedValue(generator="generator")
 	private int id;
 
-	@Column
-	private String username;
-	@Column
-	private String fiveDigExt;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="user_ext")
+	private Users user;
+	@ManyToOne
+	private Reservables reservable;
 	@Column
 	private String jobDescription;
 	@Column
 	private String jobDuration;
 	@Column
-	private Timestamp jobSchedule;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date jobSchedule;
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date jobScheduleEnd;
 	@Column
 	private String additionalComments;
-	@Column
-	private String printerID;
 
 	public PrinterReservations(){
 
 	}
 
-	public PrinterReservations(String username, String fiveDigExt, String jobDescription, String jobDuration, Timestamp jobSchedule, String additionalComments, String printerID) {
-		this.username = username;
-		this.fiveDigExt = fiveDigExt;
+	public PrinterReservations(Users user, Reservables reservable, String jobDescription, String jobDuration, Timestamp jobSchedule, Timestamp jobScheduleEnd, String additionalComments) {
+		this.user = user;
+		this.reservable = reservable;
 		this.jobDescription = jobDescription;
 		this.jobDuration = jobDuration;
 		this.jobSchedule = jobSchedule;
+		this.jobScheduleEnd = jobScheduleEnd;
 		this.additionalComments = additionalComments;
-		this.printerID = printerID;
+	}
+	
+	public Date getJobSchedule()
+	{
+		return this.jobSchedule;
+	}
+	
+	public Date getJobScheduleEnd()
+	{
+		return this.jobScheduleEnd;
 	}
 }

@@ -26,4 +26,20 @@ public class Users
 		this.fiveDigExt = fiveDigExt;
 		this.depCode = depCode;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Timestamp getCreationDate() {
+		return creationDate;
+	}
+
+	public String getFiveDigExt() {
+		return fiveDigExt;
+	}
+
+	public String getDepCode() {
+		return depCode;
+	}
 }

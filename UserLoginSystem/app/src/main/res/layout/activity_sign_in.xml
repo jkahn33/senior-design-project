@@ -1,56 +1,79 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="#0099cc" tools:context=".signIn">
-
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-    <TextView android:id="@+id/fullscreen_content" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#33b5e5"
-        android:textStyle="bold" android:textSize="50sp" android:gravity="center" />
-
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
-    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:background="#ffffffff">
-
-        <Button
-            android:id="@+id/savedUser"
-            style="?metaButtonBarButtonStyle"
-            android:layout_width="322dp"
-            android:layout_height="79dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="391dp"
-            android:background="@drawable/saved_user"
-            android:paddingLeft="40dp"
-            android:paddingTop="10dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:layout_gravity="left|top"
-            android:background="@drawable/logo_2" />
-
-        <ImageView
-            android:layout_marginTop="200dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/uswric"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/uswric" />
-
-        <Button
-            android:id="@+id/newUser"
-            style="?metaButtonBarButtonStyle"
-            android:layout_width="322dp"
-            android:layout_height="79dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="600dp"
-            android:background="@drawable/new_user" />
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".initialScreen">
 
 
-    </FrameLayout>
+    <Button
+        android:id="@+id/savedUser"
+        style="?metaButtonBarButtonStyle"
+        android:layout_width="320dp"
+        android:layout_height="85dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/saved_user"
+        android:paddingLeft="40dp"
+        android:paddingTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newUser" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/logo_2"
+        app:layout_constraintBottom_toTopOf="@+id/newUser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uswric" />
+
+    <ImageView
+        android:id="@+id/uswric"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/uswric"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/newUser"
+        style="?metaButtonBarButtonStyle"
+        android:layout_width="320dp"
+        android:layout_height="85dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/new_user"
+        android:paddingLeft="-90dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/savedUser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
+
+
+    </android.support.constraint.ConstraintLayout>
