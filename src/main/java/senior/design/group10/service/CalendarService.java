@@ -3,7 +3,6 @@ package senior.design.group10.service;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,6 @@ import senior.design.group10.objects.user.Admin;
 
 @Service
 public class CalendarService {
-    private final static Logger log = Logger.getLogger(MessageService.class.getName());
     private final CalendarDAO calendarDAO;
     private final AdminDAO adminDAO;
 
@@ -35,7 +33,6 @@ public class CalendarService {
         	return new ResponseObject(false, "Admin with ID " + calendar.getAdminID() + " cannot be found.");
         
         Calendar newCalendar = new Calendar(calendar.getName(), Timestamp.valueOf(calendar.getDate()), adminOptional.get());
-        log.info("admin ID: " + calendar.getAdminID() + ", time: " + Timestamp.valueOf(calendar.getDate()));
         calendarDAO.save(newCalendar);
         
         return new ResponseObject(true, adminOptional.get().getName());
