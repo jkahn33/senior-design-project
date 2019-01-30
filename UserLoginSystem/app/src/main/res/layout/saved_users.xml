@@ -33,19 +33,27 @@
             android:layout_marginTop="30dp"
             android:layout_marginRight="100dp" />
 
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonView"
-            android:layout_gravity="top|left|center"
-            android:layout_marginTop="200dp">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:orientation="vertical"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/buttonLayout"></LinearLayout>
-        </ScrollView>
+                android:layout_marginTop="175dp"
+                android:layout_marginRight="300dp" />
+
+            <com.futuremind.recyclerviewfastscroll.FastScroller
+                android:id="@+id/fastscroll"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="175dp"
+                android:layout_marginRight="300dp"
+                android:orientation="vertical" />
+
+        </RelativeLayout>
 
         <!--<ImageButton-->
             <!--android:layout_width="wrap_content"-->
