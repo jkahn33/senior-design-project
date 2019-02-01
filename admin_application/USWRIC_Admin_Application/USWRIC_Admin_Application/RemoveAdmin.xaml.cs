@@ -70,6 +70,7 @@ namespace USWRIC_Admin_Application
         {
             UserAdminMgmt userAdminMgmt = new UserAdminMgmt();
             userAdminMgmt.Show();
+            this.Close();
         }
 
         private async void SendDeletion()

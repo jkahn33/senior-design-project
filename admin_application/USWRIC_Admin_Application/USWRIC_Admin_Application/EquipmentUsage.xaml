@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Equipment Usage" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="Equipment Usage Statistics" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="232,50,0,0" VerticalAlignment="Top" Height="35" Width="333" FontFamily="Arial Black" FontSize="20"/>
+
     </Grid>
 </Window>

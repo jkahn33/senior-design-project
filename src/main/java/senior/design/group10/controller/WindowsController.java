@@ -69,8 +69,8 @@ public class WindowsController {
 
     @GetMapping("/userStatistics")
     @ResponseBody
-    public List<UsersStatisticResponse> getUserStatistics(@RequestBody StatisticsRequest request){
-        request = new StatisticsRequest("2018-12-04 00:00:00", "2018-12-18 11:59:59");
+    public List<UsersStatisticResponse> getUserStatistics(/*@RequestBody StatisticsRequest request*/){
+        StatisticsRequest request = new StatisticsRequest("2018-12-04 00:00:00", "2018-12-18 11:59:59");
         return userService.getUsersBetweenDates(request);
     }
 
