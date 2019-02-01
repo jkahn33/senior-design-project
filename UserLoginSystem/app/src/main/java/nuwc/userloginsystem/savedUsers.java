@@ -3,18 +3,13 @@ package nuwc.userloginsystem;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
+
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import static android.content.ContentValues.TAG;
 
 import android.view.View;
 import android.widget.Button;
@@ -32,12 +27,8 @@ import com.android.volley.toolbox.Volley;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import nuwc.userloginsystem.objects.ResponseObject;
@@ -58,8 +49,9 @@ public class savedUsers extends AppCompatActivity{
 
     static Context ctx;
 
-    ScrollView buttonView;
-    LinearLayout buttonLayout;
+    RecyclerView recyclerView;
+    RecycleViewAdapter adapter;
+    FastScroller fastScroller;
     String name;
     ArrayList<String> mNames = new ArrayList<>();
     String ext;
@@ -98,7 +90,7 @@ public class savedUsers extends AppCompatActivity{
     @TargetApi(24)
     public void addUser() {
         if(userList != null) {
-            userList.sort(Comparator.comparing(Users::getName));
+//            userList.sort(Comparator.comparing(Users::getName));
 
             for (int i = 0; i < userList.size(); i++) {
                 final Button userButton = new Button(this);
@@ -109,7 +101,7 @@ public class savedUsers extends AppCompatActivity{
                 userButton.setTextSize(30);
                 userButton.setBackgroundResource(R.drawable.name_plate);
 
-                buttonLayout.addView(userButton);
+                recyclerView.addView(userButton);
 
                 userButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
@@ -133,7 +125,7 @@ public class savedUsers extends AppCompatActivity{
             //confirm user creation
             Log.d("RESPONSE", "creating welcome user");
             welcomeUser.setText("Welcome " + response.getMessage() + "!");
-            buttonLayout.setVisibility(View.INVISIBLE);
+            recyclerView.setVisibility(View.INVISIBLE);
         }
         else{
             showError(response.getMessage());
@@ -148,27 +140,21 @@ public class savedUsers extends AppCompatActivity{
                 Request.Method.GET,
                 RequestUtil.BASE_URL + "/printAllUsers",
                 null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            ObjectMapper mapper = new ObjectMapper();
-                            userList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
-                            addUser();
-                        }
-                        catch(Exception e){
-                            Log.e("EXCEPTION", e.toString());
-                            showError("Object mapping error. Please check logs.");
-                        }
+                response -> {
+                    try {
+                        ObjectMapper mapper = new ObjectMapper();
+                        userList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
+                        addUser();
+                    }
+                    catch(Exception e){
+                        Log.e("EXCEPTION", e.toString());
+                        showError("Object mapping error. Please check logs.");
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("ERROR", error.getMessage());
-                        showError("Unknown error. Please check logs.");
+                error -> {
+                    Log.e("ERROR", error.getMessage());
+                    showError("Unknown error. Please check logs.");
 
-                    }
                 }
         );
 
