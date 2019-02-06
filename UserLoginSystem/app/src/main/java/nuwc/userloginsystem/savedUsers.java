@@ -13,8 +13,6 @@ import android.util.Log;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -33,13 +31,12 @@ import java.util.List;
 
 import nuwc.userloginsystem.objects.ResponseObject;
 import nuwc.userloginsystem.objects.Users;
+import nuwc.userloginsystem.util.RecycleViewAdapter;
 import nuwc.userloginsystem.util.RequestUtil;
 
 import com.futuremind.recyclerviewfastscroll.FastScroller;
 
 import java.util.ArrayList;
-
-import nuwc.userloginsystem.util.RecycleViewAdapter;
 
 /**
  * Created by Vinny on 11/5/18.
@@ -99,17 +96,15 @@ public class savedUsers extends AppCompatActivity{
 
                 //recyclerView.addView(userButton);
 
-                userButton.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View view) {
-                        try {
-                            logUser(Integer.toString(userButton.getId()));
-                            Log.d("EXCEPTION", "hi");
+                userButton.setOnClickListener(view -> {
+                    try {
+                        logUser(Integer.toString(userButton.getId()));
+                        Log.d("EXCE", "hi");
 
-                        }
-                        catch(JSONException e){
-                            showError("JSON Format Error");
-                            Log.e("EXCEPTION", e.toString());
-                        }
+                    }
+                    catch(JSONException e){
+                        showError("JSON Format Error");
+                        Log.e("EXCEPTION", e.toString());
                     }
                 });
             }
@@ -176,19 +171,16 @@ public class savedUsers extends AppCompatActivity{
                 Request.Method.POST,
                 RequestUtil.BASE_URL + "/storeLogin",
                 body,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            ObjectMapper mapper = new ObjectMapper();
-                            Log.d("RESPONSE", response.toString());
-                            ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
-                            verifyResponse(responseObject);
-                        }
-                        catch(Exception e){
-                            showError("User logging object mapping error, please check logs.");
-                            Log.d("EXCEPTION", e.toString());
-                        }
+                response -> {
+                    try {
+                        ObjectMapper mapper = new ObjectMapper();
+                        Log.d("RESPONSE", response.toString());
+                        ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
+                        verifyResponse(responseObject);
+                    }
+                    catch(Exception e){
+                        showError("User logging object mapping error, please check logs.");
+                        Log.d("EXCEPTION", e.toString());
                     }
                 },
                 new Response.ErrorListener() {

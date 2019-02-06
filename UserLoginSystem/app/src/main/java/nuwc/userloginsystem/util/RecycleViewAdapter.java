@@ -21,10 +21,11 @@ import static android.content.ContentValues.TAG;
 
 public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> implements SectionTitleProvider {
 
-    private ArrayList<String> mUserNames = new ArrayList<>();
+    private ArrayList<String> mUserNames;
     private Context mContext;
 
     public RecycleViewAdapter(ArrayList<String> userNames, Context context){
+        mUserNames = new ArrayList<>();
         mUserNames = userNames;
         mContext = context;
     }
