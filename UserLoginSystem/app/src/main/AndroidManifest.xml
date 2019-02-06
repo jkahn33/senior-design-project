@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="nuwc.userloginsystem">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -41,7 +46,7 @@
         <activity android:name=".equipmentCheckin" />
         <activity android:name=".checkinBarcode" />
         <activity android:name=".addEquipment" />
-        <activity android:name=".adminCheckout"/>
+        <activity android:name=".adminCheckout" />
         <activity
             android:name=".PickReservationType"
             android:label="title_activity_pick_reservation_type"
@@ -49,6 +54,11 @@
         <activity
             android:name=".BreakoutReservation"
             android:label="title_activity_breakout_reservation"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".scannerScreen"
+            android:label="@string/title_activity_scanner_screen"
+            android:theme="@style/AppTheme"></activity>
     </application>
+
 </manifest>
