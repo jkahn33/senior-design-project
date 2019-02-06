@@ -70,27 +70,23 @@ public class savedUsers extends AppCompatActivity{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_users);
-
-
-        ctx = this;
-
-
-
-
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        RecycleViewAdapter adapter = new RecycleViewAdapter(mNames,this);
-        FastScroller fastScroller = (FastScroller) findViewById(R.id.fastscroll);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        adapter = new RecycleViewAdapter(mNames,this);
+        fastScroller = (FastScroller) findViewById(R.id.fastscroll);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
         //has to be called AFTER RecyclerView.setAdapter()
         fastScroller.setRecyclerView(recyclerView);
-}
+
+
+        ctx = this;
+    }
 
     @TargetApi(24)
     public void addUser() {
         if(userList != null) {
-//            userList.sort(Comparator.comparing(Users::getName));
+            //userList.sort(Comparator.comparing(Users::getName));
 
             for (int i = 0; i < userList.size(); i++) {
                 final Button userButton = new Button(this);
@@ -101,12 +97,14 @@ public class savedUsers extends AppCompatActivity{
                 userButton.setTextSize(30);
                 userButton.setBackgroundResource(R.drawable.name_plate);
 
-                recyclerView.addView(userButton);
+                //recyclerView.addView(userButton);
 
                 userButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
                         try {
                             logUser(Integer.toString(userButton.getId()));
+                            Log.d("EXCEPTION", "hi");
+
                         }
                         catch(JSONException e){
                             showError("JSON Format Error");
@@ -115,6 +113,10 @@ public class savedUsers extends AppCompatActivity{
                     }
                 });
             }
+            for(Users u : userList){
+                mNames.add(u.getName());
+            }
+
         }
         else{
             Log.d("ERROR", "Users list is null");
@@ -216,7 +218,7 @@ public class savedUsers extends AppCompatActivity{
                 .show();
     }
     public static Context getContex(){
-            return ctx;
+        return ctx;
     }
     public String getFirstName(){
         return this.name;
