@@ -39,7 +39,7 @@ public class MessageService {
         if(!adminOptional.isPresent())
         	return new ResponseObject(false, "Admin with ID " + message.getAdminID() + " cannot be found.");
         
-        Messages newMessage = new Messages(message.getMessage(), currentTime, adminOptional.get());
+        Messages newMessage = new Messages(message.getMessage(), Timestamp.valueOf(message.getEndDate()), adminOptional.get());
         log.info("admin ID: " + message.getAdminID() + ", time: " + currentTime);
         messageDAO.save(newMessage);
         

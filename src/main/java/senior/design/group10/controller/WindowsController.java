@@ -25,12 +25,11 @@ public class WindowsController {
         this.messageService = messageService;
     }
 
-    @GetMapping("/newAdmin")
+    @PostMapping("/newAdmin")
     @ResponseBody
     public ResponseObject newAdmin( NewAdmin sentAdmin)
     {
-    		NewAdmin sentadmin2 = new NewAdmin("pat","12345","lol");
-    		return adminService.createNewAdmin(sentadmin2);
+    		return adminService.createNewAdmin(sentAdmin);
     }
 
     @PostMapping("/validateAdmin")
@@ -63,7 +62,7 @@ public class WindowsController {
     public ResponseObject newMessage(SentMessage sentMessage) 
     {
     		//Sending a message
-    		SentMessage sentMessages = new SentMessage("1","","");
+    		SentMessage sentMessages = new SentMessage("Get your ass outta here","12345","2020-01-01 20:20:20");
         return messageService.createNewMessage(sentMessages);
     }    
     

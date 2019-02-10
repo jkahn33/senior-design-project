@@ -20,8 +20,8 @@ public class Messages
 
 	@Column
 	private String message;
-	//@Column
-	//private Timestamp messageEndDate;
+	@Column
+	private Timestamp messageEndDate;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private Admin admin;
@@ -31,7 +31,7 @@ public class Messages
 	public Messages(String message, Timestamp messageEndDate, Admin admin)
 	{
 		this.message = message;
-		//this.messageEndDate = messageEndDate;
+		this.messageEndDate = messageEndDate;
 		this.admin = admin;
 	}
 }
