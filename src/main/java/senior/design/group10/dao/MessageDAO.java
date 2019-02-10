@@ -14,7 +14,7 @@ import senior.design.group10.objects.tv.Messages;
 @Repository
 public interface MessageDAO extends CrudRepository<Messages, Integer>
 {
-	@Query(value= "Select * from messages where (resSchedule between :startTime and :endTime or resScheduleEnd between :startTime and :endTime) and reservable_type = 'Breakout' and reservable_id = :res_id", nativeQuery = true)
-	List <BreakoutReservations> checkTimeAvailable(@Param("startTime") Date startTime, @Param("endTime") Date endTime, @Param("res_id") String res_id);
+	@Query(value= "Select * from messages where messageEndDate >= :currentDate", nativeQuery = true)
+	List <Messages> getcurrentMessages(@Param("currentDate") Date currentDate);
 	
 }

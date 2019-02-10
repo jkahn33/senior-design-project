@@ -34,4 +34,9 @@ public class Messages
 		this.messageEndDate = messageEndDate;
 		this.admin = admin;
 	}
+	
+	public String getMessage()
+	{
+		return message;
+	}
 }

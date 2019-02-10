@@ -50,31 +50,22 @@ public class MessageService {
     //Look at the BreakoutService and return the list of messages for dates greater than or equal to todays date
     //Implement the DAO function to return the messages then use it  in this class
     //Implement in Android service class
-    
-    public ResponseObject getCurrentMessages(SentMessage message){
-    	Date date = new Date();
-        Timestamp currentTime = new Timestamp(date.getTime());
-        
-        //find the user attached to the five digit extension
-        Optional<Admin> adminOptional = adminDAO.findById(message.getAdminID());
-        //checking if the five digit extension is valid
-        if(!adminOptional.isPresent())
-        	return new ResponseObject(false, "Admin with ID " + message.getAdminID() + " cannot be found.");
-        
-        Messages newMessage = new Messages(message.getMessage(), currentTime, adminOptional.get());
-        log.info("admin ID: " + message.getAdminID() + ", time: " + currentTime);
-        messageDAO.save(newMessage);
-        
-        return new ResponseObject(true, adminOptional.get().getName());
-    }
-    
-    
     //Returns a list of the message which the dates are greater than or equal to current date
-    public List<Messages> getCurrentMessages()
-    {
-    		
-    		return new ArrayList<Messages>();
+
+    public List <Messages> getCurrentMessages(){
+    	
+    		Date date = new Date();
+        Timestamp currentTime = new Timestamp(date.getTime());
+		List <Messages> messages = messageDAO.getcurrentMessages(currentTime);
+		 // Or like this...
+        for(int i = 0; i < messages.size(); i++) {
+            System.out.println(messages.get(i).getMessage());
+        }
+		return messages;
+		
     }
+    
+    
     
     
 }
