@@ -213,7 +213,7 @@ public class savedUsers extends AppCompatActivity{
                 .show();
     }
     public static Context getContex(){
-            return ctx;
+        return ctx;
     }
     public String getFirstName(){
         return this.name;
@@ -221,7 +221,4 @@ public class savedUsers extends AppCompatActivity{
     public void setFirstName(String firstName){
         this.name = firstName;
     }
-
-
-
 }
