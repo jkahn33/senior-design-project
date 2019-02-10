@@ -9,6 +9,7 @@ import senior.design.group10.objects.sent.*;
 import senior.design.group10.objects.user.Users;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.EquipmentService;
+import senior.design.group10.service.MessageService;
 import senior.design.group10.service.UserService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,12 +24,14 @@ public class WindowsController {
     private final AdminService adminService;
     private final UserService userService;
     private final EquipmentService equipmentService;
+    private final MessageService messageService;
 
     @Autowired
-    public WindowsController(AdminService adminService, UserService userService, EquipmentService equipmentService) {
+    public WindowsController(AdminService adminService, UserService userService, EquipmentService equipmentService, MessageService messageService) {
         this.adminService = adminService;
         this.userService = userService;
         this.equipmentService = equipmentService;
+        this.messageService = messageService;
     }
 
     @PostMapping("/newAdmin")
@@ -67,11 +70,17 @@ public class WindowsController {
         return equipmentService.getUsageStatistics();
     }
 
-    @GetMapping("/userStatistics")
+    @PostMapping("/userStatistics")
     @ResponseBody
-    public List<UsersStatisticResponse> getUserStatistics(/*@RequestBody StatisticsRequest request*/){
-        StatisticsRequest request = new StatisticsRequest("2018-12-04 00:00:00", "2018-12-18 11:59:59");
+    public List<UsersStatisticResponse> getUserStatistics(@RequestBody StatisticsRequest request){
+        //StatisticsRequest request = new StatisticsRequest("2018-12-04 00:00:00", "2018-12-18 11:59:59");
         return userService.getUsersBetweenDates(request);
+    }
+
+    @GetMapping
+    @ResponseBody
+    public void getSpecificUserStatistics(){
+        return;
     }
 
     @GetMapping("/getCurrentPrinterReservations")
@@ -114,5 +123,11 @@ public class WindowsController {
     @ResponseBody
     public ResponseObject removeAdmin(@RequestBody StringWrapper stringWrapper){
         return adminService.removeAdmin(stringWrapper.getString());
+    }
+
+    @GetMapping("/renderImage")
+    @ResponseBody
+    public boolean renderImage(){
+        return messageService.renderImage();
     }
 }

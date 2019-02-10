@@ -1,10 +1,14 @@
 package senior.design.group10.service;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,8 @@ import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentMessage;
 import senior.design.group10.objects.tv.Messages;
 import senior.design.group10.objects.user.Admin;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 @Service
 public class MessageService {
@@ -42,5 +48,36 @@ public class MessageService {
         messageDAO.save(newMessage);
         
         return new ResponseObject(true, adminOptional.get().getName());
+    }
+    private static void generatePDFFromHTML(String filename) throws ParserConfigurationException, IOException, DocumentException {
+        Document document = new Document();
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("src/output/html.pdf"));
+        document.open();
+        XMLWorkerHelper.getInstance().parseXHtml(writer, document, new FileInputStream(filename));
+        document.close();
+    }
+    public boolean renderImage(){
+        StringBuilder contentBuilder = new StringBuilder();
+        try {
+            BufferedReader in = new BufferedReader(new FileReader("test.html"));
+            String str;
+            while ((str = in.readLine()) != null) {
+                contentBuilder.append(str);
+            }
+            in.close();
+        } catch (IOException e) {
+            log.severe(e.toString());
+            return false;
+        }
+        String html = contentBuilder.toString();
+
+        Document document = new Document();
+        PdfWriter writer = PdfWriter.getInstance(document,
+                new FileOutputStream("html.pdf"));
+        document.open();
+        XMLWorkerHelper.getInstance().parseXHtml(writer, document,
+                new FileInputStream(filename));
+        document.close();
+        return true;
     }
 }

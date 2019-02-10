@@ -37,3 +37,7 @@ C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Appl
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\TestPage.g.cs
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\EquipmentUsage.baml
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\TestPage.baml
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\HtmlRenderer.dll
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\HtmlRenderer.WPF.dll
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\HtmlRenderer.pdb
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\HtmlRenderer.WPF.pdb
