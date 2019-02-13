@@ -77,12 +77,12 @@ public class BreakoutService
 	{
 		//Checking for user existance
 
-		Optional<Users> usersOptional = usersDAO.findById(breakout.getUserExt());
+		Optional<Users> usersOptional = usersDAO.findById(breakout.getBadgeID());
 		
 
 		if(!usersOptional.isPresent())
 		{
-			return new ResponseObject(false, "User with extension " + breakout.getUserExt() + " cannot be found");
+			return new ResponseObject(false, "User with extension " + breakout.getBadgeID() + " cannot be found");
 		}
 
 		//Saving the breakout res to the db

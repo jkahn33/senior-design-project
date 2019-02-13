@@ -44,14 +44,14 @@ public class EquipmentService {
         Date date = new Date();
         Timestamp currentTime = new Timestamp(date.getTime());
 
-        Optional<Users> usersOptional = usersDAO.findById(sentEquipment.getUserExt());
-        Optional<Admin> adminOptional = adminDAO.findById(sentEquipment.getAdminExt());
+        Optional<Users> usersOptional = usersDAO.findById(sentEquipment.getUserID());
+        Optional<Admin> adminOptional = adminDAO.findById(sentEquipment.getAdminID());
         Optional<Equipment> equipmentOptional = equipmentDAO.findById(sentEquipment.getBarcode());
         if(!usersOptional.isPresent()){
-            return new ResponseObject(false, "User with extension " + sentEquipment.getUserExt() + " cannot be found");
+            return new ResponseObject(false, "User with extension " + sentEquipment.getUserID() + " cannot be found");
         }
         if(!adminOptional.isPresent()){
-            return new ResponseObject(false, "Admin with extension " + sentEquipment.getAdminExt() + " cannot be found");
+            return new ResponseObject(false, "Admin with extension " + sentEquipment.getAdminID() + " cannot be found");
         }
         if(!equipmentOptional.isPresent()){
             return new ResponseObject(false, "Equipment with barcode " + sentEquipment.getBarcode() + " cannot be found");

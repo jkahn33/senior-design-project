@@ -36,7 +36,7 @@ public class WindowsController {
     @PostMapping("/getAdmin")
     @ResponseBody
     public ReturnAdmin getAdmin(@RequestBody EditAdmin editAdmin){
-        return adminService.getAdminById(editAdmin.getOldExt());
+        return adminService.getAdminById(editAdmin.getOldBadgeID());
     }
 
     @PostMapping("/editAdmin")

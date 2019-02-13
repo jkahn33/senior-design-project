@@ -46,11 +46,11 @@ public class PrinterService
 	public ResponseObject addPrintRes(SentPrinterReservation printer)
 	{
 		//Checking for user existance
-		Optional<Users> usersOptional = usersDAO.findById(printer.getUserExt());
+		Optional<Users> usersOptional = usersDAO.findById(printer.getBadgeID());
 		Optional <Reservables> reservableOptional = reservablesDAO.findById(new ReservableKey(printer.getReservableType(),printer.getReservableId()));
 
 		if(!usersOptional.isPresent()){
-			return new ResponseObject(false, "User with extension " + printer.getUserExt() + " cannot be found");
+			return new ResponseObject(false, "User with extension " + printer.getBadgeID() + " cannot be found");
 		}
 		if(!reservableOptional.isPresent()){
 			return new ResponseObject(false, "Reservable with type " + printer.getReservableType() + printer.getReservableId() + " cannot be found");

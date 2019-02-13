@@ -6,15 +6,15 @@ import java.sql.Timestamp;
 
 public class SentLoginHistory {
     @XmlElement
-    private String ext;
+    private String badgeID;
 
     public SentLoginHistory(){}
 
-    public SentLoginHistory(String ext){
-        this.ext = ext;
+    public SentLoginHistory(String badgeID){
+        this.badgeID = badgeID;
     }
     
-    public String getExt() {
-    	return ext;
+    public String getBadgeID() {
+    	return badgeID;
     }
 }

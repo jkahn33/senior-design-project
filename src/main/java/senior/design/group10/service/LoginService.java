@@ -32,13 +32,13 @@ public class LoginService {
         Timestamp currentTime = new Timestamp(date.getTime());
         
         //find the user attached to the five digit extension
-        Optional<Users> usersOptional = usersDAO.findById(login.getExt());
+        Optional<Users> usersOptional = usersDAO.findById(login.getBadgeID());
         //checking if the five digit extension is valid
         if(!usersOptional.isPresent())
-        	return new ResponseObject(false, "User with extension " + login.getExt() + " cannot be found.");
+        	return new ResponseObject(false, "User with extension " + login.getBadgeID() + " cannot be found.");
         
         UserLoginHistory loginToSave = new UserLoginHistory(usersOptional.get(), currentTime);
-        log.info("ext: " + login.getExt() + ", time: " + currentTime);
+        log.info("ext: " + login.getBadgeID() + ", time: " + currentTime);
         userLoginHistoryDAO.save(loginToSave);
         return new ResponseObject(true, usersOptional.get().getName());
     }

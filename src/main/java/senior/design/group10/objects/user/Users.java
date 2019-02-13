@@ -13,17 +13,17 @@ public class Users
 	private Timestamp creationDate;
 	@Id
 	@Column(length=5)
-	private String fiveDigExt;
+	private String badgeID;
 	@Column
 	private String depCode;
 
 	public Users(){}
 	
-	public Users( String name, Timestamp creationDate, String fiveDigExt, String depCode)
+	public Users( String name, Timestamp creationDate, String badgeID, String depCode)
 	{
 		this.name = name;
 		this.creationDate = creationDate;
-		this.fiveDigExt = fiveDigExt;
+		this.badgeID = badgeID;
 		this.depCode = depCode;
 	}
 
@@ -35,8 +35,8 @@ public class Users
 		return creationDate;
 	}
 
-	public String getFiveDigExt() {
-		return fiveDigExt;
+	public String getBadgeID() {
+		return badgeID;
 	}
 
 	public String getDepCode() {

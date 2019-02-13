@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SentBreakoutReservation 
 {
-	private String userExt;
+	private String badgeID;
 	private String reservableType;
 	private List <String> reservableIdList;
 	private String resDescription;
@@ -17,9 +17,9 @@ public class SentBreakoutReservation
 
 	public SentBreakoutReservation(){}
 	
-	public SentBreakoutReservation(String userExt, String reservableType, List <String> reservableIdList, String resDescription, String resStart, String resEnd,String numPeople, String additionalCom)
+	public SentBreakoutReservation(String badgeID, String reservableType, List <String> reservableIdList, String resDescription, String resStart, String resEnd,String numPeople, String additionalCom)
 	{
-		this.userExt = userExt;
+		this.badgeID = badgeID;
 		this.reservableIdList = new ArrayList<String>(reservableIdList);
 		this.reservableType = reservableType;
 		this.resDescription= resDescription;
@@ -29,8 +29,8 @@ public class SentBreakoutReservation
 		this.additionalCom=additionalCom;
 	}
 
-	public String getUserExt() {
-		return userExt;
+	public String getBadgeID() {
+		return badgeID;
 	}
 
 

@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class SentPrinterReservation
 {
-	private String userExt;
+	private String badgeID;
 	private String reservableType;
 	private String reservableId;
 	private String jobDescription;
@@ -15,9 +15,9 @@ public class SentPrinterReservation
 
 	public SentPrinterReservation(){}
 	
-	public SentPrinterReservation(String userExt, String reservableType, String reservableId, String jobDescription, String jobSchedule, String jobDuration, String additionalCom)
+	public SentPrinterReservation(String badgeID, String reservableType, String reservableId, String jobDescription, String jobSchedule, String jobDuration, String additionalCom)
 	{
-		this.userExt = userExt;
+		this.badgeID = badgeID;
 		this.reservableId = reservableId;
 		this.reservableType = reservableType;
 		this.jobDescription=jobDescription;
@@ -26,8 +26,8 @@ public class SentPrinterReservation
 		this.additionalCom=additionalCom;
 	}
 
-	public String getUserExt() {
-		return userExt;
+	public String getBadgeID() {
+		return badgeID;
 	}
 
 

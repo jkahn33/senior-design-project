@@ -1,26 +1,26 @@
 package senior.design.group10.objects.sent;
 
 public class EditAdmin {
-    private String oldExt;
-    private String ext;
+    private String oldBadgeID;
+    private String badgeID;
     private String name;
     private String newPass;
 
     public EditAdmin(){}
 
-    public EditAdmin(String oldExt, String ext, String name, String newPass) {
-        this.oldExt = oldExt;
-        this.ext = ext;
+    public EditAdmin(String oldBadgeID, String badgeID, String name, String newPass) {
+        this.oldBadgeID = oldBadgeID;
+        this.badgeID = badgeID;
         this.name = name;
         this.newPass = newPass;
     }
 
-    public String getOldExt(){
-        return oldExt;
+    public String getOldBadgeID(){
+        return oldBadgeID;
     }
 
-    public String getExt() {
-        return ext;
+    public String getBadgeID() {
+        return badgeID;
     }
 
     public String getName() {
