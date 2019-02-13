@@ -26,14 +26,15 @@ public class Admin
 		this.name = name;
 		this.creationDate = creationDate;
 	}
-	public String getPassword(){
-		return password;
-	}
 
 	public String getBadgeID() {
 		return badgeID;
 	}
-
+	
+	public String getPassword(){
+		return password;
+	}
+	
 	public String getName() {
 		return name;
 	}

@@ -28,4 +28,12 @@ public class ActiveAdmin
 	public String getBadgeID() {
 		return badgeID;
 	}
+	
+	public void setBadgeID(String badgeID) {
+		this.badgeID = badgeID;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

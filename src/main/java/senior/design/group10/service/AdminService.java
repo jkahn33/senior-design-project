@@ -88,19 +88,24 @@ public class AdminService {
      */
     public ResponseObject editAdmin(EditAdmin editAdmin){
         Optional<Admin> adminOptional = adminDAO.findById(editAdmin.getOldBadgeID());
-        if(!adminOptional.isPresent() || !activeAdminDAO.existsById(editAdmin.getOldBadgeID())){
+        Optional<ActiveAdmin> activeAdminOptional = activeAdminDAO.findById(editAdmin.getOldBadgeID());
+        if(!adminOptional.isPresent() || !activeAdminOptional.isPresent()){
             return new ResponseObject(false, "Admin cannot be found");
         }
         Admin adminToEdit = adminOptional.get();
+        ActiveAdmin activeAdminToEdit = activeAdminOptional.get();
         if(editAdmin.getBadgeID() != null){
             adminToEdit.setBadgeID(editAdmin.getBadgeID());
+            activeAdminToEdit.setBadgeID(editAdmin.getBadgeID());
         }
         if(editAdmin.getName() != null){
             adminToEdit.setName(editAdmin.getName());
+            activeAdminToEdit.setName(editAdmin.getName());
         }
         if(editAdmin.getNewPass() != null){
             adminToEdit.setPassword(passwordEncoder.encode(editAdmin.getNewPass()));
         }
+        activeAdminDAO.save(activeAdminToEdit);
         adminDAO.save(adminToEdit);
         return new ResponseObject(true, null);
     }
