@@ -32,7 +32,12 @@ dependencies {
     compile("org.hibernate:hibernate-core")
     compile("org.hibernate:hibernate-c3p0")
     compile("org.hibernate:hibernate-entitymanager")
-    compile "org.apache.pdfbox:pdfbox-tools:2.0.3"
-    compile "net.sf.cssbox:pdf2dom:1.6"
+//    compile "org.apache.pdfbox:pdfbox-tools:2.0.3"
+//    compile "net.sf.cssbox:pdf2dom:1.6"
+//    //compile 'com.itextpdf:itextpdf:5.0.6'
+//    compile group: 'com.itextpdf.tool', name: 'xmlworker', version: '5.4.1'
+    compile 'com.openhtmltopdf:openhtmltopdf-core:0.0.1-RC17'
+    compile 'com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-RC17'
+    compile 'com.openhtmltopdf:openhtmltopdf-java2d:0.0.1-RC17'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

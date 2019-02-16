@@ -12,5 +12,6 @@
         <Button x:Name="btnEdit" Content="Edit Personal Information" HorizontalAlignment="Left" Height="39" Margin="450,193,0,0" VerticalAlignment="Top" Width="281" Click="BtnEdit_Click"/>
         <Button x:Name="btnUserAdminMgmt"  Content="User and Admin Management" HorizontalAlignment="Left" Height="39" Margin="450,274,0,0" VerticalAlignment="Top" Width="281" Click="BtnUserAdminMgmt_Click"/>
         <Button x:Name="btnDisplayMgmt" Content="Display Management" HorizontalAlignment="Left" Height="39" Margin="60,274,0,0" VerticalAlignment="Top" Width="281" Click="BtnDisplayMgmt_Click"/>
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="358,361,0,0" VerticalAlignment="Top" Width="75" Click="BtnLogout_Click"/> 
     </Grid>
 </Window>
