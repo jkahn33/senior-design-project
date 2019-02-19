@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import senior.design.group10.application.Application;
 import senior.design.group10.objects.response.ResponseObject;
+import senior.design.group10.objects.response.ReturnAdmin;
 import senior.design.group10.objects.sent.EditAdmin;
 import senior.design.group10.objects.sent.NewAdmin;
 import senior.design.group10.objects.sent.SentUser;
@@ -23,31 +24,31 @@ import senior.design.group10.service.UserService;
 public class ActiveTest2 {
 	@Autowired
 	private AdminService adminService;
-	NewAdmin newAdmin;
-	EditAdmin editAdmin;
+	NewAdmin newAdminA, newAdminB;
+	ReturnAdmin returnAdmin;
 	ResponseObject response;
 	
 	@Before
 	public void before() {
-		newAdmin = new NewAdmin("test name", "12345", "password");
-		editAdmin = new EditAdmin("12345", "88888", "changed name", "newpass");
-		response = null;
+		newAdminA = new NewAdmin("test name A", "00001", "password");
+		newAdminB = new NewAdmin("test name B", "00002", "password");
+		returnAdmin = null;
 	}
 	@Test
 	public void test() {
-		response = adminService.createNewAdmin(newAdmin);
-		//This request should succeed.
-		//assertTrue(response.isSuccess());
+		adminService.createNewAdmin(newAdminA);
+		adminService.createNewAdmin(newAdminB);
 		
-		response = adminService.editAdmin(editAdmin);
-		//This request should succeed.
-		assertTrue(response.isSuccess());
-		System.out.println(response.getMessage());
+		returnAdmin = adminService.getAdminById(newAdminA.getBadgeID());
+		assertTrue(returnAdmin != null);
+		returnAdmin = adminService.getAdminById(newAdminB.getBadgeID());
+		assertTrue(returnAdmin != null);
 	}
 	@After
 	public void after() {
-		newAdmin = null;
-		editAdmin = null;
+		newAdminA = null;
+		newAdminB = null;
+		returnAdmin = null;
 		response = null;
 	}
 }
