@@ -1,9 +1,11 @@
 package senior.design.group10.service;
 
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Scanner;
@@ -55,70 +57,60 @@ public class MessageService {
         return new ResponseObject(true, adminOptional.get().getName());
     }
     public boolean renderImage(){
-//        StringBuilder contentBuilder = new StringBuilder();
-//        try {
-//            BufferedReader in = new BufferedReader(new FileReader("test.html"));
-//            String str;
-//            while ((str = in.readLine()) != null) {
-//                contentBuilder.append(str);
-//            }
-//            in.close();
-//        } catch (IOException e) {
-//            log.severe(e.toString());
-//            return false;
-//        }
-//        String html = contentBuilder.toString();
-//        try (OutputStream os = new FileOutputStream("out.pdf")) {
-//            PdfRendererBuilder builder = new PdfRendererBuilder();
-//
-////            InputStream is = new FileInputStream("test.html");
-//
-//            builder.withFile(new File("test.html"));
-//            builder.toStream(os);
-//            builder.run();
-//        }
-//        catch(Exception e){
-//            log.severe(e.toString());
-//            return false;
-//        }
-//        try {
-//            DefaultPageProcessor processor = new DefaultPageProcessor(zeroBasedPageNumber ->
-//                    new FileOutputStream("out.png"), BufferedImage.TYPE_3BYTE_BGR, "png");
-//
-//            Graphics2D g2d = processor.createLayoutGraphics();
-//
-//            Java2DRendererBuilder builder = new Java2DRendererBuilder();
-//            builder.withFile(new File("test.html"));
-//            builder.useLayoutGraphics(g2d);
-//            builder.toPageProcessor(processor);
-//            builder.runPaged();
-//
-//            g2d.dispose();
-//        }
-//        catch(Exception e){
-//            log.severe(e.toString());
-//            return false;
-//        }
-        int width = 250;
-        int height = 250;
+        String headerText = "USWRIC Important Information";
+        int width = 1920;
+        int height = 1080;
 
         // Constructs a BufferedImage of one of the predefined image types.
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
         // Create a graphics which can be used to draw into the buffered image
         Graphics2D g2d = bufferedImage.createGraphics();
+        //used to setup Java rendering algorithms
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-        // fill all the image with white
-        g2d.setColor(Color.white);
+        //render the gradient blue/yellow background
+        GradientPaint paint = new GradientPaint(0, 0, Color.BLUE, 0, height, Color.ORANGE);
+        g2d.setPaint(paint);
         g2d.fillRect(0, 0, width, height);
 
-        // create a circle with black
-        g2d.setColor(Color.black);
-        g2d.fillOval(0, 0, width, height);
+        //render the header text
+        Font font = new Font("Arial", Font.BOLD, 100);
+        g2d.setFont(font);
+        FontMetrics fm = g2d.getFontMetrics();
+        int x = ((width - fm.stringWidth(headerText)) / 2);
 
-        // create a string with yellow
-        g2d.setColor(Color.yellow);
-        g2d.drawString("Java Code Geeks", 50, 120);
+        g2d.setColor(Color.BLACK);
+        g2d.drawString(headerText, x, 150);
+
+        //rendering of administrative messages
+        x = 64;
+        int y = 300;
+        ArrayList<String> testArr = new ArrayList<>();
+        testArr.add("Printer number 3 is broken. Please refrain from using printer number 3.");
+        testArr.add("The USWRIC will be closed to all visitors on Friday, February 22nd.");
+
+        font = new Font("Arial", Font.BOLD, 48);
+        g2d.setFont(font);
+
+        g2d.setColor(Color.BLACK);
+
+        for(String s : testArr) {
+            if(s.length() > 65) {
+                String[] vals = s.split("(?<=\\G.{65})");
+                for (String val : vals) {
+                    g2d.drawString(val, x, y);
+                    y += 50;
+                }
+            }
+            else{
+                g2d.drawString(s, x, y);
+                y += 50;
+            }
+            g2d.setStroke(new BasicStroke(10));
+            g2d.draw(new Line2D.Float(210, y, 1710, y));
+            y+=100;
+        }
 
         // Disposes of this graphics context and releases any system resources that it is using.
         g2d.dispose();
@@ -127,10 +119,6 @@ public class MessageService {
             // Save as PNG
             File file = new File("myimage.png");
             ImageIO.write(bufferedImage, "png", file);
-
-            // Save as JPEG
-            file = new File("myimage.jpg");
-            ImageIO.write(bufferedImage, "jpg", file);
         }
         catch (Exception e){
             log.severe(e.toString());
