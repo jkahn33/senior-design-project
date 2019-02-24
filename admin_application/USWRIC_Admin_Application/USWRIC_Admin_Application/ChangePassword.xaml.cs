@@ -21,7 +21,7 @@ namespace USWRIC_Admin_Application
     /// <summary>
     /// Interaction logic for ChangePassword.xaml
     /// </summary>
-    public partial class ChangePassword : Window
+    public partial class ChangePassword : Page
     {
         public ChangePassword()
         {
@@ -83,9 +83,7 @@ namespace USWRIC_Admin_Application
 
         private void BtnEditCancel_Click(object sender, RoutedEventArgs e)
         {
-            Homepage homepage = new Homepage();
-            homepage.Show();
-            this.Close();
+            this.NavigationService.Navigate(new Homepage());
         }
 
         private async void SendPasswordChange()
@@ -107,9 +105,7 @@ namespace USWRIC_Admin_Application
                 if (responseObject.Success)
                 {
                     MessageBox.Show("Successfully changed password.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Homepage homepage = new Homepage();
-                    homepage.Show();
-                    this.Close();
+                    this.NavigationService.Navigate(new Homepage());
                 }
 
             }

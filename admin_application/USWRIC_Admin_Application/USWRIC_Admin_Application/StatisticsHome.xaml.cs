@@ -17,7 +17,7 @@ namespace USWRIC_Admin_Application
     /// <summary>
     /// Interaction logic for StatisticsHome.xaml
     /// </summary>
-    public partial class StatisticsHome : Window
+    public partial class StatisticsHome : Page
     {
         public StatisticsHome()
         {
@@ -41,9 +41,7 @@ namespace USWRIC_Admin_Application
 
         private void BtnStatisticsCancel_Click(object sender, RoutedEventArgs e)
         {
-            Homepage homepage = new Homepage();
-            homepage.Show();
-            this.Close();
+            this.NavigationService.Navigate(new Homepage());
         }
     }
 }

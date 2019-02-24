@@ -21,7 +21,7 @@ namespace USWRIC_Admin_Application
     /// <summary>
     /// Interaction logic for RemoveAdmin.xaml
     /// </summary>
-    public partial class RemoveAdmin : Window
+    public partial class RemoveAdmin : Page
     {
         public RemoveAdmin()
         {
@@ -68,9 +68,7 @@ namespace USWRIC_Admin_Application
 
         private void BtnRemoveAdminCancel_Click(object sender, RoutedEventArgs e)
         {
-            UserAdminMgmt userAdminMgmt = new UserAdminMgmt();
-            userAdminMgmt.Show();
-            this.Close();
+            this.NavigationService.Navigate(new UserAdminMgmt());
         }
 
         private async void SendDeletion()
@@ -92,8 +90,7 @@ namespace USWRIC_Admin_Application
                 if (responseObject.Success)
                 {
                     MessageBox.Show("Successfully removed administrator.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Homepage homepage = new Homepage();
-                    homepage.Show();
+                    this.NavigationService.Navigate(new Homepage());
                 }
                 else
                 {

@@ -14,20 +14,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
-using USWRIC_Admin_Application.objects;
 
 namespace USWRIC_Admin_Application
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Login : Page
     {
-        public MainWindow()
+        public Login()
         {
             InitializeComponent();
         }
-
         private async void BtnLoginSubmit_Click(object sender, RoutedEventArgs e)
         {
             HttpClient client = Globals.GetHttpClient();
@@ -44,10 +42,7 @@ namespace USWRIC_Admin_Application
             if (response.IsSuccessStatusCode)
             {
                 Globals.BadgeId = txtBadgeId.Text;
-
-                Homepage homepage = new Homepage();
-                homepage.Show();
-                this.Close();
+                this.NavigationService.Navigate(new Homepage());
             }
             else
             {

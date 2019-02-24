@@ -17,7 +17,7 @@ namespace USWRIC_Admin_Application
     /// <summary>
     /// Interaction logic for EquipmentUsage.xaml
     /// </summary>
-    public partial class EquipmentUsage : Window
+    public partial class EquipmentUsage : Page
     {
         public EquipmentUsage()
         {

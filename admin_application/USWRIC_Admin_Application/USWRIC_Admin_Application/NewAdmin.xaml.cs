@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -21,7 +22,7 @@ namespace USWRIC_Admin_Application
     /// <summary>
     /// Interaction logic for NewAdmin.xaml
     /// </summary>
-    public partial class NewAdmin : Window
+    public partial class NewAdmin : Page
     {
         public NewAdmin()
         {
@@ -71,9 +72,7 @@ namespace USWRIC_Admin_Application
 
         private void BtnNewCancel_Click(object sender, RoutedEventArgs e)
         {
-            UserAdminMgmt userAdminMgmt = new UserAdminMgmt();
-            userAdminMgmt.Show();
-            this.Close();
+            this.NavigationService.Navigate(new UserAdminMgmt());
         }
 
         private async void SendNewAdmin()
@@ -96,9 +95,7 @@ namespace USWRIC_Admin_Application
                 if (responseObject.Success)
                 {
                     MessageBox.Show("Successfully created new administrator.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Homepage homepage = new Homepage();
-                    homepage.Show();
-                    this.Close();
+                    this.NavigationService.Navigate(new Homepage());
                 }
                 else
                 {

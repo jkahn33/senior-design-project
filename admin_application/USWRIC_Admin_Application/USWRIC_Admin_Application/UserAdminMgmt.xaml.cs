@@ -17,7 +17,7 @@ namespace USWRIC_Admin_Application
     /// <summary>
     /// Interaction logic for UserAdminMgmt.xaml
     /// </summary>
-    public partial class UserAdminMgmt : Window
+    public partial class UserAdminMgmt : Page
     {
         public UserAdminMgmt()
         {
@@ -26,29 +26,21 @@ namespace USWRIC_Admin_Application
 
         private void BtnNewAdmin_Click(object sender, RoutedEventArgs e)
         {
-            NewAdmin newAdmin = new NewAdmin();
-            newAdmin.Show();
-            this.Close();
+            this.NavigationService.Navigate(new NewAdmin());
         }
 
         private void BtnRemoveUser_Click(object sender, RoutedEventArgs e)
         {
-            RemoveUser removeUser = new RemoveUser();
-            removeUser.Show();
-            this.Close();
+            this.NavigationService.Navigate(new RemoveUser());
         }
 
         private void BtnRemoveAdmin_Click(object sender, RoutedEventArgs e)
         {
-            RemoveAdmin removeAdmin = new RemoveAdmin();
-            removeAdmin.Show();
-            this.Close();
+            this.NavigationService.Navigate(new RemoveAdmin());
         }
         private void BtnUserAdminMgmtCancel_Click(object sender, RoutedEventArgs e)
         {
-            Homepage homepage = new Homepage();
-            homepage.Show();
-            this.Close();
+            this.NavigationService.Navigate(new Homepage());
         }
     }
 }

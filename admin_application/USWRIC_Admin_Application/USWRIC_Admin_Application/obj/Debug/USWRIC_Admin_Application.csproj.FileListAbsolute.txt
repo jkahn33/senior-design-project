@@ -1,12 +1,10 @@
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\USWRIC_Admin_Application.csprojAssemblyReference.cache
-C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\MainWindow.g.cs
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\App.g.cs
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\USWRIC_Admin_Application_MarkupCompile.cache
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\USWRIC_Admin_Application_MarkupCompile.lref
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\USWRIC_Admin_Application.exe.config
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\USWRIC_Admin_Application.exe
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\USWRIC_Admin_Application.pdb
-C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\MainWindow.baml
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\USWRIC_Admin_Application.g.resources
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\USWRIC_Admin_Application.Properties.Resources.resources
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\USWRIC_Admin_Application.csproj.GenerateResource.cache
@@ -34,10 +32,10 @@ C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Appl
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\RemoveAdmin.g.cs
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\RemoveAdmin.baml
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\EquipmentUsage.g.cs
-C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\TestPage.g.cs
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\EquipmentUsage.baml
-C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\TestPage.baml
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\HtmlRenderer.dll
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\HtmlRenderer.WPF.dll
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\HtmlRenderer.pdb
 C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\bin\Debug\HtmlRenderer.WPF.pdb
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\Login.g.cs
+C:\Users\jgkah\Desktop\senior-design-project\admin_application\USWRIC_Admin_Application\USWRIC_Admin_Application\obj\Debug\Login.baml

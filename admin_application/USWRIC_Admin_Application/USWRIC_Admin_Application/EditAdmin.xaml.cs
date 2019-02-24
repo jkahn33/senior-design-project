@@ -21,7 +21,7 @@ namespace USWRIC_Admin_Application
     /// <summary>
     /// Interaction logic for EditAdmin.xaml
     /// </summary>
-    public partial class EditAdmin : Window
+    public partial class EditAdmin : Page
     {
         public EditAdmin()
         {
@@ -89,9 +89,7 @@ namespace USWRIC_Admin_Application
                         {
                             MessageBox.Show("Successfully changed information.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                            Homepage homepage = new Homepage();
-                            homepage.Show();
-                            this.Close();
+                            this.NavigationService.Navigate(new Homepage());
                         }
                     }
                 }
@@ -100,16 +98,12 @@ namespace USWRIC_Admin_Application
 
         private void BtnEditCancel_Click(object sender, RoutedEventArgs e)
         {
-            Homepage homepage = new Homepage();
-            homepage.Show();
-            this.Close();
+            this.NavigationService.Navigate(new Homepage());
         }
 
         private void BtnChangePassword_Click(object sender, RoutedEventArgs e)
         {
-            ChangePassword changePassword = new ChangePassword();
-            changePassword.Show();
-            this.Close();
+            this.NavigationService.Navigate(new ChangePassword());
         }
     }
 }

@@ -18,7 +18,7 @@ namespace USWRIC_Admin_Application
     /// <summary>
     /// Interaction logic for Homepage.xaml
     /// </summary>
-    public partial class Homepage : Window
+    public partial class Homepage : Page
     {
         public Homepage()
         {
@@ -32,16 +32,12 @@ namespace USWRIC_Admin_Application
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            EditAdmin editAdmin = new EditAdmin();
-            editAdmin.Show();
-            this.Close();
+            this.NavigationService.Navigate(new EditAdmin());
         }
 
         private void BtnUserAdminMgmt_Click(object sender, RoutedEventArgs e)
         {
-            UserAdminMgmt userAdminMgmt = new UserAdminMgmt();
-            userAdminMgmt.Show();
-            this.Close();
+            this.NavigationService.Navigate(new UserAdminMgmt());
         }
 
         private void BtnDisplayMgmt_Click(object sender, RoutedEventArgs e)
@@ -57,9 +53,7 @@ namespace USWRIC_Admin_Application
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
+            this.NavigationService.Navigate(new Login());
         }
     }
 }

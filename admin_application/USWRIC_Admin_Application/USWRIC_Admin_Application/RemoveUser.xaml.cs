@@ -21,7 +21,7 @@ namespace USWRIC_Admin_Application
     /// <summary>
     /// Interaction logic for RemoveUser.xaml
     /// </summary>
-    public partial class RemoveUser : Window
+    public partial class RemoveUser : Page
     {
         public RemoveUser()
         {
@@ -68,9 +68,7 @@ namespace USWRIC_Admin_Application
 
         private void BtnRemoveUserCancel_Click(object sender, RoutedEventArgs e)
         {
-            UserAdminMgmt userAdminMgmt = new UserAdminMgmt();
-            userAdminMgmt.Show();
-            this.Close();
+            this.NavigationService.Navigate(new UserAdminMgmt());
         }
 
         private async void SendDeletion()
@@ -92,9 +90,7 @@ namespace USWRIC_Admin_Application
                 if (responseObject.Success)
                 {
                     MessageBox.Show("Successfully deleted user.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Homepage homepage = new Homepage();
-                    homepage.Show();
-                    this.Close();
+                    this.NavigationService.Navigate(new Homepage());
                 }
                 else
                 {

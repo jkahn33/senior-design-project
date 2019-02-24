@@ -77,6 +77,9 @@
       <DependentUpon>EquipmentUsage.xaml</DependentUpon>
     </Compile>
     <Compile Include="EquipmentUsageResponse.cs" />
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NewAdmin.xaml.cs">
       <DependentUpon>NewAdmin.xaml</DependentUpon>
     </Compile>
@@ -89,9 +92,6 @@
     <Compile Include="ReturnAdmin.cs" />
     <Compile Include="StatisticsHome.xaml.cs">
       <DependentUpon>StatisticsHome.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TestPage.xaml.cs">
-      <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="UserAdminMgmt.xaml.cs">
@@ -113,10 +113,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="AdminCredentials.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -126,10 +122,10 @@
     <Compile Include="Homepage.xaml.cs">
       <DependentUpon>Homepage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NewAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,10 +139,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StatisticsHome.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
