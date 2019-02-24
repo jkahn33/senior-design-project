@@ -46,11 +46,21 @@ public class WindowsController {
         return adminService.editAdmin(editAdmin);
     }
     
+    
+    //use piservice function execcomtopi with string containing the command
+    //
     @GetMapping("/execComToPi")
     @ResponseBody
     public ResponseObject sshPi()
     {
     		PiService piservice = new PiService();
     		return new ResponseObject(true, null);
+    }
+    
+    @GetMapping("/setAutoUpdate")
+    @ResponseBody
+    public ResponseObject setAutoUpdate()
+    {
+    	
     }
 }
