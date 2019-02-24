@@ -87,7 +87,7 @@ public class MessageService {
         x = 64;
         int y = 300;
         ArrayList<String> testArr = new ArrayList<>();
-        testArr.add("Printer number 3 is broken. Please refrain from using printer number 3.");
+        testArr.add("Printer number 3 is broken. Please refrain from using printer number 3. Test1 test2 test3 test4. Test5 test6 test7 test8.");
         testArr.add("The USWRIC will be closed to all visitors on Friday, February 22nd.");
 
         font = new Font("Arial", Font.BOLD, 48);
@@ -96,17 +96,16 @@ public class MessageService {
         g2d.setColor(Color.BLACK);
 
         for(String s : testArr) {
-            if(s.length() > 65) {
-                String[] vals = s.split("(?<=\\G.{65})");
-                for (String val : vals) {
-                    g2d.drawString(val, x, y);
-                    y += 50;
-                }
-            }
-            else{
-                g2d.drawString(s, x, y);
+            String[] splits = s.split(" ");
+            for(int i = 0; i < splits.length; i++){
+                String stringToPrint = getStringToPrint(splits, i);
+                String[] printString = stringToPrint.split("@#&");
+                g2d.drawString(printString[0], x, y);
                 y += 50;
+
+                i = Integer.parseInt(printString[1]);
             }
+
             g2d.setStroke(new BasicStroke(10));
             g2d.draw(new Line2D.Float(210, y, 1710, y));
             y+=100;
@@ -117,7 +116,7 @@ public class MessageService {
 
         try {
             // Save as PNG
-            File file = new File("myimage.png");
+            File file = new File("admin_messages.png");
             ImageIO.write(bufferedImage, "png", file);
         }
         catch (Exception e){
@@ -125,6 +124,18 @@ public class MessageService {
             return false;
         }
         return true;
-        // align='center' style='font-size:50;color:#ffffff'
+    }
+    private String getStringToPrint(String[] splits, int index){
+        StringBuilder newString = new StringBuilder();
+        while(index < splits.length && newString.length() + splits[index].length() < 75){
+            newString.append(" ");
+            newString.append(splits[index]);
+            index++;
+        }
+        index--;
+        newString.append("@#&");
+        newString.append(index);
+        log.info(newString.toString());
+        return newString.toString();
     }
 }
