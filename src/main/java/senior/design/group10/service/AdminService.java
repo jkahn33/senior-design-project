@@ -94,6 +94,7 @@ public class AdminService {
         }
         Admin adminToEdit = adminOptional.get();
         ActiveAdmin activeAdminToEdit = activeAdminOptional.get();
+        adminDAO.delete(adminToEdit);
         if(editAdmin.getBadgeID() != null){
             adminToEdit.setBadgeID(editAdmin.getBadgeID());
             activeAdminToEdit.setBadgeID(editAdmin.getBadgeID());

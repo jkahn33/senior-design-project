@@ -29,8 +29,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.List;
 
+import nuwc.userloginsystem.objects.ActiveUser;
 import nuwc.userloginsystem.objects.ResponseObject;
-import nuwc.userloginsystem.objects.Users;
 import nuwc.userloginsystem.util.RecycleViewAdapter;
 import nuwc.userloginsystem.util.RequestUtil;
 
@@ -55,7 +55,7 @@ public class savedUsers extends AppCompatActivity{
 
     TextView welcomeUser;
 
-    private List<Users> userList = null;
+    private List<ActiveUser> userList = null;
 
 
 
@@ -83,12 +83,13 @@ public class savedUsers extends AppCompatActivity{
     @TargetApi(24)
     public void addUser() {
         if(userList != null) {
-            //userList.sort(Comparator.comparing(Users::getName));
+            //userList.sort(Comparator.comparing(ActiveUser::getName));
 
             for (int i = 0; i < userList.size(); i++) {
+                Log.d("test", "TEST STRING: REACHED LINE 89, i = " + i);
                 final Button userButton = new Button(this);
 
-                userButton.setId(Integer.parseInt(userList.get(i).getFiveDigExt()));
+                userButton.setId(Integer.parseInt(userList.get(i).getBadgeID()));
                 userButton.setText(userList.get(i).getName());
                 userButton.setTag(i);
                 userButton.setTextSize(30);
@@ -108,13 +109,13 @@ public class savedUsers extends AppCompatActivity{
                     }
                 });
             }
-            for(Users u : userList){
+            for(ActiveUser u : userList){
                 mNames.add(u.getName());
             }
 
         }
         else{
-            Log.d("ERROR", "Users list is null");
+            Log.d("ERROR", "ActiveUser list is null");
         }
     }
     public void verifyResponse(ResponseObject response){
@@ -140,7 +141,8 @@ public class savedUsers extends AppCompatActivity{
                 response -> {
                     try {
                         ObjectMapper mapper = new ObjectMapper();
-                        userList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
+                        userList = mapper.readValue(response.toString(), new TypeReference<List<ActiveUser>>(){});
+                        Log.d("test", userList.toString());
                         addUser();
                     }
                     catch(Exception e){
@@ -163,7 +165,7 @@ public class savedUsers extends AppCompatActivity{
 
         JSONObject body = new JSONObject();
 
-        body.put("ext", id);
+        body.put("badgeID", id);
 
         ext = id;
 

@@ -24,7 +24,7 @@ public class PrinterReservations
 	private int id;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_ext")
+	@JoinColumn(name="user")
 	private Users user;
 	@ManyToOne
 	private Reservables reservable;

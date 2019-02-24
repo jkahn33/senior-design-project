@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,10 +31,13 @@ import org.json.JSONObject;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import nuwc.userloginsystem.objects.ResponseObject;
+import nuwc.userloginsystem.objects.ReservableIdWrapper;
 import nuwc.userloginsystem.util.RequestUtil;
 
 public class BreakoutReservation extends AppCompatActivity {
@@ -45,7 +47,7 @@ public class BreakoutReservation extends AppCompatActivity {
     boolean startEnd = false;
 
     private EditText printName;
-    private EditText employeeExt;
+    private EditText employeeID;
     private EditText startsDate;
     private EditText endsDate;
     private NumberPicker endsTimeHour;
@@ -90,7 +92,8 @@ public class BreakoutReservation extends AppCompatActivity {
 
 
     String pName;
-    int ext;
+    List<ReservableIdWrapper> reservableIdList = new ArrayList<ReservableIdWrapper>();
+    int badgeID;
     int sTimeHour, sTimeMin;
     int eTimeHour, eTimeMin;
     String details;
@@ -107,7 +110,7 @@ public class BreakoutReservation extends AppCompatActivity {
 
         //All fields in reservation page
         printName = (EditText) findViewById(R.id.printName);
-        employeeExt = (EditText) findViewById(R.id.ext);
+        employeeID = (EditText) findViewById(R.id.badgeID);
 
         startsDate = (EditText) findViewById(R.id.startsDate);
         endsDate = (EditText) findViewById(R.id.endsDate);
@@ -224,12 +227,12 @@ public class BreakoutReservation extends AppCompatActivity {
                     ready = false;
                 }
 
-                if(isInteger(employeeExt.getText().toString())){
-                    ext = Integer.parseInt(employeeExt.getText().toString());
+                if(isInteger(employeeID.getText().toString())){
+                    badgeID = Integer.parseInt(employeeID.getText().toString());
                 }else{
-                    employeeExt.getText().clear();
-                    employeeExt.setHintTextColor(getResources().getColor(R.color.red));
-                    employeeExt.setHint("Enter employee extension!");
+                    employeeID.getText().clear();
+                    employeeID.setHintTextColor(getResources().getColor(R.color.red));
+                    employeeID.setHint("Enter employee badge ID!");
                     ready = false;
                 }
                 if(isInteger(guestNumber.getText().toString())){
@@ -278,53 +281,33 @@ public class BreakoutReservation extends AppCompatActivity {
 
                 if(ready) {
                     if (roomA.isChecked() && overallSuccess) {
+                        reservableIdList.add(new ReservableIdWrapper("A"));
                         checkCount++;
-                        try {
-                            logBreakoutRes("A");
-                        } catch (JSONException e) {
-                            showError("JSON mapping error.");
-                            Log.e("EXCEPTION", e.toString());
-
-                            overallSuccess = false;
-                        }
                     }
                     if (roomB.isChecked() && overallSuccess) {
+                        reservableIdList.add(new ReservableIdWrapper("B"));
                         checkCount++;
-                        try {
-                            logBreakoutRes("B");
-                        } catch (JSONException e) {
-                            showError("JSON mapping error.");
-                            Log.e("EXCEPTION", e.toString());
-
-                            overallSuccess = false;
-                        }
                     }
                     if (roomC.isChecked() && overallSuccess) {
+                        reservableIdList.add(new ReservableIdWrapper("C"));
                         checkCount++;
-                        try {
-                            logBreakoutRes("C");
-                        } catch (JSONException e) {
-                            showError("JSON mapping error.");
-                            Log.e("EXCEPTION", e.toString());
-
-                            overallSuccess = false;
-                        }
                     }
                     if (roomD.isChecked() && overallSuccess) {
+                        reservableIdList.add(new ReservableIdWrapper("D"));
                         checkCount++;
-                        try {
-                            logBreakoutRes("D");
-                        } catch (JSONException e) {
-                            showError("JSON mapping error.");
-                            Log.e("EXCEPTION", e.toString());
+                    }
+                    try {
+                        logBreakoutRes(reservableIdList);
+                    } catch (JSONException e) {
+                        showError("JSON mapping error.");
+                        Log.e("EXCEPTION", e.toString());
 
-                            overallSuccess = false;
-                        }
+                        overallSuccess = false;
                     }
                     calendarView.setVisibility(View.INVISIBLE);
                     times.setVisibility(View.INVISIBLE);
                     printName.setVisibility(View.INVISIBLE);
-                    employeeExt.setVisibility(View.INVISIBLE);
+                    employeeID.setVisibility(View.INVISIBLE);
                     startsDate.setVisibility(View.INVISIBLE);
                     endsDate.setVisibility(View.INVISIBLE);
                     endsTimeHour.setVisibility(View.INVISIBLE);
@@ -412,7 +395,7 @@ public class BreakoutReservation extends AppCompatActivity {
 
     }
 
-    public void logBreakoutRes(String reservableId) throws JSONException {
+    public void logBreakoutRes(List<ReservableIdWrapper> reservableIdList) throws JSONException {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
 
@@ -436,10 +419,10 @@ public class BreakoutReservation extends AppCompatActivity {
 
         JSONObject body = new JSONObject();
 
-        body.put("userExt", employeeExt.getText().toString());
+        body.put("badgeID", employeeID.getText().toString());
         //currently is either "Printer" or "Breakout", should eventually be enum
         body.put("reservableType", "Breakout");
-        body.put("reservableId", reservableId);
+        body.put("reservableIdList", reservableIdList.toString());
         body.put("resDescription", printName.getText().toString());
         body.put("resStart", startTime.toString());
         body.put("resEnd", endTime.toString());
@@ -482,7 +465,7 @@ public class BreakoutReservation extends AppCompatActivity {
             calendarView.setVisibility(View.VISIBLE);
             times.setVisibility(View.VISIBLE);
             printName.setVisibility(View.VISIBLE);
-            employeeExt.setVisibility(View.VISIBLE);
+            employeeID.setVisibility(View.VISIBLE);
             startsDate.setVisibility(View.VISIBLE);
             endsDate.setVisibility(View.VISIBLE);
             endsTimeHour.setVisibility(View.VISIBLE);

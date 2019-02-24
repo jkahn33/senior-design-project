@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -34,13 +33,13 @@ public class newUser extends AppCompatActivity{
     String firstName;
     String lastName;
     String depCode;
-    String ext;
+    String badgeID;
 
     Button submit;
 
     EditText nameText;
     EditText lastNameText;
-    EditText badgeText;
+    EditText depText;
     EditText idText;
 
     TextView welcomeUser;
@@ -60,7 +59,7 @@ public class newUser extends AppCompatActivity{
 
         nameText = (EditText) findViewById(R.id.nameText);
         lastNameText = (EditText) findViewById(R.id.lastNameText);
-        badgeText = (EditText) findViewById(R.id.badgeText);
+        depText = (EditText) findViewById(R.id.badgeText);
         idText = (EditText) findViewById(R.id.idText);
 
         welcomeUser = (TextView) findViewById(R.id.welcomeUser);
@@ -70,21 +69,21 @@ public class newUser extends AppCompatActivity{
                 //save first and last name
                 firstName = nameText.getText().toString();
                 lastName = lastNameText.getText().toString();
-                //save department code and employee extension
-                depCode = badgeText.getText().toString();
-                ext = idText.getText().toString();
+                //save department code and employee badgeID
+                depCode = depText.getText().toString();
+                badgeID = idText.getText().toString();
 
                 if(firstName.equals("")){
                     showError("First name cannot be empty.");
                 }
                 else if(lastName.equals("")){
-                    showError("Last name cannot empty");
+                    showError("Last name cannot empty.");
                 }
-                else if(ext.length() != 5){
+                else if(badgeID.length() != 5){
                     showError("Extension must be 5 digits.");
                 }
                 else if(depCode.length() != 2 && depCode.length() != 4){
-                    showError("Deparment code must be either 2 or 4 digits.");
+                    showError("Department code must be either 2 or 4 digits.");
                 }
                 else {
                     try {
@@ -103,7 +102,7 @@ public class newUser extends AppCompatActivity{
                 //make editTexts disappear
                 nameText.setVisibility(View.INVISIBLE);
                 lastNameText.setVisibility(View.INVISIBLE);
-                badgeText.setVisibility(View.INVISIBLE);
+                depText.setVisibility(View.INVISIBLE);
                 idText.setVisibility(View.INVISIBLE);
                 submit.setVisibility(View.INVISIBLE);
                 //confirm user creation
@@ -121,7 +120,7 @@ public class newUser extends AppCompatActivity{
             JSONObject body = new JSONObject();
 
             body.put("name", firstName + " " + lastName);
-            body.put("ext", ext);
+            body.put("badgeID", badgeID);
             body.put("dep", depCode);
 
             JsonObjectRequest request = new JsonObjectRequest(

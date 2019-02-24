@@ -99,7 +99,7 @@ public class BreakoutService
 			}
 			else
 			{
-				Reservables reservable = new Reservables(new ReservableKey(breakout.getReservableType(),breakout.getReservableIdList().get(x)));
+				Reservables reservable = new Reservables(new ReservableKey(breakout.getReservableType(),breakout.getReservableIdList().get(x).getId()));
 				
 				BreakoutReservations newReservation = new BreakoutReservations(user,reservable,breakout.getResDescription(), Timestamp.valueOf(breakout.getResStart()), Timestamp.valueOf(breakout.getResEnd()),breakout.getNumPeople(),breakout.getAdditionalCom());
 				breakoutDAO.save(newReservation);
@@ -121,9 +121,9 @@ public class BreakoutService
 		{
 			//check what lists start with
 			//Check to assure that the printer timeslots are available
-			Optional <Reservables> reservableOptional = reservablesDAO.findById(new ReservableKey(breakout.getReservableType(),breakout.getReservableIdList().get(resListNum)));
-			List<BreakoutReservations> checking = breakoutDAO.checkTimeAvailable(Timestamp.valueOf(breakout.getResStart()),Timestamp.valueOf(breakout.getResEnd()),breakout.getReservableIdList().get(resListNum));
-			Optional <BreakoutReservations> precedingRes = breakoutDAO.checkNestedReservation(Timestamp.valueOf(breakout.getResStart()),breakout.getReservableIdList().get(resListNum));
+			Optional <Reservables> reservableOptional = reservablesDAO.findById(new ReservableKey(breakout.getReservableType(),breakout.getReservableIdList().get(resListNum).getId()));
+			List<BreakoutReservations> checking = breakoutDAO.checkTimeAvailable(Timestamp.valueOf(breakout.getResStart()),Timestamp.valueOf(breakout.getResEnd()),breakout.getReservableIdList().get(resListNum).getId());
+			Optional <BreakoutReservations> precedingRes = breakoutDAO.checkNestedReservation(Timestamp.valueOf(breakout.getResStart()),breakout.getReservableIdList().get(resListNum).getId());
 
 
 			if(!reservableOptional.isPresent())

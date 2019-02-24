@@ -29,18 +29,18 @@ import nuwc.userloginsystem.util.RequestUtil;
 public class adminCheckout extends AppCompatActivity {
 
     String password;
-    String extension;
+    String badgeID;
 
     TextView directions;
     EditText passwordBox;
-    EditText extensionBox;
+    EditText badgeIDBox;
     Button submitBut;
     Button cancel;
 
     public void checkoutScreen(){
 
         Intent sub = new Intent(adminCheckout.this, equipmentCheckout.class);
-        sub.putExtra("adminExt", extension);
+        sub.putExtra("adminID", badgeID);
         adminCheckout.this.startActivity(sub);
     }
 
@@ -52,15 +52,15 @@ public class adminCheckout extends AppCompatActivity {
 
         submitBut = (Button) findViewById(R.id.submitBut);
         passwordBox = (EditText) findViewById(R.id.passwordBox);
-        extensionBox = (EditText) findViewById(R.id.barcodeBox);
+        badgeIDBox = (EditText) findViewById(R.id.barcodeBox);
         directions = (TextView) findViewById(R.id.commandBox);
         cancel = (Button) findViewById(R.id.btnAdminLoginCancel);
 
         submitBut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                //get the password and extension from admin
+                //get the password and badgeID from admin
                 password = passwordBox.getText().toString();
-                extension = extensionBox.getText().toString();
+                badgeID = badgeIDBox.getText().toString();
 
                 try {
                     verifyAdmin();
@@ -84,7 +84,7 @@ public class adminCheckout extends AppCompatActivity {
 
         JSONObject body = new JSONObject();
 
-        body.put("ext", extension);
+        body.put("badgeID", badgeID);
         body.put("password", password);
 
         JsonObjectRequest request = new JsonObjectRequest(

@@ -21,14 +21,14 @@ public class EquipmentCheckoutHistory
     @JoinColumn(name="barcode")
     private Equipment equipment;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_ext")
+    @JoinColumn(name="user")
     private Users user;
     @Column
     private Timestamp checkoutDate;
     @Column
     private Timestamp checkinDate;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="admin_ext")
+    @JoinColumn(name="admin")
     private Admin admin;
 
     public EquipmentCheckoutHistory(){

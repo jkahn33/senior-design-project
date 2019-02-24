@@ -49,7 +49,7 @@ public class Reservations extends AppCompatActivity  {
     private LinearLayout times;
 
     private EditText printName;
-    private EditText employeeExt;
+    private EditText badgeID;
     private EditText startsDate;
     private EditText endsDate;
     private NumberPicker endsTimeHour;
@@ -120,7 +120,7 @@ public class Reservations extends AppCompatActivity  {
         success.setVisibility(View.INVISIBLE);
 
         printName = (EditText) findViewById(R.id.printName);
-        employeeExt = (EditText) findViewById(R.id.ext);
+        badgeID = (EditText) findViewById(R.id.badgeID);
 
         startsDate = (EditText) findViewById(R.id.startsDate);
         endsDate = (EditText) findViewById(R.id.endsDate);
@@ -252,12 +252,12 @@ public class Reservations extends AppCompatActivity  {
                 }
 
 
-                if(isInteger(employeeExt.getText().toString())){
-                    ext = Integer.parseInt(employeeExt.getText().toString());
+                if(isInteger(badgeID.getText().toString())){
+                    ext = Integer.parseInt(badgeID.getText().toString());
                 }else{
-                    employeeExt.getText().clear();
-                    employeeExt.setHintTextColor(getResources().getColor(R.color.red));
-                    employeeExt.setHint("Enter employee extension");
+                    badgeID.getText().clear();
+                    badgeID.setHintTextColor(getResources().getColor(R.color.red));
+                    badgeID.setHint("Enter employee badgeID");
                     ready = false;
                 }
 
@@ -418,7 +418,7 @@ public class Reservations extends AppCompatActivity  {
 
         JSONObject body = new JSONObject();
 
-        body.put("userExt", employeeExt.getText().toString());
+        body.put("badgeID", badgeID.getText().toString());
         //currently is either "Printer" or "Breakout", should eventually be enum
         body.put("reservableType", "Printer");
         body.put("reservableId", reservableId);
@@ -463,7 +463,7 @@ public class Reservations extends AppCompatActivity  {
             calendarView.setVisibility(View.INVISIBLE);
             times.setVisibility(View.INVISIBLE);
             printName.setVisibility(View.INVISIBLE);
-            employeeExt.setVisibility(View.INVISIBLE);
+            badgeID.setVisibility(View.INVISIBLE);
             startsDate.setVisibility(View.INVISIBLE);
             endsDate.setVisibility(View.INVISIBLE);
             endsTimeHour.setVisibility(View.INVISIBLE);

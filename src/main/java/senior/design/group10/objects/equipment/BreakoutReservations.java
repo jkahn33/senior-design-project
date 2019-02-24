@@ -30,7 +30,7 @@ public class BreakoutReservations
 	private int id;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_ext")
+	@JoinColumn(name="user")
 	private Users user;
 	//@MapsId("reserable")
 	@ManyToOne

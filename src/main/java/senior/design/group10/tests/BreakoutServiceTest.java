@@ -66,15 +66,15 @@ public class BreakoutServiceTest {
 		reservablesService.saveNewReservable(reservable);
 		
 		rList = Arrays.asList("A", "B");
-		reservationExisting = new SentBreakoutReservation("12345", "Breakout", rList, "test", 
-								"2007-6-11 10:10:10.0", "2007-6-11 11:10:10.0","25", "test");
+		//reservationExisting = new SentBreakoutReservation("12345", "Breakout", rList, "test", 
+		//						"2007-6-11 10:10:10.0", "2007-6-11 11:10:10.0","25", "test");
 		service.addBreakRes(reservationExisting);
 	}
 	@Test
 	public void test() {
 		rList = Arrays.asList("C");
-		reservationNew = new SentBreakoutReservation("12345", "Breakout", rList, "test", 
-						"2007-6-11 10:10:10.0", "2007-6-11 11:10:10.0", "25", "test");
+		//reservationNew = new SentBreakoutReservation("12345", "Breakout", rList, "test", 
+		////				"2007-6-11 10:10:10.0", "2007-6-11 11:10:10.0", "25", "test");
 		response = service.addBreakRes(reservationNew);
 		System.out.println(response.getMessage());
 		//This request should succeed.

@@ -29,11 +29,11 @@ import nuwc.userloginsystem.util.RequestUtil;
 public class checkoutBarcode extends AppCompatActivity {
 
     String barcode;
-    String adminExt;
-    String extension;
+    String adminID;
+    String userID;
 
     EditText barcodeBox;
-    EditText extensionBox;
+    EditText badgeIDBox;
     TextView commandBox;
 
     Button submitButton;
@@ -43,12 +43,12 @@ public class checkoutBarcode extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adminExt = getIntent().getStringExtra("adminExt");
+        adminID = getIntent().getStringExtra("adminID");
         setContentView(R.layout.activity_checkout_barcode_screen);
 
         submitButton = (Button) findViewById(R.id.submitButton2);
         barcodeBox = (EditText) findViewById(R.id.barcodeBox);
-        extensionBox = (EditText) findViewById(R.id.extensionBox);
+        badgeIDBox = (EditText) findViewById(R.id.extensionBox);
         commandBox = (TextView) findViewById(R.id.commandBox);
         cancelButton = (Button) findViewById(R.id.cancelButton);
         homeButton = (Button) findViewById(R.id.homeButton);
@@ -60,12 +60,12 @@ public class checkoutBarcode extends AppCompatActivity {
             public void onClick(View view) {
                 //get the barcode from user
                 barcode = barcodeBox.getText().toString();
-                extension = extensionBox.getText().toString();
+                userID = badgeIDBox.getText().toString();
 
                 if(barcode.equals("")){
                     showError("Barcode must not be empty.");
                 }
-                else if(extension.length() != 5){
+                else if(userID.length() != 5){
                     showError("Extension must be 5 digits");
                 }
                 else {
@@ -99,8 +99,8 @@ public class checkoutBarcode extends AppCompatActivity {
         JSONObject body = new JSONObject();
 
         body.put("barcode", barcode);
-        body.put("userExt", extension);
-        body.put("adminExt", adminExt);
+        body.put("userID", userID);
+        body.put("adminID", adminID);
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
@@ -135,7 +135,7 @@ public class checkoutBarcode extends AppCompatActivity {
         if(response.isSuccess()){
             //make editTexts disappear
             barcodeBox.setVisibility(View.INVISIBLE);
-            extensionBox.setVisibility(View.INVISIBLE);
+            badgeIDBox.setVisibility(View.INVISIBLE);
             submitButton.setVisibility(View.INVISIBLE);
             cancelButton.setVisibility(View.INVISIBLE);
 

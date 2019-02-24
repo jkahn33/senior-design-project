@@ -22,7 +22,7 @@ public class equipmentCheckout extends AppCompatActivity {
                 Intent prev = getIntent();
 
                 Intent next = new Intent(equipmentCheckout.this, checkoutBarcode.class);
-                next.putExtra("adminExt", prev.getStringExtra("adminExt"));
+                next.putExtra("adminID", prev.getStringExtra("adminID"));
                 equipmentCheckout.this.startActivity(next);
             }
         });
