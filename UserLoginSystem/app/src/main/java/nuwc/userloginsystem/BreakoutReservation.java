@@ -92,7 +92,7 @@ public class BreakoutReservation extends AppCompatActivity {
 
 
     String pName;
-    List<ReservableIdWrapper> reservableIdList = new ArrayList<ReservableIdWrapper>();
+    List<String> reservableIdList = new ArrayList<String>();
     int badgeID;
     int sTimeHour, sTimeMin;
     int eTimeHour, eTimeMin;
@@ -281,19 +281,19 @@ public class BreakoutReservation extends AppCompatActivity {
 
                 if(ready) {
                     if (roomA.isChecked() && overallSuccess) {
-                        reservableIdList.add(new ReservableIdWrapper("A"));
+                        reservableIdList.add("A");
                         checkCount++;
                     }
                     if (roomB.isChecked() && overallSuccess) {
-                        reservableIdList.add(new ReservableIdWrapper("B"));
+                        reservableIdList.add("B");
                         checkCount++;
                     }
                     if (roomC.isChecked() && overallSuccess) {
-                        reservableIdList.add(new ReservableIdWrapper("C"));
+                        reservableIdList.add("C");
                         checkCount++;
                     }
                     if (roomD.isChecked() && overallSuccess) {
-                        reservableIdList.add(new ReservableIdWrapper("D"));
+                        reservableIdList.add("D");
                         checkCount++;
                     }
                     try {
@@ -395,7 +395,7 @@ public class BreakoutReservation extends AppCompatActivity {
 
     }
 
-    public void logBreakoutRes(List<ReservableIdWrapper> reservableIdList) throws JSONException {
+    public void logBreakoutRes(List<String> reservableIdList) throws JSONException {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
 
@@ -422,7 +422,7 @@ public class BreakoutReservation extends AppCompatActivity {
         body.put("badgeID", employeeID.getText().toString());
         //currently is either "Printer" or "Breakout", should eventually be enum
         body.put("reservableType", "Breakout");
-        body.put("reservableIdList", reservableIdList.toString());
+        body.put("reservableIdList", reservableIdList);
         body.put("resDescription", printName.getText().toString());
         body.put("resStart", startTime.toString());
         body.put("resEnd", endTime.toString());

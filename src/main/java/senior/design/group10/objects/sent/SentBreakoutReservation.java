@@ -7,7 +7,7 @@ public class SentBreakoutReservation
 {
 	private String badgeID;
 	private String reservableType;
-	private List<ReservableIdWrapper> reservableIdList;
+	private ReservableIdWrapper reservableIdList;
 	private String resDescription;
 	private String resStart;
 	private String resEnd;
@@ -16,7 +16,7 @@ public class SentBreakoutReservation
 
 	public SentBreakoutReservation(){}
 	
-	public SentBreakoutReservation(String badgeID, String reservableType, List<ReservableIdWrapper> reservableIdList, String resDescription, String resStart, String resEnd,String numPeople, String additionalCom)
+	public SentBreakoutReservation(String badgeID, String reservableType, ReservableIdWrapper reservableIdList, String resDescription, String resStart, String resEnd,String numPeople, String additionalCom)
 	{
 		this.badgeID = badgeID;
 		this.reservableType = reservableType;
@@ -36,8 +36,8 @@ public class SentBreakoutReservation
 		return reservableType;
 	}
 	
-	public List<ReservableIdWrapper> getReservableIdList() {
-		return reservableIdList;
+	public List<String> getReservableIdList() {
+		return reservableIdList.getIds();
 	}
 
 	public String getResDescription() {

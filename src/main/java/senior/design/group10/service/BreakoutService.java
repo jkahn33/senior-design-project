@@ -28,7 +28,7 @@ public class BreakoutService
 	private final UsersDAO usersDAO;
 	private final ReservablesDAO reservablesDAO;
 	@Autowired
-	public BreakoutService( UsersDAO usersDAO, BreakoutReservationDAO breakoutDAO, ReservablesDAO reservablesDAO)
+	public BreakoutService(UsersDAO usersDAO, BreakoutReservationDAO breakoutDAO, ReservablesDAO reservablesDAO)
 	{
 		this.usersDAO = usersDAO;
 		this.breakoutDAO = breakoutDAO;
@@ -57,7 +57,7 @@ public class BreakoutService
 			//if one room is unavailable send the list of availability and return false
 			if(!roomsAvailable[x])
 			{
-				//Print the list of available and unavailble room
+				//Print the list of available and unavailable room
 				for(int y = 0; y < breakout.getReservableIdList().size();y++)
 				{
 					roomString += "Room " + breakout.getReservableIdList().get(y) + " is ";
@@ -99,7 +99,7 @@ public class BreakoutService
 			}
 			else
 			{
-				Reservables reservable = new Reservables(new ReservableKey(breakout.getReservableType(),breakout.getReservableIdList().get(x).getId()));
+				Reservables reservable = new Reservables(new ReservableKey(breakout.getReservableType(),breakout.getReservableIdList().get(x)));
 				
 				BreakoutReservations newReservation = new BreakoutReservations(user,reservable,breakout.getResDescription(), Timestamp.valueOf(breakout.getResStart()), Timestamp.valueOf(breakout.getResEnd()),breakout.getNumPeople(),breakout.getAdditionalCom());
 				breakoutDAO.save(newReservation);
@@ -116,14 +116,13 @@ public class BreakoutService
 	public boolean[] roomAvailable(SentBreakoutReservation breakout)
 	{
 		boolean roomList []= new boolean [breakout.getReservableIdList().size()];
-		
-		for (int resListNum = 0; resListNum < breakout.getReservableIdList().size();resListNum++)
+		for (int resListNum = 0; resListNum < breakout.getReservableIdList().size(); resListNum++)
 		{
 			//check what lists start with
-			//Check to assure that the printer timeslots are available
-			Optional <Reservables> reservableOptional = reservablesDAO.findById(new ReservableKey(breakout.getReservableType(),breakout.getReservableIdList().get(resListNum).getId()));
-			List<BreakoutReservations> checking = breakoutDAO.checkTimeAvailable(Timestamp.valueOf(breakout.getResStart()),Timestamp.valueOf(breakout.getResEnd()),breakout.getReservableIdList().get(resListNum).getId());
-			Optional <BreakoutReservations> precedingRes = breakoutDAO.checkNestedReservation(Timestamp.valueOf(breakout.getResStart()),breakout.getReservableIdList().get(resListNum).getId());
+			//Check to assure that the printer time slots are available
+			Optional <Reservables> reservableOptional = reservablesDAO.findById(new ReservableKey(breakout.getReservableType(),breakout.getReservableIdList().get(resListNum)));
+			List<BreakoutReservations> checking = breakoutDAO.checkTimeAvailable(Timestamp.valueOf(breakout.getResStart()),Timestamp.valueOf(breakout.getResEnd()),breakout.getReservableIdList().get(resListNum));
+			Optional <BreakoutReservations> precedingRes = breakoutDAO.checkNestedReservation(Timestamp.valueOf(breakout.getResStart()),breakout.getReservableIdList().get(resListNum));
 
 
 			if(!reservableOptional.isPresent())

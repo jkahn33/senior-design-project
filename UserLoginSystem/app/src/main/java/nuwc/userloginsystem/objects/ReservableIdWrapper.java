@@ -1,11 +1,13 @@
 package nuwc.userloginsystem.objects;
 
+import java.util.List;
+
 public class ReservableIdWrapper {
-    private String id;
-    public String getId() {
-        return id;
+    private List<String> ids;
+    public List<String> getIds() {
+        return ids;
     }
-    public ReservableIdWrapper(String id) {
-        this.id = id;
+    public ReservableIdWrapper(List<String> ids) {
+        this.ids = ids;
     }
 }
