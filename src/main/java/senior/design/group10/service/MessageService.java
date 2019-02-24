@@ -8,14 +8,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
-import com.openhtmltopdf.java2d.Java2DRenderer;
-import com.openhtmltopdf.java2d.api.DefaultPageProcessor;
-import com.openhtmltopdf.java2d.api.FSPageOutputStreamSupplier;
-import com.openhtmltopdf.java2d.api.Java2DRendererBuilder;
-import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +52,7 @@ public class MessageService {
     }
     public boolean renderImage(){
         String headerText = "USWRIC Important Information";
+        //make size fit 1080p tv
         int width = 1920;
         int height = 1080;
 
@@ -135,7 +130,6 @@ public class MessageService {
         index--;
         newString.append("@#&");
         newString.append(index);
-        log.info(newString.toString());
         return newString.toString();
     }
 }
