@@ -51,7 +51,6 @@ public class WindowsController {
     public ResponseObject sshPi()
     {
     		PiService piservice = new PiService();
-    		//piservice.ExecComToPi("ls");
     		return new ResponseObject(true, null);
     }
 }
