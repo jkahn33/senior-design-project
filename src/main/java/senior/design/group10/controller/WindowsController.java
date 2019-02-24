@@ -9,6 +9,7 @@ import senior.design.group10.objects.sent.AdminInQuestion;
 import senior.design.group10.objects.sent.EditAdmin;
 import senior.design.group10.objects.sent.NewAdmin;
 import senior.design.group10.service.AdminService;
+import senior.design.group10.service.PiService;
 
 @Controller
 @RequestMapping("/windows")
@@ -43,5 +44,13 @@ public class WindowsController {
     @ResponseBody
     public ResponseObject editAdmin(@RequestBody EditAdmin editAdmin){
         return adminService.editAdmin(editAdmin);
+    }
+    
+    @GetMapping("/execComToPi")
+    @ResponseBody
+    public ResponseObject sshPi()
+    {
+    		PiService piservice = new PiService();
+    		return new ResponseObject(true, null);
     }
 }
