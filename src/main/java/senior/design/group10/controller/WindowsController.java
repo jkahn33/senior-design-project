@@ -46,6 +46,8 @@ public class WindowsController {
         return adminService.editAdmin(editAdmin);
     }
     
+    
+    //Sends the command to the pi to execute through ssh command
     @GetMapping("/execComToPi")
     @ResponseBody
     public ResponseObject sshPi()
