@@ -49,13 +49,15 @@ public class WindowsController {
         return adminService.editAdmin(editAdmin);
     }
     
-    @GetMapping("addPi")
+    
+    //Checks for duplicate ip then stores to ip table
+    //if duplicate returns false object response
+    //else stores in db and will be used to connect to different pis
+    @PostMapping("addPi")
     @ResponseBody
-    public ResponseObject addPi( SentPi sentPi)
+    public ResponseObject addPi(@RequestBody SentPi sentPi)
     {
-    		sentPi = new SentPi("168.192.1.2", "pi", "admin");
-        return piService.addPi(sentPi);
-        
+        return piService.addPi(sentPi);        
     }
     
     @GetMapping("/execComToPi")

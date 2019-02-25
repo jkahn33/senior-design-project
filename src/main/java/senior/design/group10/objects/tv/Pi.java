@@ -22,6 +22,8 @@ public class Pi
 	@Column
 	private String pasword;
 	
+	public Pi() {};
+	
 	public Pi(String ip, String host, String password)
 	{
 		this.ip = ip;

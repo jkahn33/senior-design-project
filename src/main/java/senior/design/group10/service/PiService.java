@@ -8,6 +8,7 @@ import senior.design.group10.objects.tv.Pi;
 
 import java.awt.*;
 import java.io.InputStream;
+import java.util.Optional;
 
 import javax.swing.*;
 
@@ -72,6 +73,13 @@ public class PiService
 	
 	public ResponseObject addPi( SentPi sentPi)
 	{
+		Optional<Pi> piOptional = piDAO.checkIP(sentPi.getIp());
+		
+		if(piOptional.isPresent())
+		{
+			return new ResponseObject(false, "Pi with " + sentPi.getIp() + " ip already exists");
+		}
+		
 		
 		Pi piToAdd = new Pi(sentPi.getIp(),sentPi.getHost(),sentPi.getPassword());
 		piDAO.save(piToAdd);
