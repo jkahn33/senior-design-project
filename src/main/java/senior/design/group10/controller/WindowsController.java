@@ -15,6 +15,7 @@ import senior.design.group10.service.UserService;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.logging.Logger;
+import senior.design.group10.service.PiService;
 
 @Controller
 @RequestMapping("/windows")
@@ -127,7 +128,14 @@ public class WindowsController {
 
     @GetMapping("/renderImage")
     @ResponseBody
-    public boolean renderImage(){
+    public boolean renderImage() {
         return messageService.renderImage();
+    }
+    @GetMapping("/execComToPi")
+    @ResponseBody
+    public ResponseObject sshPi()
+    {
+    		PiService piservice = new PiService();
+    		return new ResponseObject(true, null);
     }
 }
