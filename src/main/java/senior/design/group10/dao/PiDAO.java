@@ -2,9 +2,9 @@ package senior.design.group10.dao;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import senior.design.group10.objects.tv.Messages;
+import senior.design.group10.objects.tv.Pi;
 
 @Repository
-public interface MessageDAO extends CrudRepository<Messages, Integer>
+public interface PiDAO extends CrudRepository<Pi, Integer>
 {
 }

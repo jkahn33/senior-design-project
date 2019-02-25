@@ -1,16 +1,33 @@
 package senior.design.group10.service;
 import com.jcraft.jsch.*;
+
+import senior.design.group10.dao.PiDAO;
+import senior.design.group10.objects.response.ResponseObject;
+import senior.design.group10.objects.sent.SentPi;
+import senior.design.group10.objects.tv.Pi;
+
 import java.awt.*;
 import java.io.InputStream;
 
 import javax.swing.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+@Service
 public class PiService 
 {
+	
+	private final
+	PiDAO piDAO;
 	String user = "pi";
 	String host = "192.168.1.3";//ip
 	String password = "admin";
 
+	@Autowired
+	public PiService(PiDAO piDAO)
+	{
+		this.piDAO = piDAO;
+	}
 	public void ExecComToPi(String command)
 	{
 
@@ -51,6 +68,14 @@ public class PiService
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	public ResponseObject addPi( SentPi sentPi)
+	{
+		
+		Pi piToAdd = new Pi(sentPi.getIp(),sentPi.getHost(),sentPi.getPassword());
+		piDAO.save(piToAdd);
+		return new ResponseObject(true, "Pi added");
 	}
 }
 

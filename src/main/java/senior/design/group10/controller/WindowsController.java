@@ -8,6 +8,7 @@ import senior.design.group10.objects.response.ReturnAdmin;
 import senior.design.group10.objects.sent.AdminInQuestion;
 import senior.design.group10.objects.sent.EditAdmin;
 import senior.design.group10.objects.sent.NewAdmin;
+import senior.design.group10.objects.sent.SentPi;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.PiService;
 
@@ -16,10 +17,12 @@ import senior.design.group10.service.PiService;
 public class WindowsController {
 
     private final AdminService adminService;
+    private final PiService piService;
 
     @Autowired
-    public WindowsController(AdminService adminService) {
+    public WindowsController(AdminService adminService, PiService piService) {
         this.adminService = adminService;
+        this.piService = piService;
     }
 
     @PostMapping("/newAdmin")
@@ -46,11 +49,20 @@ public class WindowsController {
         return adminService.editAdmin(editAdmin);
     }
     
+    @GetMapping("addPi")
+    @ResponseBody
+    public ResponseObject addPi( SentPi sentPi)
+    {
+    		sentPi = new SentPi("168.192.1.2", "pi", "admin");
+        return piService.addPi(sentPi);
+        
+    }
+    
     @GetMapping("/execComToPi")
     @ResponseBody
     public ResponseObject sshPi()
     {
-    		PiService piservice = new PiService();
+    		//PiService piservice = new PiService();
     		return new ResponseObject(true, null);
     }
 }
