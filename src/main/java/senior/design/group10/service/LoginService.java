@@ -15,6 +15,9 @@ import java.util.Date;
 import java.util.logging.Logger;
 import java.util.Optional;
 
+/**
+ * Service class to handle business logic for User logins
+ */
 @Service
 public class LoginService {
     private final static Logger log = Logger.getLogger(LoginService.class.getName());

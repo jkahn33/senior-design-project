@@ -6,6 +6,9 @@ import senior.design.group10.objects.equipment.EquipmentCheckoutHistory;
 
 import java.util.List;
 
+/**
+ * DAO to handle database access for equipment_checkout table
+ */
 public interface EquipmentCheckoutDAO extends JpaRepository<EquipmentCheckoutHistory, Integer> {
     List<EquipmentCheckoutHistory> findByEquipment(Equipment equipment);
 }

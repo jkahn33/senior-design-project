@@ -12,6 +12,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import senior.design.group10.objects.equipment.PrinterReservations;
 
+/**
+ * DAO to handle database access for printer_res table
+ */
 @Repository
 public interface PrinterReservationDAO extends JpaRepository<PrinterReservations, Integer>
 {
