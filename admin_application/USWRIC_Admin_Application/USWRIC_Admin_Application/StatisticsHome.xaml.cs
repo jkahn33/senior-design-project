@@ -24,9 +24,9 @@ namespace USWRIC_Admin_Application
             InitializeComponent();
         }
 
-        private void BtnEqueipmentUsage_Click(object sender, RoutedEventArgs e)
+        private void BtnEquipmentUsage_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new EquipmentUsage());
         }
 
         private void BtnCheckedOutEquipment_Click(object sender, RoutedEventArgs e)

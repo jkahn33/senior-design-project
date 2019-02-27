@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data;
 
 namespace USWRIC_Admin_Application
 {
@@ -22,6 +23,23 @@ namespace USWRIC_Admin_Application
         public EquipmentUsage()
         {
             InitializeComponent();
+
+            FillGrid();
+        }
+        private void FillGrid()
+        {
+            DataTable table = new DataTable();
+
+            // create "fixed" columns
+            table.Columns.Add("id");
+            table.Columns.Add("image");
+
+            // create custom columns
+            table.Columns.Add("Name1");
+            table.Columns.Add("Name2");
+
+            // add one row as an object array
+            table.Rows.Add(new object[] { 123, "image.png", "Foo", "Bar" });
         }
     }
 }
