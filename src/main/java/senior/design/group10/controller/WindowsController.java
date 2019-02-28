@@ -65,17 +65,7 @@ public class WindowsController {
     }
     
     
-
-
-    //Checks for duplicate ip then stores to ip table
-    //if duplicate returns false object response
-    //else stores in db and will be used to connect to different pis
-    @PostMapping("addPi")
-    @ResponseBody
-    public ResponseObject addPi(@RequestBody SentPi sentPi)
-    {
-        return piService.addPi(sentPi);        
-    }
+    
     
     @GetMapping("/equipmentUsage")
     @ResponseBody
@@ -143,13 +133,35 @@ public class WindowsController {
     public boolean renderImage() {
         return messageService.renderImage();
     }
-    //Sends the command to the pi to execute through ssh command
+    
+////////////////////////////////////////////////
+//Pi commands
+//
+////////////////////////////////////////////////
 
-    @GetMapping("/execComToPi")
-    @ResponseBody
-    public ResponseObject sshPi()
-    {
-    		//PiService piservice = new PiService();
-    		return new ResponseObject(true, null);
-    }
+//Checks for duplicate ip then stores to ip table
+//if duplicate returns false object response
+//else stores in db and will be used to connect to different pis
+@PostMapping("addPi")
+@ResponseBody
+public ResponseObject addPi(@RequestBody SentPi sentPi)
+{
+return piService.addPi(sentPi);        
+}
+
+@GetMapping("/fillPiList")
+public void fillPiList()
+{
+	piService.piListFill();
+}
+//Sends the command to the pi to execute through ssh command
+
+@GetMapping("/execComToPi")
+@ResponseBody
+public ResponseObject sshPi()
+{
+//PiService piservice = new PiService();
+return new ResponseObject(true, null);
+}
+  
 }

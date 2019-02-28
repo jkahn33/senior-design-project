@@ -30,4 +30,9 @@ public class Pi
 		this.host = host;
 		this.pasword = password;
 	}
+	
+	public String getIP()
+	{
+		return ip;
+	}
 }

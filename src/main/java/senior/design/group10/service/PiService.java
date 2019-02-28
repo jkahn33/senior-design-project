@@ -1,6 +1,7 @@
 package senior.design.group10.service;
 import com.jcraft.jsch.*;
 
+import ch.qos.logback.core.joran.conditional.IfAction;
 import senior.design.group10.dao.PiDAO;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentPi;
@@ -13,6 +14,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Optional;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -24,6 +28,7 @@ public class PiService
 
 	private final
 	PiDAO piDAO;
+	List<Pi> piList = new ArrayList<Pi>();
 	String user = "pi";
 	String host = "192.168.1.3";//ip
 	String password = "admin";
@@ -33,6 +38,22 @@ public class PiService
 	public PiService(PiDAO piDAO)
 	{
 		this.piDAO = piDAO;
+	}
+	
+	public void piListFill()
+	{
+		//If list is full empty then refill
+		if (!piList.isEmpty())
+			piList.clear();
+		
+		//get the list of pis from the db then add to the pi list to be used to send the photo to the
+		// lis of displays
+		Iterable <Pi> piIt = piDAO.findAll();
+		//For every pi in Pi iterable add to list
+		for (Pi pi : piIt)
+			piList.add(pi);
+				
+		System.out.print(piList.get(0).getIP());
 	}
 	
 	public ResponseObject addPi( SentPi sentPi)
@@ -50,6 +71,12 @@ public class PiService
 		return new ResponseObject(true, "Pi added");
 	}
 
+	//Get the list of pis from the db and create a list to connect to them
+	//public List<Pi> getPiList()
+	{
+		
+	}
+	
 	public void execComToPi(String command)
 	{
 
