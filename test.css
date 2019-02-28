@@ -1,0 +1,12 @@
+p{
+    padding: 15px;
+    font-size: 30;
+    color:#ffffff;
+}
+hr{
+  border-width: 5px;
+  border-style:double;
+}
+html{
+  background: linear-gradient(to bottom, #000099 0%, #cc9900 100%);
+}
