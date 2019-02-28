@@ -1,19 +1,54 @@
 package senior.design.group10.service;
 import com.jcraft.jsch.*;
+
+import senior.design.group10.dao.PiDAO;
+import senior.design.group10.objects.response.ResponseObject;
+import senior.design.group10.objects.sent.SentPi;
+import senior.design.group10.objects.tv.Pi;
+
 import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Optional;
 
 import javax.swing.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+@Service
 public class PiService 
 {
+
+	private final
+	PiDAO piDAO;
 	String user = "pi";
 	String host = "192.168.1.3";//ip
 	String password = "admin";
+
+
+	@Autowired
+	public PiService(PiDAO piDAO)
+	{
+		this.piDAO = piDAO;
+	}
+	
+	public ResponseObject addPi( SentPi sentPi)
+	{
+		Optional<Pi> piOptional = piDAO.checkIP(sentPi.getIp());
+
+		if(piOptional.isPresent())
+		{
+			return new ResponseObject(false, "Pi with " + sentPi.getIp() + " ip already exists");
+		}
+
+
+		Pi piToAdd = new Pi(sentPi.getIp(),sentPi.getHost(),sentPi.getPassword());
+		piDAO.save(piToAdd);
+		return new ResponseObject(true, "Pi added");
+	}
 
 	public void execComToPi(String command)
 	{
@@ -77,7 +112,7 @@ public class PiService
 
 			// username and password will be given via UserInfo interface.
 			UserInfo ui=new MyUserInfo();
-			
+
 			/////////////////////
 			//Here
 			//Modify set user info ui to not require ui by giving password and whatever else is required
@@ -160,7 +195,8 @@ public class PiService
 		}
 	}
 
-	static int checkAck(InputStream in) throws IOException{
+	static int checkAck(InputStream in) throws IOException
+	{
 		int b=in.read();
 		// b may be 0 for success,
 		//          1 for error,
@@ -187,7 +223,8 @@ public class PiService
 		return b;
 	}
 
-	public static class MyUserInfo implements UserInfo, UIKeyboardInteractive{
+	public static class MyUserInfo implements UserInfo, UIKeyboardInteractive
+	{
 		public String getPassword(){ return passwd; }
 		public boolean promptYesNo(String str){
 			Object[] options={ "yes", "no" };
@@ -277,6 +314,9 @@ public class PiService
 			}
 		}
 	}
+
+
 }
+
 
 

@@ -1,10 +1,7 @@
 package senior.design.group10.objects.tv;
 
 import org.hibernate.annotations.GenericGenerator;
-
-
 import javax.persistence.*;
-
 import java.sql.Timestamp;
 
 @Entity
