@@ -8,10 +8,12 @@ import senior.design.group10.objects.sent.SentPi;
 import senior.design.group10.objects.tv.Pi;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Optional;
 import java.util.ArrayList;
@@ -55,6 +57,7 @@ public class PiService
 				
 		System.out.print(piList.get(0).getIP());
 	}
+	
 	
 	public ResponseObject addPi( SentPi sentPi)
 	{
@@ -119,6 +122,36 @@ public class PiService
 		}
 	}
 
+	public void createPiImageFolder(String folderName) {
+        String s;
+        Process p;
+        
+        //Remove folder if exists
+        try {
+            p = Runtime.getRuntime().exec("rm -R " + folderName);
+            BufferedReader br = new BufferedReader(
+                new InputStreamReader(p.getInputStream()));
+            while ((s = br.readLine()) != null)
+                System.out.println("line: " + s);
+            p.waitFor();
+            System.out.println ("exit: " + p.exitValue());
+            p.destroy();
+        } catch (Exception e) {}
+        
+        //Create new Folder
+        try {
+            p = Runtime.getRuntime().exec("mkdir " + folderName);
+            BufferedReader br = new BufferedReader(
+                new InputStreamReader(p.getInputStream()));
+            while ((s = br.readLine()) != null)
+                System.out.println("line: " + s);
+            p.waitFor();
+            System.out.println ("exit: " + p.exitValue());
+            p.destroy();
+        } catch (Exception e) {}
+    }
+	//Assuming that the pi list is full and contains all pis to be update
+	//scp the photos onto the list of pis contained
 	public void copyImgToPi(String lfile, String rfile)
 	{
 		/*public static void main(String[] arg){
@@ -138,14 +171,21 @@ public class PiService
 			Session session=jsch.getSession(user, host, 22);
 
 			// username and password will be given via UserInfo interface.
-			UserInfo ui=new MyUserInfo();
+			//UserInfo ui=new MyUserInfo();
+			java.util.Properties config = new java.util.Properties(); 
+
+			config.put("StrictHostKeyChecking", "no");
+
 
 			/////////////////////
 			//Here
 			//Modify set user info ui to not require ui by giving password and whatever else is required
 			/////////////////////////
-			session.setUserInfo(ui);
+			//session.setUserInfo(ui);
+			session.setPassword(password);
+			session.setConfig(config);
 			session.connect();
+			System.out.println("Connected");
 
 			boolean ptimestamp = true;
 

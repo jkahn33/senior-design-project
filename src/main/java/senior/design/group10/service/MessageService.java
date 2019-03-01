@@ -50,6 +50,7 @@ public class MessageService {
         
         return new ResponseObject(true, adminOptional.get().getName());
     }
+    
     public boolean renderImage(){
         String headerText = "USWRIC Important Information";
         //make size fit 1080p tv
@@ -111,7 +112,8 @@ public class MessageService {
 
         try {
             // Save as PNG
-            File file = new File("admin_messages.png");
+            File file = new File("testing/admin_messages.png");
+            OutputStream out = new FileOutputStream(file);
             ImageIO.write(bufferedImage, "png", file);
         }
         catch (Exception e){
