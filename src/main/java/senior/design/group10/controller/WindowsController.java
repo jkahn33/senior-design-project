@@ -147,10 +147,11 @@ public class WindowsController {
 	//Checks for duplicate ip then stores to ip table
 	//if duplicate returns false object response
 	//else stores in db and will be used to connect to different pis
-	@PostMapping("addPi")
+	@GetMapping("addPi")
 	@ResponseBody
-	public ResponseObject addPi(@RequestBody SentPi sentPi)
+	public ResponseObject addPi( SentPi sentPi)
 	{
+		sentPi = new SentPi("192.168.1.3","pi", "admin");
 		return piService.addPi(sentPi);        
 	}
 
@@ -168,6 +169,15 @@ public class WindowsController {
 	{
 		//PiService piservice = new PiService();
 		return new ResponseObject(true, null);
+	}
+	
+	@GetMapping("/sendFileToPi")
+	@ResponseBody
+	public ResponseObject sendFileToPi()
+	{
+		
+		piService.copyImgToPi("test.png", "Desktop");
+		return new ResponseObject(true,null);
 	}
 
 }

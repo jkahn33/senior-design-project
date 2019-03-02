@@ -18,21 +18,30 @@ public class Pi
 	@Column
 	private String ip;
 	@Column
-	private String host;
+	private String user;
 	@Column
-	private String pasword;
+	private String password;
 	
 	public Pi() {};
 	
-	public Pi(String ip, String host, String password)
+	public Pi(String ip, String user, String password)
 	{
 		this.ip = ip;
-		this.host = host;
-		this.pasword = password;
+		this.user = user;
+		this.password = password;
 	}
 	
 	public String getIP()
 	{
 		return ip;
 	}
+	public String getUser()
+	{
+		return user;
+	}
+	public String getPassword()
+	{
+		return password;
+	}
+	
 }
