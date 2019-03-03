@@ -1,6 +1,7 @@
 package senior.design.group10.objects.sent;
 
-public class SentUser {
+public class SentUser 
+{
     private String name;
     private String ext;
     private String dep;

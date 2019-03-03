@@ -1,8 +1,6 @@
 package senior.design.group10.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -13,8 +11,7 @@ import senior.design.group10.objects.equipment.Equipment;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.response.ValidateWrapper;
 import senior.design.group10.objects.sent.AdminInQuestion;
-import senior.design.group10.objects.sent.EquipmentWrapper;
-import senior.design.group10.objects.sent.NewAdmin;
+import senior.design.group10.objects.sent.StringWrapper;
 import senior.design.group10.objects.sent.SentBreakoutReservation;
 import senior.design.group10.objects.sent.SentCalendar;
 import senior.design.group10.objects.sent.SentEquipment;
@@ -181,9 +178,9 @@ public class AndroidController {
     
     @PostMapping("/checkinEquipment")
     @ResponseBody
-    public ResponseObject checkinEquipment(@RequestBody EquipmentWrapper barcode){
-        return equipmentService.checkin(barcode.getBarcode());
-    }  
+    public ResponseObject checkinEquipment(@RequestBody StringWrapper barcode){
+        return equipmentService.checkin(barcode.getString());
+    }
     
     @PostMapping("/checkoutEquipment")
     @ResponseBody
