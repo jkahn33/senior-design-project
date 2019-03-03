@@ -69,13 +69,14 @@ public class PiService
 		return new ResponseObject(true, "Pi added");
 	}
 
+	
+	//Executes linux command to list of pis
 	public void execComToPi(String command)
 	{
 
 
 		String user,host,password;
 
-		//Do the file transfer contained in piList
 		for (int x = 0; x < piList.size(); x++)
 		{
 			user = piList.get(x).getUser();
@@ -123,6 +124,7 @@ public class PiService
 		}
 	}
 
+	///Creates an image folder to be distributed amongst pis. called at fillPi List
 	public void createPiImageFolder(String folderName) {
 		String s;
 		Process p;
@@ -151,6 +153,7 @@ public class PiService
 			p.destroy();
 		} catch (Exception e) {}
 	}
+	
 	//Assuming that the pi list is full and contains all pis to be update
 	//scp the photos onto the list of pis contained
 	public void copyImgToPi(String lfile, String rfile)
@@ -172,6 +175,8 @@ public class PiService
 			FileInputStream fis=null;
 			try
 			{
+				System.out.println("got to the exec1");
+
 				JSch jsch=new JSch();
 				Session session=jsch.getSession(user, host, 22);
 
@@ -192,6 +197,7 @@ public class PiService
 				String command="scp " + (ptimestamp ? "-p" :"") +" -t "+rfile;
 				Channel channel=session.openChannel("exec");
 				((ChannelExec)channel).setCommand(command);
+				System.out.println("got to the exec2");
 
 				// get I/O streams for remote scp
 				OutputStream out=channel.getOutputStream();
@@ -205,6 +211,8 @@ public class PiService
 					return ;}
 
 				File _lfile = new File(lfile);
+				System.out.println("got to the exec3");
+
 				/*
 			if(ptimestamp){
 				command="T "+(_lfile.lastModified()/1000)+" 0";
@@ -264,6 +272,29 @@ public class PiService
 			catch(Exception e){
 				System.out.println(e);
 				try{if(fis!=null)fis.close();}catch(Exception ee){}
+			}
+		}
+	}
+
+	//Assuming that the pi list is full and contains all pis to be update
+	//scp the folder specified onto the list of pis contained
+	public void copyFolderToPi(String lFolder, String rfile)
+	{
+		File folder = new File(lFolder);
+		File[] listOfFiles = folder.listFiles();
+
+		//For every file contained in 
+		for (int i = 0; i < listOfFiles.length; i++)
+		{
+			if (listOfFiles[i].isFile()) 
+			{
+				System.out.println("File " + listOfFiles[i].getName());
+
+				String fileLocation = lFolder+ "/" +listOfFiles[i].getName();
+				copyImgToPi(fileLocation, rfile);
+			} else if (listOfFiles[i].isDirectory()) 
+			{
+				System.out.println("Directory " + listOfFiles[i].getName());
 			}
 		}
 	}

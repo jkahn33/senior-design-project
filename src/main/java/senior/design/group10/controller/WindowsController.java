@@ -147,27 +147,28 @@ public class WindowsController {
 	//Checks for duplicate ip then stores to ip table
 	//if duplicate returns false object response
 	//else stores in db and will be used to connect to different pis
-	@GetMapping("addPi")
+	@GetMapping("/addPi")
 	@ResponseBody
-	public ResponseObject addPi( SentPi sentPi)
+	public ResponseObject addPi(@RequestBody SentPi sentPi)
 	{
-		sentPi = new SentPi("192.168.1.3","pi", "admin");
 		return piService.addPi(sentPi);        
 	}
 
+	
 	@GetMapping("/fillPiList")
 	public void fillPiList()
 	{
-		piService.createPiImageFolder("PiImages");
+		//piService.createPiImageFolder("PiImages");
 		piService.piListFill();
 	}
 	//Sends the command to the pi to execute through ssh command
 
 	@GetMapping("/execComToPi")
 	@ResponseBody
-	public ResponseObject sshPi()
+	public ResponseObject sshPi(String command)
 	{
 		//PiService piservice = new PiService();
+		piService.execComToPi(command);
 		return new ResponseObject(true, null);
 	}
 	
@@ -175,8 +176,16 @@ public class WindowsController {
 	@ResponseBody
 	public ResponseObject sendFileToPi()
 	{
+		piService.copyImgToPi("out.pdf", "Desktop");
+		return new ResponseObject(true,null);
+	}
+	
+	@GetMapping("sendFolderToPi")
+	@ResponseBody
+	public ResponseObject sendFolderToPi()
+	{
 		
-		piService.copyImgToPi("test.png", "Desktop");
+		piService.copyFolderToPi("TestDir", "Desktop/New");
 		return new ResponseObject(true,null);
 	}
 
