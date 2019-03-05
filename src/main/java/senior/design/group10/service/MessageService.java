@@ -1,10 +1,18 @@
 package senior.design.group10.service;
 
+/*
+ * Todo
+ * Function to remove all messages less than current date
+ * Function to create images based on messsages table
+ * 
+ */
+
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +27,7 @@ import senior.design.group10.dao.AdminDAO;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentMessage;
 import senior.design.group10.objects.tv.Messages;
+import senior.design.group10.objects.tv.Pi;
 import senior.design.group10.objects.user.Admin;
 
 import javax.imageio.ImageIO;
@@ -35,6 +44,7 @@ public class MessageService {
         this.adminDAO = adminDAO;
     }
 
+    //Message includes end date to describe how long the message will last for
     public ResponseObject createNewMessage(SentMessage message){
     	Date date = new Date();
         Timestamp currentTime = new Timestamp(date.getTime());
@@ -52,22 +62,38 @@ public class MessageService {
         return new ResponseObject(true, adminOptional.get().getName());
     }
     
+    public void deletePastMessages()
+    {
+    		//Remove the message that end dates are less than current time
+    		String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
+        //Timestamp currentTime = new Timestamp(date.getTime());
+        messageDAO.deletPastMessages(date);
+        //System.out.println(currentTime);
+
+    }
     //To do
     //Look at the BreakoutService and return the list of messages for dates greater than or equal to todays date
     //Implement the DAO function to return the messages then use it  in this class
-    //Implement in Android service class
     //Returns a list of the message which the dates are greater than or equal to current date
 
     public List <Messages> getCurrentMessages(){
     	
-    		Date date = new Date();
-        Timestamp currentTime = new Timestamp(date.getTime());
-		List <Messages> messages = messageDAO.getcurrentMessages(currentTime);
+        
+        //Remove the messages less than today
+    		deletePastMessages();
+        //Return everything else
+        List <Messages> messageList = new ArrayList<Messages>();
+        
+		Iterable <Messages> messagesIt = messageDAO.findAll();
+		
+		for (Messages message : messagesIt)
+			messageList.add(message);
 		 // Or like this...
-        for(int i = 0; i < messages.size(); i++) {
-            System.out.println(messages.get(i).getMessage());
+        for(int i = 0; i < messageList.size(); i++) {
+            System.out.println(messageList.get(i).getMessage());
         }
-		return messages;
+		return messageList;
 		
     }
         
