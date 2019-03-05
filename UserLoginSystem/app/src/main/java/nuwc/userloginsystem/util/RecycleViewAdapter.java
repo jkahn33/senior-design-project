@@ -1,7 +1,6 @@
 package nuwc.userloginsystem.util;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,11 +20,10 @@ import static android.content.ContentValues.TAG;
 
 public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> implements SectionTitleProvider {
 
-    private ArrayList<String> mUserNames;
+    private ArrayList<String> mUserNames = new ArrayList<>();
     private Context mContext;
 
     public RecycleViewAdapter(ArrayList<String> userNames, Context context){
-        mUserNames = new ArrayList<>();
         mUserNames = userNames;
         mContext = context;
     }
@@ -45,9 +43,7 @@ public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d(TAG,"onBind");
 
-
         holder.userName.setText((mUserNames.get(position)));
-
 
     }
 

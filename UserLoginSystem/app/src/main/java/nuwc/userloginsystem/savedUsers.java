@@ -27,10 +27,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Collections;
 import java.util.List;
 
 import nuwc.userloginsystem.objects.ResponseObject;
 import nuwc.userloginsystem.objects.Users;
+import nuwc.userloginsystem.util.RandNameGen;
 import nuwc.userloginsystem.util.RecycleViewAdapter;
 import nuwc.userloginsystem.util.RequestUtil;
 
@@ -64,7 +67,6 @@ public class savedUsers extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getUserList();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_users);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
@@ -82,36 +84,19 @@ public class savedUsers extends AppCompatActivity{
 
     @TargetApi(24)
     public void addUser() {
+        RandNameGen nameGen = new RandNameGen();
+        Log.d("addUser","User added");
         if(userList != null) {
-            //userList.sort(Comparator.comparing(Users::getName));
 
-            for (int i = 0; i < userList.size(); i++) {
-                final Button userButton = new Button(this);
 
-                userButton.setId(Integer.parseInt(userList.get(i).getFiveDigExt()));
-                userButton.setText(userList.get(i).getName());
-                userButton.setTag(i);
-                userButton.setTextSize(30);
-                userButton.setBackgroundResource(R.drawable.name_plate);
-
-                //recyclerView.addView(userButton);
-
-                userButton.setOnClickListener(view -> {
-                    try {
-                        logUser(Integer.toString(userButton.getId()));
-                        Log.d("EXCE", "hi");
-
-                    }
-                    catch(JSONException e){
-                        showError("JSON Format Error");
-                        Log.e("EXCEPTION", e.toString());
-                    }
-                });
+//            for(Users u : userList){
+//                mNames.add(u.getName());
+//                Log.d("Names",u.getName());
+//            }
+            for(int i = 0; i < 200; i ++){
+                mNames.add(nameGen.randomIdentifier());
             }
-            for(Users u : userList){
-                mNames.add(u.getName());
-            }
-
+            Collections.sort(mNames);
         }
         else{
             Log.d("ERROR", "Users list is null");
