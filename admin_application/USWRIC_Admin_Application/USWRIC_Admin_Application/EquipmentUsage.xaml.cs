@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Data;
+using Newtonsoft.Json;
+using USWRIC_Admin_Application.objects;
 
 namespace USWRIC_Admin_Application
 {
@@ -20,26 +22,36 @@ namespace USWRIC_Admin_Application
     /// </summary>
     public partial class EquipmentUsage : Page
     {
+        public DataTable StatsTable { get; private set; }
         public EquipmentUsage()
         {
-            InitializeComponent();
-
             FillGrid();
         }
-        private void FillGrid()
+
+        private async void FillGrid()
         {
-            DataTable table = new DataTable();
+            StatsTable = new DataTable();
 
-            // create "fixed" columns
-            table.Columns.Add("id");
-            table.Columns.Add("image");
+            StatsTable.Columns.Add("Equipment Name");
+            StatsTable.Columns.Add("Barcode");
+            StatsTable.Columns.Add("Amount Used");
+            StatsTable.Columns.Add("Date Added");
+            StatsTable.Columns.Add("Last Checked Out");
 
-            // create custom columns
-            table.Columns.Add("Name1");
-            table.Columns.Add("Name2");
+            var response = await Globals.GetHttpClient().GetAsync(Globals.GetBaseUrl() + "/equipmentUsage");
+            var responseString = await response.Content.ReadAsStringAsync();
 
-            // add one row as an object array
-            table.Rows.Add(new object[] { 123, "image.png", "Foo", "Bar" });
+            if (response.IsSuccessStatusCode)
+            {
+                List<EquipmentUsageResponse> equipmentList = JsonConvert.DeserializeObject<List<EquipmentUsageResponse>>(responseString);
+                foreach (EquipmentUsageResponse equipment in equipmentList)
+                {
+                    StatsTable.Rows.Add(new object[] { equipment.EquipmentName, equipment.Barcode, equipment.AmtUsed, equipment.DateAdded, equipment.LastCheckedOut });
+                }
+            }
+
+            InitializeComponent();
+            StatsGrid.DataContext = StatsTable.DefaultView;
         }
     }
 }
