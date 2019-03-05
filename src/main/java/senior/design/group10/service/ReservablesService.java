@@ -11,6 +11,9 @@ import senior.design.group10.objects.equipment.Reservables;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentReservable;
 
+/**
+ * Service class to handle business logic for Reservables (3D printers and breakout rooms)
+ */
 @Service
 public class ReservablesService 
 {

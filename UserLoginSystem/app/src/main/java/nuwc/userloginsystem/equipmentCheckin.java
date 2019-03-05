@@ -9,6 +9,7 @@ import android.widget.Button;
 public class equipmentCheckin extends AppCompatActivity {
 
     public Button manualButton2;
+    public Button scanButton2;
     public Button cancel;
 
     public void init2() {
@@ -37,6 +38,19 @@ public class equipmentCheckin extends AppCompatActivity {
 
     }
 
+    public void scanScreen() {
+
+        scanButton2 = (Button)findViewById(R.id.scanButton2);
+        scanButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent scanScreen = new Intent(equipmentCheckin.this, scannerScreen.class);
+                startActivity(scanScreen);
+            }
+        });
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +58,6 @@ public class equipmentCheckin extends AppCompatActivity {
         setContentView(R.layout.activity_equipment_checkin);
         init2();
         cancel();
+        scanScreen();
     }
 }

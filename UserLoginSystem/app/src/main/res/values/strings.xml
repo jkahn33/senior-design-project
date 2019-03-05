@@ -8,4 +8,5 @@
     <string name="title_activity_pick_reservation_type">PickReservationType</string>
     <string name="title_activity_breakout_reservation">BreakoutReservation</string>
     <string name="test">Test</string>
+    <string name="title_activity_scanner_screen">scannerScreen</string>
 </resources>

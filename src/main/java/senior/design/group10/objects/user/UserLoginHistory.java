@@ -29,4 +29,16 @@ public class UserLoginHistory
 		this.user = user;
 		this.loginDateTime = loginDateTime;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public Users getUser() {
+		return user;
+	}
+
+	public Timestamp getLoginDateTime() {
+		return loginDateTime;
+	}
 }

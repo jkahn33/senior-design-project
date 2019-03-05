@@ -184,6 +184,7 @@ public class Reservations extends AppCompatActivity {
     public void displayCalendar(int month, int day, int year){
         CalenImport calendar = new CalenImport();
 
+
         monthYear.setText(month + " " + year);
 
         //day of the week (sun-sat) 1-7
