@@ -96,8 +96,11 @@ public class MessageService {
 		return messageList;
 		
     }
+    /*
+     * From the messages received from get current message create the rendered image
+     */
         
-    public boolean renderImage(){
+    public boolean renderImage(List<Messages> messageList){
         String headerText = "USWRIC Important Information";
         //make size fit 1080p tv
         int width = 1920;
@@ -129,8 +132,13 @@ public class MessageService {
         x = 64;
         int y = 300;
         ArrayList<String> testArr = new ArrayList<>();
-        testArr.add("Printer number 3 is broken. Please refrain from using printer number 3. Test1 test2 test3 test4. Test5 test6 test7 test8.");
-        testArr.add("The USWRIC will be closed to all visitors on Friday, February 22nd.");
+        //for every string in messages add to testArr
+        for( int loop = 0; loop< messageList.size();loop++)
+        {
+        		testArr.add(messageList.get(loop).getMessage());
+        }
+        //testArr.add("Printer number 3 is broken. Please refrain from using printer number 3. Test1 test2 test3 test4. Test5 test6 test7 test8.");
+        //testArr.add("The USWRIC will be closed to all visitors on Friday, February 22nd.");
 
         font = new Font("Arial", Font.BOLD, 48);
         g2d.setFont(font);
@@ -158,7 +166,7 @@ public class MessageService {
 
         try {
             // Save as PNG
-            File file = new File("testing/admin_messages.png");
+            File file = new File("PiImages/admin_messages.png");
             OutputStream out = new FileOutputStream(file);
             ImageIO.write(bufferedImage, "png", file);
         }
