@@ -1,6 +1,7 @@
 package senior.design.group10.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -134,8 +135,16 @@ public class AndroidController {
 	 * String for the additional comments
 	 */
 	@PostMapping("/newBreakoutReservation")
+	//@GetMapping("/newBreakoutReservation")
 	@ResponseBody
-    public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation) {
+    public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation) //Add @RequestBody
+	{
+		//List for passing in in sent breakout reservation
+		//List<String> reservableIdList = new ArrayList<String>();
+		//reservableIdList.add("C");
+		
+		//Manual breakout reservation entry for testing image rendering
+		//breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-18 05:01:01", "2019-03-18 17:00:00", "2","none");
         return breakoutService.addBreakRes(breakoutReservation);
     }
 

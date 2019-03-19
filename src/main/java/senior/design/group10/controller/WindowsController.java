@@ -31,14 +31,16 @@ public class WindowsController {
 	private final UserService userService;
 	private final EquipmentService equipmentService;
 	private final MessageService messageService;
+	private final BreakoutService breakoutService;
 
 	@Autowired
-	public WindowsController(AdminService adminService, UserService userService, EquipmentService equipmentService, MessageService messageService, PiService piService) {
+	public WindowsController(AdminService adminService, UserService userService, EquipmentService equipmentService, MessageService messageService, PiService piService, BreakoutService breakoutService) {
 		this.adminService = adminService;
 		this.userService = userService;
 		this.equipmentService = equipmentService;
 		this.messageService = messageService;
 		this.piService = piService;
+		this.breakoutService = breakoutService;
 	}
 
 	@PostMapping("/newAdmin")
@@ -214,7 +216,8 @@ public class WindowsController {
     public ResponseObject newMessage(SentMessage sentMessage) 
     {
     		//Sending a message
-    		sentMessage = new SentMessage("entering past message", "12345", "2010-01-01 01:01:01");
+    		//Used for making new messages
+    		//sentMessage = new SentMessage("entering past message", "12345", "2010-01-01 01:01:01");
         return messageService.createNewMessage(sentMessage);
     }    
     
@@ -229,7 +232,9 @@ public class WindowsController {
     @ResponseBody
     public ResponseObject getCurrentMessages( SentMessage sentMessage) //Add @RequestBody
     {
-    		messageService.renderImage(messageService.getCurrentMessages());
+    		messageService.renderMessagesImage(messageService.getCurrentMessages());
+    		messageService.renderBreakoutImage(breakoutService.todaysReservations());
+    		
         return  new ResponseObject(true,null);
     }
 
