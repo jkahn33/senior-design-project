@@ -3,23 +3,30 @@ import com.jcraft.jsch.*;
 
 import ch.qos.logback.core.joran.conditional.IfAction;
 import senior.design.group10.dao.PiDAO;
+import senior.design.group10.objects.equipment.BreakoutReservations;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentPi;
+import senior.design.group10.objects.tv.Messages;
 import senior.design.group10.objects.tv.Pi;
 
 import java.awt.*;
+import java.awt.geom.Line2D;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +38,198 @@ public class PiService
 	private final
 	PiDAO piDAO;
 	List<Pi> piList = new ArrayList<Pi>();
+	private final static Logger log = Logger.getLogger(PiService.class.getName());
+
 	@Autowired
 	public PiService(PiDAO piDAO)
 	{
 		this.piDAO = piDAO;
 	}
 
+
+	/*///////////////////////////////////////////////
+	 * Image Rendering
+	 */////////////////////////////////////////////
+
+	public boolean renderBreakoutImage(List<BreakoutReservations> breakoutList)
+	{
+
+		//Create a switch to choose header for image to display
+		String headerText= "USWRIC Today's Breakout Events";
+
+		//make size fit 1080p tv
+		int width = 1920;
+		int height = 1080;
+
+		// Constructs a BufferedImage of one of the predefined image types.
+		BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+		// Create a graphics which can be used to draw into the buffered image
+		Graphics2D g2d = bufferedImage.createGraphics();
+		//used to setup Java rendering algorithms
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+		//render the gradient blue/yellow background
+		GradientPaint paint = new GradientPaint(0, 0, Color.BLUE, 0, height, Color.ORANGE);
+		g2d.setPaint(paint);
+		g2d.fillRect(0, 0, width, height);
+
+		//render the header text
+		Font font = new Font("Arial", Font.BOLD, 100);
+		g2d.setFont(font);
+		FontMetrics fm = g2d.getFontMetrics();
+		int x = ((width - fm.stringWidth(headerText)) / 2);
+
+		g2d.setColor(Color.BLACK);
+		g2d.drawString(headerText, x, 150);
+
+		//rendering of administrative messages
+		x = 64;
+		int y = 300;
+		ArrayList<String> testArr = new ArrayList<>();
+
+		//for every string in messages add to testArr
+		for( int loop = 0; loop< breakoutList.size();loop++)
+		{
+			String message = breakoutList.get(loop).getresDescription() + " Room: " + breakoutList.get(loop).getRoom()
+					+ ", From " + breakoutList.get(loop).getStartHours()+ " to "+ breakoutList.get(loop).getEndHours();
+			testArr.add(message);
+		}
+		//testArr.add("Printer number 3 is broken. Please refrain from using printer number 3. Test1 test2 test3 test4. Test5 test6 test7 test8.");
+		//testArr.add("The USWRIC will be closed to all visitors on Friday, February 22nd.");
+
+		font = new Font("Arial", Font.BOLD, 48);
+		g2d.setFont(font);
+
+		g2d.setColor(Color.BLACK);
+
+		for(String s : testArr) {
+			String[] splits = s.split(" ");
+			for(int i = 0; i < splits.length; i++){
+				String stringToPrint = getStringToPrint(splits, i);
+				String[] printString = stringToPrint.split("@#&");
+				g2d.drawString(printString[0], x, y);
+				y += 50;
+
+				i = Integer.parseInt(printString[1]);
+			}
+
+			g2d.setStroke(new BasicStroke(10));
+			g2d.draw(new Line2D.Float(210, y, 1710, y));
+			y+=100;
+		}
+
+		// Disposes of this graphics context and releases any system resources that it is using.
+		g2d.dispose();
+
+		try {
+			// Save as PNG
+			File file = new File("PiImages/breakout_events.png");
+			OutputStream out = new FileOutputStream(file);
+			ImageIO.write(bufferedImage, "png", file);
+		}
+		catch (Exception e){
+			log.severe(e.toString());
+			return false;
+		}
+		return true;
+	}
+	public boolean renderMessagesImage(List<Messages> messageList){
+		String headerText = "USWRIC Important Information";
+		//make size fit 1080p tv
+		int width = 1920;
+		int height = 1080;
+
+		// Constructs a BufferedImage of one of the predefined image types.
+		BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+		// Create a graphics which can be used to draw into the buffered image
+		Graphics2D g2d = bufferedImage.createGraphics();
+		//used to setup Java rendering algorithms
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+		//render the gradient blue/yellow background
+		GradientPaint paint = new GradientPaint(0, 0, Color.BLUE, 0, height, Color.ORANGE);
+		g2d.setPaint(paint);
+		g2d.fillRect(0, 0, width, height);
+
+		//render the header text
+		Font font = new Font("Arial", Font.BOLD, 100);
+		g2d.setFont(font);
+		FontMetrics fm = g2d.getFontMetrics();
+		int x = ((width - fm.stringWidth(headerText)) / 2);
+
+		g2d.setColor(Color.BLACK);
+		g2d.drawString(headerText, x, 150);
+
+		//rendering of administrative messages
+		x = 64;
+		int y = 300;
+		ArrayList<String> testArr = new ArrayList<>();
+		//for every string in messages add to testArr
+		for( int loop = 0; loop< messageList.size();loop++)
+		{
+			testArr.add(messageList.get(loop).getMessage());
+		}
+		//testArr.add("Printer number 3 is broken. Please refrain from using printer number 3. Test1 test2 test3 test4. Test5 test6 test7 test8.");
+		//testArr.add("The USWRIC will be closed to all visitors on Friday, February 22nd.");
+
+		font = new Font("Arial", Font.BOLD, 48);
+		g2d.setFont(font);
+
+		g2d.setColor(Color.BLACK);
+
+		for(String s : testArr) {
+			String[] splits = s.split(" ");
+			for(int i = 0; i < splits.length; i++){
+				String stringToPrint = getStringToPrint(splits, i);
+				String[] printString = stringToPrint.split("@#&");
+				g2d.drawString(printString[0], x, y);
+				y += 50;
+
+				i = Integer.parseInt(printString[1]);
+			}
+
+			g2d.setStroke(new BasicStroke(10));
+			g2d.draw(new Line2D.Float(210, y, 1710, y));
+			y+=100;
+		}
+
+		// Disposes of this graphics context and releases any system resources that it is using.
+		g2d.dispose();
+
+		try {
+			// Save as PNG
+			File file = new File("PiImages/admin_messages.png");
+			OutputStream out = new FileOutputStream(file);
+			ImageIO.write(bufferedImage, "png", file);
+		}
+		catch (Exception e){
+			log.severe(e.toString());
+			return false;
+		}
+		return true;
+	}
+	
+	private String getStringToPrint(String[] splits, int index){
+		StringBuilder newString = new StringBuilder();
+		while(index < splits.length && newString.length() + splits[index].length() < 75){
+			newString.append(" ");
+			newString.append(splits[index]);
+			index++;
+		}
+		index--;
+		newString.append("@#&");
+		newString.append(index);
+		return newString.toString();
+	}
+
+	/////////////////////////////////////////
+	////Connecting to pi
+	////////////////////////////////////////
 	public void piListFill()
 	{
+		System.out.println("got here");
 		//If list is full empty then refill
 		if (!piList.isEmpty())
 			piList.clear();
@@ -69,7 +260,7 @@ public class PiService
 		return new ResponseObject(true, "Pi added");
 	}
 
-	
+
 	//Executes linux command to list of pis
 	public void execComToPi(String command)
 	{
@@ -153,7 +344,7 @@ public class PiService
 			p.destroy();
 		} catch (Exception e) {}
 	}
-	
+
 	//Assuming that the pi list is full and contains all pis to be update
 	//scp the photos onto the list of pis contained
 	public void copyImgToPi(String lfile, String rfile)
@@ -164,6 +355,7 @@ public class PiService
 		      System.exit(-1);
 		    }      
 		 */
+		
 		String user,host,password;
 
 		//Do the file transfer contained in piList
@@ -187,7 +379,7 @@ public class PiService
 				session.setPassword(password);
 				session.setConfig(config);
 				session.connect();
-				System.out.println("Connected");
+				System.out.println("Connected to " +piList.get(x).getIP());
 
 				boolean ptimestamp = true;
 
@@ -197,8 +389,6 @@ public class PiService
 				String command="scp " + (ptimestamp ? "-p" :"") +" -t "+rfile;
 				Channel channel=session.openChannel("exec");
 				((ChannelExec)channel).setCommand(command);
-				System.out.println("got to the exec2");
-
 				// get I/O streams for remote scp
 				OutputStream out=channel.getOutputStream();
 				InputStream in=channel.getInputStream();
@@ -211,7 +401,6 @@ public class PiService
 					return ;}
 
 				File _lfile = new File(lfile);
-				System.out.println("got to the exec3");
 
 				/*
 			if(ptimestamp){
@@ -326,6 +515,8 @@ public class PiService
 		}
 		return b;
 	}
+
+
 }
 
 
