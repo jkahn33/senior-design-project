@@ -31,17 +31,22 @@ namespace USWRIC_Admin_Application
 
         private void BtnCheckedOutEquipment_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new CheckedOutEquipmentPage());
         }
 
         private void BtnRoomUsage_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new LoginHistory());
         }
 
         private void BtnStatisticsCancel_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Homepage());
+        }
+
+        private void BtnSpecificUser_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new UserSearch());
         }
     }
 }

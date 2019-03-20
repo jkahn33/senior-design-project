@@ -60,8 +60,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BadgeIdSearch.xaml.cs">
+      <DependentUpon>BadgeIdSearch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CheckedOutEquipment.cs" />
+    <Compile Include="CheckedOutEquipment.xaml.cs">
+      <DependentUpon>CheckedOutEquipment.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditAdmin.xaml.cs">
       <DependentUpon>EditAdmin.xaml</DependentUpon>
@@ -72,6 +79,9 @@
     <Compile Include="EquipmentUsageResponse.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginHistory.xaml.cs">
+      <DependentUpon>LoginHistory.xaml</DependentUpon>
     </Compile>
     <Compile Include="NewAdmin.xaml.cs">
       <DependentUpon>NewAdmin.xaml</DependentUpon>
@@ -90,7 +100,19 @@
     <Compile Include="UserAdminMgmt.xaml.cs">
       <DependentUpon>UserAdminMgmt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserSearch.xaml.cs">
+      <DependentUpon>UserSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UsersStatisticsResponse.cs" />
+    <Page Include="BadgeIdSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CheckedOutEquipment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,6 +141,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="LoginHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NewAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserAdminMgmt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

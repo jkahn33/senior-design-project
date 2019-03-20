@@ -7,6 +7,7 @@ import java.sql.Timestamp;
  */
 public interface UsersStatisticResponse {
     String getName();
-    String getFiveDigExt();
+    String getBadgeId();
     Timestamp getLoginDateTime();
+    String getDepCode();
 }

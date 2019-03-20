@@ -53,5 +53,10 @@ namespace USWRIC_Admin_Application
             InitializeComponent();
             StatsGrid.DataContext = StatsTable.DefaultView;
         }
+
+        private void EquipmentStatsBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new StatisticsHome());
+        }
     }
 }

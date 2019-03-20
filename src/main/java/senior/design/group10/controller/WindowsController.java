@@ -78,9 +78,10 @@ public class WindowsController {
         return userService.getUsersBetweenDates(request);
     }
 
-    @GetMapping
+    @PostMapping("/userSearchId")
     @ResponseBody
-    public void getSpecificUserStatistics(){
+    public void userSearchById(@RequestBody StringWrapper stringWrapper){
+
         return;
     }
 
