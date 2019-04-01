@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import nuwc.userloginsystem.objects.ValidateWrapper;
 import nuwc.userloginsystem.util.RequestUtil;
 
-public class adminCheckout extends AppCompatActivity {
+public class adminCheckin extends AppCompatActivity {
 
     String password;
     String extension;
@@ -37,17 +37,17 @@ public class adminCheckout extends AppCompatActivity {
     Button submitBut;
     Button cancel;
 
-    public void checkoutScreen(){
+    public void checkinScreen(){
 
-        Intent sub = new Intent(adminCheckout.this, /*checkoutBarcode*/equipmentCheckout.class);
+        Intent sub = new Intent(adminCheckin.this, checkinBarcode.class);
         sub.putExtra("adminExt", extension);
-        adminCheckout.this.startActivity(sub);
+        adminCheckin.this.startActivity(sub);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_checkout);
+        setContentView(R.layout.activity_admin_checkin);
 
 
         submitBut = (Button) findViewById(R.id.submitBut2);
@@ -73,8 +73,8 @@ public class adminCheckout extends AppCompatActivity {
         });
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent sub = new Intent(adminCheckout.this, checkoutOptions.class);
-                adminCheckout.this.startActivity(sub);
+                Intent sub = new Intent(adminCheckin.this, checkoutOptions.class);
+                adminCheckin.this.startActivity(sub);
             }
         });
     }
@@ -119,7 +119,7 @@ public class adminCheckout extends AppCompatActivity {
     public void verifyResponse(boolean success){
         if(success){
 
-            checkoutScreen();
+            checkinScreen();
         }
         else{
             showError("Extension or password is incorrect.");
