@@ -10,7 +10,7 @@
 
     <Grid>
         <Label Content="USWRIC Login History" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="232,50,0,0" VerticalAlignment="Top" Height="35" Width="333" FontFamily="Arial Black" FontSize="20"/>
-        <DataGrid Name="LoginHistGrid" ItemsSource="{Binding}" AutoGenerateColumns="True" Margin="0,85,0,34.6" />
+        <DataGrid Name="LoginHistGrid" ItemsSource="{Binding}" AutoGenerateColumns="True" IsReadOnly="True" ColumnWidth="*" CanUserAddRows="False" Margin="0,85,0,34.6" />
         <Button Name="LoginHistBack" Content="Back" HorizontalAlignment="Left" Margin="362,420,0,0" VerticalAlignment="Top" Width="75" Click="LoginHistBack_Click"/>
     </Grid>
 </Page>
