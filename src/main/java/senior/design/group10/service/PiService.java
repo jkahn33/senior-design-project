@@ -240,8 +240,6 @@ public class PiService
 		//For every pi in Pi iterable add to list
 		for (Pi pi : piIt)
 			piList.add(pi);
-
-		System.out.print(piList.get(0).getIP());
 	}
 
 	//Adds pi to db by checking if ip sent matches any existing
@@ -258,6 +256,12 @@ public class PiService
 		Pi piToAdd = new Pi(sentPi.getIp(),sentPi.getUser(),sentPi.getPassword());
 		piDAO.save(piToAdd);
 		return new ResponseObject(true, "Pi added");
+	}
+	
+	public ResponseObject startSlideShow()
+	{
+		execComToPi("./runslideshow.sh");
+		return new ResponseObject(true,null);
 	}
 
 
@@ -367,8 +371,6 @@ public class PiService
 			FileInputStream fis=null;
 			try
 			{
-				System.out.println("got to the exec1");
-
 				JSch jsch=new JSch();
 				Session session=jsch.getSession(user, host, 22);
 
