@@ -152,5 +152,7 @@ public class BreakoutService
 		return roomList;
 	}
 	
-	
+	public List<BreakoutReservations> getAllRes() {
+		return breakoutDAO.findAll();
+	}
 }

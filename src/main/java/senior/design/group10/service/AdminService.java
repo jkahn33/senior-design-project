@@ -16,6 +16,7 @@ import senior.design.group10.objects.user.Admin;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -95,6 +96,7 @@ public class AdminService {
         Admin adminToEdit = adminOptional.get();
         ActiveAdmin activeAdminToEdit = activeAdminOptional.get();
         adminDAO.delete(adminToEdit);
+        activeAdminDAO.delete(activeAdminToEdit);
         if(editAdmin.getBadgeID() != null){
             adminToEdit.setBadgeID(editAdmin.getBadgeID());
             activeAdminToEdit.setBadgeID(editAdmin.getBadgeID());
@@ -118,5 +120,9 @@ public class AdminService {
             return new ReturnAdmin(admin.getName(), admin.getBadgeID());
         }
         return null;
+    }
+    
+    public List<Admin> getAllAdmins() {
+    	return (List<Admin>)adminDAO.findAll();
     }
 }

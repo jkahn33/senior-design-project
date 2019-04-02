@@ -42,4 +42,8 @@ public class Users
 	public String getDepCode() {
 		return depCode;
 	}
+	
+	public String toString() {
+		return badgeID + ":" + name;
+	}
 }

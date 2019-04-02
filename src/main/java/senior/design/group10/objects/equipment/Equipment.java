@@ -31,7 +31,7 @@ public class Equipment
 		return equipmentName;
 	}
 
-	public boolean isInStock() {
+	public boolean getInStock() {
 		return inStock;
 	}
 

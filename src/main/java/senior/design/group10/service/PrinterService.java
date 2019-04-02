@@ -2,6 +2,7 @@ package senior.design.group10.service;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -107,5 +108,8 @@ public class PrinterService
 
 		return new ResponseObject(true,null);
 	}
-
+	
+	public List<PrinterReservations> getAllRes() {
+		return printerDAO.findAll();
+	}
 }

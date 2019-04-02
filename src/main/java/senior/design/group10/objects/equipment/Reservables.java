@@ -24,4 +24,8 @@ public class Reservables
 	{
 		this.id = id;
 	}
+	
+	public String toString() {
+		return id.getType() + " " + id.getID();
+	}
 }

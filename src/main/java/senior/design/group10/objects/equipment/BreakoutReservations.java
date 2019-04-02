@@ -74,4 +74,28 @@ public class BreakoutReservations
 	{
 		return this.resScheduleEnd;
 	}
+	
+	public Users getUser() {
+		return user;
+	}
+	
+	public Reservables getReservable() {
+		return reservable;
+	}
+	
+	public String getResDescription() {
+		return resDescription;
+	}
+	
+	public String getNumPeople() {
+		return numPeople;
+	}
+	
+	public String getAdditionalComments() {
+		return additionalComments;
+	}
+	
+	public int getRes_ID() {
+		return id;
+	}
 }

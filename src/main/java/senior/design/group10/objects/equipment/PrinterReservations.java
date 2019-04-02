@@ -55,13 +55,35 @@ public class PrinterReservations
 		this.additionalComments = additionalComments;
 	}
 	
-	public Date getJobSchedule()
-	{
+	public Date getJobSchedule() {
 		return this.jobSchedule;
 	}
 	
-	public Date getJobScheduleEnd()
-	{
+	public Date getJobScheduleEnd() {
 		return this.jobScheduleEnd;
+	}
+	
+	public Users getUser() {
+		return user;
+	}
+	
+	public Reservables getReservable() {
+		return reservable;
+	}
+	
+	public String getJobDescription() {
+		return jobDescription;
+	}
+	
+	public String getJobDuration() {
+		return jobDuration;
+	}
+	
+	public String getAdditionalComments() {
+		return additionalComments;
+	}
+	
+	public int getRes_ID() {
+		return id;
 	}
 }

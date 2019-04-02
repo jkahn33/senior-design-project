@@ -59,7 +59,7 @@ public class EquipmentService {
         Users user = usersOptional.get();
         Admin admin = adminOptional.get();
         Equipment equipment = equipmentOptional.get();
-        if(!equipment.isInStock()){
+        if(!equipment.getInStock()){
             return new ResponseObject(false, "Equipment is currently checked out. Please check equipment in before checking out again.");
         }
 
@@ -86,7 +86,7 @@ public class EquipmentService {
         if(historyList == null){
             return new ResponseObject(false, "Equipment with barcode " + barcode + " has not ever been checked out");
         }
-        if(equipmentToFind.isInStock()){
+        if(equipmentToFind.getInStock()){
             return new ResponseObject(false, "Equipment with barcode " + barcode + " is not currently checked out");
         }
         equipmentToFind.setInStock(true);
@@ -98,5 +98,9 @@ public class EquipmentService {
         recent.setCheckinDate(currentTime);
         equipmentCheckoutDAO.save(recent);
         return new ResponseObject(true, null);
+    }
+    
+    public List<Equipment> getAllEquipment() {
+    	return (List<Equipment>) equipmentDAO.findAll();
     }
 }

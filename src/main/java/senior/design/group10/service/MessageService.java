@@ -2,6 +2,7 @@ package senior.design.group10.service;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,9 @@ public class MessageService {
         messageDAO.save(newMessage);
         
         return new ResponseObject(true, adminOptional.get().getName());
+    }
+    
+    public List<Messages> getAllMessages() {
+    	return (List<Messages>)messageDAO.findAll();
     }
 }

@@ -34,4 +34,20 @@ public class Messages
 		this.messageDate = messageDate;
 		this.admin = admin;
 	}
+	
+	public int getMes_ID() {
+		return id;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+	
+	public Timestamp getMessageDate() {
+		return messageDate;
+	}
+	
+	public Admin getAdmin() {
+		return admin;
+	}
 }
