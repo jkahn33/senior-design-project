@@ -114,6 +114,12 @@ public class Reservations extends AppCompatActivity {
         row5 = (TableRow) findViewById(R.id.row5);
 
         days = new View[calSize];
+
+        for(int i = 0; i < calSize; i ++){
+            String viewID = "D" + i;
+            int resID = getResources().getIdentifier(viewID, "id", getPackageName());
+            days[i] = ((View) findViewById(resID));
+        }
         textDay = new TextView[calSize];
 
 
@@ -149,6 +155,7 @@ public class Reservations extends AppCompatActivity {
 
         displayCalendar(month1,day1,year1);
 
+        //Click listeners used for navigating calendar
         leftArrow.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -185,7 +192,7 @@ public class Reservations extends AppCompatActivity {
         CalenImport calendar = new CalenImport();
 
 
-        monthYear.setText(month + " " + year);
+        monthYear.setText(calendar.month(month) + " " + year);
 
         //day of the week (sun-sat) 1-7
         int dayOfWeek = calendar.day(month,1,year);
@@ -194,28 +201,15 @@ public class Reservations extends AppCompatActivity {
         //id of day block in calendar D1,D2,D3 etc
         String dayID = dayOfWeekID(dayOfWeek);
 
-
-
-
-            if(1 < dayOfWeek){
+            if(1 < dayOfWeek) {
                 hideDays(1,dayOfWeek);
-
-
             }
-
             printDays(dayOfWeek,calendar.lastDay(month,year));
-
     }
 
     public void hideDays(int start, int end){
         for(int i = start; i != end; i ++){
-            Log.d("hide","i = " + i);
-            String viewID = "D" + i;
-            int resID = getResources().getIdentifier(viewID, "id", getPackageName());
-            days[i] = ((View) findViewById(resID));
             textDay[i] = (TextView) days[i].findViewById(R.id.date);
-
-
             textDay[i].setText("");
         }
 
@@ -223,21 +217,17 @@ public class Reservations extends AppCompatActivity {
     }
 
     public void printDays(int start,int end) {
-        int day = 1;
+        int d = 1;
 
         for(int i = 1; i <= end; i ++){
-            Log.d("Days","days" + i);
-            String viewID = "D" + start;
-            int resID = getResources().getIdentifier(viewID, "id", getPackageName());
-            days[i] = ((View) findViewById(resID));
-            textDay[i] = (TextView) days[i].findViewById(R.id.date);
-
-            textDay[i].setText(day + "th");
-            day ++;
+            textDay[i] = (TextView) days[start].findViewById(R.id.date);
+            textDay[i].setText(d + "th");
+            d ++;
             start++;
         }
         hideDays(start,calSize);
     }
+
 
     public String dayOfWeekID(int dayOfWeek){
         String dayID = null;

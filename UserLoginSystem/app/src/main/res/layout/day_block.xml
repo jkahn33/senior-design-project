@@ -3,178 +3,71 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date">
 
-
-        <Button
-            android:id="@+id/button"
+        <TextView
+            android:id="@+id/bubb2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            android:background="@color/white" />
+            android:background="@drawable/day_bubb_yellow"
+            android:text=" hoihsd iusdhouh auh dasuho uidsauh osadi asouh @string/dummy_button"
+            android:textSize="10sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date" />
 
-        <Button
-            android:id="@+id/button2"
+        <TextView
+            android:id="@+id/bubb"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            android:background="@color/white" />
+            android:background="@drawable/day_bubb_blue"
+            android:text="HELLO"
+            android:textSize="10sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date" />
 
-        <Button
-            android:id="@+id/button3"
+        <TextView
+            android:id="@+id/bubb1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button7"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button8"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button9"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button10"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button11"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button12"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button13"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button15"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button16"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button17"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button18"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button19"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button20"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button21"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button22"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button23"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-        <Button
-            android:id="@+id/button24"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
-
-
+            android:background="@drawable/day_bubb_yellow"
+            android:text="HELLO"
+            android:textSize="10sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date" />
     </LinearLayout>
 
     <TextView
@@ -184,18 +77,15 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="324dp"
-        android:text="@string/test"
-        android:textColor="@color/black_overlay"
-        android:autoSizeTextType="uniform"
-        android:autoSizeMinTextSize="12sp"
         android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="12sp"
         android:autoSizeStepGranularity="2sp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        android:autoSizeTextType="uniform"
+        android:baselineAligned="false"
+        android:textColor="@color/black_overlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.018"
-        tools:text="4th" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

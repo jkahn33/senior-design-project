@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <NumberPicker
+        android:id="@+id/endTimehourP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="724dp"
+        android:layout_marginTop="388dp"
+        android:text="Print"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/startsDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <NumberPicker
+        android:id="@+id/endTimeMinP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="880dp"
+        android:layout_marginTop="388dp"
+        android:text="Print"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/startsDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <DatePicker
+        android:id="@+id/date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="336dp"
+        android:layout_weight="4"
+        android:calendarViewShown="true"
+        android:spinnersShown="false"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/startDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="728dp"
+        android:layout_marginTop="116dp"
+        android:ems="10"
+        android:hint="Start Date"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <NumberPicker
+        android:id="@+id/startTimeMinP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="880dp"
+        android:layout_marginTop="192dp"
+        android:text="Print"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/startsDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <NumberPicker
+        android:id="@+id/startTimeHourP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="724dp"
+        android:layout_marginTop="192dp"
+        android:text="Print"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/startsDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/blue_back"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/blue_background" />
+
+    <TextView
+        android:id="@+id/MDY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="40dp"
+        android:text="TextView"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="@+id/blue_back"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/dayWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="@+id/blue_back"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:id="@+id/timeSlots"
+        android:layout_width="277dp"
+        android:layout_height="830dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blue_back">
+
+        <LinearLayout
+            android:id="@+id/times"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteY="319dp">
+
+        </LinearLayout>
+    </ScrollView>
+
+    <EditText
+        android:id="@+id/printName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="244dp"
+        android:ems="10"
+        android:hint="Print Name"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/endDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="788dp"
+        android:layout_marginTop="608dp"
+        android:text="End Date"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/employExt"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="372dp"
+        android:ems="10"
+        android:hint="Employee Extension"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/printDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="448dp"
+        android:ems="10"
+        android:hint="Extra details"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="520dp"
+        android:text="Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="440dp"
+        android:layout_marginTop="520dp"
+        android:text="Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
