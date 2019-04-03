@@ -4,18 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import senior.design.group10.objects.equipment.Equipment;
+import senior.design.group10.objects.equipment.PrinterUsageUsers;
 import senior.design.group10.objects.response.*;
 import senior.design.group10.objects.sent.*;
 import senior.design.group10.objects.user.Users;
-import senior.design.group10.service.AdminService;
-import senior.design.group10.service.EquipmentService;
-import senior.design.group10.service.MessageService;
-import senior.design.group10.service.UserService;
+import senior.design.group10.service.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.logging.Logger;
-import senior.design.group10.service.PiService;
 
 @Controller
 @RequestMapping("/windows")
@@ -26,13 +23,19 @@ public class WindowsController {
     private final UserService userService;
     private final EquipmentService equipmentService;
     private final MessageService messageService;
+    private final PrinterService printerService;
 
     @Autowired
-    public WindowsController(AdminService adminService, UserService userService, EquipmentService equipmentService, MessageService messageService) {
+    public WindowsController(AdminService adminService,
+                             UserService userService,
+                             EquipmentService equipmentService,
+                             MessageService messageService,
+                             PrinterService printerService) {
         this.adminService = adminService;
         this.userService = userService;
         this.equipmentService = equipmentService;
         this.messageService = messageService;
+        this.printerService = printerService;
     }
 
     @PostMapping("/newAdmin")
@@ -132,11 +135,24 @@ public class WindowsController {
     public boolean renderImage() {
         return messageService.renderImage();
     }
+
     @GetMapping("/execComToPi")
     @ResponseBody
     public ResponseObject sshPi()
     {
     		PiService piservice = new PiService();
     		return new ResponseObject(true, null);
+    }
+
+    @GetMapping("/printerUsage")
+    @ResponseBody
+    public List<PrinterUsageResponse> getPrinterUsage(){
+        return printerService.getPrinterUsage();
+    }
+
+    @GetMapping("/printerUserUsage")
+    @ResponseBody
+    public List<PrinterUsageUsers> getPrinterUserUsage(){
+        return printerService.getUserUsage();
     }
 }

@@ -1,7 +1,11 @@
 package senior.design.group10.service;
 
+import java.math.RoundingMode;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -11,9 +15,8 @@ import org.springframework.stereotype.Service;
 import senior.design.group10.dao.PrinterReservationDAO;
 import senior.design.group10.dao.ReservablesDAO;
 import senior.design.group10.dao.UsersDAO;
-import senior.design.group10.objects.equipment.PrinterReservations;
-import senior.design.group10.objects.equipment.ReservableKey;
-import senior.design.group10.objects.equipment.Reservables;
+import senior.design.group10.objects.equipment.*;
+import senior.design.group10.objects.response.PrinterUsageResponse;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentPrinterReservation;
 import senior.design.group10.objects.user.Users;
@@ -58,10 +61,8 @@ public class PrinterService
 		if(!reservableOptional.isPresent()){
 			return new ResponseObject(false, "Reservable with type " + printer.getReservableType() + printer.getReservableId() + " cannot be found");
 		}
-		
 
 		//Calculate the end time
-
 		Timestamp jobScheduleEnd = Timestamp.valueOf(printer.getJobSchedule());
 
 		//Splitting the time by : for hours and mins
@@ -71,11 +72,7 @@ public class PrinterService
 		// add number of hours
 		cal.add(Calendar.MINUTE, Integer.parseInt(hourMin[1]) );
 		cal.add(Calendar.HOUR, Integer.parseInt(hourMin[0]) );
-		jobScheduleEnd = new Timestamp(cal.getTime().getTime());
-		//Where end time finishes calculating
-
-
-
+		jobScheduleEnd = new Timestamp(cal.getTime().getTime()); //Where end time finishes calculating
 
 		//Check to assure that the printer/ timeslot are available
 		java.util.List<PrinterReservations> checking = printerDAO.checkTimeAvailable(Timestamp.valueOf(printer.getJobSchedule()),jobScheduleEnd,printer.getReservableId());
@@ -111,4 +108,40 @@ public class PrinterService
 		return new ResponseObject(true,null);
 	}
 
+	/**
+	 * Gets usage statistics of totalHours about printers
+	 * @return A list of PrinterUsageResponse objects
+	 */
+	public List<PrinterUsageResponse> getPrinterUsage(){
+		List<PrinterUsageResponse> printers = new ArrayList<>();
+		//creating a String array to make it easier to loop through each printer
+		String[] ids = {"A", "B", "C", "D", "E"};
+
+		//used to format the hours in order to not get lots of decimals from division
+		DecimalFormat df = new DecimalFormat("#.##");
+		df.setRoundingMode(RoundingMode.CEILING);
+
+		//getting printer information for each printer
+		//it will loop through the array of IDs and print plug the current id in for printer specific stats
+		for(String id : ids) {
+			PrinterUsageHours currHours = printerDAO.getUsageHoursById(id);
+			if(currHours.getTotalHours() != null) {
+				printers.add(new PrinterUsageResponse(currHours.getPrinterId(),
+						//the amount of usage is returned in seconds, so the seconds have to be converted to hours
+						df.format(Double.parseDouble(currHours.getTotalHours())/3600)));
+			}
+			else{
+				printers.add(new PrinterUsageResponse(id, "0"));
+			}
+		}
+		return printers;
+	}
+
+	/**
+	 * Gets the amount each user has used the printers and the department they belong to
+	 * @return A list of PrinterUsageUsers objects
+	 */
+	public List<PrinterUsageUsers> getUserUsage(){
+		return printerDAO.getUserUsage();
+	}
 }

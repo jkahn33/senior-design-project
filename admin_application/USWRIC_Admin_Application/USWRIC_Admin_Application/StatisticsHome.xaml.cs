@@ -48,5 +48,10 @@ namespace USWRIC_Admin_Application
         {
             this.NavigationService.Navigate(new UserSearch());
         }
+
+        private void BtnPrinterUsage_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PrinterUsageStatistics());
+        }
     }
 }

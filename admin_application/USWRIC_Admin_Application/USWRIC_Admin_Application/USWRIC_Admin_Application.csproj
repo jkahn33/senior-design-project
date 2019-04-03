@@ -86,6 +86,9 @@
     <Compile Include="NewAdmin.xaml.cs">
       <DependentUpon>NewAdmin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PrinterUsageStatistics.xaml.cs">
+      <DependentUpon>PrinterUsageStatistics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RemoveAdmin.xaml.cs">
       <DependentUpon>RemoveAdmin.xaml</DependentUpon>
     </Compile>
@@ -146,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NewAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrinterUsageStatistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
