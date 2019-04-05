@@ -24,4 +24,9 @@ public class Reservables
 	{
 		this.id = id;
 	}
+	
+	public String getRoom()
+	{
+		return this.id.getID();
+	}
 }

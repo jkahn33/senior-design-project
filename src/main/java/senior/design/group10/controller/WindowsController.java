@@ -3,13 +3,20 @@ package senior.design.group10.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import senior.design.group10.objects.response.ResponseObject;
+import senior.design.group10.objects.response.ReturnAdmin;
+import senior.design.group10.objects.sent.AdminInQuestion;
+import senior.design.group10.objects.sent.EditAdmin;
+import senior.design.group10.objects.sent.NewAdmin;
+import senior.design.group10.objects.sent.SentMessage;
+import senior.design.group10.service.AdminService;
+import senior.design.group10.service.MessageService;
 import senior.design.group10.objects.equipment.Equipment;
 import senior.design.group10.objects.equipment.PrinterUsageUsers;
 import senior.design.group10.objects.response.*;
 import senior.design.group10.objects.sent.*;
 import senior.design.group10.objects.user.Users;
 import senior.design.group10.service.*;
-
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.logging.Logger;
@@ -24,18 +31,24 @@ public class WindowsController {
     private final EquipmentService equipmentService;
     private final MessageService messageService;
     private final PrinterService printerService;
+    private final PiService piService;
+    private final BreakoutService breakoutService;
 
     @Autowired
     public WindowsController(AdminService adminService,
                              UserService userService,
                              EquipmentService equipmentService,
                              MessageService messageService,
-                             PrinterService printerService) {
+                             PrinterService printerService,
+							  PiService piService,
+							  BreakoutService breakoutService) {
         this.adminService = adminService;
         this.userService = userService;
         this.equipmentService = equipmentService;
         this.messageService = messageService;
         this.printerService = printerService;
+        this.piService = piService;
+        this.breakoutService = breakoutService;
     }
 
     @PostMapping("/newAdmin")
@@ -112,38 +125,133 @@ public class WindowsController {
         return userService.getUserById(stringWrapper.getString());
     }
 
-    @PostMapping("/removeUser")
-    @ResponseBody
-    public ResponseObject removeUser(@RequestBody StringWrapper stringWrapper){
-        return userService.removeUser(stringWrapper.getString());
-    }
+	@PostMapping("/removeUser")
+	@ResponseBody
+	public ResponseObject removeUser(@RequestBody StringWrapper stringWrapper){
+		return userService.removeUser(stringWrapper.getString());
+	}
 
-    @PostMapping("/getAdminName")
-    @ResponseBody
-    public ResponseObject getAdminName(@RequestBody StringWrapper stringWrapper){
-        return adminService.getAdminName(stringWrapper.getString());
-    }
+	@PostMapping("/getAdminName")
+	@ResponseBody
+	public ResponseObject getAdminName(@RequestBody StringWrapper stringWrapper){
+		return adminService.getAdminName(stringWrapper.getString());
+	}
 
-    @PostMapping("/removeAdmin")
-    @ResponseBody
-    public ResponseObject removeAdmin(@RequestBody StringWrapper stringWrapper){
-        return adminService.removeAdmin(stringWrapper.getString());
-    }
+	@PostMapping("/removeAdmin")
+	@ResponseBody
+	public ResponseObject removeAdmin(@RequestBody StringWrapper stringWrapper){
+		return adminService.removeAdmin(stringWrapper.getString());
+	}
 
-    @GetMapping("/renderImage")
-    @ResponseBody
-    public boolean renderImage() {
-        return messageService.renderImage();
-    }
+	////////////////////////////////////////////////
+	//Pi commands
+	//
+	////////////////////////////////////////////////
 
-    @GetMapping("/execComToPi")
+	//Checks for duplicate ip then stores to ip table
+	//if duplicate returns false object response
+	//else stores in db and will be used to connect to different pis
+	@GetMapping("/addPi")
+	@ResponseBody
+	public ResponseObject addPi(@RequestBody SentPi sentPi)
+	{
+		return piService.addPi(sentPi);        
+	}
+
+	
+	@GetMapping("/fillPiList")
+	public void fillPiList()
+	{
+		//piService.createPiImageFolder("PiImages");
+		piService.piListFill();
+	}
+	//Sends the command to the pi to execute through ssh command
+
+	@GetMapping("/execComToPi")
+	@ResponseBody
+	public ResponseObject sshPi(String command)
+	{
+		//PiService piservice = new PiService();
+		piService.execComToPi(command);
+		return new ResponseObject(true, null);
+	}
+	
+	@GetMapping("/sendFileToPi")
+	@ResponseBody
+	public ResponseObject sendFileToPi()
+	{
+		piService.copyImgToPi("out.pdf", "Desktop");
+		return new ResponseObject(true,null);
+	}
+	
+	@GetMapping("sendFolderToPi")
+	@ResponseBody
+	public ResponseObject sendFolderToPi()
+	{
+		
+		piService.copyFolderToPi("TestDir", "Desktop/New");
+		return new ResponseObject(true,null);
+	}
+
+    /////////////////////////////////
+	//Messages
+	//////////////////////////////
+	
+    /*
+     * Saves a new message to the database.
+     * Messages contain:
+     * -a string (the message)
+     * -a timestamp of creation (automatically generated by the backend)
+     * -an associated administrator account
+     */
+    @PostMapping("/newMessage")
+    //@GetMapping("newMessage") for testing
     @ResponseBody
-    public ResponseObject sshPi()
+    public ResponseObject newMessage(@RequestBody SentMessage sentMessage) 
+    //public ResponseObject newMessage(SentMessage sentMessage) This is for testing
     {
-    		PiService piservice = new PiService();
-    		return new ResponseObject(true, null);
-    }
+    		//Sending a message
+    		//Used for making new messages
+    		//sentMessage = new SentMessage("entering past message", "12345", "2010-01-01 01:01:01");
+        return messageService.createNewMessage(sentMessage);
+    }    
+    
+    /*
+     * Deletes all messages with date less than current date then returns everything else
+     * Messages contain:
+     * -a string (the message)
+     * -a timestamp of creation (automatically generated by the backend)
+     * -an associated administrator account
+     */
+    @GetMapping("/updatePiImages")
+    @ResponseBody
+    public ResponseObject updatePiImages()
+    {
+    		System.out.println("Getting Current Messages");
+    		piService.renderMessagesImage(messageService.getCurrentMessages());
+    		System.out.println("Getting Current Breakout Reservation");
+    		//Todo
+    		//Add future events function
 
+    		piService.renderBreakoutImage(breakoutService.todaysReservations());
+    		//Send the folder to the pi
+    		piService.piListFill();
+
+    		System.out.println("Sending the Images");
+
+    		
+    		piService.copyFolderToPi("PiImages", "Pictures/Slides");
+
+        return  new ResponseObject(true,null);
+    }
+    
+    @GetMapping("/runSlideShow")
+    @ResponseBody
+    public ResponseObject startSlideshow()
+    {
+    		piService.startSlideShow();
+    		return new ResponseObject(true,null);
+    }
     @GetMapping("/printerUsage")
     @ResponseBody
     public List<PrinterUsageResponse> getPrinterUsage(){
