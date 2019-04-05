@@ -41,7 +41,7 @@ namespace USWRIC_Admin_Application
 
         private void BtnDisplayMgmt_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new DisplayManagement());
         }
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
