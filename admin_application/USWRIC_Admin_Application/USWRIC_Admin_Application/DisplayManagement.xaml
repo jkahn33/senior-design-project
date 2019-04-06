@@ -14,7 +14,7 @@
         <TextBox Name="txtMessageDays" HorizontalAlignment="Left" Height="26" Margin="557,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
         <Label x:Name="lblMessage" Content="Enter Message to Display" HorizontalAlignment="Left" Height="30" Margin="57,60,0,0" VerticalAlignment="Top" Width="186" FontFamily="Arial Black"/>
         <Label x:Name="lblMessageDuration" Content="Enter Duration in Days" HorizontalAlignment="Left" Height="30" Margin="557,60,0,0" VerticalAlignment="Top" Width="163" FontFamily="Arial Black"/>
-        <Button Name="btnMessageSubmit" Content="Submit" HorizontalAlignment="Left" Margin="541,162,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="btnMessageSubmit" Content="Submit" HorizontalAlignment="Left" Margin="541,162,0,0" VerticalAlignment="Top" Width="75" Click="BtnMessageSubmit_Click"/>
         <Button Name="btnQueuedMessages" Content="Queued Messages" HorizontalAlignment="Left" Margin="629,162,0,0" VerticalAlignment="Top" Width="109"/>
         <Separator HorizontalAlignment="Left" Height="15" Margin="57,231,0,0" VerticalAlignment="Top" Width="681"/>
         <TextBox x:Name="txtFutureEvent" HorizontalAlignment="Left" Height="87" Margin="57,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="348"/>
@@ -43,7 +43,8 @@
         </DatePicker>
         <Label x:Name="lblStart" Content="Event Start" HorizontalAlignment="Left" Height="30" Margin="486,262,0,0" VerticalAlignment="Top" Width="139" FontFamily="Arial Black"/>
         <Label x:Name="lblEnd" Content="Event End" HorizontalAlignment="Left" Height="30" Margin="636,262,0,0" VerticalAlignment="Top" Width="139" FontFamily="Arial Black"/>
-        <Button Name="btnEventSubmit" Content="Submit" HorizontalAlignment="Left" Margin="506,350,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Name="btnQueuedEvents" Content="Queued Events" HorizontalAlignment="Left" Margin="609,350,0,0" VerticalAlignment="Top" Width="109"/>
+        <Button Name="btnEventSubmit" Content="Submit" HorizontalAlignment="Left" Margin="506,350,0,0" VerticalAlignment="Top" Width="75" Click="BtnEventSubmit_Click"/>
+        <Button Name="btnQueuedEvents" Content="Queued Events" HorizontalAlignment="Left" Margin="609,350,0,0" VerticalAlignment="Top" Width="109" Click="BtnQueuedEvents_Click"/>
+        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="362,406,0,0" VerticalAlignment="Top" Width="75" Click="BtnBack_Click"/>
     </Grid>
 </Page>

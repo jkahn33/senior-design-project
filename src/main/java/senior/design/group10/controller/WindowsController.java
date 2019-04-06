@@ -205,7 +205,7 @@ public class WindowsController {
      * -an associated administrator account
      */
     @PostMapping("/newMessage")
-    //@GetMapping("newMessage") for testing
+    //@GetMapping("newMessage") //for testing
     @ResponseBody
     public ResponseObject newMessage(@RequestBody SentMessage sentMessage) 
     //public ResponseObject newMessage(SentMessage sentMessage) This is for testing

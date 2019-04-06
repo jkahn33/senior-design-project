@@ -37,7 +37,7 @@ public class PiService
 
 	private final
 	PiDAO piDAO;
-	List<Pi> piList = new ArrayList<Pi>();
+	List<Pi> piList = new ArrayList<>();
 	private final static Logger log = Logger.getLogger(PiService.class.getName());
 
 	@Autowired
@@ -49,7 +49,7 @@ public class PiService
 
 	/*///////////////////////////////////////////////
 	 * Image Rendering
-	 */////////////////////////////////////////////
+	 *//////////////////////////////////////////////
 
 	public boolean renderBreakoutImage(List<BreakoutReservations> breakoutList)
 	{

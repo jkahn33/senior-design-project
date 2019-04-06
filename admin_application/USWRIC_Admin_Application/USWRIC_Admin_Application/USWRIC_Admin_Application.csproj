@@ -92,6 +92,9 @@
     <Compile Include="PrinterUsageStatistics.xaml.cs">
       <DependentUpon>PrinterUsageStatistics.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QueuedMessages.xaml.cs">
+      <DependentUpon>QueuedMessages.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RemoveAdmin.xaml.cs">
       <DependentUpon>RemoveAdmin.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PrinterUsageStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QueuedMessages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
