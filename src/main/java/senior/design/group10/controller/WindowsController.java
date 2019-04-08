@@ -210,9 +210,9 @@ public class WindowsController {
     public ResponseObject newMessage(@RequestBody SentMessage sentMessage) 
     //public ResponseObject newMessage(SentMessage sentMessage) This is for testing
     {
-    		//Sending a message
-    		//Used for making new messages
-    		//sentMessage = new SentMessage("entering past message", "12345", "2010-01-01 01:01:01");
+        //Sending a message
+        //Used for making new messages
+        //sentMessage = new SentMessage("entering past message", "12345", "2010-01-01 01:01:01");
         return messageService.createNewMessage(sentMessage);
     }    
     

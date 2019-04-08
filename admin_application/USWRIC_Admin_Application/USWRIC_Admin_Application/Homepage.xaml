@@ -8,11 +8,17 @@
         mc:Ignorable="d"
         Title="Homepage" Height="450" Width="800">
     <Grid>
+        <Button Margin="134,239,537,75.6" Click="BtnDisplayMgmt_Click">
+            <StackPanel>
+                <Image Source="Display.jpg" Height="92" />
+                <TextBlock><Run Text="Display Management"/></TextBlock>
+            </StackPanel>
+        </Button>
         <Label Content="Administrator Homepage" HorizontalAlignment="Left" HorizontalContentAlignment="center" Height="37" Margin="192,47,0,0" VerticalAlignment="Top" Width="415" FontFamily="Arial Black" FontSize="20"/>
         <Button x:Name="btnStatistics" Content="Statistics" HorizontalAlignment="Left" Height="39" Margin="60,193,0,0" VerticalAlignment="Top" Width="281" Click="BtnStatistics_Click"/>
         <Button x:Name="btnEdit" Content="Edit Personal Information" HorizontalAlignment="Left" Height="39" Margin="450,193,0,0" VerticalAlignment="Top" Width="281" Click="BtnEdit_Click"/>
         <Button x:Name="btnUserAdminMgmt"  Content="User and Admin Management" HorizontalAlignment="Left" Height="39" Margin="450,274,0,0" VerticalAlignment="Top" Width="281" Click="BtnUserAdminMgmt_Click"/>
-        <Button x:Name="btnDisplayMgmt" Content="Display Management" HorizontalAlignment="Left" Height="39" Margin="60,274,0,0" VerticalAlignment="Top" Width="281" Click="BtnDisplayMgmt_Click"/>
-        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="358,361,0,0" VerticalAlignment="Top" Width="75" Click="BtnLogout_Click"/> 
+        
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="358,361,0,0" VerticalAlignment="Top" Width="75" Click="BtnLogout_Click"/>
     </Grid>
 </Page>
