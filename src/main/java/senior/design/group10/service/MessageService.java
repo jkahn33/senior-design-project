@@ -28,11 +28,17 @@ public class MessageService {
 	private final static Logger log = Logger.getLogger(MessageService.class.getName());
 	private final MessageDAO messageDAO;
 	private final AdminDAO adminDAO;
+	private final PiService piService;
+	private final BreakoutService breakoutService;
+	private final FutureService futureService;
 
 	@Autowired
-	public MessageService(MessageDAO messageDAO, AdminDAO adminDAO) {
+	public MessageService(MessageDAO messageDAO, AdminDAO adminDAO, PiService piService, BreakoutService breakoutService, FutureService futureService) {
 		this.messageDAO = messageDAO;
 		this.adminDAO = adminDAO;
+		this.piService = piService;
+		this.futureService = futureService;
+		this.breakoutService = breakoutService;
 	}
 
 	//Message includes end date to describe how long the message will last for
@@ -52,6 +58,13 @@ public class MessageService {
 
 		Messages newMessage = new Messages(message.getMessage(), endTime, adminOptional.get());
 		messageDAO.save(newMessage);
+
+		piService.renderMessagesImage(getCurrentMessages());
+		piService.renderBreakoutImage(breakoutService.todaysReservations());
+		piService.renderFutureImage(futureService.getFutureMessages());
+
+		piService.piListFill();
+		piService.copyFolderToPi("PiImages", "Pictures/Slides");
 
 		return new ResponseObject(true, adminOptional.get().getName());
 	}

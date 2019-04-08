@@ -4,8 +4,6 @@ import org.hibernate.annotations.GenericGenerator;
 import senior.design.group10.objects.user.Admin;
 
 import javax.persistence.*;
-
-
 import java.sql.Timestamp;
 
 @Entity

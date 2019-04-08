@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 @Controller
 @RequestMapping("/windows")
 public class WindowsController {
-    private final static Logger log = Logger.getLogger(WindowsController.class.getName());
+	private final static Logger log = Logger.getLogger(WindowsController.class.getName());
 
     private final AdminService adminService;
     private final UserService userService;
@@ -33,6 +33,7 @@ public class WindowsController {
     private final PrinterService printerService;
     private final PiService piService;
     private final BreakoutService breakoutService;
+    private final FutureService futureService;
 
     @Autowired
     public WindowsController(AdminService adminService,
@@ -41,7 +42,8 @@ public class WindowsController {
                              MessageService messageService,
                              PrinterService printerService,
 							  PiService piService,
-							  BreakoutService breakoutService) {
+							  BreakoutService breakoutService,
+                             FutureService futureService) {
         this.adminService = adminService;
         this.userService = userService;
         this.equipmentService = equipmentService;
@@ -49,6 +51,7 @@ public class WindowsController {
         this.printerService = printerService;
         this.piService = piService;
         this.breakoutService = breakoutService;
+        this.futureService = futureService;
     }
 
     @PostMapping("/newAdmin")
@@ -234,6 +237,7 @@ public class WindowsController {
     		//Add future events function
 
     		piService.renderBreakoutImage(breakoutService.todaysReservations());
+    		piService.renderFutureImage(futureService.getFutureMessages());
     		//Send the folder to the pi
     		piService.piListFill();
 
