@@ -86,12 +86,12 @@ public class BreakoutReservations
 	
 	public String getEndHours()
 	{
-		String endHours  = resScheduleEnd.getHours() + ":"+ resScheduleEnd.getMinutes();
+		String endHours  = ""+resScheduleEnd.getHours();
 		return endHours;
 	}
 	public String getStartHours()
 	{
-		String startHours  = resSchedule.getHours() + ":"+ resSchedule.getMinutes();
+		String startHours  = ""+resSchedule.getHours();
 		return startHours;
 	}
 }
