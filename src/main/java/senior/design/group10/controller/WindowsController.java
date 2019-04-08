@@ -32,15 +32,17 @@ public class WindowsController {
 	private final EquipmentService equipmentService;
 	private final MessageService messageService;
 	private final BreakoutService breakoutService;
+	private final FutureService futureService;
 
 	@Autowired
-	public WindowsController(AdminService adminService, UserService userService, EquipmentService equipmentService, MessageService messageService, PiService piService, BreakoutService breakoutService) {
+	public WindowsController(AdminService adminService, UserService userService, EquipmentService equipmentService, MessageService messageService, PiService piService, BreakoutService breakoutService, FutureService futureService) {
 		this.adminService = adminService;
 		this.userService = userService;
 		this.equipmentService = equipmentService;
 		this.messageService = messageService;
 		this.piService = piService;
 		this.breakoutService = breakoutService;
+		this.futureService = futureService;
 	}
 
 	@PostMapping("/newAdmin")
@@ -225,6 +227,7 @@ public class WindowsController {
     		//Add future events function
 
     		piService.renderBreakoutImage(breakoutService.todaysReservations());
+    		piService.renderFutureImage(futureService.getFutureMessages());
     		//Send the folder to the pi
     		piService.piListFill();
 

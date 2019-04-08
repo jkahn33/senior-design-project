@@ -6,6 +6,7 @@ import senior.design.group10.dao.PiDAO;
 import senior.design.group10.objects.equipment.BreakoutReservations;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentPi;
+import senior.design.group10.objects.tv.Future;
 import senior.design.group10.objects.tv.Messages;
 import senior.design.group10.objects.tv.Pi;
 
@@ -88,13 +89,16 @@ public class PiService
 		int y = 300;
 		ArrayList<String> testArr = new ArrayList<>();
 
+		if(breakoutList.isEmpty())
+			testArr.add("No breakout reservations for today");
 		//for every string in messages add to testArr
-		for( int loop = 0; loop< breakoutList.size();loop++)
-		{
-			String message = breakoutList.get(loop).getresDescription() + " Room: " + breakoutList.get(loop).getRoom()
-					+ ", From " + breakoutList.get(loop).getStartHours()+ " to "+ breakoutList.get(loop).getEndHours();
-			testArr.add(message);
-		}
+		else
+			for( int loop = 0; loop< breakoutList.size();loop++)
+			{
+				String message = breakoutList.get(loop).getresDescription() + " Room: " + breakoutList.get(loop).getRoom()
+						+ ", From " + breakoutList.get(loop).getStartHours()+ " to "+ breakoutList.get(loop).getEndHours();
+				testArr.add(message);
+			}
 		//testArr.add("Printer number 3 is broken. Please refrain from using printer number 3. Test1 test2 test3 test4. Test5 test6 test7 test8.");
 		//testArr.add("The USWRIC will be closed to all visitors on Friday, February 22nd.");
 
@@ -167,6 +171,8 @@ public class PiService
 		int y = 300;
 		ArrayList<String> testArr = new ArrayList<>();
 		//for every string in messages add to testArr
+		if(messageList.isEmpty())
+			testArr.add("No messages for Today");
 		for( int loop = 0; loop< messageList.size();loop++)
 		{
 			testArr.add(messageList.get(loop).getMessage());
@@ -210,7 +216,93 @@ public class PiService
 		}
 		return true;
 	}
-	
+
+	public boolean renderFutureImage(List<Future> futureList){
+		String headerText = "USWRIC Future Events";
+		//make size fit 1080p tv
+		int width = 1920;
+		int height = 1080;
+
+		// Constructs a BufferedImage of one of the predefined image types.
+		BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+		// Create a graphics which can be used to draw into the buffered image
+		Graphics2D g2d = bufferedImage.createGraphics();
+		//used to setup Java rendering algorithms
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+		//render the gradient blue/yellow background
+		GradientPaint paint = new GradientPaint(0, 0, Color.BLUE, 0, height, Color.ORANGE);
+		g2d.setPaint(paint);
+		g2d.fillRect(0, 0, width, height);
+
+		//render the header text
+		Font font = new Font("Arial", Font.BOLD, 100);
+		g2d.setFont(font);
+		FontMetrics fm = g2d.getFontMetrics();
+		int x = ((width - fm.stringWidth(headerText)) / 2);
+
+		g2d.setColor(Color.BLACK);
+		g2d.drawString(headerText, x, 150);
+
+		//rendering of administrative messages
+		x = 64;
+		int y = 300;
+		ArrayList<String> testArr = new ArrayList<>();
+		//for every string in messages add to testArr
+		//for every string in messages add to testArr
+
+		if(futureList.isEmpty())
+			testArr.add("No Future Events");
+		else
+		{
+			for( int loop = 0; loop< futureList.size();loop++)
+			{
+				String future = futureList.get(loop).getFuture()
+						+ ", From " + futureList.get(loop).getStartHours()+ " to "+ futureList.get(loop).getEndHours();
+				testArr.add(future);
+			}
+		}
+		//testArr.add("Printer number 3 is broken. Please refrain from using printer number 3. Test1 test2 test3 test4. Test5 test6 test7 test8.");
+		//testArr.add("The USWRIC will be closed to all visitors on Friday, February 22nd.");
+
+		font = new Font("Arial", Font.BOLD, 48);
+		g2d.setFont(font);
+
+		g2d.setColor(Color.BLACK);
+
+		for(String s : testArr) {
+			String[] splits = s.split(" ");
+			for(int i = 0; i < splits.length; i++){
+				String stringToPrint = getStringToPrint(splits, i);
+				String[] printString = stringToPrint.split("@#&");
+				g2d.drawString(printString[0], x, y);
+				y += 50;
+
+				i = Integer.parseInt(printString[1]);
+			}
+
+			g2d.setStroke(new BasicStroke(10));
+			g2d.draw(new Line2D.Float(210, y, 1710, y));
+			y+=100;
+		}
+
+		// Disposes of this graphics context and releases any system resources that it is using.
+		g2d.dispose();
+
+		try {
+			// Save as PNG
+			File file = new File("PiImages/future_events.png");
+			OutputStream out = new FileOutputStream(file);
+			ImageIO.write(bufferedImage, "png", file);
+		}
+		catch (Exception e){
+			log.severe(e.toString());
+			return false;
+		}
+		return true;
+	}
+
 	private String getStringToPrint(String[] splits, int index){
 		StringBuilder newString = new StringBuilder();
 		while(index < splits.length && newString.length() + splits[index].length() < 75){
@@ -359,7 +451,7 @@ public class PiService
 		      System.exit(-1);
 		    }      
 		 */
-		
+
 		String user,host,password;
 
 		//Do the file transfer contained in piList
