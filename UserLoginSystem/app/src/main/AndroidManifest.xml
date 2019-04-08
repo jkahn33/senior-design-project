@@ -15,64 +15,83 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity
             android:name=".adminCheckin"
             android:label="@string/title_activity_admin_checkin"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".adminAddEquip"
             android:label="@string/title_activity_admin_add_equip"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".scannerScreen3"
             android:label="@string/title_activity_scanner_screen3"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".scannerScreen2"
             android:label="@string/title_activity_scanner_screen2"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".savedUsers"
             android:label="@string/app_name" />
+
         <activity
             android:name=".signIn"
             android:exported="true"
             android:label="@string/app_name" />
+
         <activity
             android:name=".newUser"
             android:label="@string/app_name" />
+
         <activity
             android:name=".checkoutBarcode"
-            />
-        <activity
-            android:name=".equipmentCheckout"
-            android:exported="true" />
+            android:exported="true"
+            android:label="@string/app_name" />
+
         <activity
             android:name=".Reservations"
             android:label="@string/title_activity_reservations"
             android:theme="@style/AppTheme" />
-        <activity android:name=".initialScreen">
+
+        <activity
+            android:name=".initialScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".checkoutOptions" />
+
+        <activity
+            android:name=".checkoutOptions" />
+
         <activity
             android:name=".addEquipment"
             android:exported="true" />
-        <activity android:name=".checkinBarcode"
-            />
-        <activity android:name=".adminCheckout" />
+
+        <activity
+            android:name=".checkinBarcode" />
+
+        <activity
+            android:name=".adminCheckout"
+            android:exported="true"
+            android:label="@string/app_name"/>
+
         <activity
             android:name=".PickReservationType"
             android:label="title_activity_pick_reservation_type"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".BreakoutReservation"
             android:label="title_activity_breakout_reservation"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".scannerScreen"
             android:label="@string/title_activity_scanner_screen"

@@ -39,7 +39,7 @@ public class adminCheckout extends AppCompatActivity {
 
     public void checkoutScreen(){
 
-        Intent sub = new Intent(adminCheckout.this, /*checkoutBarcode*/equipmentCheckout.class);
+        Intent sub = new Intent(adminCheckout.this, /*equipmentCheckout*/checkoutBarcode.class);
         sub.putExtra("adminExt", extension);
         adminCheckout.this.startActivity(sub);
     }

@@ -53,6 +53,7 @@ public class checkoutBarcode extends AppCompatActivity {
         commandBox = (TextView) findViewById(R.id.commandBox2);
         cancelButton = (Button) findViewById(R.id.cancelButton);
         homeButton = (Button) findViewById(R.id.homeButton);
+        buttonScan2 = (Button) findViewById(R.id.buttonScan2);
 
         homeButton.setVisibility(View.INVISIBLE);
 
@@ -99,6 +100,8 @@ public class checkoutBarcode extends AppCompatActivity {
             }
         });
     }
+
+
     public void sendCheckout() throws JSONException {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();

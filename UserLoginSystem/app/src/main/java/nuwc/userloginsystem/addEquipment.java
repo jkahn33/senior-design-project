@@ -32,9 +32,16 @@ public class addEquipment extends AppCompatActivity {
     String equipName;
     String barcode;
 
-    EditText barcodeBox;
     static EditText BITS;
+
+    EditText barcodeBox;
     EditText equipmentNameBox;
+    EditText manufacturerBox;
+    EditText modelNumBox;
+    EditText serialNumBox;
+    EditText plantNumBox;
+
+
     TextView equipmentSuccessBox;
 
     Button submitButton;
@@ -52,6 +59,10 @@ public class addEquipment extends AppCompatActivity {
         scanButton = (Button) findViewById(R.id.scanButton);
         barcodeBox = (EditText) findViewById(R.id.barcodeBox2);
         equipmentNameBox = (EditText) findViewById(R.id.equipmentName);
+        manufacturerBox= (EditText) findViewById(R.id.manufacturerBox);
+        modelNumBox = (EditText) findViewById(R.id.modelNumBox);
+        serialNumBox = (EditText) findViewById(R.id.serialNumBox2);
+        plantNumBox= (EditText) findViewById(R.id.plantNumBox);
         equipmentSuccessBox = (TextView) findViewById(R.id.commandBox2);
         addEquipCancel = (Button) findViewById(R.id.btnAddEquipCancel);
         back = (Button) findViewById(R.id.btnAddEquipHome);

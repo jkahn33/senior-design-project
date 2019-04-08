@@ -85,8 +85,6 @@ public class checkinBarcode extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), scannerScreen.class));
             }
         });
-
-
     }
 
     public void sendCheckin() throws JSONException {
