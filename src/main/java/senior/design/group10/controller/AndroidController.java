@@ -137,14 +137,14 @@ public class AndroidController {
 	@PostMapping("/newBreakoutReservation")
 	//@GetMapping("/newBreakoutReservation")
 	@ResponseBody
-    public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation) //Add @RequestBody
+    public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation) 
 	{
 		//List for passing in in sent breakout reservation
-		//List<String> reservableIdList = new ArrayList<String>();
+		//List<String> reservableIdList = new ArrayList<String>(); used for testing
 		//reservableIdList.add("C");
 		
 		//Manual breakout reservation entry for testing image rendering
-		//breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-18 05:01:01", "2019-03-18 17:00:00", "2","none");
+		//breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-20 05:01:01", "2019-03-20 17:00:00", "2","none");
         return breakoutService.addBreakRes(breakoutReservation);
     }
 
