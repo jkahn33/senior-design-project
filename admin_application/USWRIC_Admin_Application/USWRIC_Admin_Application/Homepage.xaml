@@ -18,12 +18,12 @@
                 <Image Source="/images/Statistics.png" Height="68" Width="76" />
             </StackPanel>
         </Button>
-        <Button Margin="448,191,283,187.6" BorderThickness="0" Click="BtnStatistics_Click">
+        <Button Margin="448,191,283,187.6" BorderThickness="0" Click="BtnEdit_Click">
             <StackPanel>
                 <Image Source="/images/Personal.png" Height="68" Width="76" />
             </StackPanel>
         </Button>
-        <Button Margin="624,191,106,187.6" BorderThickness="0" Click="BtnStatistics_Click">
+        <Button Margin="624,191,106,187.6" BorderThickness="0" Click="BtnUserAdminMgmt_Click">
             <StackPanel>
                 <Image Source="/images/Users.png" Height="68" Width="76" />
             </StackPanel>
