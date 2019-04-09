@@ -81,7 +81,7 @@ public class PiService
 		FontMetrics fm = g2d.getFontMetrics();
 		int x = ((width - fm.stringWidth(headerText)) / 2);
 
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.WHITE);
 		g2d.drawString(headerText, x, 150);
 
 		//rendering of administrative messages
@@ -105,7 +105,7 @@ public class PiService
 		font = new Font("Arial", Font.BOLD, 48);
 		g2d.setFont(font);
 
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.WHITE);
 
 		for(String s : testArr) {
 			String[] splits = s.split(" ");
@@ -163,7 +163,7 @@ public class PiService
 		FontMetrics fm = g2d.getFontMetrics();
 		int x = ((width - fm.stringWidth(headerText)) / 2);
 
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.WHITE);
 		g2d.drawString(headerText, x, 150);
 
 		//rendering of administrative messages
@@ -183,7 +183,7 @@ public class PiService
 		font = new Font("Arial", Font.BOLD, 48);
 		g2d.setFont(font);
 
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.WHITE);
 
 		for(String s : testArr) {
 			String[] splits = s.split(" ");
@@ -242,7 +242,7 @@ public class PiService
 		FontMetrics fm = g2d.getFontMetrics();
 		int x = ((width - fm.stringWidth(headerText)) / 2);
 
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.WHITE);
 		g2d.drawString(headerText, x, 150);
 
 		//rendering of administrative messages
@@ -269,7 +269,7 @@ public class PiService
 		font = new Font("Arial", Font.BOLD, 48);
 		g2d.setFont(font);
 
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.WHITE);
 
 		for(String s : testArr) {
 			String[] splits = s.split(" ");

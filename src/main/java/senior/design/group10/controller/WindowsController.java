@@ -156,8 +156,9 @@ public class WindowsController {
 	//else stores in db and will be used to connect to different pis
 	@GetMapping("/addPi")
 	@ResponseBody
-	public ResponseObject addPi(@RequestBody SentPi sentPi)
+	public ResponseObject addPi(/*@RequestBody SentPi sentPi*/)
 	{
+	    SentPi sentPi = new SentPi("192.168.1.2", "pi", "admin");
 		return piService.addPi(sentPi);        
 	}
 
