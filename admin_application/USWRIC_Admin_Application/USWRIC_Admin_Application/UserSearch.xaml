@@ -5,11 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:USWRIC_Admin_Application"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      Height="Auto" Width="Auto"
       Title="UserSearch">
 
-    <Grid>
-        <Label Content="Search by User" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="232,50,0,0" VerticalAlignment="Top" Height="35" Width="333" FontFamily="Arial Black" FontSize="20"/>
-        <Button x:Name="btnIdSearch" Content="Search by By Badge ID" HorizontalAlignment="Left" Height="39" Margin="259,163,0,0" VerticalAlignment="Top" Width="281" Click="BtnIdSearch_Click"/>
-    </Grid>
+    <Viewbox>
+        <Grid Height="450" Width="800">
+            <Label Content="Search by User" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="232,50,0,0" VerticalAlignment="Top" Height="35" Width="333" FontFamily="Arial Black" FontSize="20"/>
+            <Button x:Name="btnIdSearch" Content="Search by By Badge ID" HorizontalAlignment="Left" Height="39" Margin="259,163,0,0" VerticalAlignment="Top" Width="281" Click="BtnIdSearch_Click"/>
+        </Grid>
+    </Viewbox>
+    
 </Page>

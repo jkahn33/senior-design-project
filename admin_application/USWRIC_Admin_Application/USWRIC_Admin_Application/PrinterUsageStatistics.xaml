@@ -6,20 +6,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:USWRIC_Admin_Application"
       mc:Ignorable="d" 
-      Height="450" Width="800"
+      Height="Auto" Width="Auto"
       Title="PrinterUsageStatistics">
 
-    <Grid>
-        <Label Content="3D Printer Usage Statistics" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="232,50,0,0" VerticalAlignment="Top" Height="35" Width="333" FontFamily="Arial Black" FontSize="20"/>
-        <Label Content="A" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="98,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
-        <Label Content="B" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="238,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
-        <Label Content="C" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="378,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
-        <Label Content="D" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="518,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
-        <Label Content="E" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="658,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
-        <Rectangle VerticalAlignment="Stretch" Width="5" Fill="Black" Margin="188,128,610,0" Stroke="Black" />
-        <Rectangle VerticalAlignment="Stretch" Width="5" Fill="Black" Margin="328,128,478,-0.4" Stroke="Black" />
-        <Rectangle VerticalAlignment="Stretch" Width="5" Fill="Black" Margin="468,128,324,-0.4" Stroke="Black" />
-        <Rectangle VerticalAlignment="Stretch" Width="5" Fill="Black" Margin="608,128,200,-0.4" Stroke="Black" />
-    
-    </Grid>
+    <Viewbox>
+        <Grid Height="450" Width="800">
+            <Label Content="3D Printer Usage Statistics" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="232,50,0,0" VerticalAlignment="Top" Height="35" Width="333" FontFamily="Arial Black" FontSize="20"/>
+            <Label Content="A" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="98,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
+            <Label Content="B" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="238,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
+            <Label Content="C" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="378,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
+            <Label Content="D" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="518,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
+            <Label Content="E" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="658,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
+            <Rectangle VerticalAlignment="Stretch" Width="5" Fill="Black" Margin="188,128,610,0" Stroke="Black" />
+            <Rectangle VerticalAlignment="Stretch" Width="5" Fill="Black" Margin="328,128,478,-0.4" Stroke="Black" />
+            <Rectangle VerticalAlignment="Stretch" Width="5" Fill="Black" Margin="468,128,324,-0.4" Stroke="Black" />
+            <Rectangle VerticalAlignment="Stretch" Width="5" Fill="Black" Margin="608,128,200,-0.4" Stroke="Black" />
+
+        </Grid>
+    </Viewbox>
 </Page>
