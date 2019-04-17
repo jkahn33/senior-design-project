@@ -4,9 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import senior.design.group10.dao.UsersDAO;
 import senior.design.group10.objects.response.ResponseObject;
+import senior.design.group10.objects.response.SpecificUserResponse;
 import senior.design.group10.objects.response.UsersStatisticResponse;
 import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.objects.sent.StatisticsRequest;
+import senior.design.group10.objects.sent.StringWrapper;
+import senior.design.group10.objects.user.DebugUser;
+import senior.design.group10.objects.user.SpecifcUserSearch;
 import senior.design.group10.objects.user.UserLoginHistory;
 import senior.design.group10.objects.user.Users;
 
@@ -99,5 +103,29 @@ public class UserService {
         }
         usersDAO.delete(usersOptional.get());
         return new ResponseObject(true, null);
+    }
+
+    /**
+     * First checks to see if the criteria is a badge ID, then checks to see if badge ID fails. If one of those is available,
+     * statistics will be generated for the given user.
+     * @param criteria Either the name or badge ID of the user to search for
+     * @return A SpecificUserResponse object
+     */
+    public SpecificUserResponse statsByUser(String criteria){
+        Optional<Users> usersOptional = usersDAO.findById(criteria);
+        if(usersOptional.isPresent()){
+            SpecifcUserSearch search = usersDAO.getSpecificUserStatsById(criteria);
+            return new SpecificUserResponse(true, search.getName(), search.getDept(), "12", "2019-04-16 13:15:44.0", search.getCreationDate());
+        }
+        usersOptional = usersDAO.findByName(criteria);
+        if(usersOptional.isPresent()){
+            SpecifcUserSearch search = usersDAO.getSpecificUserStatsByName(criteria);
+            return new SpecificUserResponse(true, search.getName(), search.getDept(), search.getOccurrences(), search.getLasteEntered(), search.getCreationDate());
+        }
+        return new SpecificUserResponse(false);
+    }
+
+    public DebugUser debugUser(){
+        return usersDAO.testDebug();
     }
 }

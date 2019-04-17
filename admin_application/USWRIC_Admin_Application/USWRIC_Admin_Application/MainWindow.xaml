@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="USWRIC Administrator" Height="450" Width="800">
 
-    <Frame Source="/Login.xaml">
+    <Frame NavigationUIVisibility="Hidden" Source="/Login.xaml">
     </Frame>
 </Window>

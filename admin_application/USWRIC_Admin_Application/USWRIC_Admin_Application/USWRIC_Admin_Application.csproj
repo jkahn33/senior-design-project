@@ -105,6 +105,7 @@
       <DependentUpon>RemoveUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReturnAdmin.cs" />
+    <Compile Include="SpecificUserResponse.cs" />
     <Compile Include="StatisticsHome.xaml.cs">
       <DependentUpon>StatisticsHome.xaml</DependentUpon>
     </Compile>
