@@ -12,16 +12,21 @@
     <Viewbox>
         <Grid Height="450" Width="800">
             <Label Content="3D Printer Usage Statistics" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="232,50,0,0" VerticalAlignment="Top" Height="35" Width="333" FontFamily="Arial Black" FontSize="20"/>
-            <Label Content="A" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="98,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
-            <Label Content="B" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="238,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
-            <Label Content="C" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="378,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
-            <Label Content="D" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="518,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
-            <Label Content="E" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="658,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
-            <Rectangle VerticalAlignment="Stretch" Width="5" Fill="Black" Margin="188,128,610,0" Stroke="Black" />
-            <Rectangle VerticalAlignment="Stretch" Width="5" Fill="Black" Margin="328,128,478,-0.4" Stroke="Black" />
-            <Rectangle VerticalAlignment="Stretch" Width="5" Fill="Black" Margin="468,128,324,-0.4" Stroke="Black" />
-            <Rectangle VerticalAlignment="Stretch" Width="5" Fill="Black" Margin="608,128,200,-0.4" Stroke="Black" />
-
+            <Label Content="A" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="104,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
+            <Label Content="B" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="245,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
+            <Label Content="C" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="387,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
+            <Label Content="D" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="528,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
+            <Label Content="E" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="665,128,0,0" VerticalAlignment="Top" Height="35" Width="41" FontFamily="Arial Black" FontSize="20"/>
+            <Rectangle VerticalAlignment="Stretch" Width="2" Fill="Black" Margin="190,128,600,94" Stroke="Black" />
+            <Rectangle VerticalAlignment="Stretch" Width="2" Fill="Black" Margin="332,128,458,94" Stroke="Black" />
+            <Rectangle VerticalAlignment="Stretch" Width="2" Fill="Black" Margin="470,128,313,94" Stroke="Black" />
+            <Rectangle VerticalAlignment="Stretch" Width="2" Fill="Black" Margin="613,128,182,94" Stroke="Black" />
+            
+            <TextBlock Name="AUse" HorizontalAlignment="Left" Margin="78,186,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" Width="91"/>
+            <TextBlock Name="BUse" HorizontalAlignment="Left" Margin="220,186,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" Width="91"/>
+            <TextBlock Name="CUse" HorizontalAlignment="Left" Margin="362,185,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" Width="91"/>
+            <TextBlock Name="DUse" HorizontalAlignment="Left" Margin="503,186,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" Width="91"/>
+            <TextBlock Name="EUse" HorizontalAlignment="Left" Margin="641,185,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" Width="91"/>
         </Grid>
     </Viewbox>
 </Page>

@@ -31,13 +31,13 @@ public interface UsersDAO extends CrudRepository<Users, String> {
             "where(loginDateTime between :startTime and :endTime)", nativeQuery = true)
     List <UsersStatisticResponse> getUsersBetweenDates(@Param("startTime") Date startTime, @Param("endTime") Date endTime);
 
-    @Query(value = "select users.name, users.depCode as dept, (select count(*) from user_login_hist where user_ext=ulh.user_ext) as occurences, ulh.loginDateTime as lastEntered, users.creationDate from user_login_hist ulh " +
+    @Query(value = "select users.name, users.depCode as dept, (select count(*) from user_login_hist where user_ext=ulh.user_ext) as occurrences, ulh.loginDateTime as lastEntered, users.creationDate from user_login_hist ulh " +
             "inner join users on users.badgeId = ulh.user_ext " +
             "where ulh.loginDateTime=(select MAX(loginDateTime) from user_login_hist ulh2 where ulh.user_ext = ulh2.user_ext) and users.badgeId= :badgeId " +
             "group by users.name, users.depCode, ulh.loginDateTime, users.creationDate, ulh.user_ext", nativeQuery=true)
     SpecifcUserSearch getSpecificUserStatsById(@Param("badgeId") String badgeId);
 
-    @Query(value = "select users.name, users.depCode as dept, (select count(*) from user_login_hist where user_ext=ulh.user_ext) as occurences, ulh.loginDateTime as lastEntered, users.creationDate from user_login_hist ulh " +
+    @Query(value = "select users.name, users.depCode as dept, (select count(*) from user_login_hist where user_ext=ulh.user_ext) as occurrences, ulh.loginDateTime as lastEntered, users.creationDate from user_login_hist ulh " +
             "inner join users on users.badgeId = ulh.user_ext " +
             "where ulh.loginDateTime=(select MAX(loginDateTime) from user_login_hist ulh2 where ulh.user_ext = ulh2.user_ext) and users.name= :userName " +
             "group by users.name, users.depCode, ulh.loginDateTime, users.creationDate, ulh.user_ext", nativeQuery=true)

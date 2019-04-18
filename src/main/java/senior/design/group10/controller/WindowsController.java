@@ -150,7 +150,7 @@ public class WindowsController {
 	@PostMapping("/getSpecificUser")
     @ResponseBody
     public SpecificUserResponse getSpecificUser(@RequestBody StringWrapper stringWrapper){
-        //StringWrapper stringWrapper = new StringWrapper("651561561");
+        //StringWrapper stringWrapper = new StringWrapper("12345");
         return userService.statsByUser(stringWrapper.getString());
     }
 

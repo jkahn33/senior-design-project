@@ -36,8 +36,8 @@ public interface PrinterReservationDAO extends JpaRepository<PrinterReservations
 			"from printer_res where reservable_id = :printer_id", nativeQuery = true)
 	PrinterUsageHours getUsageHoursById(@Param("printer_id") String printerId);
 
-	@Query(value = "select users.name, users.fiveDigExt, users.depCode as department, count(printer_res.user_ext) as occurrences from printer_res " +
-			"INNER JOIN users ON printer_res.user_ext = users.fiveDigExt " +
+	@Query(value = "select users.name, users.badgeId, users.depCode as department, count(printer_res.user_ext) as occurrences from printer_res " +
+			"INNER JOIN users ON printer_res.user_ext = users.badgeId " +
 			"GROUP BY user_ext;", nativeQuery = true)
 	List<PrinterUsageUsers> getUserUsage();
 }

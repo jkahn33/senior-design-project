@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using USWRIC_Admin_Application.objects;
 
 namespace USWRIC_Admin_Application
 {
@@ -23,6 +27,10 @@ namespace USWRIC_Admin_Application
         public PrinterUsageStatistics()
         {
             InitializeComponent();
+        }
+        private async void fillStatistics()
+        {
+
         }
     }
 }

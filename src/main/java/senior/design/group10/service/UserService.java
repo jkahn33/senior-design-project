@@ -115,12 +115,12 @@ public class UserService {
         Optional<Users> usersOptional = usersDAO.findById(criteria);
         if(usersOptional.isPresent()){
             SpecifcUserSearch search = usersDAO.getSpecificUserStatsById(criteria);
-            return new SpecificUserResponse(true, search.getName(), search.getDept(), "12", "2019-04-16 13:15:44.0", search.getCreationDate());
+            return new SpecificUserResponse(true, search.getName(), search.getDept(), search.getOccurrences(), search.getLastEntered(), search.getCreationDate());
         }
         usersOptional = usersDAO.findByName(criteria);
         if(usersOptional.isPresent()){
             SpecifcUserSearch search = usersDAO.getSpecificUserStatsByName(criteria);
-            return new SpecificUserResponse(true, search.getName(), search.getDept(), search.getOccurrences(), search.getLasteEntered(), search.getCreationDate());
+            return new SpecificUserResponse(true, search.getName(), search.getDept(), search.getOccurrences(), search.getLastEntered(), search.getCreationDate());
         }
         return new SpecificUserResponse(false);
     }
