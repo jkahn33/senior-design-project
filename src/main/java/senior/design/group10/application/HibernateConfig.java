@@ -1,5 +1,5 @@
 /*
- * This contains hibernate configuration and will not be modified for application functionality
+ * This contains hibernate configuration and should not be modified for application functionality
  */
 
 package senior.design.group10.application;
@@ -39,9 +39,9 @@ public class HibernateConfig {
     @Bean
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.p6spy.engine.spy.P6SpyDriver");
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         //database url setting
-        dataSource.setUrl("jdbc:p6spy:mysql://localhost:3306/user_logging_system");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/user_logging_system");
         //database root setting
         dataSource.setUsername("root");
         //database password setting
@@ -65,12 +65,10 @@ public class HibernateConfig {
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.bytecode.use_reflection_optimizer", "false");
-//        properties.setProperty("hibernate.connection.driver_class", "com.p6spy.engine.spy.P6SpyDriver");
-//        properties.setProperty("hibernate.hbm2ddl.auto", "update");
-//        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-//        properties.setProperty("hibernate.current_session_context_class", "org.springframework.orm.hibernate5.SpringSessionContext");
-        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        //properties.setProperty("show_sql", "true");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.current_session_context_class", "org.springframework.orm.hibernate5.SpringSessionContext");
         return properties;
     }
 
@@ -84,6 +82,4 @@ public class HibernateConfig {
             throw new NullPointerException("Not a hibernate factory");
         }
     }
-
-
 }
