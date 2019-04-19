@@ -161,7 +161,7 @@ public class CSVExport {
             ColumnPositionMappingStrategy<Messages> ms = new ColumnPositionMappingStrategy<Messages>();
             ms.setType(Messages.class);
         	
-            String[] cols = new String[]{"mes_id", "message", "messagedate", "admin"};
+            String[] cols = new String[]{"mes_id", "message", "messageenddate", "admin"};
             writer.write(cols[0]);
             for(int i = 1; i < cols.length; i++) writer.write("," + cols[i]);
             writer.write("\n");
