@@ -18,16 +18,11 @@
         <activity android:name=".initialScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".savedUsers"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".signIn"
-            android:exported="true"
             android:label="@string/app_name" />
         <activity
             android:name=".newUser"
@@ -38,6 +33,10 @@
         <activity
             android:name=".equipmentCheckout"
             android:exported="true" />
+        <activity
+            android:name=".signIn"
+            android:exported="true"
+            android:label="@string/app_name" />
         <activity
             android:name=".Reservations"
             android:label="@string/title_activity_reservations"
@@ -62,6 +61,9 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".reserveOptionsPrint"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".myPrintList"
             android:label="@string/app_name" />
     </application>
 

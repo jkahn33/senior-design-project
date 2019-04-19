@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -66,6 +67,8 @@ public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter
         ImageView namePlate;
         TextView  userName;
         RelativeLayout parentLayout;
+
+
         public ViewHolder(View itemView) {
             super(itemView);
 

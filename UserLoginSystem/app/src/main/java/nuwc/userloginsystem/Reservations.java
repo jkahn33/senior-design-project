@@ -84,6 +84,8 @@ public class Reservations extends AppCompatActivity {
 
 
 
+
+
     SimpleDateFormat fullTimeFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
     Date startDate = new Date();
     Date endDate = new Date();
@@ -211,6 +213,8 @@ public class Reservations extends AppCompatActivity {
         for(int i = start; i != end; i ++){
             textDay[i] = (TextView) days[i].findViewById(R.id.date);
             textDay[i].setText("");
+
+
         }
 
 

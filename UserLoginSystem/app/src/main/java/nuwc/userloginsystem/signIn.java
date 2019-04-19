@@ -32,7 +32,7 @@ public class signIn extends AppCompatActivity{
         });
         newUser.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(signIn.this, newUser.class);
+                Intent myIntent = new Intent(signIn.this, Reservations.class);
                 signIn.this.startActivity(myIntent);
             }
         });

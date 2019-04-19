@@ -66,8 +66,7 @@ public class savedUsers extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        getUserList();
-        addUser();
+        getUserList();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_users);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
@@ -80,6 +79,7 @@ public class savedUsers extends AppCompatActivity{
         fastScroller.setRecyclerView(recyclerView);
 
 
+
         ctx = this;
     }
 
@@ -90,17 +90,18 @@ public class savedUsers extends AppCompatActivity{
 
 
 
-//            for(Users u : userList){
-//                mNames.add(u.getName());
-//                Log.d("Names",u.getName());
-//            }
-            for(int i = 0; i < 200; i ++){
-                mNames.add(nameGen.randomIdentifier());
-                Log.d("names",mNames.get(i));
-
+            for(Users u : userList){
+                mNames.add(u.getName());
+                Log.d("Names",u.getName());
             }
+//            for(int i = 0; i < 200; i ++){
+//                mNames.add(nameGen.randomIdentifier());
+//                Log.d("names",mNames.get(i));
+//
+//            }
             Collections.sort(mNames);
-            
+
+
     }
     public void verifyResponse(ResponseObject response){
         if(response.isSuccess()){
@@ -113,35 +114,35 @@ public class savedUsers extends AppCompatActivity{
             showError(response.getMessage());
         }
     }
-//    public void getUserList(){
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//        requestQueue.start();
-//
-//
-//        JsonArrayRequest request = new JsonArrayRequest(
-//                Request.Method.GET,
-//                RequestUtil.BASE_URL + "/printAllUsers",
-//                null,
-//                response -> {
-//                    try {
-//                        ObjectMapper mapper = new ObjectMapper();
-//                        userList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
-//                        addUser();
-//                    }
-//                    catch(Exception e){
-//                        Log.e("EXCEPTION", e.toString());
-//                        showError("Object mapping error. Please check logs.");
-//                    }
-//                },
-//                error -> {
-//                    Log.e("ERROR", error.getMessage());
-//                    showError("Unknown error. Please check logs.");
-//
-//                }
-//        );
-//
-//        requestQueue.add(request);
-//    }
+    public void getUserList(){
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.start();
+
+
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                RequestUtil.BASE_URL + "/printAllUsers",
+                null,
+                response -> {
+                    try {
+                        ObjectMapper mapper = new ObjectMapper();
+                        userList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
+                        addUser();
+                    }
+                    catch(Exception e){
+                        Log.e("EXCEPTION", e.toString());
+                        showError("Object mapping error. Please check logs.");
+                    }
+                },
+                error -> {
+                    Log.e("ERROR", error.getMessage());
+                    showError("Unknown error. Please check logs.");
+
+                }
+        );
+
+        requestQueue.add(request);
+    }
     public void logUser(String id) throws JSONException {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();

@@ -201,6 +201,8 @@ public class reserveOptionsPrint extends AppCompatActivity{
                     int time = view.getId();
 
                     startTimeHourP.setValue(time);
+                    calStart.set(Calendar.HOUR_OF_DAY,time);
+
 
                 }
             });

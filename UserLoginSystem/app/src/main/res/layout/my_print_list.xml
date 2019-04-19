@@ -27,12 +27,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include
-                layout="@layout/edit_reservation_button"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:layout_editor_absoluteY="100dp" />
         </android.support.v7.widget.RecyclerView>
 
     </RelativeLayout>
