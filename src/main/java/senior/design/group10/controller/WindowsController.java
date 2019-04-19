@@ -9,6 +9,8 @@ import senior.design.group10.objects.sent.AdminInQuestion;
 import senior.design.group10.objects.sent.EditAdmin;
 import senior.design.group10.objects.sent.NewAdmin;
 import senior.design.group10.objects.sent.SentMessage;
+import senior.design.group10.objects.tv.Future;
+import senior.design.group10.objects.tv.Messages;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.MessageService;
 import senior.design.group10.objects.equipment.Equipment;
@@ -246,5 +248,39 @@ public class WindowsController {
     		piService.startSlideShow();
     		return new ResponseObject(true,null);
     }
+    
+    @GetMapping("/getMessages")
+    @ResponseBody
+    public List<Messages> getMesssages()
+    {
+    		return messageService.getCurrentMessages();
+    }
+    
+    @GetMapping("/deleteMessagesById")
+    @ResponseBody
+    public ResponseObject deleteMessageById(int[] ids)
+    {
+    		messageService.deleteMessagesById(ids);
+    		updatePiImages();
+    		return new ResponseObject(true,null);
+    }
+    
+    @GetMapping("/getFutures")
+    @ResponseBody
+    public List<Future> getFutures()
+    {
+    		return futureService.getFutureMessages();
+    }
+    
+    @GetMapping("/deleteFuturesById")
+    @ResponseBody
+    public ResponseObject deleteFutureById(int[] ids)
+    {
+    	
+    		futureService.deleteFuturesById(ids);
+    		updatePiImages();
+		return new ResponseObject(true,null);
+    }
+    
 
 }
