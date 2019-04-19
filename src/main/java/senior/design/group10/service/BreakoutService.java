@@ -34,7 +34,7 @@ public class BreakoutService
 	private final UsersDAO usersDAO;
 	private final ReservablesDAO reservablesDAO;
 	@Autowired
-	public BreakoutService( UsersDAO usersDAO, BreakoutReservationDAO breakoutDAO, ReservablesDAO reservablesDAO)
+	public BreakoutService(UsersDAO usersDAO, BreakoutReservationDAO breakoutDAO, ReservablesDAO reservablesDAO)
 	{
 		this.usersDAO = usersDAO;
 		this.breakoutDAO = breakoutDAO;
@@ -63,7 +63,7 @@ public class BreakoutService
 			//if one room is unavailable send the list of availability and return false
 			if(!roomsAvailable[x])
 			{
-				//Print the list of available and unavailble room
+				//Print the list of available and unavailable room
 				for(int y = 0; y < breakout.getReservableIdList().size();y++)
 				{
 					roomString += "Room " + breakout.getReservableIdList().get(y) + " is ";
@@ -83,12 +83,12 @@ public class BreakoutService
 	{
 		//Checking for user existance
 
-		Optional<Users> usersOptional = usersDAO.findById(breakout.getUserExt());
+		Optional<Users> usersOptional = usersDAO.findById(breakout.getBadgeID());
 		
 
 		if(!usersOptional.isPresent())
 		{
-			return new ResponseObject(false, "User with extension " + breakout.getUserExt() + " cannot be found");
+			return new ResponseObject(false, "User with extension " + breakout.getBadgeID() + " cannot be found");
 		}
 
 		//Saving the breakout res to the db
@@ -125,11 +125,10 @@ public class BreakoutService
 	public boolean[] roomAvailable(SentBreakoutReservation breakout)
 	{
 		boolean roomList []= new boolean [breakout.getReservableIdList().size()];
-		
-		for (int resListNum = 0; resListNum < breakout.getReservableIdList().size();resListNum++)
+		for (int resListNum = 0; resListNum < breakout.getReservableIdList().size(); resListNum++)
 		{
 			//check what lists start with
-			//Check to assure that the printer timeslots are available
+			//Check to assure that the printer time slots are available
 			Optional <Reservables> reservableOptional = reservablesDAO.findById(new ReservableKey(breakout.getReservableType(),breakout.getReservableIdList().get(resListNum)));
 			List<BreakoutReservations> checking = breakoutDAO.checkTimeAvailable(Timestamp.valueOf(breakout.getResStart()),Timestamp.valueOf(breakout.getResEnd()),breakout.getReservableIdList().get(resListNum));
 			Optional <BreakoutReservations> precedingRes = breakoutDAO.checkNestedReservation(Timestamp.valueOf(breakout.getResStart()),breakout.getReservableIdList().get(resListNum));
@@ -185,5 +184,7 @@ public class BreakoutService
 		return todaysReservation;
 	}
 	
-	
+	public List<BreakoutReservations> getAllRes() {
+		return breakoutDAO.findAll();
+	}
 }

@@ -20,6 +20,7 @@ import senior.design.group10.objects.sent.SentPrinterReservation;
 import senior.design.group10.objects.sent.SentReservable;
 import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.objects.tv.Calendar;
+import senior.design.group10.objects.user.ActiveUser;
 import senior.design.group10.objects.user.Users;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.BreakoutService;
@@ -108,8 +109,8 @@ public class AndroidController {
     //Just for testing. UserService.getAllUsers() returns a list of all users
     @GetMapping("/printAllUsers")
     @ResponseBody
-    public List<Users> printAllUsers() {
-        return userService.getAllUsers();
+    public List<ActiveUser> printAllUsers() {
+        return userService.getAllActiveUsers();
     }
     
 	@PostMapping("/newPrinterReservation")

@@ -64,16 +64,16 @@ public class EquipmentService {
         Date date = new Date();
         Timestamp currentTime = new Timestamp(date.getTime());
 
-        Optional<Users> usersOptional = usersDAO.findById(sentEquipment.getUserExt());
-        Optional<Admin> adminOptional = adminDAO.findById(sentEquipment.getAdminExt());
+        Optional<Users> usersOptional = usersDAO.findById(sentEquipment.getUserID());
+        Optional<Admin> adminOptional = adminDAO.findById(sentEquipment.getAdminID());
         Optional<Equipment> equipmentOptional = equipmentDAO.findById(sentEquipment.getBarcode());
         //verifies that the user exists
         if(!usersOptional.isPresent()){
-            return new ResponseObject(false, "User with extension " + sentEquipment.getUserExt() + " cannot be found");
+            return new ResponseObject(false, "User with extension " + sentEquipment.getUserID() + " cannot be found");
         }
         //verifies that the administrator exists
         if(!adminOptional.isPresent()){
-            return new ResponseObject(false, "Admin with extension " + sentEquipment.getAdminExt() + " cannot be found");
+            return new ResponseObject(false, "Admin with extension " + sentEquipment.getAdminID() + " cannot be found");
         }
         //verifies that the equipment exists
         if(!equipmentOptional.isPresent()){
@@ -82,8 +82,9 @@ public class EquipmentService {
         Users user = usersOptional.get();
         Admin admin = adminOptional.get();
         Equipment equipment = equipmentOptional.get();
+
         //verifies that the equipment is not currently checked out
-        if(!equipment.isInStock()){
+        if(!equipment.getInStock()) {
             return new ResponseObject(false, "Equipment is currently checked out. Please check equipment in before checking out again.");
         }
 
@@ -122,7 +123,7 @@ public class EquipmentService {
             return new ResponseObject(false, "Equipment with barcode " + barcode + " has not ever been checked out");
         }
         //verifies that the equipment is currently checked out
-        if(equipmentToFind.isInStock()){
+        if(equipmentToFind.getInStock()) {
             return new ResponseObject(false, "Equipment with barcode " + barcode + " is not currently checked out");
         }
         //sets the inStock attribute to true to represent the equipment is currently available
@@ -157,5 +158,13 @@ public class EquipmentService {
      */
     public List<CheckedOutEquipment> getCheckedOutEquipment(){
         return equipmentDAO.getCheckedOutEquipment();
+    }
+    
+    /**
+     * Gets a list of all of the equipment in the database.
+     * @return List of all equipment in the database.
+     */
+    public List<Equipment> getAllEquipment() {
+    	return (List<Equipment>) equipmentDAO.findAll();
     }
 }

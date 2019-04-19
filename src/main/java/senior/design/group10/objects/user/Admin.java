@@ -9,7 +9,7 @@ public class Admin
 {
 	@Id
 	@Column(length=5)
-	private String ext;
+	private String badgeID;
 	@Column
 	private String password;
 	@Column
@@ -19,21 +19,22 @@ public class Admin
 
 	public Admin(){}
 	
-	public Admin(String ext, String password, String name, Timestamp creationDate)
+	public Admin(String badgeID, String password, String name, Timestamp creationDate)
 	{
-		this.ext = ext;
+		this.badgeID = badgeID;
 		this.password = password;
 		this.name = name;
 		this.creationDate = creationDate;
 	}
+
+	public String getBadgeID() {
+		return badgeID;
+	}
+	
 	public String getPassword(){
 		return password;
 	}
-
-	public String getExt() {
-		return ext;
-	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -42,8 +43,8 @@ public class Admin
 		return creationDate;
 	}
 
-	public void setExt(String ext) {
-		this.ext = ext;
+	public void setBadgeID(String badgeID) {
+		this.badgeID = badgeID;
 	}
 
 	public void setPassword(String password) {
@@ -52,5 +53,9 @@ public class Admin
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String toString() {
+		return badgeID + ":" + name;
 	}
 }

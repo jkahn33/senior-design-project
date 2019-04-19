@@ -2,6 +2,7 @@ package senior.design.group10.service;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -49,11 +50,11 @@ public class PrinterService
 	public ResponseObject addPrintRes(SentPrinterReservation printer)
 	{
 		//Checking for user existance
-		Optional<Users> usersOptional = usersDAO.findById(printer.getUserExt());
+		Optional<Users> usersOptional = usersDAO.findById(printer.getBadgeID());
 		Optional <Reservables> reservableOptional = reservablesDAO.findById(new ReservableKey(printer.getReservableType(),printer.getReservableId()));
 
 		if(!usersOptional.isPresent()){
-			return new ResponseObject(false, "User with extension " + printer.getUserExt() + " cannot be found");
+			return new ResponseObject(false, "User with extension " + printer.getBadgeID() + " cannot be found");
 		}
 		if(!reservableOptional.isPresent()){
 			return new ResponseObject(false, "Reservable with type " + printer.getReservableType() + printer.getReservableId() + " cannot be found");
@@ -110,5 +111,8 @@ public class PrinterService
 
 		return new ResponseObject(true,null);
 	}
-
+	
+	public List<PrinterReservations> getAllRes() {
+		return printerDAO.findAll();
+	}
 }

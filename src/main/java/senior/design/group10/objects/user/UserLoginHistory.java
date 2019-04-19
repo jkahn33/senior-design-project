@@ -14,18 +14,15 @@ public class UserLoginHistory
 	@GenericGenerator(name="generator", strategy="increment")
 	@GeneratedValue(generator="generator")
 	private int id;
-
-	
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_ext")
+	@JoinColumn(name = "user")
 	private Users user;
 	@Column
 	private Timestamp loginDateTime;
 
-	public UserLoginHistory(){}
+	public UserLoginHistory() {}
 	
-	public UserLoginHistory(Users user, Timestamp loginDateTime)
-	{
+	public UserLoginHistory(Users user, Timestamp loginDateTime) {
 		this.user = user;
 		this.loginDateTime = loginDateTime;
 	}
@@ -33,11 +30,15 @@ public class UserLoginHistory
 	public int getId() {
 		return id;
 	}
-
+	
+	public int getLogin_ID() {
+		return id;
+	}
+	
 	public Users getUser() {
 		return user;
 	}
-
+	
 	public Timestamp getLoginDateTime() {
 		return loginDateTime;
 	}

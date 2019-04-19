@@ -2,26 +2,26 @@ package senior.design.group10.objects.sent;
 
 public class SentEquipment {
     private String barcode;
-    private String userExt;
-    private String adminExt;
+    private String userID;
+    private String adminID;
 
     public SentEquipment(){}
 
-    public SentEquipment(String barcode, String userExt, String adminExt) {
+    public SentEquipment(String barcode, String userID, String adminID) {
         this.barcode = barcode;
-        this.userExt = userExt;
-        this.adminExt = adminExt;
+        this.userID = userID;
+        this.adminID = adminID;
     }
 
     public String getBarcode() {
         return barcode;
     }
 
-    public String getUserExt() {
-        return userExt;
+    public String getUserID() {
+        return userID;
     }
 
-    public String getAdminExt() {
-        return adminExt;
+    public String getAdminID() {
+        return adminID;
     }
 }

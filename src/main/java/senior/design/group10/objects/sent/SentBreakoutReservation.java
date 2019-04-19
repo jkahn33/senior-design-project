@@ -1,14 +1,13 @@
 package senior.design.group10.objects.sent;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SentBreakoutReservation 
 {
-	private String userExt;
+	private String badgeID;
 	private String reservableType;
-	private List <String> reservableIdList;
+	private ReservableIdWrapper reservableIdList;
 	private String resDescription;
 	private String resStart;
 	private String resEnd;
@@ -17,11 +16,11 @@ public class SentBreakoutReservation
 
 	public SentBreakoutReservation(){}
 	
-	public SentBreakoutReservation(String userExt, String reservableType, List <String> reservableIdList, String resDescription, String resStart, String resEnd,String numPeople, String additionalCom)
+	public SentBreakoutReservation(String badgeID, String reservableType, ReservableIdWrapper reservableIdList, String resDescription, String resStart, String resEnd,String numPeople, String additionalCom)
 	{
-		this.userExt = userExt;
-		this.reservableIdList = new ArrayList<String>(reservableIdList);
+		this.badgeID = badgeID;
 		this.reservableType = reservableType;
+		this.reservableIdList = reservableIdList;
 		this.resDescription= resDescription;
 		this.resStart = resStart;
 		this.resEnd = resEnd;
@@ -29,10 +28,17 @@ public class SentBreakoutReservation
 		this.additionalCom=additionalCom;
 	}
 
-	public String getUserExt() {
-		return userExt;
+	public String getBadgeID() {
+		return badgeID;
 	}
 
+	public String getReservableType() {
+		return reservableType;
+	}
+	
+	public List<String> getReservableIdList() {
+		return reservableIdList.getIds();
+	}
 
 	public String getResDescription() {
 		return resDescription;
@@ -53,15 +59,5 @@ public class SentBreakoutReservation
 
 	public String getAdditionalCom() {
 		return additionalCom;
-	}
-
-
-	public String getReservableType() {
-		return reservableType;
-	}
-
-
-	public List <String> getReservableIdList() {
-		return reservableIdList;
 	}
 }

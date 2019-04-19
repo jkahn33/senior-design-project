@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +34,6 @@ import javax.imageio.ImageIO;
 
 @Service
 public class MessageService {
-	private final static Logger log = Logger.getLogger(MessageService.class.getName());
 	private final MessageDAO messageDAO;
 	private final AdminDAO adminDAO;
 
@@ -44,24 +42,23 @@ public class MessageService {
 		this.messageDAO = messageDAO;
 		this.adminDAO = adminDAO;
 	}
+	
 
-	//Message includes end date to describe how long the message will last for
-	public ResponseObject createNewMessage(SentMessage message){
-		Date date = new Date();
-		Timestamp currentTime = new Timestamp(date.getTime());
-
-		//find the user attached to the five digit extension
-		Optional<Admin> adminOptional = adminDAO.findById(message.getAdminID());
-		//checking if the five digit extension is valid
-		if(!adminOptional.isPresent())
-			return new ResponseObject(false, "Admin with ID " + message.getAdminID() + " cannot be found.");
-
-		Messages newMessage = new Messages(message.getMessage(), Timestamp.valueOf(message.getEndDate()), adminOptional.get());
-		log.info("admin ID: " + message.getAdminID() + ", time: " + currentTime);
-		messageDAO.save(newMessage);
-
-		return new ResponseObject(true, adminOptional.get().getName());
-	}
+    public ResponseObject createNewMessage(SentMessage message){
+    	Date date = new Date();
+        Timestamp currentTime = new Timestamp(date.getTime());
+        
+        //find the user attached to the five digit extension
+        Optional<Admin> adminOptional = adminDAO.findById(message.getAdminID());
+        //checking if the five digit extension is valid
+        if(!adminOptional.isPresent())
+        	return new ResponseObject(false, "Admin with ID " + message.getAdminID() + " cannot be found.");
+        
+        Messages newMessage = new Messages(message.getMessage(), currentTime, adminOptional.get());
+        messageDAO.save(newMessage);
+        
+        return new ResponseObject(true, adminOptional.get().getName());
+    }
 
 	public void deletePastMessages()
 	{
@@ -99,6 +96,13 @@ public class MessageService {
 			System.out.println(messageList.get(i).getMessage());
 		}*/
 		return messageList;
-
 	}
+
+	/**
+	 * Gets a list of all of the messages in the database.
+	 * @return list of all messages.
+	 */
+    public List<Messages> getAllMessages() {
+    	return (List<Messages>)messageDAO.findAll();
+    }
 }

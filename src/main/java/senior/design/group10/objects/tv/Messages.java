@@ -33,8 +33,19 @@ public class Messages
 		this.admin = admin;
 	}
 	
-	public String getMessage()
-	{
+	public int getMes_ID() {
+		return id;
+	}
+	
+	public String getMessage() {
 		return message;
+	}
+	
+	public Timestamp getMessageEndDate() {
+		return messageEndDate;
+	}
+	
+	public Admin getAdmin() {
+		return admin;
 	}
 }

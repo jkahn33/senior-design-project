@@ -34,7 +34,7 @@ public class Calendar
 		this.admin = admin;
 	}
 	
-	public int getID() {
+	public int getCal_ID() {
 		return id;
 	}
 

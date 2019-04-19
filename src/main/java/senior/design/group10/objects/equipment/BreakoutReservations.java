@@ -30,7 +30,7 @@ public class BreakoutReservations
 	private int id;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_ext")
+	@JoinColumn(name="user")
 	private Users user;
 	//@MapsId("reserable")
 	@ManyToOne
@@ -93,5 +93,29 @@ public class BreakoutReservations
 	{
 		String startHours  = ""+resSchedule.getHours();
 		return startHours;
+	}
+	
+	public Users getUser() {
+		return user;
+	}
+	
+	public Reservables getReservable() {
+		return reservable;
+	}
+	
+	public String getResDescription() {
+		return resDescription;
+	}
+	
+	public String getNumPeople() {
+		return numPeople;
+	}
+	
+	public String getAdditionalComments() {
+		return additionalComments;
+	}
+	
+	public int getRes_ID() {
+		return id;
 	}
 }

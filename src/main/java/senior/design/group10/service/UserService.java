@@ -2,16 +2,17 @@ package senior.design.group10.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import senior.design.group10.dao.ActiveUserDAO;
 import senior.design.group10.dao.UsersDAO;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.response.UsersStatisticResponse;
 import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.objects.sent.StatisticsRequest;
-import senior.design.group10.objects.user.UserLoginHistory;
+import senior.design.group10.objects.user.ActiveUser;
 import senior.design.group10.objects.user.Users;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -22,11 +23,13 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UsersDAO usersDAO;
+    private final ActiveUserDAO activeUserDAO;
 
     @Autowired
-    public UserService(UsersDAO usersDAO)
+    public UserService(UsersDAO usersDAO, ActiveUserDAO activeUserDAO)
     {
         this.usersDAO = usersDAO;
+        this.activeUserDAO = activeUserDAO;
     }
 
     /**
@@ -42,16 +45,18 @@ public class UserService {
 
         //checks to make sure the extension has not been used before.
         //If the extension already exists, a message will be sent to the client
-        if(usersDAO.existsById(sentUser.getExt())){
-            return new ResponseObject(false, "A user with extension " + sentUser.getExt() + " already exists.");
+        if(usersDAO.existsById(sentUser.getBadgeID()) || activeUserDAO.existsById(sentUser.getBadgeID())){
+            return new ResponseObject(false, "A user with extension " + sentUser.getBadgeID() + " already exists.");
         }
 
         //creates a new Users object which is the database entity. This object has the user data sent from the front end
         //as well as the datetime object created above.
-        Users userToSave = new Users(sentUser.getName(), currentTime, sentUser.getExt(), sentUser.getDep());
+        Users userToSave = new Users(sentUser.getName(), currentTime, sentUser.getBadgeID(), sentUser.getDep());
+        ActiveUser activeUserToSave = new ActiveUser(sentUser.getName(), sentUser.getBadgeID());
 
         //accesses the DAO class and uses Spring's CrudRepository class to save the new user.
         usersDAO.save(userToSave);
+        activeUserDAO.save(activeUserToSave);
         return new ResponseObject(true, null);
     }
     
@@ -99,5 +104,13 @@ public class UserService {
         }
         usersDAO.delete(usersOptional.get());
         return new ResponseObject(true, null);
+    }
+    
+    /**
+     * Returns a list of all active (non-deleted) user accounts
+     * @return list of all active (non-deleted) user accounts
+     */
+    public List<ActiveUser> getAllActiveUsers() {
+    	return (List<ActiveUser>)activeUserDAO.findAll();
     }
 }
