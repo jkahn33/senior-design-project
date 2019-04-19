@@ -25,6 +25,7 @@ import senior.design.group10.objects.equipment.PrinterReservations;
 import senior.design.group10.objects.equipment.ReservableKey;
 import senior.design.group10.objects.equipment.Reservables;
 import senior.design.group10.objects.response.ResponseObject;
+import senior.design.group10.objects.sent.ReservableIdWrapper;
 import senior.design.group10.objects.sent.SentBreakoutReservation;
 import senior.design.group10.objects.sent.SentPrinterReservation;
 import senior.design.group10.objects.sent.SentReservable;
@@ -51,43 +52,38 @@ public class BreakoutServiceTest {
 	private SentBreakoutReservation reservationExisting;
 	private SentBreakoutReservation reservationNew;
 	private Timestamp timeExisting;
+	private ReservableIdWrapper roomList;
 	private Timestamp timeNew;
 	private ResponseObject response;
 	private List<String> rList;
 	
 	@Before
 	public void before() {
-		//Creating the  reservables
+		rList = Arrays.asList("A", "B");
+		roomList = new ReservableIdWrapper(rList);
 		reservable = new SentReservable("Breakout", "A");
 		reservablesService.saveNewReservable(reservable);
 		reservable = new SentReservable("Breakout", "B");
 		reservablesService.saveNewReservable(reservable);
-		reservable = new SentReservable("Breakout", "C");
-		reservablesService.saveNewReservable(reservable);
-		
-		rList = Arrays.asList("A", "B");
-		//reservationExisting = new SentBreakoutReservation("12345", "Breakout", rList, "test", 
-		//						"2007-6-11 10:10:10.0", "2007-6-11 11:10:10.0","25", "test");
-		service.addBreakRes(reservationExisting);
 	}
 	@Test
 	public void test() {
-		rList = Arrays.asList("C");
-		//reservationNew = new SentBreakoutReservation("12345", "Breakout", rList, "test", 
-		////				"2007-6-11 10:10:10.0", "2007-6-11 11:10:10.0", "25", "test");
+		reservationNew = new SentBreakoutReservation("00001", "Breakout", 
+				roomList, "desc", "2007-6-11 10:10:10.0", 
+				"2007-6-11 12:10:10.0", "5", "comments");
 		response = service.addBreakRes(reservationNew);
-		System.out.println(response.getMessage());
-		//This request should succeed.
 		assertTrue(response.isSuccess());
 	}
 	@After
 	public void after() {
+		/*
 		reservable = new SentReservable("Breakout", "A");
 		reservablesService.removeReservable(reservable);
 		reservable = new SentReservable("Breakout", "B");
 		reservablesService.removeReservable(reservable);
 		reservable = new SentReservable("Breakout", "C");
 		reservablesService.removeReservable(reservable);
+		*/
 		reservable = null;
 		reservationExisting = null;
 		reservationNew = null;

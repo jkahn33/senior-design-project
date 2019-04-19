@@ -37,27 +37,17 @@ public class ActiveTest1 {
 	
 	@Before
 	public void before() {
-		newUserA = new SentUser("user A", "00001", "dept");
-		newUserB = new SentUser("user B", "00002", "dept");
-		login = new SentLoginHistory("00001");
+		newUserA = new SentUser("user A", "00001", "0001");
+		newUserB = new SentUser("user B", "00002", "0002");
 		response = null;
 	}
 	@Test
 	public void test() {
-		/*
 		response = userService.saveNewUser(newUserA);
-		response = userService.saveNewUser(newUserB);
-		//This request should succeed.
-		 * 
-		 */
-		loginService.saveNewLogin(login);
-		System.out.println("LDSKJFKLSDJLKS" + response.getMessage());
+		System.out.println(response.getMessage());
 		assertTrue(response.isSuccess());
-		activeUsersList = userService.getAllActiveUsers();
-		permUsersList = userService.getAllUsers();
-		//make sure that there are 2 accounts in each table
-		assertTrue(activeUsersList.size() == 2);
-		assertTrue(permUsersList.size() == 2);
+		response = userService.saveNewUser(newUserB);
+		assertTrue(response.isSuccess());
 	}
 	@After
 	public void after() {
