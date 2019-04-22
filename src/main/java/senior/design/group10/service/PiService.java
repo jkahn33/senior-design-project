@@ -259,7 +259,7 @@ public class PiService
 			for( int loop = 0; loop< futureList.size();loop++)
 			{
 				String future = futureList.get(loop).getFuture()
-						+ ", From " + futureList.get(loop).getStartHours()+ " to "+ futureList.get(loop).getEndHours();
+						+ ", From " + futureList.get(loop).getStartDate()+ " to "+ futureList.get(loop).getEndDate();
 				testArr.add(future);
 			}
 		}
