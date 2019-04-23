@@ -15,7 +15,7 @@
             <Label x:Name="lblMessage" Content="Enter Message to Display" HorizontalAlignment="Left" Height="30" Margin="57,60,0,0" VerticalAlignment="Top" Width="186" Foreground="White" FontFamily="Arial Black"/>
             <Label x:Name="lblMessageDuration" Content="Enter Duration in Days" HorizontalAlignment="Left" Height="30" Margin="557,60,0,0" VerticalAlignment="Top" Width="163" Foreground="White" FontFamily="Arial Black"/>
             <Button Name="btnMessageSubmit" Content="Submit" HorizontalAlignment="Left" Margin="541,162,0,0" VerticalAlignment="Top" Width="75" Click="BtnMessageSubmit_Click"/>
-            <Button Name="btnQueuedMessages" Content="Queued Messages" HorizontalAlignment="Left" Margin="629,162,0,0" VerticalAlignment="Top" Width="109"/>
+            <Button Name="btnQueuedMessages" Content="Queued Messages" HorizontalAlignment="Left" Margin="629,162,0,0" VerticalAlignment="Top" Width="109" Click="BtnQueuedMessages_Click"/>
             <Separator HorizontalAlignment="Left" Height="15" Margin="57,231,0,0" VerticalAlignment="Top" Width="681"/>
             <TextBox x:Name="txtFutureEvent" HorizontalAlignment="Left" Height="87" Margin="57,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="348"/>
             <Label x:Name="lblEvent" Content="Enter Future Event" HorizontalAlignment="Left" Height="30" Margin="57,251,0,0" VerticalAlignment="Top" Width="139" Foreground="White" FontFamily="Arial Black"/>

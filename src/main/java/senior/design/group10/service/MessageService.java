@@ -94,7 +94,7 @@ public class MessageService {
 		//Remove the messages less than today
 		deletePastMessages();
 		//Return everything else
-		List <Messages> messageList = new ArrayList<Messages>();
+		List <Messages> messageList = new ArrayList<>();
 
 		Iterable <Messages> messagesIt = messageDAO.findAll();
 

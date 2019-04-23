@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:USWRIC_Admin_Application"
         mc:Ignorable="d"
-        Title="QueuedMessages" Height="450" Width="800">
-    <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="800"/>
+        Title="QueuedMessages" Height="450" Width="800"
+        Background="Black">
+    <Grid Name="messagesGrid">
+        <Button Content="Submit Deletions" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="330,374,0,0"/>
+        
     </Grid>
 </Window>

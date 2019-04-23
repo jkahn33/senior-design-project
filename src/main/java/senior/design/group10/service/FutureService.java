@@ -38,7 +38,7 @@ public class FutureService
 		//checking if the five digit extension is valid
 		if(!adminOptional.isPresent())
 			return new ResponseObject(false, "Admin with ID " + future.getAdminID() + " cannot be found.");
-
+		System.out.println(future.getEndDate());
 		Future newFuture = new Future(future.getFuture(), Timestamp.valueOf(future.getEndDate()), Timestamp.valueOf(future.getStartDate()), adminOptional.get());
 		//log.info("admin ID: " + future.getAdminID() + ", time: " + currentTime);
 		futureDAO.save(newFuture);

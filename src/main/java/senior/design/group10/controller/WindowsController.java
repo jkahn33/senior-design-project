@@ -294,23 +294,23 @@ public class WindowsController {
     @ResponseBody
     public List<Messages> getMesssages()
     {
-    		return messageService.getCurrentMessages();
+        return messageService.getCurrentMessages();
     }
     
     @PostMapping("/deleteMessagesById")
     @ResponseBody
     public ResponseObject deleteMessageById(@RequestBody int[] ids)
     {
-    		messageService.deleteMessagesById(ids);
-    		updatePiImages();
-    		return new ResponseObject(true,null);
+        messageService.deleteMessagesById(ids);
+        updatePiImages();
+        return new ResponseObject(true,null);
     }
     
     @PostMapping("/getFutures")
     @ResponseBody
     public List<Future> getFutures()
     {
-    		return futureService.getFutureMessages();
+        return futureService.getFutureMessages();
     }
     
     @PostMapping("/deleteFuturesById")
@@ -318,8 +318,8 @@ public class WindowsController {
     public ResponseObject deleteFutureById(@RequestBody int[] ids)
     {
     	
-    		futureService.deleteFuturesById(ids);
-    		updatePiImages();
+        futureService.deleteFuturesById(ids);
+        updatePiImages();
 		return new ResponseObject(true,null);
     }
 

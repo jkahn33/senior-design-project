@@ -37,4 +37,12 @@ public class Messages
 	{
 		return message;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public Timestamp getMessageEndDate() {
+		return messageEndDate;
+	}
 }
