@@ -9,6 +9,8 @@ import senior.design.group10.objects.sent.AdminInQuestion;
 import senior.design.group10.objects.sent.EditAdmin;
 import senior.design.group10.objects.sent.NewAdmin;
 import senior.design.group10.objects.sent.SentMessage;
+import senior.design.group10.objects.tv.Future;
+import senior.design.group10.objects.tv.Messages;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.MessageService;
 import senior.design.group10.objects.equipment.Equipment;
@@ -209,6 +211,17 @@ public class WindowsController {
         return messageService.createNewMessage(sentMessage);
     }    
     
+    @PostMapping("/newFuture")
+    @ResponseBody
+    public ResponseObject newFuture(@RequestBody SentFuture sentFuture)//Add @request body
+    {
+    		//for testing
+    		//SentFuture test = new SentFuture("This is for test", "12345", "2019-01-01 01:01:01", "2019-10-02 01:01:01");
+    		futureService.createNewFuture(sentFuture);
+    		return new ResponseObject(true, null);
+    
+    }
+    
     /*
      * Deletes all messages with date less than current date then returns everything else
      * Messages contain:
@@ -222,11 +235,11 @@ public class WindowsController {
     {
     		System.out.println("Getting Current Messages");
     		piService.renderMessagesImage(messageService.getCurrentMessages());
+    		
     		System.out.println("Getting Current Breakout Reservation");
-    		//Todo
-    		//Add future events function
-
     		piService.renderBreakoutImage(breakoutService.todaysReservations());
+    		
+    		System.out.println("Getting Future Messages");
     		piService.renderFutureImage(futureService.getFutureMessages());
     		//Send the folder to the pi
     		piService.piListFill();
@@ -246,5 +259,39 @@ public class WindowsController {
     		piService.startSlideShow();
     		return new ResponseObject(true,null);
     }
+    
+    @GetMapping("/getMessages")
+    @ResponseBody
+    public List<Messages> getMesssages()
+    {
+    		return messageService.getCurrentMessages();
+    }
+    
+    @PostMapping("/deleteMessagesById")
+    @ResponseBody
+    public ResponseObject deleteMessageById(@RequestBody int[] ids)
+    {
+    		messageService.deleteMessagesById(ids);
+    		updatePiImages();
+    		return new ResponseObject(true,null);
+    }
+    
+    @PostMapping("/getFutures")
+    @ResponseBody
+    public List<Future> getFutures()
+    {
+    		return futureService.getFutureMessages();
+    }
+    
+    @PostMapping("/deleteFuturesById")
+    @ResponseBody
+    public ResponseObject deleteFutureById(@RequestBody int[] ids)
+    {
+    	
+    		futureService.deleteFuturesById(ids);
+    		updatePiImages();
+		return new ResponseObject(true,null);
+    }
+    
 
 }

@@ -84,4 +84,10 @@ public class FutureService
 		return futureList;
 
 	}
+	
+	public void deleteFuturesById(int[] ids)
+	{
+		for(int x = 0; x<ids.length;x++)
+			futureDAO.deleteById(ids[x]);
+	}
 }

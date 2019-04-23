@@ -57,6 +57,7 @@ public class Future
 	{
 		return admin;
 	}
+	/*
 	public String getEndHours()
 	{
 		String endHours  = ""+futureEndDate.getHours();
@@ -66,6 +67,26 @@ public class Future
 	{
 		String startHours  = ""+futureStartDate.getHours();
 		return startHours;
+	}*/
+	
+	public String getStartDate()
+	{
+		long ts = futureStartDate.getTime();
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		cal.setTimeInMillis(ts);
+		String startDate =""+ (cal.get(java.util.Calendar.MONTH)+1)+ "/" + cal.get(java.util.Calendar.DATE); 
+
+		return startDate;
+	}
+	
+	public String getEndDate()
+	{
+		long ts = futureEndDate.getTime();
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		cal.setTimeInMillis(ts);
+		String startDate =""+ (cal.get(java.util.Calendar.MONTH)+1)+ "/" + cal.get(java.util.Calendar.DATE); 
+
+		return startDate;
 	}
 	
 }
