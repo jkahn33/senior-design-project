@@ -79,10 +79,14 @@ public class MessageService {
 		//System.out.println(currentTime);
 
 	}
-	//To do
-	//Look at the BreakoutService and return the list of messages for dates greater than or equal to todays date
-	//Implement the DAO function to return the messages then use it  in this class
-	//Returns a list of the message which the dates are greater than or equal to current date
+	
+	public void deleteMessagesById(int [] ids)
+	{
+		//for every int in id delete by id
+		for(int x = 0; x < ids.length; x++)
+			messageDAO.deleteById(ids[x]);
+	}
+	
 
 	public List <Messages> getCurrentMessages(){
 
