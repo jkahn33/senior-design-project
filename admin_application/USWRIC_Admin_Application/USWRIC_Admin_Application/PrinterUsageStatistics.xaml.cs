@@ -30,7 +30,12 @@ namespace USWRIC_Admin_Application
         }
         private async void fillStatistics()
         {
+            
+        }
 
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new StatisticsHome());
         }
     }
 }

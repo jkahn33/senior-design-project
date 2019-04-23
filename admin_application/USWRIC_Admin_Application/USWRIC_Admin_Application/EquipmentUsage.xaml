@@ -9,7 +9,7 @@
         Title="Equipment Usage" Height="Auto" Width="AUto">
     <Viewbox>
         <Grid Height="450" Width="800">
-            <Label Content="Equipment Usage Statistics" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="232,50,0,0" VerticalAlignment="Top" Height="35" Width="333" FontFamily="Arial Black" FontSize="20"/>
+            <Label Content="Equipment Usage Statistics" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="232,50,0,0" VerticalAlignment="Top" Height="35" Width="333" Foreground="White" FontFamily="Arial Black" FontSize="20"/>
             <DataGrid Name="StatsGrid" ItemsSource="{Binding}" AutoGenerateColumns="True" IsReadOnly="True" ColumnWidth="*" CanUserAddRows="False" Margin="0,85,0,53.6" />
             <Button Name="EquipmentStatsBack" Content="Back" HorizontalAlignment="Left" Margin="362,420,0,0" VerticalAlignment="Top" Width="75" Click="EquipmentStatsBack_Click"/>
         </Grid>

@@ -46,7 +46,7 @@ namespace USWRIC_Admin_Application
                 User user = JsonConvert.DeserializeObject<User>(responseString);
                 if (user != null)
                 {
-                    MessageBoxResult result = MessageBox.Show("Are you sure you want to remove " + user.Name + " (badge ID " + user.FiveDigExt + ", department " + user.DepCode + ") from the system?", 
+                    MessageBoxResult result = MessageBox.Show("Are you sure you want to remove " + user.Name + " (badge ID " + user.BadgeId + ", department " + user.DepCode + ") from the system?", 
                         "Confirm", 
                         MessageBoxButton.YesNo, 
                         MessageBoxImage.Question);

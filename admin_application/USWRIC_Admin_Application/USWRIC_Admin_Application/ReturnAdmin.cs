@@ -9,12 +9,12 @@ namespace USWRIC_Admin_Application.objects
     class ReturnAdmin
     {
         public string Name { get; private set; }
-        public string FiveDigExt { get; private set; }
+        public string BadgeId { get; private set; }
 
-        public ReturnAdmin(string name, string fiveDigExt)
+        public ReturnAdmin(string name, string badgeId)
         {
             Name = name;
-            FiveDigExt = fiveDigExt;
+            BadgeId = badgeId;
         }
     }
 }

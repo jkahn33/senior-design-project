@@ -6,9 +6,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:USWRIC_Admin_Application"
         mc:Ignorable="d"
-        Title="USWRIC Administrator" Height="450" Width="800">
-
+        Title="USWRIC Administrator" Height="450" Width="800"
+        Background="Black">
     <Frame NavigationUIVisibility="Hidden" Source="/Homepage.xaml">
         <!--<Frame NavigationUIVisibility="Hidden" Source="/Login.xaml">-->
     </Frame>
+
 </Window>

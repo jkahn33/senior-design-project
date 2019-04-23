@@ -60,9 +60,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BadgeIdSearch.xaml.cs">
-      <DependentUpon>BadgeIdSearch.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
@@ -117,10 +114,6 @@
       <DependentUpon>UserSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="UsersStatisticsResponse.cs" />
-    <Page Include="BadgeIdSearch.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -239,6 +232,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\PurpleBridge.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Loading.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

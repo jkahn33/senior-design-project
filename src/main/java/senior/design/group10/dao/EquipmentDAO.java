@@ -25,7 +25,7 @@ public interface EquipmentDAO extends CrudRepository<Equipment, String> {
             "from equipment_checkout " +
             "inner join equipment on equipment.barcode=equipment_checkout.barcode " +
             "inner join admin on admin.ext=equipment_checkout.admin_ext " +
-            "inner join users on users.fiveDigExt=equipment_checkout.user_ext " +
+            "inner join users on users.badgeId=equipment_checkout.user_ext " +
             "where equipment.inStock=false and equipment_checkout.checkinDate is null", nativeQuery = true)
     List<CheckedOutEquipment> getCheckedOutEquipment();
 }

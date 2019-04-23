@@ -9,37 +9,37 @@
         Title="Homepage" Height="Auto" Width="Auto">
     <Viewbox>
         <Grid Height="450" Width="800">
-            <Grid.Background>
-                <SolidColorBrush Color="Black" />
-            </Grid.Background>
-            <Image Source="/images/RIC.png" Height="Auto" Width="Auto" Margin="10,-23,591,330" />
-            <Button Margin="274,191,456,187.6" BorderThickness="0" Click="BtnDisplayMgmt_Click">
+            <!--<Grid.Background>
+                <ImageBrush ImageSource="/images/RIC.png"/>
+            </Grid.Background>-->
+            <Image Source="/images/RIC.png" Height="Auto" Width="Auto" Margin="171,10,171,271" />
+            <Button Background="Black" Margin="308,233,446,169" BorderThickness="0" Click="BtnDisplayMgmt_Click">
                 <StackPanel>
-                    <Image Source="/images/Display.png" Height="Auto" Width="Auto" />
+                    <Image Source="/images/Display.png" Height="36" Width="44" />
                 </StackPanel>
             </Button>
-            <Button Margin="99,191,631,187.6" BorderThickness="0" Click="BtnStatistics_Click">
+            <Button Background="Black" Margin="171,233,583,169" BorderThickness="0" Click="BtnStatistics_Click">
                 <StackPanel>
-                    <Image Source="/images/Statistics.png" Height="68" Width="76" />
+                    <Image Source="/images/Statistics.png" Height="36" Width="44" />
                 </StackPanel>
             </Button>
-            <Button Margin="448,191,283,187.6" BorderThickness="0" Click="BtnEdit_Click">
+            <Button Background="Black" Margin="583,233,171,169" BorderThickness="0" Click="BtnEdit_Click">
                 <StackPanel>
-                    <Image Source="/images/Personal.png" Height="68" Width="76" />
+                    <Image Source="/images/Personal.png" Height="36" Width="44" />
                 </StackPanel>
             </Button>
-            <Button Margin="624,191,106,187.6" BorderThickness="0" Click="BtnUserAdminMgmt_Click">
+            <Button Background="Black" Margin="445,233,309,169" BorderThickness="0" Click="BtnUserAdminMgmt_Click">
                 <StackPanel>
-                    <Image Source="/images/Users.png" Height="68" Width="76" />
+                    <Image Source="/images/Users.png" Height="36" Width="44" />
                 </StackPanel>
             </Button>
-            <Image Source="/images/PurpleBridge.jpg" Height="Auto" Width="Auto" Margin="0,362,0,0" />
-            <Label Content="Administrator Homepage" HorizontalAlignment="Left" HorizontalContentAlignment="center" Height="37" Margin="192,47,0,0" VerticalAlignment="Top" Width="415" FontFamily="Arial Black" FontSize="20" Foreground="White"/>
-            <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="358,343,0,0" VerticalAlignment="Top" Width="75" Click="BtnLogout_Click"/>
-            <TextBox BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" Height="21" Margin="99,267,0,0" TextWrapping="Wrap" Text="Statistics" VerticalAlignment="Top" Width="70" FontSize="9" FontFamily="Arial Black"/>
-            <TextBox BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" Height="21" Margin="274,267,0,0" TextWrapping="Wrap" Text="Display Management" VerticalAlignment="Top" Width="70" FontSize="9" FontFamily="Arial Black"/>
-            <TextBox BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" Height="21" Margin="448,267,0,0" TextWrapping="Wrap" Text="Personal Information" VerticalAlignment="Top" Width="70" FontSize="9" FontFamily="Arial Black"/>
-            <TextBox BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" Height="40" Margin="624,267,0,0" TextWrapping="Wrap" Text="User and Admin Management" VerticalAlignment="Top" Width="70" FontSize="9" FontFamily="Arial Black"/>
+            <Button Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="715,10,0,0" VerticalAlignment="Top" Width="75" Click="BtnLogout_Click" BorderBrush="Black" Foreground="White" Background="Black"/>
+            <TextBox Background="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" Height="11" Margin="167,286,0,0" TextWrapping="Wrap" Text="Statistics" VerticalAlignment="Top" Width="56" FontSize="9" FontFamily="Arial Black" Foreground="White"/>
+            <TextBox Background="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" Height="21" Margin="295,286,0,0" TextWrapping="Wrap" Text="Display Management" VerticalAlignment="Top" Width="70" FontSize="9" FontFamily="Arial Black" Foreground="White"/>
+            <TextBox Background="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" Height="21" Margin="571,286,0,0" TextWrapping="Wrap" Text="Personal Information" VerticalAlignment="Top" Width="70" FontSize="9" FontFamily="Arial Black" Foreground="White"/>
+            <TextBox Background="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" Height="40" Margin="433,286,0,0" TextWrapping="Wrap" Text="User and Admin Management" VerticalAlignment="Top" Width="70" FontSize="9" FontFamily="Arial Black" Foreground="White"/>
+
+            <!--<Image Source="/images/PurpleBridge.jpg" Margin="-38,362,-38,-5"/>-->
         </Grid>
     </Viewbox>
 </Page>
