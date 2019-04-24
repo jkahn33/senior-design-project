@@ -1,7 +1,6 @@
 package senior.design.group10.service;
 import com.jcraft.jsch.*;
 
-import ch.qos.logback.core.joran.conditional.IfAction;
 import senior.design.group10.dao.PiDAO;
 import senior.design.group10.objects.equipment.BreakoutReservations;
 import senior.design.group10.objects.response.ResponseObject;
@@ -24,11 +23,9 @@ import java.io.OutputStream;
 import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -258,7 +255,7 @@ public class PiService
 		{
 			for( int loop = 0; loop< futureList.size();loop++)
 			{
-				String future = futureList.get(loop).getFuture()
+				String future = futureList.get(loop).getFutureMessage()
 						+ ", From " + futureList.get(loop).getStartDate()+ " to "+ futureList.get(loop).getEndDate();
 				testArr.add(future);
 			}

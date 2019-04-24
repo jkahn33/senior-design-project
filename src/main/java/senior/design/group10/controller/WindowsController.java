@@ -242,9 +242,7 @@ public class WindowsController {
     {
     		//for testing
     		//SentFuture test = new SentFuture("This is for test", "12345", "2019-01-01 01:01:01", "2019-10-02 01:01:01");
-    		futureService.createNewFuture(sentFuture);
-    		return new ResponseObject(true, null);
-    
+    		return futureService.createNewFuture(sentFuture);
     }
     
     /*
@@ -299,14 +297,14 @@ public class WindowsController {
     
     @PostMapping("/deleteMessagesById")
     @ResponseBody
-    public ResponseObject deleteMessageById(@RequestBody int[] ids)
+    public ResponseObject deleteMessageById(@RequestBody IdWrapper ids)
     {
-        messageService.deleteMessagesById(ids);
+        messageService.deleteMessagesById(ids.getIds());
         updatePiImages();
         return new ResponseObject(true,null);
     }
     
-    @PostMapping("/getFutures")
+    @GetMapping("/getFutures")
     @ResponseBody
     public List<Future> getFutures()
     {

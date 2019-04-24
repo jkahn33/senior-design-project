@@ -21,11 +21,13 @@ public class FutureService
 {
 	private final FutureDAO futureDAO;
 	private final AdminDAO adminDAO;
+	private final PiService piService;
 
 	@Autowired
-	public FutureService(FutureDAO futureDAO, AdminDAO adminDAO) {
+	public FutureService(FutureDAO futureDAO, AdminDAO adminDAO, PiService piService) {
 		this.futureDAO = futureDAO;
 		this.adminDAO = adminDAO;
+		this.piService = piService;
 	}
 
 	//Message includes end date to describe how long the message will last for
@@ -43,6 +45,10 @@ public class FutureService
 		//log.info("admin ID: " + future.getAdminID() + ", time: " + currentTime);
 		futureDAO.save(newFuture);
 
+		piService.renderFutureImage(getFutureMessages());
+
+		piService.piListFill();
+		piService.copyFolderToPi("PiImages", "Pictures/Slides");
 		return new ResponseObject(true, adminOptional.get().getName());
 	}
 
@@ -67,7 +73,7 @@ public class FutureService
 		//Remove the messages less than today
 		deletePastFuture();
 		//Return everything else
-		List <Future> futureList = new ArrayList<Future>();
+		List <Future> futureList = new ArrayList<>();
 
 		Iterable <Future> futureIt = futureDAO.findAll();
 

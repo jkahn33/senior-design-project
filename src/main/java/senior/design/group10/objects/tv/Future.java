@@ -9,7 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import senior.design.group10.objects.user.Admin;
 
 @Entity
-@Table(name = "future")
+@Table(name = "futureMessage")
 public class Future 
 {
 	@Id
@@ -19,7 +19,7 @@ public class Future
 	private int id;
 	
 	@Column
-	private String future;
+	private String futureMessage;
 	@Column
 	private Timestamp futureEndDate;
 	@Column
@@ -28,46 +28,29 @@ public class Future
 	@JoinColumn
 	private Admin admin;
 	
-	public Future() {};
+	public Future() {}
 	
-	public Future(String future, Timestamp futureEndDate, Timestamp futureStartDate, Admin admin)
+	public Future(String futureMessage, Timestamp futureEndDate, Timestamp futureStartDate, Admin admin)
 	{
-		this.future = future;
+		this.futureMessage = futureMessage;
 		this.futureEndDate = futureEndDate;
 		this.futureStartDate = futureStartDate;
 		this.admin = admin;
 	}
-	
-	public String getFuture()
-	{
-		return future;
+
+	public int getId(){
+		return id;
 	}
 	
-	public Timestamp getFutureEndDate()
+	public String getFutureMessage()
 	{
-		return futureEndDate;
-	}
-	
-	public Timestamp getFutureStartDate()
-	{
-		return futureStartDate;
+		return futureMessage;
 	}
 	
 	public Admin admin()
 	{
 		return admin;
 	}
-	/*
-	public String getEndHours()
-	{
-		String endHours  = ""+futureEndDate.getHours();
-		return endHours;
-	}
-	public String getStartHours()
-	{
-		String startHours  = ""+futureStartDate.getHours();
-		return startHours;
-	}*/
 	
 	public String getStartDate()
 	{

@@ -21,8 +21,10 @@
             <TextBlock Name="tblockUserSince" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="319,223,0,0" Foreground="White" FontSize="15" FontFamily="Arial Black" Width="92"/>
             <Label Name="lblEntered" Content="# Times Entered USWRIC:" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="138,282,0,0" Foreground="White" FontSize="15" FontFamily="Arial Black"/>
             <TextBlock Name="tblockTimesEntered" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="360,287,0,0" FontSize="15" Foreground="White" FontFamily="Arial Black" Width="51"/>
-            <Label Name="lblLastRecorded" Content="Last Recorded Entrance:" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="138,346,0,0" Foreground="White" FontSize="15" FontFamily="Arial Black"/>
+            <Label Name="lblLastRecorded" Content="Last Recorded Entrance:" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="138,346,0,0" Foreground="White" FontSize="15" FontFamily="Arial Black"/>
             <TextBlock Name="tblockLastRecorded" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="351,351,0,0" FontSize="15" Foreground="White" FontFamily="Arial Black" Width="143"/>
+            <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="362,421,0,0" Click="Button_Click"/>
+
         </Grid>
     </Viewbox>
 

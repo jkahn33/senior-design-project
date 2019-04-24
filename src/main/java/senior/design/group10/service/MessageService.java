@@ -60,8 +60,6 @@ public class MessageService {
 		messageDAO.save(newMessage);
 
 		piService.renderMessagesImage(getCurrentMessages());
-		piService.renderBreakoutImage(breakoutService.todaysReservations());
-		piService.renderFutureImage(futureService.getFutureMessages());
 
 		piService.piListFill();
 		piService.copyFolderToPi("PiImages", "Pictures/Slides");

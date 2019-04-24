@@ -9,9 +9,6 @@
         Title="Homepage" Height="Auto" Width="Auto">
     <Viewbox>
         <Grid Height="450" Width="800">
-            <!--<Grid.Background>
-                <ImageBrush ImageSource="/images/RIC.png"/>
-            </Grid.Background>-->
             <Image Source="/images/RIC.png" Height="Auto" Width="Auto" Margin="171,10,171,271" />
             <Button Background="Black" Margin="308,233,446,169" BorderThickness="0" Click="BtnDisplayMgmt_Click">
                 <StackPanel>

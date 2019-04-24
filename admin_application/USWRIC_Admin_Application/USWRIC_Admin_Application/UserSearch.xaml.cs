@@ -66,5 +66,10 @@ namespace USWRIC_Admin_Application
                 }
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new StatisticsHome());
+        }
     }
 }

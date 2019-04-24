@@ -40,19 +40,22 @@ namespace USWRIC_Admin_Application
                     { "adminID", Globals.BadgeId }
                 };
 
+                WorkingBar.Visibility = Visibility.Visible;
+                DisplayMgmtGrid.IsEnabled = false;
                 var response = await Globals.GetHttpClient().PostAsync(
                             Globals.GetBaseUrl() + "/newMessage",
                             new StringContent(validPassObject.ToString(), Encoding.UTF8, "application/json"));
 
                 var responseString = await response.Content.ReadAsStringAsync();
-
+                WorkingBar.Visibility = Visibility.Hidden;
+                DisplayMgmtGrid.IsEnabled = true;
                 if (response.IsSuccessStatusCode)
                 {
                     ResponseObject responseObject = JsonConvert.DeserializeObject<ResponseObject>(responseString);
                     if (responseObject.Success)
                     {
-                        //txtAdminMessage.Text = "";
-                        //txtMessageDays.Text = "";
+                        txtAdminMessage.Text = "";
+                        txtMessageDays.Text = "";
                         MessageBox.Show("Successfully added message.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
@@ -84,7 +87,8 @@ namespace USWRIC_Admin_Application
 
         private void BtnQueuedEvents_Click(object sender, RoutedEventArgs e)
         {
-
+            QueuedEvents events = new QueuedEvents();
+            events.Show();
         }
 
         private async void BtnEventSubmit_Click(object sender, RoutedEventArgs e)
@@ -95,8 +99,7 @@ namespace USWRIC_Admin_Application
             try
             {
                 DateTime startDate = new DateTime(Convert.ToInt32(startVals[2]), Convert.ToInt32(startVals[0]), Convert.ToInt32(startVals[1]));
-                DateTime endDate = new DateTime(Convert.ToInt32(endVals[2]), Convert.ToInt32(endVals[0]), Convert.ToInt32(endVals[1]));
-
+                DateTime endDate = new DateTime(Convert.ToInt32(endVals[2]), Convert.ToInt32(endVals[0]), Convert.ToInt32(endVals[1]), 23, 59, 59);
 
                 int startEndCheck = DateTime.Compare(endDate, startDate);
                 int todayCheck = DateTime.Compare(startDate, DateTime.Today);
@@ -118,15 +121,34 @@ namespace USWRIC_Admin_Application
                     { "endDate", endDate.ToString("yyyy-MM-dd HH:mm:ss") },
                     { "adminID", Globals.BadgeId }
                 };
-
+                    //shows loading bar and disables page content
+                    WorkingBar.Visibility = Visibility.Visible;
+                    DisplayMgmtGrid.IsEnabled = false;
                     var response = await Globals.GetHttpClient().PostAsync(
                                 Globals.GetBaseUrl() + "/newFuture",
                                 new StringContent(validPassObject.ToString(), Encoding.UTF8, "application/json"));
 
                     var responseString = await response.Content.ReadAsStringAsync();
+                    //hides loading bar and renables content
+                    WorkingBar.Visibility = Visibility.Hidden;
+                    DisplayMgmtGrid.IsEnabled = true;
                     if (response.IsSuccessStatusCode)
                     {
-                        MessageBox.Show("Success", "success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        ResponseObject responseObject = JsonConvert.DeserializeObject<ResponseObject>(responseString);
+                        if (responseObject.Success)
+                        {
+                            txtFutureEvent.Text = "";
+                            dteEventStart.Text = "";
+                            dteEventEnd.Text = "";
+                            MessageBox.Show("Successfully added future event.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show(responseObject.Message,
+                                    "Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+                        }
                     }
                     else
                     {

@@ -34,19 +34,26 @@ namespace USWRIC_Admin_Application
             o.Add("ext", txtBadgeId.Text);
             o.Add("password", txtPass.Password);
 
-            var response = await client.PostAsync(
-                    Globals.GetBaseUrl() + "/validateAdmin",
-                     new StringContent(o.ToString(), Encoding.UTF8, "application/json"));
+            try
+            {
+                var response = await client.PostAsync(
+                        Globals.GetBaseUrl() + "/validateAdmin",
+                         new StringContent(o.ToString(), Encoding.UTF8, "application/json"));
 
-            var responseString = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
-            {
-                Globals.BadgeId = txtBadgeId.Text;
-                this.NavigationService.Navigate(new Homepage());
+                var responseString = await response.Content.ReadAsStringAsync();
+                if (response.IsSuccessStatusCode)
+                {
+                    Globals.BadgeId = txtBadgeId.Text;
+                    this.NavigationService.Navigate(new Homepage());
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect Badge Id or Password", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else
+            catch (HttpRequestException)
             {
-                MessageBox.Show("Incorrect Badge Id or Password", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Server Connection Refused", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
