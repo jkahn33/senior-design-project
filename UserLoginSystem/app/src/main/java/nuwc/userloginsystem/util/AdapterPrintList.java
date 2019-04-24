@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import nuwc.userloginsystem.R;
+import nuwc.userloginsystem.ReserveOptionsBreakout;
 import nuwc.userloginsystem.editReservButton;
 import nuwc.userloginsystem.myPrintList;
 import nuwc.userloginsystem.reserveOptionsPrint;
@@ -87,11 +88,7 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
 
             edit.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    Intent myIntent = new Intent(ctx, reserveOptionsPrint.class);
-                    //used to send data to other layout
-//                    Intent myIntent = getIntent(); // gets the previously created intent
-//                    String firstKeyName = myIntent.getStringExtra("firstKeyName"); // will return "FirstKeyValue"
-//                    String secondKeyName= myIntent.getStringExtra("secondKeyName");
+                    Intent myIntent = new Intent(ctx, ReserveOptionsBreakout.class);
                     myIntent.putExtra("firstKeyName","FirstKeyValue");
                     myIntent.putExtra("secondKeyName","SecondKeyValue");
                     ctx.startActivity(myIntent);
