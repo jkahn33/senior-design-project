@@ -39,7 +39,7 @@ public class adminCheckout extends AppCompatActivity {
 
     public void checkoutScreen(){
 
-        Intent sub = new Intent(adminCheckout.this, equipmentCheckout.class);
+        Intent sub = new Intent(adminCheckout.this, /*equipmentCheckout*/checkoutBarcode.class);
         sub.putExtra("adminExt", extension);
         adminCheckout.this.startActivity(sub);
     }
@@ -50,10 +50,10 @@ public class adminCheckout extends AppCompatActivity {
         setContentView(R.layout.activity_admin_checkout);
 
 
-        submitBut = (Button) findViewById(R.id.submitBut);
-        passwordBox = (EditText) findViewById(R.id.passwordBox);
-        extensionBox = (EditText) findViewById(R.id.barcodeBox);
-        directions = (TextView) findViewById(R.id.commandBox);
+        submitBut = (Button) findViewById(R.id.submitBut2);
+        passwordBox = (EditText) findViewById(R.id.passwordBox2);
+        extensionBox = (EditText) findViewById(R.id.barcodeBox2);
+        directions = (TextView) findViewById(R.id.commandBox2);
         cancel = (Button) findViewById(R.id.btnAdminLoginCancel);
 
         submitBut.setOnClickListener(new View.OnClickListener() {

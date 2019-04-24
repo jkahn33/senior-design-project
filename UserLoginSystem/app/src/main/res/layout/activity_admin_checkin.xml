@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".adminCheckin">
+
+    <EditText
+        android:id="@+id/barcodeBox2"
+        android:layout_width="450dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="159dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="159dp"
+        android:layout_marginBottom="41dp"
+        android:ems="10"
+        android:hint="Extension"
+        android:inputType="textPersonName"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/passwordBox2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/commandBox2" />
+
+    <EditText
+        android:id="@+id/passwordBox2"
+        android:layout_width="450dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="159dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="159dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/submitBut2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barcodeBox2" />
+
+    <TextView
+        android:id="@+id/commandBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="179dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="78dp"
+        android:text="Administrator Login"
+        android:textAllCaps="false"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/barcodeBox2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textColor="@android:color/background_dark" />
+
+    <Button
+        android:id="@+id/submitBut2"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="284dp"
+        android:layout_marginBottom="239dp"
+        android:text="Submit"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordBox2" />
+
+    <Button
+        android:id="@+id/btnAdminLoginCancel"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="283dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="283dp"
+        android:layout_marginBottom="163dp"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submitBut2" />
+</android.support.constraint.ConstraintLayout>

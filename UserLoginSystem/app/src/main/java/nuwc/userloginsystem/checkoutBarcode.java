@@ -32,13 +32,14 @@ public class checkoutBarcode extends AppCompatActivity {
     String adminExt;
     String extension;
 
-    EditText barcodeBox;
+    static EditText barcodeBox;
     EditText extensionBox;
     TextView commandBox;
 
     Button submitButton;
     Button cancelButton;
     Button homeButton;
+    Button buttonScan2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +48,12 @@ public class checkoutBarcode extends AppCompatActivity {
         setContentView(R.layout.activity_checkout_barcode_screen);
 
         submitButton = (Button) findViewById(R.id.submitButton2);
-        barcodeBox = (EditText) findViewById(R.id.barcodeBox);
+        barcodeBox = (EditText) findViewById(R.id.barcodeBox2);
         extensionBox = (EditText) findViewById(R.id.extensionBox);
-        commandBox = (TextView) findViewById(R.id.commandBox);
+        commandBox = (TextView) findViewById(R.id.commandBox2);
         cancelButton = (Button) findViewById(R.id.cancelButton);
         homeButton = (Button) findViewById(R.id.homeButton);
+        buttonScan2 = (Button) findViewById(R.id.buttonScan2);
 
         homeButton.setVisibility(View.INVISIBLE);
 
@@ -91,7 +93,15 @@ public class checkoutBarcode extends AppCompatActivity {
                 startActivity(next);
             }
         });
+
+        buttonScan2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), scannerScreen2.class));
+            }
+        });
     }
+
+
     public void sendCheckout() throws JSONException {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();

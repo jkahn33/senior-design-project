@@ -7,26 +7,25 @@
     tools:context=".checkoutBarcode">
 
     <EditText
-        android:id="@+id/barcodeBox"
-        android:layout_width="620dp"
+        android:id="@+id/barcodeBox2"
+        android:layout_width="458dp"
         android:layout_height="80dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="135dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="61dp"
         android:ems="10"
         android:hint="Barcode"
         android:inputType="textPersonName"
         android:textSize="35sp"
-        app:layout_constraintBottom_toTopOf="@+id/submitButton2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintBottom_toTopOf="@+id/extensionBox"
+        app:layout_constraintEnd_toStartOf="@+id/buttonScan2"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commandBox"
-        app:layout_constraintVertical_bias="0.366" />
+        app:layout_constraintTop_toBottomOf="@+id/commandBox2" />
 
     <TextView
-        android:id="@+id/commandBox"
+        android:id="@+id/commandBox2"
         android:layout_width="639dp"
         android:layout_height="64dp"
         android:layout_marginStart="55dp"
@@ -39,54 +38,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintVertical_chainStyle="spread_inside"
         tools:textColor="@android:color/background_dark" />
 
     <EditText
         android:id="@+id/extensionBox"
         android:layout_width="620dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="68dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="74dp"
+        android:layout_marginBottom="22dp"
         android:ems="10"
         android:hint="Checkout User Extension"
         android:inputType="textPersonName"
         android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/submitButton2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commandBox" />
+        app:layout_constraintTop_toBottomOf="@+id/barcodeBox2" />
 
     <Button
         android:id="@+id/submitButton2"
         android:layout_width="250dp"
         android:layout_height="75dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="296dp"
+        android:layout_marginStart="259dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="259dp"
+        android:layout_marginBottom="3dp"
         android:text="Submit"
         android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/homeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/extensionBox" />
+
     <Button
         android:id="@+id/homeButton"
         android:layout_width="250dp"
         android:layout_height="75dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="296dp"
+        android:layout_marginStart="259dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="259dp"
+        android:layout_marginBottom="37dp"
         android:text="Home"
         android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cancelButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extensionBox" />
+        app:layout_constraintTop_toBottomOf="@+id/submitButton2" />
 
     <Button
         android:id="@+id/cancelButton"
@@ -101,6 +103,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/submitButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/submitButton2"
+        app:layout_constraintVertical_bias="0.678" />
+
+    <Button
+        android:id="@+id/buttonScan2"
+        android:layout_width="131dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="143dp"
+        android:layout_marginEnd="74dp"
+        android:layout_marginBottom="111dp"
+        android:text="Scan"
+        app:layout_constraintBottom_toTopOf="@+id/extensionBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/barcodeBox2"
+        app:layout_constraintTop_toBottomOf="@+id/commandBox2" />
 
 </android.support.constraint.ConstraintLayout>

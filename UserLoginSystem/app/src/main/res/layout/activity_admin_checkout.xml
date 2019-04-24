@@ -7,7 +7,7 @@
     tools:context=".adminCheckout">
 
     <EditText
-        android:id="@+id/barcodeBox"
+        android:id="@+id/barcodeBox2"
         android:layout_width="450dp"
         android:layout_height="100dp"
         android:layout_marginStart="159dp"
@@ -18,13 +18,13 @@
         android:hint="Extension"
         android:inputType="textPersonName"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/passwordBox"
+        app:layout_constraintBottom_toTopOf="@+id/passwordBox2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commandBox" />
+        app:layout_constraintTop_toBottomOf="@+id/commandBox2" />
 
     <EditText
-        android:id="@+id/passwordBox"
+        android:id="@+id/passwordBox2"
         android:layout_width="450dp"
         android:layout_height="100dp"
         android:layout_marginStart="159dp"
@@ -35,13 +35,13 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/submitBut"
+        app:layout_constraintBottom_toTopOf="@+id/submitBut2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barcodeBox" />
+        app:layout_constraintTop_toBottomOf="@+id/barcodeBox2" />
 
     <TextView
-        android:id="@+id/commandBox"
+        android:id="@+id/commandBox2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
@@ -51,14 +51,14 @@
         android:text="Administrator Login"
         android:textAllCaps="false"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/barcodeBox"
+        app:layout_constraintBottom_toTopOf="@+id/barcodeBox2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:textColor="@android:color/background_dark" />
 
     <Button
-        android:id="@+id/submitBut"
+        android:id="@+id/submitBut2"
         android:layout_width="200dp"
         android:layout_height="75dp"
         android:layout_marginStart="284dp"
@@ -70,7 +70,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordBox" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordBox2" />
 
     <Button
         android:id="@+id/btnAdminLoginCancel"
@@ -82,5 +82,5 @@
         android:text="Cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/submitBut" />
+        app:layout_constraintTop_toBottomOf="@+id/submitBut2" />
 </android.support.constraint.ConstraintLayout>
