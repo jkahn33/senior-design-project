@@ -6,6 +6,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/enterInfoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="315dp"
+        android:layout_marginTop="350dp"
+        android:text="Please enter your employee extension"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/extBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="400dp"
+        android:layout_marginTop="408dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Extension"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="525dp"
+        android:layout_marginTop="500dp"
+        android:text="@android:string/cancel"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="400dp"
+        android:layout_marginTop="500dp"
+        android:text="Submit"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/blue_back" />
+
     <TableLayout
         android:id="@+id/calendar"
         android:layout_width="match_parent"
@@ -13,7 +60,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blue_back">
+        app:layout_constraintTop_toBottomOf="@+id/blue_back"
+        tools:visibility="invisible">
 
         <TableRow
             android:id="@+id/row1"
@@ -146,9 +194,6 @@
         </TableRow>
 
 
-
-
-
         <TableRow
             android:id="@+id/row3"
             android:layout_width="match_parent"
@@ -278,7 +323,6 @@
                 android:layout_weight="1" />
 
         </TableRow>
-
 
 
         <TableRow
@@ -418,10 +462,11 @@
         android:id="@+id/blue_back"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/blue_background" />
+        android:background="@color/blue_background"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/myPrints"
+        android:id="@+id/myReserve"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -532,5 +577,61 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/blue_back"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/leftArrow"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+        <RadioButton
+            android:id="@+id/Aprinter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="A" />
+
+        <RadioButton
+            android:id="@+id/Dprinter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="D" />
+
+        <RadioButton
+            android:id="@+id/Cprinter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="C" />
+
+        <RadioButton
+            android:id="@+id/Bprinter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="B" />
+
+        <RadioButton
+            android:id="@+id/Eprinter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="E" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:text="Select printer:"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/leftArrow"
+        app:layout_constraintTop_toTopOf="@+id/blue_back" />
 
 </android.support.constraint.ConstraintLayout>

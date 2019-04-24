@@ -1,6 +1,5 @@
 package nuwc.userloginsystem;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 
@@ -12,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -28,13 +26,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Collections;
 import java.util.List;
 
 import nuwc.userloginsystem.objects.ResponseObject;
 import nuwc.userloginsystem.objects.Users;
-import nuwc.userloginsystem.util.RandNameGen;
-import nuwc.userloginsystem.util.RecycleViewAdapter;
 import nuwc.userloginsystem.util.RequestUtil;
 
 import com.futuremind.recyclerviewfastscroll.FastScroller;
@@ -52,11 +47,13 @@ public class savedUsers extends AppCompatActivity{
     RecyclerView recyclerView;
     RecycleViewAdapter adapter;
     FastScroller fastScroller;
-    String name;
     ArrayList<String> mNames = new ArrayList<>();
     String ext;
 
     TextView welcomeUser;
+    String signedIn = null;
+    String name;
+
 
     private List<Users> userList = null;
 
@@ -66,7 +63,17 @@ public class savedUsers extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getUserList();
+        AddSavedUsers userThread = new AddSavedUsers("userThread");
+
+        try{
+            userThread.join();	//Waiting to finish
+        }catch(InterruptedException ie) {
+
+        }
+        mNames = userThread.getUsers();
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_users);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
@@ -74,35 +81,41 @@ public class savedUsers extends AppCompatActivity{
         fastScroller = (FastScroller) findViewById(R.id.fastscroll);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+        welcomeUser = (TextView) findViewById(R.id.welcomeUser);
 
         //has to be called AFTER RecyclerView.setAdapter()
         fastScroller.setRecyclerView(recyclerView);
 
-
-
         ctx = this;
-    }
-
-    @TargetApi(24)
-    public void addUser() {
-        RandNameGen nameGen = new RandNameGen();
-        Log.d("addUser","User added");
 
 
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                name= null;
+                signedIn= null;
 
-            for(Users u : userList){
-                mNames.add(u.getName());
-                Log.d("Names",u.getName());
+
+            } else {
+                name= extras.getString("name");
+                signedIn= extras.getString("signedIn");
+                recyclerView.setVisibility(View.INVISIBLE);
+                fastScroller.setVisibility(View.INVISIBLE);
+                welcomeUser.setText("Welcome " + name + "!");
+
+
             }
-//            for(int i = 0; i < 200; i ++){
-//                mNames.add(nameGen.randomIdentifier());
-//                Log.d("names",mNames.get(i));
-//
-//            }
-            Collections.sort(mNames);
+        } else {
+            name= (String) savedInstanceState.getSerializable("name");
+            signedIn= (String) savedInstanceState.getSerializable("signedIn");
 
 
+        }
     }
+
+
+
+
     public void verifyResponse(ResponseObject response){
         if(response.isSuccess()){
             //confirm user creation
@@ -127,7 +140,6 @@ public class savedUsers extends AppCompatActivity{
                     try {
                         ObjectMapper mapper = new ObjectMapper();
                         userList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
-                        addUser();
                     }
                     catch(Exception e){
                         Log.e("EXCEPTION", e.toString());

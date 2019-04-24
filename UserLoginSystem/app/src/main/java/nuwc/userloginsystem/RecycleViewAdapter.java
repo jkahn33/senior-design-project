@@ -1,12 +1,12 @@
-package nuwc.userloginsystem.util;
+package nuwc.userloginsystem;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,14 +15,14 @@ import com.futuremind.recyclerviewfastscroll.SectionTitleProvider;
 
 import java.util.ArrayList;
 
-import nuwc.userloginsystem.R;
-
 import static android.content.ContentValues.TAG;
 
 public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> implements SectionTitleProvider {
 
     private ArrayList<String> mUserNames = new ArrayList<>();
     private Context mContext;
+
+
 
     public RecycleViewAdapter(ArrayList<String> userNames, Context context){
         mUserNames = userNames;
@@ -64,6 +64,8 @@ public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+
+
         ImageView namePlate;
         TextView  userName;
         RelativeLayout parentLayout;
@@ -75,8 +77,17 @@ public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter
             namePlate = itemView.findViewById(R.id.namePlate);
             parentLayout = itemView.findViewById(R.id.parentLayout);
             userName = itemView.findViewById(R.id.nameView);
+            parentLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent checkout = new Intent(mContext, savedUsers.class);
+                    checkout.putExtra("name",userName.getText());
+                    checkout.putExtra("signedIn","T");
+                    mContext.startActivity(checkout);
 
 
+                }
+            });
 
         }
     }

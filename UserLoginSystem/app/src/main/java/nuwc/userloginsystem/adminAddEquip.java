@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import nuwc.userloginsystem.objects.ValidateWrapper;
 import nuwc.userloginsystem.util.RequestUtil;
 
-public class adminCheckout extends AppCompatActivity {
+public class adminAddEquip extends AppCompatActivity {
 
     String password;
     String extension;
@@ -37,24 +37,23 @@ public class adminCheckout extends AppCompatActivity {
     Button submitBut;
     Button cancel;
 
-    public void checkoutScreen(){
-
-        Intent sub = new Intent(adminCheckout.this, /*equipmentCheckout*/checkoutBarcode.class);
+    public void AddEquipScreen(){
+        Intent sub = new Intent(adminAddEquip.this, addEquipment.class);
         sub.putExtra("adminExt", extension);
-        adminCheckout.this.startActivity(sub);
+        adminAddEquip.this.startActivity(sub);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_checkout);
+        setContentView(R.layout.activity_admin_add_equip);
 
 
         submitBut = (Button) findViewById(R.id.submitBut2);
         passwordBox = (EditText) findViewById(R.id.passwordBox2);
         extensionBox = (EditText) findViewById(R.id.barcodeBox2);
         directions = (TextView) findViewById(R.id.commandBox2);
-        cancel = (Button) findViewById(R.id.btnAdminLoginCancel);
+        cancel = (Button) findViewById(R.id.btnAdminLoginCancel2);
 
         submitBut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -71,10 +70,11 @@ public class adminCheckout extends AppCompatActivity {
 
             }
         });
+
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent sub = new Intent(adminCheckout.this, checkoutOptions.class);
-                adminCheckout.this.startActivity(sub);
+                Intent sub = new Intent(adminAddEquip.this, checkoutOptions.class);
+                adminAddEquip.this.startActivity(sub);
             }
         });
     }
@@ -119,7 +119,7 @@ public class adminCheckout extends AppCompatActivity {
     public void verifyResponse(boolean success){
         if(success){
 
-            checkoutScreen();
+            AddEquipScreen();
         }
         else{
             showError("Extension or password is incorrect.");

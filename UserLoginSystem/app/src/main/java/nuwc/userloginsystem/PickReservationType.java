@@ -28,12 +28,15 @@ public class PickReservationType extends AppCompatActivity {
         printerRes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent myIntent = new Intent(PickReservationType.this, Reservations.class);
+                myIntent.putExtra("resType","printer");
                 PickReservationType.this.startActivity(myIntent);
             }
         });
         breakoutRes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent myIntent = new Intent(PickReservationType.this, BreakoutReservation.class);
+                myIntent.putExtra("resType","breakout");
+
                 PickReservationType.this.startActivity(myIntent);
             }
         });

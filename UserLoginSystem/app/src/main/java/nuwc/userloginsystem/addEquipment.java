@@ -32,23 +32,38 @@ public class addEquipment extends AppCompatActivity {
     String equipName;
     String barcode;
 
+    static EditText BITS;
+
     EditText barcodeBox;
     EditText equipmentNameBox;
+    EditText manufacturerBox;
+    EditText modelNumBox;
+    EditText serialNumBox;
+    EditText plantNumBox;
+
+
     TextView equipmentSuccessBox;
 
     Button submitButton;
     Button addEquipCancel;
     Button back;
+    Button scanButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_equipment);
 
+        BITS = (EditText) findViewById(R.id.barcodeBox2);
         submitButton = (Button) findViewById(R.id.submitButton2);
-        barcodeBox = (EditText) findViewById(R.id.barcodeBox);
+        scanButton = (Button) findViewById(R.id.scanButton);
+        barcodeBox = (EditText) findViewById(R.id.barcodeBox2);
         equipmentNameBox = (EditText) findViewById(R.id.equipmentName);
-        equipmentSuccessBox = (TextView) findViewById(R.id.commandBox);
+        manufacturerBox= (EditText) findViewById(R.id.manufacturerBox);
+        modelNumBox = (EditText) findViewById(R.id.modelNumBox);
+        serialNumBox = (EditText) findViewById(R.id.serialNumBox2);
+        plantNumBox= (EditText) findViewById(R.id.plantNumBox);
+        equipmentSuccessBox = (TextView) findViewById(R.id.commandBox2);
         addEquipCancel = (Button) findViewById(R.id.btnAddEquipCancel);
         back = (Button) findViewById(R.id.btnAddEquipHome);
         back.setVisibility(View.INVISIBLE);
@@ -80,7 +95,16 @@ public class addEquipment extends AppCompatActivity {
                 addEquipment.this.startActivity(cancelIntent);
             }
         });
+
+        scanButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), scannerScreen3.class));
+            }
+        });
+
     }
+
+
     public void sendEquipment() throws JSONException {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
@@ -154,4 +178,5 @@ public class addEquipment extends AppCompatActivity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
 }

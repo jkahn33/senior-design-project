@@ -22,7 +22,7 @@ import java.util.Date;
 /**
  * Created by Vinny on 11/5/18.
  */
-public class reserveOptionsPrint extends AppCompatActivity{
+public class ReserveOptionsBreakout extends AppCompatActivity{
 
     NumberPicker startTimeHourP;
     NumberPicker startTimeMinP;
@@ -56,7 +56,7 @@ public class reserveOptionsPrint extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reserve_options_printer);
+        setContentView(R.layout.reserve_breakout_options);
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();

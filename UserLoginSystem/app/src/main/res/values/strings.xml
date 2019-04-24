@@ -10,4 +10,10 @@
     <string name="test">Test</string>
     <string name="title_activity_scanner_screen">scannerScreen</string>
     <string name="title_activity_printer_options">PrinterOptions</string>
+    <string name="title_activity_scanner_screen2">scannerScreen2</string>
+    <string name="title_activity_scanner_screen3">scannerScreen3</string>
+    <string name="title_activity_admin_add_equip">adminAddEquip</string>
+    <string name="title_activity_admin_checkin">adminCheckin</string>
+    <string name="title_activity_barcode_checkout">barcodeCheckout</string>
+    <string name="title_activity_checkout_equip">checkoutEquip</string>
 </resources>

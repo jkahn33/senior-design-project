@@ -1,66 +1,48 @@
 package nuwc.userloginsystem;
 
-import android.app.Fragment;
-import android.content.Context;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
+
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.NumberPicker;
+
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.*;
 
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import nuwc.userloginsystem.objects.CalenImport;
-import nuwc.userloginsystem.objects.ResponseObject;
-import nuwc.userloginsystem.util.RequestUtil;
+
 
 
 public class Reservations extends AppCompatActivity {
 
     ConstraintLayout conLay;
 
+    Button submit;
+    Button cancel;
+
     TextView monthYear;
+    TextView pleaseEnter;
+
+    EditText employeeExt;
 
     ImageView leftArrow;
     ImageView rightArrow;
+    ImageView myPrints;
 
     TableLayout table;
 
@@ -72,6 +54,14 @@ public class Reservations extends AppCompatActivity {
 
     View[] days;
     TextView[] textDay;
+
+    RadioButton Abutton;
+    RadioButton Bbutton;
+    RadioButton Cbutton;
+    RadioButton Dbutton;
+    RadioButton Ebutton;
+
+
     int calSize = 42;
 
     int year1;
@@ -100,9 +90,16 @@ public class Reservations extends AppCompatActivity {
         conLay = (ConstraintLayout) findViewById(R.id.ConLay);
 
         monthYear = (TextView) findViewById(R.id.month_year);
+        pleaseEnter =(TextView) findViewById(R.id.enterInfoText);
+
+        employeeExt = (EditText) findViewById(R.id.extBox);
 
         leftArrow = (ImageView) findViewById(R.id.leftArrow);
         rightArrow = (ImageView) findViewById(R.id.rightArrow);
+        myPrints = (ImageView) findViewById(R.id.myReserve);
+
+        submit = (Button) findViewById(R.id.submit);
+        cancel = (Button) findViewById(R.id.cancel);
 
 
 
@@ -117,7 +114,16 @@ public class Reservations extends AppCompatActivity {
 
         days = new View[calSize];
 
-        for(int i = 0; i < calSize; i ++){
+
+        Abutton = (RadioButton) findViewById(R.id.Aprinter);
+        Bbutton = (RadioButton) findViewById(R.id.Bprinter);
+        Cbutton = (RadioButton) findViewById(R.id.Cprinter);
+        Dbutton = (RadioButton) findViewById(R.id.Dprinter);
+        Ebutton = (RadioButton) findViewById(R.id.Eprinter);
+
+        Abutton.setChecked(true);
+
+        for(int i = 1; i < calSize; i ++){
             String viewID = "D" + i;
             int resID = getResources().getIdentifier(viewID, "id", getPackageName());
             days[i] = ((View) findViewById(resID));
@@ -188,7 +194,46 @@ public class Reservations extends AppCompatActivity {
 
             }
         });
+
+        myPrints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                table.setVisibility(View.INVISIBLE);
+
+                pleaseEnter.setVisibility(View.VISIBLE);
+                employeeExt.setVisibility(View.VISIBLE);
+                cancel.setVisibility(View.VISIBLE);
+                submit.setVisibility(View.VISIBLE);
+
+            }
+        });
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent checkout = new Intent(Reservations.this, myPrintList.class);
+                checkout.putExtra("employee",employeeExt.getText());
+                checkout.putExtra("reserveType","breakout");
+                Reservations.this.startActivity(checkout);
+
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                table.setVisibility(View.VISIBLE);
+
+                pleaseEnter.setVisibility(View.INVISIBLE);
+                employeeExt.setVisibility(View.INVISIBLE);
+                cancel.setVisibility(View.INVISIBLE);
+                submit.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
     }
+
+
 
     public void displayCalendar(int month, int day, int year){
         CalenImport calendar = new CalenImport();
@@ -206,13 +251,14 @@ public class Reservations extends AppCompatActivity {
             if(1 < dayOfWeek) {
                 hideDays(1,dayOfWeek);
             }
-            printDays(dayOfWeek,calendar.lastDay(month,year));
+            printDays(dayOfWeek,calendar.lastDay(month,year),month,day,year);
     }
 
     public void hideDays(int start, int end){
         for(int i = start; i != end; i ++){
             textDay[i] = (TextView) days[i].findViewById(R.id.date);
             textDay[i].setText("");
+            days[i].setOnClickListener(null);
 
 
         }
@@ -220,16 +266,69 @@ public class Reservations extends AppCompatActivity {
 
     }
 
-    public void printDays(int start,int end) {
+    public void printDays(int start,int end, int month,int day,int year) {
         int d = 1;
 
         for(int i = 1; i <= end; i ++){
             textDay[i] = (TextView) days[start].findViewById(R.id.date);
             textDay[i].setText(d + "th");
+            int finalDay = d;
+
+            addEventBubble(days[start]);
+
+            days[start].setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(Reservations.this, reserveOptionsPrint.class);
+                    myIntent.putExtra("day",finalDay);
+                    myIntent.putExtra("month",month - 1);
+                    myIntent.putExtra("year",year);
+                    myIntent.putExtra("printer",checkPrinterButtons());
+
+                    Reservations.this.startActivity(myIntent);
+
+                }
+            });
+
             d ++;
             start++;
         }
         hideDays(start,calSize);
+    }
+
+    public void addEventBubble(View day){
+        TextView view = (TextView) day.findViewById(R.id.bubb);
+        TextView view1 = (TextView) day.findViewById(R.id.bubb1);
+        TextView view2 = (TextView) day.findViewById(R.id.bubb2);
+
+        view.setVisibility(View.VISIBLE);
+        view1.setVisibility(View.VISIBLE);
+        view2.setVisibility(View.VISIBLE);
+
+        view.setText("Hey");
+        view1.setText("Bye");
+        view2.setText("Vinny");
+
+
+
+
+    }
+
+    public String checkPrinterButtons(){
+
+        if(Abutton.isChecked()){
+            return "A";
+        }else if(Bbutton.isChecked()){
+            return  "B";
+        }else if(Cbutton.isChecked()){
+            return  "C";
+        }else if(Dbutton.isChecked()){
+            return  "D";
+        }else if(Ebutton.isChecked()){
+            return  "E";
+        }else {
+            return null;
+        }
+
     }
 
 

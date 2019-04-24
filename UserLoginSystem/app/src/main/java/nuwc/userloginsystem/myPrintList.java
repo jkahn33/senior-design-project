@@ -5,18 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Button;
 
 import com.futuremind.recyclerviewfastscroll.FastScroller;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
-import nuwc.userloginsystem.objects.Users;
 import nuwc.userloginsystem.util.AdapterPrintList;
 import nuwc.userloginsystem.util.RandNameGen;
-import nuwc.userloginsystem.util.RecycleViewAdapter;
 
 public class myPrintList extends AppCompatActivity {
 
@@ -24,13 +20,35 @@ public class myPrintList extends AppCompatActivity {
     AdapterPrintList adapter;
     FastScroller fastScroller;
     ArrayList<String> reservations = new ArrayList<>();
+    String employeeExt = null;
+    String reserveType = null;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_print_list);
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                employeeExt= null;
+                reserveType= null;
 
-        addUser();
+
+            } else {
+                employeeExt= extras.getString("employee");
+                reserveType= extras.getString("reserveType");
+
+
+            }
+        } else {
+            employeeExt= (String) savedInstanceState.getSerializable("employee");
+            reserveType= (String) savedInstanceState.getSerializable("reserveType");
+
+
+        }
+
+        addReserves();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         adapter = new AdapterPrintList(reservations,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -43,7 +61,7 @@ public class myPrintList extends AppCompatActivity {
 
     }
 
-    public void addUser() {
+    public void addReserves() {
         RandNameGen nameGen = new RandNameGen();
         Log.d("addUser","User added");
 
