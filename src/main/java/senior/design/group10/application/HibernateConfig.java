@@ -41,11 +41,11 @@ public class HibernateConfig {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         //database url setting
-        dataSource.setUrl("jdbc:mysql://localhost:3306/user_logging_system");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/user_logging_system?useSSL=false");
         //database root setting
         dataSource.setUsername("root");
         //database password setting
-        dataSource.setPassword("root");
+        dataSource.setPassword("seniordesign");
         return dataSource;
     }
 

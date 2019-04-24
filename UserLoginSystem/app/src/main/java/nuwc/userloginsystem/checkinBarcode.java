@@ -30,12 +30,13 @@ public class checkinBarcode extends AppCompatActivity {
 
     String barcode;
 
-    EditText enterBox2;
+    static EditText enterBox2;
     TextView commandBox2;
 
     Button submitButton2;
     Button cancel;
     Button back;
+    Button buttonScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +44,10 @@ public class checkinBarcode extends AppCompatActivity {
         setContentView(R.layout.activity_checkin_barcode_screen);
 
         submitButton2 = (Button) findViewById(R.id.submitButton2);
+        buttonScan = (Button) findViewById(R.id.buttonScan);
         cancel = (Button) findViewById(R.id.btnCheckinCancel);
         enterBox2 = (EditText) findViewById(R.id.enterBox2);
-        commandBox2 = (TextView) findViewById(R.id.commandBox);
+        commandBox2 = (TextView) findViewById(R.id.commandBox2);
         back = (Button) findViewById(R.id.btnCheckinHome);
         back.setVisibility(View.INVISIBLE);
 
@@ -63,6 +65,8 @@ public class checkinBarcode extends AppCompatActivity {
 
             }
         });
+
+
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent cancelIntent = new Intent(checkinBarcode.this, checkoutOptions.class);
@@ -75,7 +79,14 @@ public class checkinBarcode extends AppCompatActivity {
                 checkinBarcode.this.startActivity(cancelIntent);
             }
         });
+
+        buttonScan.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), scannerScreen.class));
+            }
+        });
     }
+
     public void sendCheckin() throws JSONException {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
