@@ -76,41 +76,18 @@ public class savedUsers extends AppCompatActivity{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_users);
+        welcomeUser = (TextView) findViewById(R.id.welcomeUser);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        adapter = new RecycleViewAdapter(mNames,this);
         fastScroller = (FastScroller) findViewById(R.id.fastscroll);
+        adapter = new RecycleViewAdapter(mNames,this,recyclerView,fastScroller,welcomeUser);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-        welcomeUser = (TextView) findViewById(R.id.welcomeUser);
 
         //has to be called AFTER RecyclerView.setAdapter()
         fastScroller.setRecyclerView(recyclerView);
 
         ctx = this;
 
-
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                name= null;
-                signedIn= null;
-
-
-            } else {
-                name= extras.getString("name");
-                signedIn= extras.getString("signedIn");
-                recyclerView.setVisibility(View.INVISIBLE);
-                fastScroller.setVisibility(View.INVISIBLE);
-                welcomeUser.setText("Welcome " + name + "!");
-
-
-            }
-        } else {
-            name= (String) savedInstanceState.getSerializable("name");
-            signedIn= (String) savedInstanceState.getSerializable("signedIn");
-
-
-        }
     }
 
 

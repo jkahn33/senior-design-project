@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.futuremind.recyclerviewfastscroll.FastScroller;
 import com.futuremind.recyclerviewfastscroll.SectionTitleProvider;
 
 import java.util.ArrayList;
@@ -21,12 +22,18 @@ public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter
 
     private ArrayList<String> mUserNames = new ArrayList<>();
     private Context mContext;
+    RecyclerView recyclerView;
+    FastScroller fastScroller;
+    TextView welcome;
 
 
 
-    public RecycleViewAdapter(ArrayList<String> userNames, Context context){
+    public RecycleViewAdapter(ArrayList<String> userNames, Context context, RecyclerView rView, FastScroller scroller, TextView userWelcome){
         mUserNames = userNames;
         mContext = context;
+        recyclerView = rView;
+        fastScroller = scroller;
+        welcome = userWelcome;
     }
 
 
@@ -80,10 +87,10 @@ public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter
             parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent checkout = new Intent(mContext, savedUsers.class);
-                    checkout.putExtra("name",userName.getText());
-                    checkout.putExtra("signedIn","T");
-                    mContext.startActivity(checkout);
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    fastScroller.setVisibility(View.INVISIBLE);
+                    welcome.setText("Welcome " + userName.getText() + "!");
+                    recyclerView.setVisibility(View.INVISIBLE);
 
 
                 }
