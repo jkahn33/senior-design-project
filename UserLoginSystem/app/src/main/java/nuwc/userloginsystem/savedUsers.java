@@ -60,6 +60,8 @@ public class savedUsers extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         AddSavedUsers userThread = new AddSavedUsers("userThread");
 
+        getUserList(userThread);
+
         try{
             userThread.join();	//Waiting to finish
         }catch(InterruptedException ie) {
@@ -81,7 +83,6 @@ public class savedUsers extends AppCompatActivity{
 
         ctx = this;
 
-
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
@@ -90,24 +91,17 @@ public class savedUsers extends AppCompatActivity{
 
 
             } else {
-                name= extras.getString("name");
-                signedIn= extras.getString("signedIn");
+                name = extras.getString("name");
+                signedIn = extras.getString("signedIn");
                 recyclerView.setVisibility(View.INVISIBLE);
                 fastScroller.setVisibility(View.INVISIBLE);
                 welcomeUser.setText("Welcome " + name + "!");
-
-
             }
         } else {
             name= (String) savedInstanceState.getSerializable("name");
             signedIn= (String) savedInstanceState.getSerializable("signedIn");
-
-
         }
     }
-
-
-
 
     public void verifyResponse(ResponseObject response){
         if(response.isSuccess()){
@@ -120,7 +114,7 @@ public class savedUsers extends AppCompatActivity{
             showError(response.getMessage());
         }
     }
-    public void getUserList(){
+    public void getUserList(AddSavedUsers threadInstance){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
 
@@ -133,7 +127,8 @@ public class savedUsers extends AppCompatActivity{
                     try {
                         ObjectMapper mapper = new ObjectMapper();
                         userList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
-
+                        Log.d("USERS", "USER LIST GOTTEN");
+                        threadInstance.setUserList((ArrayList<Users>)userList);
                     }
                     catch(Exception e){
                         Log.e("EXCEPTION", e.toString());
@@ -210,7 +205,4 @@ public class savedUsers extends AppCompatActivity{
     public void setFirstName(String firstName){
         this.name = firstName;
     }
-
-
-
 }

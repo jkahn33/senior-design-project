@@ -110,10 +110,10 @@ public class AndroidController {
     @GetMapping("/printAllUsers")
     @ResponseBody
     public List<Users> printAllUsers() {
+        log.info("GETTING USER LIST");
         return userService.getAllUsers();
     }
-    
-	@PostMapping("/newPrinterReservation")
+
     /*
      * Printer reservation takes in a sent printer reservation which is composed of the following variables
      * String for user extension, String for type of reservable, string for reservable id, string for job description
@@ -121,6 +121,7 @@ public class AndroidController {
      * String for job duration in the following format: "HH:MM" since the time is parsed base on the colon
      * String for the additional comments
      */
+	@PostMapping("/newPrinterReservation")
 	@ResponseBody
 	public ResponseObject newPrinterReservation(@RequestBody SentPrinterReservation printerReservation)
 	{	

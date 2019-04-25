@@ -57,6 +57,7 @@ public class AddSavedUsers extends Thread {
     }
 
     public void setUserList(ArrayList<Users> userList){
+        Log.d("USERS", "USER LIST SET");
         this.userList = userList;
     }
 //
