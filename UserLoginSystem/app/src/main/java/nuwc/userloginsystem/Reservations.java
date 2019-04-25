@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -55,6 +56,8 @@ public class Reservations extends AppCompatActivity {
     View[] days;
     TextView[] textDay;
 
+
+    RadioGroup rGroup;
     RadioButton Abutton;
     RadioButton Bbutton;
     RadioButton Cbutton;
@@ -229,6 +232,12 @@ public class Reservations extends AppCompatActivity {
                 submit.setVisibility(View.INVISIBLE);
 
             }
+        });
+        rGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+            }
+
         });
 
     }

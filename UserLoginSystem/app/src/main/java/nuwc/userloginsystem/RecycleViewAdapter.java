@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,15 +26,17 @@ public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter
     RecyclerView recyclerView;
     FastScroller fastScroller;
     TextView welcome;
+    Button goBack;
 
 
 
-    public RecycleViewAdapter(ArrayList<String> userNames, Context context, RecyclerView rView, FastScroller scroller, TextView userWelcome){
+    public RecycleViewAdapter(ArrayList<String> userNames, Context context, RecyclerView rView, FastScroller scroller, TextView userWelcome,Button back){
         mUserNames = userNames;
         mContext = context;
         recyclerView = rView;
         fastScroller = scroller;
         welcome = userWelcome;
+        goBack = back;
     }
 
 
@@ -87,14 +90,22 @@ public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter
             parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    recyclerView.setVisibility(View.INVISIBLE);
                     fastScroller.setVisibility(View.INVISIBLE);
-                    welcome.setText("Welcome " + userName.getText() + "!");
                     recyclerView.setVisibility(View.INVISIBLE);
-
+                    welcome.setText("Welcome " + userName.getText() + "!");
+                    goBack.setVisibility(View.VISIBLE);
 
                 }
             });
+            goBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(mContext, signIn.class);
+                    mContext.startActivity(myIntent);
+
+                }
+            });
+
 
         }
     }

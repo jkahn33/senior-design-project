@@ -1,16 +1,19 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="#ffffff" tools:context=".savedUsers">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
+
     <TextView android:id="@+id/fullscreen_content" android:layout_width="match_parent"
         android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#33b5e5"
         android:textStyle="bold" android:textSize="50sp" android:gravity="center" />
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
+
     <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:background="@drawable/logo"
@@ -41,8 +44,10 @@
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="150dp"
                 android:layout_marginTop="175dp"
-                android:layout_marginRight="300dp" />
+                android:layout_marginRight="150dp"
+                android:visibility="visible" />
 
             <com.futuremind.recyclerviewfastscroll.FastScroller
                 android:id="@+id/fastscroll"
@@ -50,7 +55,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="175dp"
-                android:layout_marginRight="300dp"
+                android:layout_marginRight="150dp"
                 android:orientation="vertical" />
 
         </RelativeLayout>
@@ -85,6 +90,15 @@
             android:textColor="#000000"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp" />
+
+        <Button
+            android:id="@+id/goBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="800dp"
+            android:background="@drawable/go_back"
+            android:visibility="invisible" />
 
 
     </FrameLayout>

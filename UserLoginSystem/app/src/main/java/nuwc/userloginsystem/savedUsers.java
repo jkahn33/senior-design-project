@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -53,6 +54,7 @@ public class savedUsers extends AppCompatActivity{
     TextView welcomeUser;
     String signedIn = null;
     String name;
+    Button goBack;
 
 
     private List<Users> userList = null;
@@ -79,12 +81,15 @@ public class savedUsers extends AppCompatActivity{
         welcomeUser = (TextView) findViewById(R.id.welcomeUser);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         fastScroller = (FastScroller) findViewById(R.id.fastscroll);
-        adapter = new RecycleViewAdapter(mNames,this,recyclerView,fastScroller,welcomeUser);
+        goBack = (Button) findViewById(R.id.goBack);
+
+        adapter = new RecycleViewAdapter(mNames,this,recyclerView,fastScroller,welcomeUser,goBack);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
         //has to be called AFTER RecyclerView.setAdapter()
         fastScroller.setRecyclerView(recyclerView);
+
 
         ctx = this;
 
