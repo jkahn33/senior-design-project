@@ -1,23 +1,17 @@
 package nuwc.userloginsystem;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.text.DateFormatSymbols;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by Vinny on 11/5/18.
@@ -86,7 +80,7 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
 
         employExt = (EditText) findViewById(R.id.employExt);
         printDetails = (EditText) findViewById(R.id.printDetails);
-        printName = (EditText) findViewById(R.id.printName);
+        printName = (EditText) findViewById(R.id.numberGuests);
         startDate = (EditText) findViewById(R.id.startDate);
 
         MDY = (TextView) findViewById(R.id.MDY);
