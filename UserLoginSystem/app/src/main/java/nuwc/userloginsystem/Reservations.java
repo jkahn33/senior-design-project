@@ -117,7 +117,7 @@ public class Reservations extends AppCompatActivity {
 
         days = new View[calSize];
 
-
+        rGroup = (RadioGroup)  findViewById(R.id.radioGroup);
         Abutton = (RadioButton) findViewById(R.id.Aprinter);
         Bbutton = (RadioButton) findViewById(R.id.Bprinter);
         Cbutton = (RadioButton) findViewById(R.id.Cprinter);

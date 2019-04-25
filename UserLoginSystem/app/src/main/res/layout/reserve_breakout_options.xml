@@ -9,11 +9,11 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="588dp"
-        android:layout_marginTop="630dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="15dp"
         android:text="End date of print:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/blue_back" />
+        app:layout_constraintStart_toEndOf="@+id/cancel"
+        app:layout_constraintTop_toTopOf="@+id/endDate" />
 
     <TextView
         android:id="@+id/textView10"
@@ -28,26 +28,23 @@
     <NumberPicker
         android:id="@+id/endTimehourP"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginStart="724dp"
-        android:layout_marginTop="388dp"
+        android:layout_marginTop="50dp"
         android:text="Print"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/startsDate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/startTimeHourP" />
 
     <NumberPicker
         android:id="@+id/endTimeMinP"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginStart="880dp"
-        android:layout_marginTop="388dp"
         android:text="Print"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/startsDate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/endTimehourP" />
 
     <DatePicker
         android:id="@+id/date_picker"
@@ -78,34 +75,32 @@
         android:layout_width="215dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="724dp"
-        android:layout_marginTop="615dp"
+        android:layout_marginTop="35dp"
         android:ems="10"
         android:hint="End Date"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/endTimehourP" />
 
     <NumberPicker
         android:id="@+id/startTimeMinP"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginStart="880dp"
         android:layout_marginTop="192dp"
         android:text="Print"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/startsDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <NumberPicker
         android:id="@+id/startTimeHourP"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginStart="724dp"
         android:layout_marginTop="192dp"
         android:text="Print"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/startsDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -158,104 +153,166 @@
     </ScrollView>
 
     <EditText
-        android:id="@+id/printName"
+        android:id="@+id/numberGuests"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="292dp"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Print Name"
+        android:hint="Number of Guests"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/printName3" />
+
+    <EditText
+        android:id="@+id/printName3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:hint="Event Name"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <EditText
         android:id="@+id/employExt"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginStart="292dp"
-        android:layout_marginTop="372dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Employee Extension"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/numberGuests" />
 
     <EditText
         android:id="@+id/printDetails"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginStart="292dp"
-        android:layout_marginTop="448dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Extra details"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/employExt" />
 
     <Button
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="292dp"
-        android:layout_marginTop="520dp"
+        android:layout_marginTop="8dp"
         android:text="Submit"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/printDetails" />
 
     <Button
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="440dp"
-        android:layout_marginTop="520dp"
+        android:layout_marginStart="420dp"
+        android:layout_marginTop="8dp"
         android:text="Cancel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/printDetails" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="25dp"
         android:text="Start Time:"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/startTimeHourP"
-        app:layout_constraintTop_toBottomOf="@+id/blue_back" />
+        app:layout_constraintTop_toTopOf="@+id/startTimeHourP" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="364dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="25dp"
         android:text="End Time:"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/endTimehourP"
-        app:layout_constraintTop_toBottomOf="@+id/blue_back" />
+        app:layout_constraintTop_toTopOf="@+id/endTimehourP" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="27dp"
         android:text=":"
         android:textSize="30sp"
         app:layout_constraintStart_toEndOf="@+id/startTimeHourP"
-        app:layout_constraintTop_toBottomOf="@+id/startDate" />
+        app:layout_constraintTop_toTopOf="@+id/startTimeMinP" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="27dp"
         android:text=":"
         android:textSize="30sp"
         app:layout_constraintStart_toEndOf="@+id/startTimeHourP"
-        app:layout_constraintTop_toBottomOf="@+id/startDate" />
+        app:layout_constraintTop_toTopOf="@+id/endTimeMinP" />
+
+    <CheckBox
+        android:id="@+id/Bbreakout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="404dp"
+        android:layout_marginTop="8dp"
+        android:text="B"
+        app:layout_constraintStart_toStartOf="@+id/timeSlots"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <CheckBox
+        android:id="@+id/DBreakout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="404dp"
+        android:layout_marginTop="50dp"
+        android:text="D"
+        app:layout_constraintStart_toStartOf="@+id/timeSlots"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <CheckBox
+        android:id="@+id/Abreakout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="8dp"
+        android:text="A"
+        app:layout_constraintStart_toStartOf="@+id/timeSlots"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <CheckBox
+        android:id="@+id/Cbreakout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="50dp"
+        android:text="C"
+        app:layout_constraintStart_toStartOf="@+id/timeSlots"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="115dp"
+        android:text="Select breakout rooms:"
+        app:layout_constraintStart_toStartOf="@+id/timeSlots"
+        app:layout_constraintTop_toTopOf="@+id/blue_back" />
 
 
 </android.support.constraint.ConstraintLayout>

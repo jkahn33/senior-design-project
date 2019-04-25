@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="315dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="150dp"
         android:text="Please enter your employee extension"
         android:textSize="24sp"
         android:visibility="invisible"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="400dp"
-        android:layout_marginTop="408dp"
+        android:layout_marginTop="208dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Extension"
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="525dp"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="300dp"
         android:text="@android:string/cancel"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="400dp"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="300dp"
         android:text="Submit"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
@@ -595,11 +595,11 @@
             android:text="A" />
 
         <RadioButton
-            android:id="@+id/Dprinter"
+            android:id="@+id/Bprinter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="D" />
+            android:text="B" />
 
         <RadioButton
             android:id="@+id/Cprinter"
@@ -609,11 +609,11 @@
             android:text="C" />
 
         <RadioButton
-            android:id="@+id/Bprinter"
+            android:id="@+id/Dprinter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="B" />
+            android:text="D" />
 
         <RadioButton
             android:id="@+id/Eprinter"
