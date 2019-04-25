@@ -1,11 +1,15 @@
 package nuwc.userloginsystem;
 
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +20,18 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.json.JSONObject;
+
 import java.lang.*;
 
 
@@ -23,9 +39,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 import nuwc.userloginsystem.objects.CalenImport;
-
+import nuwc.userloginsystem.objects.PrinterReservations;
+import nuwc.userloginsystem.objects.ResponseObject;
+import nuwc.userloginsystem.util.RequestUtil;
 
 
 public class Reservations extends AppCompatActivity {
@@ -248,10 +268,10 @@ public class Reservations extends AppCompatActivity {
         //id of day block in calendar D1,D2,D3 etc
         String dayID = dayOfWeekID(dayOfWeek);
 
-            if(1 < dayOfWeek) {
-                hideDays(1,dayOfWeek);
-            }
-            printDays(dayOfWeek,calendar.lastDay(month,year),month,day,year);
+        if(1 < dayOfWeek) {
+            hideDays(1,dayOfWeek);
+        }
+        getReservationList(dayOfWeek, calendar.lastDay(month,year), month, year);
     }
 
     public void hideDays(int start, int end){
@@ -266,7 +286,7 @@ public class Reservations extends AppCompatActivity {
 
     }
 
-    public void printDays(int start,int end, int month,int day,int year) {
+    public void printDays(List<PrinterReservations> printerReservationsList, int start,int end, int month, int year) {
         int d = 1;
 
         for(int i = 1; i <= end; i ++){
@@ -274,7 +294,20 @@ public class Reservations extends AppCompatActivity {
             textDay[i].setText(d + "th");
             int finalDay = d;
 
-            addEventBubble(days[start]);
+            Date date = new GregorianCalendar(year, month, i).getTime();
+
+            Log.d("RESSS", printerReservationsList.toString());
+
+            for(PrinterReservations res : printerReservationsList){
+                Log.d("RESSS", res.getPrinter());
+                Log.d("RESID", checkPrinterButtons());
+            }
+
+            for(PrinterReservations res : printerReservationsList){
+                if(res.getPrinter().equals(checkPrinterButtons()) && dayContained(date, res.getJobSchedule(), res.getJobScheduleEnd())){
+                    addEventBubble(days[start], res.getName());
+                }
+            }
 
             days[start].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
@@ -295,18 +328,67 @@ public class Reservations extends AppCompatActivity {
         hideDays(start,calSize);
     }
 
-    public void addEventBubble(View day){
+    public boolean dayContained(Date current, Date start, Date end){
+        return current.after(start) && current.before(end);
+    }
+
+    public void getReservationList(int dayOfWeek, int end, int month, int year){
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.start();
+
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                RequestUtil.BASE_URL + "/getPrinterReservations",
+                null,
+                response -> {
+                    try {
+                        ObjectMapper mapper = new ObjectMapper();
+                        List<PrinterReservations> resList = mapper.readValue(response.toString(), new TypeReference<List<PrinterReservations>>(){});
+
+                        printDays(resList, dayOfWeek,end, month, year);
+                    }
+                    catch(Exception e){
+                        Log.e("EXCEPTION", e.toString());
+                        //showError("Object mapping error. Please check logs.");
+                    }
+                },
+                error -> {
+                    Log.e("ERROR", "Error is: " + error.getMessage());
+                    showError(error.getMessage());
+
+                }
+        );
+
+        requestQueue.add(request);
+    }
+
+    private void showError(String message){
+        Context context = this;
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle("Error")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    public void addEventBubble(View day, String name){
         TextView view = (TextView) day.findViewById(R.id.bubb);
-        TextView view1 = (TextView) day.findViewById(R.id.bubb1);
-        TextView view2 = (TextView) day.findViewById(R.id.bubb2);
+//        TextView view1 = (TextView) day.findViewById(R.id.bubb1);
+//        TextView view2 = (TextView) day.findViewById(R.id.bubb2);
 
         view.setVisibility(View.VISIBLE);
-        view1.setVisibility(View.VISIBLE);
-        view2.setVisibility(View.VISIBLE);
+//        view1.setVisibility(View.VISIBLE);
+//        view2.setVisibility(View.VISIBLE);
 
-        view.setText("Hey");
-        view1.setText("Bye");
-        view2.setText("Vinny");
+        view.setText(name);
+//        view1.setText("Bye");
+//        view2.setText("Vinny");
 
 
 

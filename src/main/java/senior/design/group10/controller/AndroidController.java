@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import senior.design.group10.objects.equipment.Equipment;
+import senior.design.group10.objects.equipment.PrinterReservations;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.response.ValidateWrapper;
 import senior.design.group10.objects.sent.AdminInQuestion;
@@ -221,5 +222,11 @@ public class AndroidController {
     @ResponseBody
     public List<Calendar> getEventsByDate(Timestamp ts) {
         return calendarService.getEventsByDate(ts);
+    }
+
+    @GetMapping("/getPrinterReservations")
+    @ResponseBody
+    public List<PrinterReservations> getPrinterReservations(){
+        return printerService.getPrinterReservations();
     }
 }

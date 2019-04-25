@@ -54,6 +54,14 @@ public class PrinterReservations
 		this.jobScheduleEnd = jobScheduleEnd;
 		this.additionalComments = additionalComments;
 	}
+
+	public String getName(){
+		return user.getName();
+	}
+
+	public String getPrinter(){
+		return reservable.getRoom();
+	}
 	
 	public Date getJobSchedule()
 	{

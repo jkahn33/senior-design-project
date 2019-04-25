@@ -144,4 +144,8 @@ public class PrinterService
 	public List<PrinterUsageUsers> getUserUsage(){
 		return printerDAO.getUserUsage();
 	}
+
+	public List<PrinterReservations> getPrinterReservations(){
+		return printerDAO.findAll();
+	}
 }

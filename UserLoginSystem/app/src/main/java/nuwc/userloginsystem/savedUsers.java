@@ -54,12 +54,7 @@ public class savedUsers extends AppCompatActivity{
     String signedIn = null;
     String name;
 
-
     private List<Users> userList = null;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +63,9 @@ public class savedUsers extends AppCompatActivity{
         try{
             userThread.join();	//Waiting to finish
         }catch(InterruptedException ie) {
-
+            Log.e("ERROR", ie.getMessage());
         }
         mNames = userThread.getUsers();
-
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_users);
@@ -140,6 +133,7 @@ public class savedUsers extends AppCompatActivity{
                     try {
                         ObjectMapper mapper = new ObjectMapper();
                         userList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
+
                     }
                     catch(Exception e){
                         Log.e("EXCEPTION", e.toString());
