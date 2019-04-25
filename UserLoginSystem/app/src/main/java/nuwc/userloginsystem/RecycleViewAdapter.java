@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.futuremind.recyclerviewfastscroll.FastScroller;
 import com.futuremind.recyclerviewfastscroll.SectionTitleProvider;
 
 import java.util.ArrayList;
@@ -21,12 +23,20 @@ public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter
 
     private ArrayList<String> mUserNames = new ArrayList<>();
     private Context mContext;
+    RecyclerView recyclerView;
+    FastScroller fastScroller;
+    TextView welcome;
+    Button goBack;
 
 
 
-    public RecycleViewAdapter(ArrayList<String> userNames, Context context){
+    public RecycleViewAdapter(ArrayList<String> userNames, Context context, RecyclerView rView, FastScroller scroller, TextView userWelcome,Button back){
         mUserNames = userNames;
         mContext = context;
+        recyclerView = rView;
+        fastScroller = scroller;
+        welcome = userWelcome;
+        goBack = back;
     }
 
 
@@ -80,14 +90,22 @@ public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter
             parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent checkout = new Intent(mContext, savedUsers.class);
-                    checkout.putExtra("name",userName.getText());
-                    checkout.putExtra("signedIn","T");
-                    mContext.startActivity(checkout);
-
+                    fastScroller.setVisibility(View.INVISIBLE);
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    welcome.setText("Welcome " + userName.getText() + "!");
+                    goBack.setVisibility(View.VISIBLE);
 
                 }
             });
+            goBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(mContext, signIn.class);
+                    mContext.startActivity(myIntent);
+
+                }
+            });
+
 
         }
     }

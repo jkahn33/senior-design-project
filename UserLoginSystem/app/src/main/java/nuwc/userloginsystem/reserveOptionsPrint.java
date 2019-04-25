@@ -125,12 +125,12 @@ public class reserveOptionsPrint extends AppCompatActivity{
         startTimeMinP.setValue(0);
 
         endTimehourP = (NumberPicker) findViewById(R.id.endTimehourP);
-        String[] nums3 = new String[200];
+        String[] nums3 = new String[1000];
         for(int i=0; i<nums3.length; i++)
             nums3[i] = Integer.toString(i);
 
         endTimehourP.setMinValue(0);
-        endTimehourP.setMaxValue(199);
+        endTimehourP.setMaxValue(999);
         endTimehourP.setWrapSelectorWheel(true);
         endTimehourP.setDisplayedValues(nums3);
         endTimehourP.setValue(0);

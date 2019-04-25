@@ -141,7 +141,7 @@
         android:id="@+id/endDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="788dp"
+        android:layout_marginStart="728dp"
         android:layout_marginTop="608dp"
         android:text="End Date"
         android:textSize="24sp"
@@ -154,11 +154,14 @@
         android:layout_height="42dp"
         android:layout_marginStart="292dp"
         android:layout_marginTop="372dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="Employee Extension"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/printDetails"
@@ -166,11 +169,14 @@
         android:layout_height="42dp"
         android:layout_marginStart="292dp"
         android:layout_marginTop="448dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="Extra details"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/submit"
@@ -255,6 +261,26 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/printName"
         app:layout_constraintTop_toBottomOf="@+id/blue_back" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="588dp"
+        android:layout_marginTop="128dp"
+        android:text="Start date of print:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/blue_back" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="588dp"
+        android:layout_marginTop="615dp"
+        android:text="End date of print:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/blue_back" />
 
 
 </android.support.constraint.ConstraintLayout>

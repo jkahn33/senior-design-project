@@ -40,7 +40,6 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
     TextView endDate;
     TextView MDY;
     TextView dayWeek;
-    TextView selectedPrinter;
 
     int year = 1997;
     int month = 0;
@@ -92,8 +91,6 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
 
         MDY = (TextView) findViewById(R.id.MDY);
         dayWeek = (TextView) findViewById(R.id.dayWeek);
-        selectedPrinter = (TextView) findViewById(R.id.selectedPrinter);
-        selectedPrinter.setText("Selected Printer: " + printer);
 
 
 
@@ -125,12 +122,12 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
         startTimeMinP.setValue(0);
 
         endTimehourP = (NumberPicker) findViewById(R.id.endTimehourP);
-        String[] nums3 = new String[200];
+        String[] nums3 = new String[24];
         for(int i=0; i<nums3.length; i++)
             nums3[i] = Integer.toString(i);
 
         endTimehourP.setMinValue(0);
-        endTimehourP.setMaxValue(199);
+        endTimehourP.setMaxValue(23);
         endTimehourP.setWrapSelectorWheel(true);
         endTimehourP.setDisplayedValues(nums3);
         endTimehourP.setValue(0);
@@ -162,9 +159,6 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
                 calStart.set(Calendar.HOUR_OF_DAY,i2);
                 startDate.setText(simpleDateFormat.format(calStart.getTime()));
 
-                calEnd = calStart;
-                endDate.setText(simpleDateFormat.format(calStart.getTime()));
-
 
             }
         });
@@ -175,9 +169,6 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
                 calStart.set(Calendar.MINUTE,i2);
                 startDate.setText(simpleDateFormat.format(calStart.getTime()));
 
-                calEnd = calStart;
-                endDate.setText(simpleDateFormat.format(calStart.getTime()));
-
 
             }
         });
@@ -185,8 +176,7 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i2) {
 
-                calStart.add(Calendar.HOUR_OF_DAY,-i);
-                calStart.add(Calendar.HOUR_OF_DAY,i2);
+                calEnd.set(Calendar.HOUR_OF_DAY,i2);
                 endDate.setText(simpleDateFormat.format(calEnd.getTime()));
 
             }
@@ -196,8 +186,7 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i2) {
 
-                calStart.add(Calendar.MINUTE,-i);
-                calStart.add(Calendar.MINUTE,i2);
+                calEnd.set(Calendar.MINUTE,i2);
                 endDate.setText(simpleDateFormat.format(calEnd.getTime()));
 
             }
@@ -236,9 +225,6 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
                     calStart.set(Calendar.HOUR_OF_DAY,time);
                     startDate.setText(simpleDateFormat.format(calStart.getTime()));
 
-                    calEnd = calStart;
-                    calEnd.add(Calendar.HOUR_OF_DAY,endTimehourP.getValue());
-                    endDate.setText(simpleDateFormat.format(calStart.getTime()));
 
 
 
