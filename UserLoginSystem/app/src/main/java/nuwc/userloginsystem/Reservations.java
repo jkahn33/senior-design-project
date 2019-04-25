@@ -144,7 +144,7 @@ public class Reservations extends AppCompatActivity {
         //gives access to current time
         Calendar now = Calendar.getInstance();
          year1 = now.get(Calendar.YEAR);
-         month1 = now.get(Calendar.MONTH) + 1; // Note: zero based!
+         month1 = now.get(Calendar.MONTH); // Note: zero based!
          day1 = now.get(Calendar.DAY_OF_MONTH);
          hour1 = now.get(Calendar.HOUR_OF_DAY);
          minute1 = now.get(Calendar.MINUTE);
@@ -161,7 +161,7 @@ public class Reservations extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        displayCalendar(month1-1,day1,year1);
+        displayCalendar(month1,day1,year1);
 
         //Click listeners used for navigating calendar
         leftArrow.setOnClickListener(new View.OnClickListener(){
@@ -173,9 +173,9 @@ public class Reservations extends AppCompatActivity {
                     year1 --;
                     displayCalendar(month1 - 1,day1,year1);
                 }else{
-                    month1 = month1 - 1;
-                    displayCalendar(month1,day1,year1);
 
+                    displayCalendar(month1-1,day1,year1);
+                    month1 = month1 - 1;
                 }
             }
         });
@@ -188,9 +188,9 @@ public class Reservations extends AppCompatActivity {
                     year1 ++;
                     displayCalendar(month1,day1,year1);
                 }else{
-                    month1 = month1 + 1;
-                    displayCalendar(month1,day1,year1);
 
+                    displayCalendar(month1+1,day1,year1);
+                    month1 = month1 + 1;
                 }
 
 
