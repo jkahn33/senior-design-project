@@ -23,18 +23,12 @@ import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.json.JSONObject;
-
 import java.lang.*;
-
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,7 +39,6 @@ import java.util.List;
 
 import nuwc.userloginsystem.objects.CalenImport;
 import nuwc.userloginsystem.objects.PrinterReservations;
-import nuwc.userloginsystem.objects.ResponseObject;
 import nuwc.userloginsystem.util.RequestUtil;
 
 
@@ -76,7 +69,6 @@ public class Reservations extends AppCompatActivity {
     View[] days;
     TextView[] textDay;
 
-
     RadioGroup rGroup;
     RadioButton Abutton;
     RadioButton Bbutton;
@@ -92,12 +84,6 @@ public class Reservations extends AppCompatActivity {
     int day1;
     int hour1;
     int minute1;
-
-
-
-
-
-
 
     SimpleDateFormat fullTimeFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
     Date startDate = new Date();
@@ -137,7 +123,7 @@ public class Reservations extends AppCompatActivity {
 
         days = new View[calSize];
 
-
+        rGroup = (RadioGroup) findViewById(R.id.radioGroup);
         Abutton = (RadioButton) findViewById(R.id.Aprinter);
         Bbutton = (RadioButton) findViewById(R.id.Bprinter);
         Cbutton = (RadioButton) findViewById(R.id.Cprinter);
@@ -153,16 +139,7 @@ public class Reservations extends AppCompatActivity {
         }
         textDay = new TextView[calSize];
 
-
-
-
-
-
-
-
-
         //All fields in reservation page
-
 
         //gives access to current time
         Calendar now = Calendar.getInstance();
@@ -172,7 +149,7 @@ public class Reservations extends AppCompatActivity {
          hour1 = now.get(Calendar.HOUR_OF_DAY);
          minute1 = now.get(Calendar.MINUTE);
 
-        final String current = (Integer.toString(month1) + "/" + Integer.toString(day1) + "/" + Integer.toString(year1));
+        final String current = ((month1 - 1) + "/" + day1 + "/" + year1);
 
 
         SimpleDateFormat f = new SimpleDateFormat("MM-dd-yyy");
@@ -184,34 +161,36 @@ public class Reservations extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        displayCalendar(month1,day1,year1);
+        displayCalendar(month1-1,day1,year1);
 
         //Click listeners used for navigating calendar
         leftArrow.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                hideCurrentViews();
                 if(month1 - 1 == 0){
                     month1 = 12;
                     year1 --;
                     displayCalendar(month1 - 1,day1,year1);
                 }else{
-                    displayCalendar(month1 - 1,day1,year1);
                     month1 = month1 - 1;
+                    displayCalendar(month1,day1,year1);
+
                 }
-
-
             }
         });
         rightArrow.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                hideCurrentViews();
                 if(month1 + 1  == 13){
                     month1 = 1;
                     year1 ++;
                     displayCalendar(month1,day1,year1);
                 }else{
-                    displayCalendar(month1 + 1,day1,year1);
                     month1 = month1 + 1;
+                    displayCalendar(month1,day1,year1);
+
                 }
 
 
@@ -255,23 +234,20 @@ public class Reservations extends AppCompatActivity {
         });
         rGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
+                hideCurrentViews();
+                displayCalendar(month1, day1, year1);
             }
 
         });
-
     }
-
-
 
     public void displayCalendar(int month, int day, int year){
         CalenImport calendar = new CalenImport();
 
-
-        monthYear.setText(calendar.month(month) + " " + year);
+        monthYear.setText(calendar.month(month+1) + " " + year);
 
         //day of the week (sun-sat) 1-7
-        int dayOfWeek = calendar.day(month,1,year);
+        int dayOfWeek = calendar.day(month+1,1,year);
         dayOfWeek += 1;
 
         //id of day block in calendar D1,D2,D3 etc
@@ -288,11 +264,7 @@ public class Reservations extends AppCompatActivity {
             textDay[i] = (TextView) days[i].findViewById(R.id.date);
             textDay[i].setText("");
             days[i].setOnClickListener(null);
-
-
         }
-
-
     }
 
     public void printDays(List<PrinterReservations> printerReservationsList, int start,int end, int month, int year) {
@@ -300,17 +272,10 @@ public class Reservations extends AppCompatActivity {
 
         for(int i = 1; i <= end; i ++){
             textDay[i] = (TextView) days[start].findViewById(R.id.date);
-            textDay[i].setText(d + "th");
+            textDay[i].setText(d + " ");
             int finalDay = d;
 
             Date date = new GregorianCalendar(year, month, i).getTime();
-
-            Log.d("RESSS", printerReservationsList.toString());
-
-            for(PrinterReservations res : printerReservationsList){
-                Log.d("RESSS", res.getPrinter());
-                Log.d("RESID", checkPrinterButtons());
-            }
 
             for(PrinterReservations res : printerReservationsList){
                 if(res.getPrinter().equals(checkPrinterButtons()) && dayContained(date, res.getJobSchedule(), res.getJobScheduleEnd())){
@@ -338,7 +303,22 @@ public class Reservations extends AppCompatActivity {
     }
 
     public boolean dayContained(Date current, Date start, Date end){
-        return current.after(start) && current.before(end);
+        Calendar currCal = new GregorianCalendar();
+        Calendar startCal = new GregorianCalendar();
+        Calendar endCal = new GregorianCalendar();
+
+        currCal.setTime(current);
+        startCal.setTime(start);
+        endCal.setTime(end);
+
+        boolean startCond = startCal.get(Calendar.DAY_OF_MONTH) <= currCal.get(Calendar.DAY_OF_MONTH)
+                && startCal.get(Calendar.MONTH) <= currCal.get(Calendar.MONTH);
+        boolean endCond = currCal.get(Calendar.DAY_OF_MONTH) <= endCal.get(Calendar.DAY_OF_MONTH)
+                && currCal.get(Calendar.MONTH) <= endCal.get(Calendar.MONTH);
+
+        boolean isAfter = startCond && endCond;
+        //boolean isAfter = current.after(start) && current.before(end);
+        return isAfter;
     }
 
     public void getReservationList(int dayOfWeek, int end, int month, int year){
@@ -367,7 +347,6 @@ public class Reservations extends AppCompatActivity {
 
                 }
         );
-
         requestQueue.add(request);
     }
 
@@ -386,6 +365,17 @@ public class Reservations extends AppCompatActivity {
                 .show();
     }
 
+    public void hideCurrentViews(){
+        for(View v1 : days){
+            if(v1 != null) {
+                TextView view = (TextView) v1.findViewById(R.id.bubb);
+                if (view != null) {
+                    view.setVisibility(View.INVISIBLE);
+                }
+            }
+        }
+    }
+
     public void addEventBubble(View day, String name){
         TextView view = (TextView) day.findViewById(R.id.bubb);
 //        TextView view1 = (TextView) day.findViewById(R.id.bubb1);
@@ -398,10 +388,6 @@ public class Reservations extends AppCompatActivity {
         view.setText(name);
 //        view1.setText("Bye");
 //        view2.setText("Vinny");
-
-
-
-
     }
 
     public String checkPrinterButtons(){
@@ -419,12 +405,9 @@ public class Reservations extends AppCompatActivity {
         }else {
             return null;
         }
-
     }
-
-
     public String dayOfWeekID(int dayOfWeek){
-        String dayID = null;
+        String dayID;
 
         switch (dayOfWeek) {
             case 0:
@@ -453,6 +436,4 @@ public class Reservations extends AppCompatActivity {
                 return dayID;
         }
     }
-
-
 }

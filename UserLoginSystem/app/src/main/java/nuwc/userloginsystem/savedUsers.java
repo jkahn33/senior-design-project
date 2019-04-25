@@ -84,7 +84,7 @@ public class savedUsers extends AppCompatActivity{
 
         //has to be called AFTER RecyclerView.setAdapter()
         fastScroller.setRecyclerView(recyclerView);
-        
+
         ctx = this;
 
         if (savedInstanceState == null) {
