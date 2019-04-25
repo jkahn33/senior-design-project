@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import senior.design.group10.objects.equipment.BreakoutReservations;
 import senior.design.group10.objects.equipment.Equipment;
 import senior.design.group10.objects.equipment.PrinterReservations;
 import senior.design.group10.objects.response.ResponseObject;
@@ -137,16 +138,15 @@ public class AndroidController {
 	 * String for the additional comments
 	 */
 	@PostMapping("/newBreakoutReservation")
-	//@GetMapping("/newBreakoutReservation")
 	@ResponseBody
-    public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation) 
+    public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation)
 	{
 		//List for passing in in sent breakout reservation
-		//List<String> reservableIdList = new ArrayList<String>(); used for testing
-		//reservableIdList.add("C");
+//		List<String> reservableIdList = new ArrayList<>(); //used for testing
+//		reservableIdList.add("C");
 		
 		//Manual breakout reservation entry for testing image rendering
-		//breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-20 05:01:01", "2019-03-20 17:00:00", "2","none");
+        //SentBreakoutReservation breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-20 05:01:01", "2019-03-20 17:00:00", "2","none");
         return breakoutService.addBreakRes(breakoutReservation);
     }
 
@@ -229,5 +229,11 @@ public class AndroidController {
     @ResponseBody
     public List<PrinterReservations> getPrinterReservations(){
         return printerService.getPrinterReservations();
+    }
+
+    @GetMapping("/getBreakoutReservations")
+    @ResponseBody
+    public List<BreakoutReservations> getBreakoutReservations(){
+        return breakoutService.getBreakoutReservations();
     }
 }

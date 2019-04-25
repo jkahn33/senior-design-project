@@ -316,9 +316,7 @@ public class Reservations extends AppCompatActivity {
         boolean endCond = currCal.get(Calendar.DAY_OF_MONTH) <= endCal.get(Calendar.DAY_OF_MONTH)
                 && currCal.get(Calendar.MONTH) <= endCal.get(Calendar.MONTH);
 
-        boolean isAfter = startCond && endCond;
-        //boolean isAfter = current.after(start) && current.before(end);
-        return isAfter;
+        return startCond && endCond;
     }
 
     public void getReservationList(int dayOfWeek, int end, int month, int year){
@@ -378,16 +376,8 @@ public class Reservations extends AppCompatActivity {
 
     public void addEventBubble(View day, String name){
         TextView view = (TextView) day.findViewById(R.id.bubb);
-//        TextView view1 = (TextView) day.findViewById(R.id.bubb1);
-//        TextView view2 = (TextView) day.findViewById(R.id.bubb2);
-
         view.setVisibility(View.VISIBLE);
-//        view1.setVisibility(View.VISIBLE);
-//        view2.setVisibility(View.VISIBLE);
-
         view.setText(name);
-//        view1.setText("Bye");
-//        view2.setText("Vinny");
     }
 
     public String checkPrinterButtons(){
