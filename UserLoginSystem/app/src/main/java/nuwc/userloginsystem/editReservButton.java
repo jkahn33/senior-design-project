@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 public class editReservButton  extends AppCompatActivity {
 
-    Button edit;
     Button delete;
     ConstraintLayout parentLayout;
 
@@ -23,7 +22,6 @@ public class editReservButton  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_reservation_button);
 
-        edit = (Button) findViewById(R.id.editButton);
         delete = (Button) findViewById(R.id.deleteButton);
         parentLayout = (ConstraintLayout) findViewById(R.id.reservationPlate);
 
