@@ -213,10 +213,13 @@ public class Reservations extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle extras = new Bundle();
+                String ext = employeeExt.getText().toString();
+                extras.putString("employee",ext);
 
                 Intent checkout = new Intent(Reservations.this, myPrintList.class);
-                checkout.putExtra("employee",employeeExt.getText());
-                checkout.putExtra("reserveType","breakout");
+                checkout.putExtra("employee",employeeExt.getText().toString());
+                checkout.putExtra("reserveType","printer");
                 Reservations.this.startActivity(checkout);
 
             }
