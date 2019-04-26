@@ -7,6 +7,8 @@ public class PrinterReservations {
     private String printer;
     private Date jobSchedule;
     private Date jobScheduleEnd;
+    private String jobDescription;
+    private int id;
 
     public PrinterReservations(){}
 
@@ -24,5 +26,13 @@ public class PrinterReservations {
 
     public Date getJobScheduleEnd() {
         return jobScheduleEnd;
+    }
+
+    public String getJobDescription(){
+        return jobDescription;
+    }
+
+    public int getId(){
+        return id;
     }
 }

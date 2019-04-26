@@ -19,17 +19,18 @@ import nuwc.userloginsystem.R;
 import nuwc.userloginsystem.ReserveOptionsBreakout;
 import nuwc.userloginsystem.editReservButton;
 import nuwc.userloginsystem.myPrintList;
+import nuwc.userloginsystem.objects.PrinterReservations;
 import nuwc.userloginsystem.reserveOptionsPrint;
 
 import static android.content.ContentValues.TAG;
 
 public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.ViewHolder>{
 
-    private ArrayList<String> aReservations = new ArrayList<>();
+    private ArrayList<PrinterReservations> aReservations = new ArrayList<>();
     private Context aContext;
 
 
-    public AdapterPrintList(ArrayList<String> reservations, Context context){
+    public AdapterPrintList(ArrayList<PrinterReservations> reservations, Context context){
         aReservations = reservations;
         aContext = context;
 
@@ -47,7 +48,8 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
     public void onBindViewHolder(AdapterPrintList.ViewHolder holder, int position) {
         Log.d(TAG,"onBind");
 
-        holder.reservationName.setText(aReservations.get(position));
+        holder.reservationName.setText(aReservations.get(position).getName());
+        holder.printId = aReservations.get(position).getId();
 
     }
 
@@ -61,15 +63,15 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
         return getItem(position).substring(0, 1);
     }
 
-    private String getItem(int position) { return aReservations.get(position); }
-
-
+    private String getItem(int position) { return aReservations.get(position).getJobDescription(); }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView backPlate;
         TextView reservationName;
         ConstraintLayout parentLayout;
+
+        int printId;
 
         Button edit;
         Button delete;
@@ -84,7 +86,6 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
             reservationName = itemView.findViewById(R.id.reservationName);
             edit = itemView.findViewById(R.id.editButton);
             delete = itemView.findViewById(R.id.deleteButton);
-
 
             edit.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
@@ -101,9 +102,6 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
 
                 }
             });
-
-
-
         }
     }
     public void removeAt(int position) {

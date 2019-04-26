@@ -26,11 +26,6 @@ public class editReservButton  extends AppCompatActivity {
         edit = (Button) findViewById(R.id.editButton);
         delete = (Button) findViewById(R.id.deleteButton);
         parentLayout = (ConstraintLayout) findViewById(R.id.reservationPlate);
-
-
-
-
-
     }
 
 

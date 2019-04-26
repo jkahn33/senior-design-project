@@ -137,16 +137,17 @@ public class AndroidController {
 	 * String for the number of people
 	 * String for the additional comments
 	 */
-	@PostMapping("/newBreakoutReservation")
+	@GetMapping("/newBreakoutReservation")
 	@ResponseBody
-    public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation)
+    public ResponseObject newBreakoutReservation(/*@RequestBody SentBreakoutReservation breakoutReservation*/)
 	{
 		//List for passing in in sent breakout reservation
-//		List<String> reservableIdList = new ArrayList<>(); //used for testing
-//		reservableIdList.add("C");
+		List<String> reservableIdList = new ArrayList<>(); //used for testing
+		reservableIdList.add("B");
+		reservableIdList.add("D");
 		
 		//Manual breakout reservation entry for testing image rendering
-        //SentBreakoutReservation breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-20 05:01:01", "2019-03-20 17:00:00", "2","none");
+        SentBreakoutReservation breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-20 05:01:01", "2019-03-20 17:00:00", "2","none");
         return breakoutService.addBreakRes(breakoutReservation);
     }
 
@@ -229,6 +230,13 @@ public class AndroidController {
     @ResponseBody
     public List<PrinterReservations> getPrinterReservations(){
         return printerService.getPrinterReservations();
+    }
+
+    @PostMapping("/getPrinterReservationsId")
+    @ResponseBody
+    public List<PrinterReservations> getPrinterReservationsId(@RequestBody StringWrapper stringWrapper){
+        log.info("ID: " + stringWrapper);
+        return printerService.getPrinterReservationId(stringWrapper.getString());
     }
 
     @GetMapping("/getBreakoutReservations")

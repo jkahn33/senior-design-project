@@ -31,9 +31,11 @@ import java.lang.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 
 import nuwc.userloginsystem.objects.BreakoutReservations;
@@ -125,7 +127,7 @@ public class BreakoutReservation extends AppCompatActivity {
         //gives access to current time
         Calendar now = Calendar.getInstance();
         year1 = now.get(Calendar.YEAR);
-        month1 = now.get(Calendar.MONTH); // Note: zero based!
+        month1 = now.get(Calendar.MONTH) + 1; // Note: zero based!
         day1 = now.get(Calendar.DAY_OF_MONTH);
         hour1 = now.get(Calendar.HOUR_OF_DAY);
         minute1 = now.get(Calendar.MINUTE);
@@ -148,6 +150,7 @@ public class BreakoutReservation extends AppCompatActivity {
         leftArrow.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                hideCurrentViews();
                 if(month1 - 1 == 0){
                     month1 = 12;
                     year1 --;
@@ -156,13 +159,12 @@ public class BreakoutReservation extends AppCompatActivity {
                     displayCalendar(month1 - 1,day1,year1);
                     month1 = month1 - 1;
                 }
-
-
             }
         });
         rightArrow.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                hideCurrentViews();
                 if(month1 + 1  == 13){
                     month1 = 1;
                     year1 ++;
@@ -243,10 +245,24 @@ public class BreakoutReservation extends AppCompatActivity {
     public void printDays(List<BreakoutReservations> resList, int start,int end, int month, int year) {
         int d = 1;
 
+        //HashMap<DateWrapper, List<BreakoutReservations>> breakoutList = new HashMap<>();
+//        for(BreakoutReservation res : resList){
+//
+//        }
+
         for(int i = 1; i <= end; i ++){
             textDay[i] = (TextView) days[start].findViewById(R.id.date);
             textDay[i].setText(d + "th");
             int finalDay = d;
+
+            Date date = new GregorianCalendar(year, month, i).getTime();
+
+            for(BreakoutReservations res : resList){
+                if(dayContained(date, res.getResSchedule(), res.getResScheduleEnd())){
+                    addEventBubble(days[start], res.getRoom());
+                }
+            }
+
             days[start].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     Intent myIntent = new Intent(BreakoutReservation.this, ReserveOptionsBreakout.class);
@@ -339,7 +355,25 @@ public class BreakoutReservation extends AppCompatActivity {
     public void addEventBubble(View day, String name){
         TextView view = (TextView) day.findViewById(R.id.bubb);
         view.setVisibility(View.VISIBLE);
-        view.setText(name);
+        String text = view.getText().toString();
+
+        if(text.equals("HELLO")){
+            view.setText(name + " reserved.");
+        }
+        else{
+//            String[] splitVals = text.split(",");
+//            String[] rooms = new String[splitVals.length-1];
+//            for(int i = 0; i < rooms.length; i++){
+//                rooms[i] = splitVals[i];
+//            }
+//            Arrays.sort(rooms);
+//            view.setText(rooms[0]);
+//            for(int i = 1; i < rooms.length; i++){
+//                view.setText(view.getText().toString() + ", " + rooms[i]);
+//            }
+            view.setText(name + " " + view.getText().toString());
+        }
+
     }
 
     public String dayOfWeekID(int dayOfWeek){

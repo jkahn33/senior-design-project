@@ -148,4 +148,13 @@ public class PrinterService
 	public List<PrinterReservations> getPrinterReservations(){
 		return printerDAO.findAll();
 	}
+
+	public List<PrinterReservations> getPrinterReservationId(String id){
+		log.info("ID IS: " + id);
+		Optional<Users> usersOptional = usersDAO.findById(id);
+		if(usersOptional.isPresent()){
+			return printerDAO.getAllByUser(usersOptional.get());
+		}
+		return null;
+	}
 }

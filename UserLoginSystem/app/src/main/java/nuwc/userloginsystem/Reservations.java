@@ -122,7 +122,7 @@ public class Reservations extends AppCompatActivity {
         row5 = (TableRow) findViewById(R.id.row5);
 
         days = new View[calSize];
-        
+
         rGroup = (RadioGroup) findViewById(R.id.radioGroup);
         Abutton = (RadioButton) findViewById(R.id.Aprinter);
         Bbutton = (RadioButton) findViewById(R.id.Bprinter);
@@ -214,8 +214,8 @@ public class Reservations extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent checkout = new Intent(Reservations.this, myPrintList.class);
-                checkout.putExtra("employee",employeeExt.getText());
-                checkout.putExtra("reserveType","breakout");
+                checkout.putExtra("employee",employeeExt.getText().toString());
+                checkout.putExtra("reserveType","printer");
                 Reservations.this.startActivity(checkout);
 
             }

@@ -59,6 +59,10 @@ public class PrinterReservations
 		return user.getName();
 	}
 
+	public String getJobDescription(){
+		return jobDescription;
+	}
+
 	public String getPrinter(){
 		return reservable.getRoom();
 	}
