@@ -105,7 +105,6 @@ public class MessageService {
 			System.out.println(messageList.get(i).getMessage());
 		}*/
 		return messageList;
-
 	}
 	
 	/**

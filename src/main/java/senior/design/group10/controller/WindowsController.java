@@ -326,10 +326,9 @@ public class WindowsController {
     
     @PostMapping("/deleteFuturesById")
     @ResponseBody
-    public ResponseObject deleteFutureById(@RequestBody int[] ids)
+    public ResponseObject deleteFutureById(@RequestBody IdWrapper ids)
     {
-    	
-        futureService.deleteFuturesById(ids);
+        futureService.deleteFuturesById(ids.getIds());
         updatePiImages();
 		return new ResponseObject(true,null);
     }

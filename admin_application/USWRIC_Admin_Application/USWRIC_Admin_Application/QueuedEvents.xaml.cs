@@ -42,13 +42,11 @@ namespace USWRIC_Admin_Application
                 ColumnDefinition startCol = new ColumnDefinition();
                 ColumnDefinition endCol = new ColumnDefinition();
                 ColumnDefinition checkboxCol = new ColumnDefinition();
-                ColumnDefinition editCol = new ColumnDefinition();
 
                 futureGrid.ColumnDefinitions.Add(futureCol);
                 futureGrid.ColumnDefinitions.Add(startCol);
                 futureGrid.ColumnDefinitions.Add(endCol);
                 futureGrid.ColumnDefinitions.Add(checkboxCol);
-                futureGrid.ColumnDefinitions.Add(editCol);
 
                 foreach (Future future in futureList)
                 {
@@ -91,7 +89,7 @@ namespace USWRIC_Admin_Application
                         Foreground = new SolidColorBrush(Colors.White)
                     };
                     Grid.SetRow(endBlock, i);
-                    Grid.SetColumn(endBlock, 1);
+                    Grid.SetColumn(endBlock, 2);
                     futureGrid.Children.Add(endBlock);
 
                     CheckBox deleteBox = new CheckBox
@@ -99,24 +97,61 @@ namespace USWRIC_Admin_Application
                         Name = "chkBox_" + future.Id
                     };
                     Grid.SetRow(deleteBox, i);
-                    Grid.SetColumn(deleteBox, 2);
+                    Grid.SetColumn(deleteBox, 3);
                     futureGrid.Children.Add(deleteBox);
-
-                    Button editButton = new Button
-                    {
-                        Content = "Edit"
-                    };
-                    Grid.SetRow(editButton, i);
-                    Grid.SetColumn(editButton, 3);
-                    futureGrid.Children.Add(editButton);
                 }
             }
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            List<int> deletionList = new List<int>();
+            foreach (var checkBox in futureGrid.Children
+                .OfType<CheckBox>()
+                .Where(cb => (bool)cb.IsChecked))
+            {
+                deletionList.Add(Convert.ToInt32(checkBox.Name.Split('_')[1]));
+            }
+            int[] deletionArr = deletionList.ToArray<int>();
+            var json = JsonConvert.SerializeObject(new
+            {
+                ids = deletionArr
+            });
+            //shows loading bar and disables page content
+            WorkingBar.Visibility = Visibility.Visible;
+            futureGrid.IsEnabled = false;
+            var response = await Globals.GetHttpClient().PostAsync(
+                        Globals.GetBaseUrl() + "/deleteFuturesById",
+                        new StringContent(json, Encoding.UTF8, "application/json"));
 
+            var responseString = await response.Content.ReadAsStringAsync();
+            //hides loading bar and renables content
+            WorkingBar.Visibility = Visibility.Hidden;
+            futureGrid.IsEnabled = true;
+            if (response.IsSuccessStatusCode)
+            {
+                ResponseObject responseObject = JsonConvert.DeserializeObject<ResponseObject>(responseString);
+                if (responseObject.Success)
+                {
+                    MessageBox.Show("Successfully deleted events.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(responseObject.Message,
+                                    "Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show(response.StatusCode.ToString(),
+                                    "Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+            }
         }
     }
 }
