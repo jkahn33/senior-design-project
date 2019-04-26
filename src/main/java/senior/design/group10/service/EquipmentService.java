@@ -158,4 +158,12 @@ public class EquipmentService {
     public List<CheckedOutEquipment> getCheckedOutEquipment(){
         return equipmentDAO.getCheckedOutEquipment();
     }
+    
+    /**
+     * Gets a list of all of the equipment in the database.
+     * @return List of all equipment in the database.
+     */
+    public List<Equipment> getAllEquipment() {
+    	return (List<Equipment>) equipmentDAO.findAll();
+    }
 }

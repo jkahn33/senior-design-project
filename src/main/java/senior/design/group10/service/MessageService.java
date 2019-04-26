@@ -107,4 +107,13 @@ public class MessageService {
 		return messageList;
 
 	}
+	
+	/**
+	 * Gets a list of all of the messages in the database.
+	 * @return list of all messages.
+	 */
+    public List<Messages> getAllMessages() {
+    	return (List<Messages>)messageDAO.findAll();
+    }
+
 }

@@ -58,6 +58,10 @@ public class PrinterReservations
 	public String getName(){
 		return user.getName();
 	}
+	
+//	public String getBadgeId(){
+//		return user.getBadgeId();
+//	}
 
 	public String getJobDescription(){
 		return jobDescription;
@@ -70,6 +74,10 @@ public class PrinterReservations
 	public Date getJobSchedule()
 	{
 		return this.jobSchedule;
+	}
+	
+	public String getJobDuration() {
+		return jobDuration;
 	}
 	
 	public Date getJobScheduleEnd()

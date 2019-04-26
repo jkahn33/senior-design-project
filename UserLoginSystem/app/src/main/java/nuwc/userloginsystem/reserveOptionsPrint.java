@@ -1,7 +1,12 @@
 package nuwc.userloginsystem;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,14 +14,31 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import nuwc.userloginsystem.objects.ResponseObject;
+import nuwc.userloginsystem.util.RequestUtil;
 
 /**
  * Created by Vinny on 11/5/18.
  */
 public class reserveOptionsPrint extends AppCompatActivity{
+
+    Button submit;
+    Button cancel;
 
     NumberPicker startTimeHourP;
     NumberPicker startTimeMinP;
@@ -40,6 +62,11 @@ public class reserveOptionsPrint extends AppCompatActivity{
     int month = 0;
     int day = 19;
     String printer = "A";
+    String userExt;
+    String jobDescription;
+    String jobSchedule;
+    String jobDuration;
+    String additionalCom;
 
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm");
@@ -84,17 +111,13 @@ public class reserveOptionsPrint extends AppCompatActivity{
         printName = (EditText) findViewById(R.id.numberGuests);
         startDate = (EditText) findViewById(R.id.startDate);
 
+        submit = (Button) findViewById(R.id.submit);
+        cancel = (Button) findViewById(R.id.cancel);
+
         MDY = (TextView) findViewById(R.id.MDY);
         dayWeek = (TextView) findViewById(R.id.dayWeek);
         selectedPrinter = (TextView) findViewById(R.id.selectedPrinter);
         selectedPrinter.setText("Selected Printer: " + printer);
-
-
-
-
-
-
-
 
         startTimeHourP = (NumberPicker) findViewById(R.id.startTimeHourP);
         String[] nums = new String[24];
@@ -196,6 +219,54 @@ public class reserveOptionsPrint extends AppCompatActivity{
 
             }
         });
+        submit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                userExt = employExt.getText().toString();
+                //printer = ;
+                jobDescription = printName.getText().toString();
+
+                /*generate the timestamp string according to JDBC timestamp standard*/
+                String printDay = String.valueOf(day);
+                String printMonth = String.valueOf(month + 1);
+                String printHour = String.valueOf(startTimeHourP.getValue());
+                String printMin = String.valueOf(startTimeMinP.getValue());
+                if(printDay.length() == 1) printDay = "0" + printDay;
+                if(printMonth.length() == 1) printMonth = "0"+ printMonth;
+                if(printHour.length() == 1) printHour = "0"+ printHour;
+                if(printMin.length() == 1) printMin = "0"+ printMin;
+                jobSchedule = year + "-" + printMonth + "-" + printDay + " " +  printHour + ":" + printMin + ":00";
+
+                jobDuration = endTimehourP.getValue() + ":" + endTimeMinP.getValue();
+                additionalCom = printDetails.getText().toString();
+
+                if(userExt.length() != 5){
+                    showError("Extension must be 5 digits.");
+                }
+                else if(jobDescription == ""){
+                    showError("Please enter a print name.");
+                }
+                else if(jobDuration == "0:0"){
+                    showError("Please enter a print duration.");
+                }
+                else {
+                    try {
+                        addPrinterReservation();
+                    } catch (JSONException e) {
+                        showError("JSON Format Error");
+                        Log.e("EXCEPTION", e.toString());
+                    }
+                }
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
 
 
         showTimeSlots(month,day,year);
@@ -284,6 +355,76 @@ public class reserveOptionsPrint extends AppCompatActivity{
         return theDay;
     }
 
+    public void addPrinterReservation() throws JSONException {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.start();
 
+        JSONObject body = new JSONObject();
 
+        body.put("userExt", userExt);
+        body.put("reservableType", "Printer");
+        body.put("reservableId", printer);
+        body.put("jobDescription", jobDescription);
+        body.put("jobSchedule", jobSchedule);
+        body.put("jobDuration", jobDuration);
+        body.put("additionalCom", additionalCom);
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                RequestUtil.BASE_URL + "/newPrinterReservation",
+                body,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            ObjectMapper mapper = new ObjectMapper();
+                            ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
+                            verifyResponse(responseObject);
+                        } catch (Exception e) {
+                            Log.d("EXCEPTION", e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("ERROR", error.getMessage());
+                        //showError(error.getMessage());
+                    }
+                }
+        );
+        requestQueue.add(request);
+    }
+
+    public void verifyResponse(ResponseObject response) {
+        String title = "Error";
+        if(response.isSuccess()) {
+            title = "Success";
+            Intent myIntent = new Intent(reserveOptionsPrint.this, Reservations.class);
+            reserveOptionsPrint.this.startActivity(myIntent);
+        }
+        Context context = this;
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle(title)
+                .setMessage(response.getMessage())
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {}
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    public void showError(String message){
+        Context context = this;
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle("Error")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {}
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 }

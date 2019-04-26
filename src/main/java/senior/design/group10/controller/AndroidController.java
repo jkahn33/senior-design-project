@@ -137,9 +137,9 @@ public class AndroidController {
 	 * String for the number of people
 	 * String for the additional comments
 	 */
-	@GetMapping("/newBreakoutReservation")
+	@PostMapping("/newBreakoutReservation")
 	@ResponseBody
-    public ResponseObject newBreakoutReservation(/*@RequestBody SentBreakoutReservation breakoutReservation*/)
+    public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation)
 	{
 		//List for passing in in sent breakout reservation
 		List<String> reservableIdList = new ArrayList<>(); //used for testing
@@ -147,8 +147,9 @@ public class AndroidController {
 		reservableIdList.add("D");
 		
 		//Manual breakout reservation entry for testing image rendering
-        SentBreakoutReservation breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-20 05:01:01", "2019-03-20 17:00:00", "2","none");
-        return breakoutService.addBreakRes(breakoutReservation);
+		//breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-20 05:01:01", "2019-03-20 17:00:00", "2","none");
+        System.out.println("AAAAAAAAAAA");
+		return breakoutService.addBreakRes(breakoutReservation);
     }
 
 

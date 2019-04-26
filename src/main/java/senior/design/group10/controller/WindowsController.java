@@ -9,18 +9,25 @@ import senior.design.group10.objects.sent.AdminInQuestion;
 import senior.design.group10.objects.sent.EditAdmin;
 import senior.design.group10.objects.sent.NewAdmin;
 import senior.design.group10.objects.sent.SentMessage;
+import senior.design.group10.objects.user.Admin;
 import senior.design.group10.objects.user.DebugUser;
+import senior.design.group10.objects.user.UserLoginHistory;
+import senior.design.group10.objects.tv.Calendar;
 import senior.design.group10.objects.tv.Future;
 import senior.design.group10.objects.tv.Messages;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.MessageService;
+import senior.design.group10.objects.equipment.BreakoutReservations;
 import senior.design.group10.objects.equipment.Equipment;
+import senior.design.group10.objects.equipment.PrinterReservations;
 import senior.design.group10.objects.equipment.PrinterUsageUsers;
 import senior.design.group10.objects.response.*;
 import senior.design.group10.objects.sent.*;
 import senior.design.group10.objects.user.Users;
 import senior.design.group10.service.*;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -37,6 +44,8 @@ public class WindowsController {
     private final PiService piService;
     private final BreakoutService breakoutService;
     private final FutureService futureService;
+    private final LoginService loginService;
+    private final CalendarService calendarService;
 
     @Autowired
     public WindowsController(AdminService adminService,
@@ -46,7 +55,9 @@ public class WindowsController {
                              PrinterService printerService,
 							  PiService piService,
 							  BreakoutService breakoutService,
-                             FutureService futureService) {
+                             FutureService futureService,
+                             LoginService loginService,
+                             CalendarService calendarService) {
         this.adminService = adminService;
         this.userService = userService;
         this.equipmentService = equipmentService;
@@ -55,6 +66,8 @@ public class WindowsController {
         this.piService = piService;
         this.breakoutService = breakoutService;
         this.futureService = futureService;
+        this.loginService = loginService;
+        this.calendarService = calendarService;
     }
 
     @PostMapping("/newAdmin")
@@ -326,4 +339,53 @@ public class WindowsController {
     public List<PrinterUsageUsers> getPrinterUserUsage(){
         return printerService.getUserUsage();
     }
+    
+    /*CSV Export Endpoints*/
+    @RequestMapping(value = "/csv/users", produces = "text/csv")
+	public void exportUsers(HttpServletResponse response) throws IOException {
+		List<Users> users = userService.getAllUsers();
+		CSVExport.exportUsers(response.getWriter(), users);
+	}
+
+	@RequestMapping(value = "/csv/breakoutres", produces = "text/csv")
+	public void exportBreakoutRes(HttpServletResponse response) throws IOException {
+		List<BreakoutReservations> res = breakoutService.getBreakoutReservations();
+		CSVExport.exportBreakoutRes(response.getWriter(), res);
+	}
+
+	@RequestMapping(value = "/csv/equipment", produces = "text/csv")
+	public void exportEquipment(HttpServletResponse response) throws IOException {
+		List<Equipment> equipment = equipmentService.getAllEquipment();
+		CSVExport.exportEquipment(response.getWriter(), equipment);
+	}
+
+	@RequestMapping(value = "/csv/printerres", produces = "text/csv")
+	public void exportPrinterRes(HttpServletResponse response) throws IOException {
+		List<PrinterReservations> res = printerService.getPrinterReservations();
+		CSVExport.exportPrinterRes(response.getWriter(), res);
+	}
+
+	@RequestMapping(value = "/csv/logins", produces = "text/csv")
+	public void exportLogins(HttpServletResponse response) throws IOException {
+		List<UserLoginHistory> logins = loginService.getAllLogins();
+		CSVExport.exportLogins(response.getWriter(), logins);
+	}    
+
+	@RequestMapping(value = "/csv/messages", produces = "text/csv")
+	public void exportMessages(HttpServletResponse response) throws IOException {
+		List<Messages> messages = messageService.getAllMessages();
+		CSVExport.exportMessages(response.getWriter(), messages);
+	}
+
+	@RequestMapping(value = "/csv/events", produces = "text/csv")
+	public void exportEvents(HttpServletResponse response) throws IOException {
+		List<Calendar> events = calendarService.getAllEvents();
+		CSVExport.exportEvents(response.getWriter(), events);
+	}
+
+	@RequestMapping(value = "/csv/admins", produces = "text/csv")
+	public void exportAdmins(HttpServletResponse response) throws IOException {
+		List<Admin> admins = adminService.getAllAdmins();
+		CSVExport.exportAdmins(response.getWriter(), admins);
+	}
 }
