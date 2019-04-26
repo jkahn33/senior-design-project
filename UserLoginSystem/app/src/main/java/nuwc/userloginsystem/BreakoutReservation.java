@@ -42,6 +42,7 @@ public class BreakoutReservation extends AppCompatActivity {
     ImageView leftArrow;
     ImageView rightArrow;
     ImageView myReserve;
+    ImageView backButton;
 
     TableLayout table;
 
@@ -89,6 +90,8 @@ public class BreakoutReservation extends AppCompatActivity {
         leftArrow = (ImageView) findViewById(R.id.leftArrow);
         rightArrow = (ImageView) findViewById(R.id.rightArrow);
         myReserve = (ImageView) findViewById(R.id.myReserve);
+
+        backButton = (ImageView) findViewById(R.id.backButton);
 
         submit = (Button) findViewById(R.id.submit);
         cancel = (Button) findViewById(R.id.cancel);
@@ -147,6 +150,14 @@ public class BreakoutReservation extends AppCompatActivity {
         displayCalendar(month1,day1,year1);
 
         //Click listeners used for navigating calendar
+        backButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent checkout = new Intent(BreakoutReservation.this, PickReservationType.class);
+                BreakoutReservation.this.startActivity(checkout);
+
+            }
+        });
         leftArrow.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

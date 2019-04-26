@@ -463,39 +463,48 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/blue_background"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-46dp" />
 
     <ImageView
         android:id="@+id/myReserve"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/blue_back"
-        app:layout_constraintEnd_toStartOf="@+id/rightArrow"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/leftArrow"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/my_reserve" />
 
     <ImageView
         android:id="@+id/leftArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="200dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/blue_back"
-        app:layout_constraintEnd_toStartOf="@+id/rightArrow"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/month_year"
+        app:layout_constraintTop_toTopOf="@+id/blue_back"
         app:srcCompat="@drawable/left_arrow" />
 
     <ImageView
         android:id="@+id/rightArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/blue_back"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/myReserve"
+        app:layout_constraintTop_toTopOf="@+id/blue_back"
         app:srcCompat="@drawable/right_arrow" />
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rightArrow"
+        app:layout_constraintTop_toTopOf="@+id/blue_back"
+        app:srcCompat="@drawable/back" />
 
     <TextView
         android:id="@+id/month_year"

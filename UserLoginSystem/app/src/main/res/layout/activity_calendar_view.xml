@@ -469,33 +469,40 @@
         android:id="@+id/myReserve"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="42dp"
         app:layout_constraintBottom_toBottomOf="@+id/blue_back"
         app:layout_constraintEnd_toStartOf="@+id/rightArrow"
-        app:layout_constraintStart_toEndOf="@+id/leftArrow"
         app:srcCompat="@drawable/my_prints" />
 
     <ImageView
         android:id="@+id/leftArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="200dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="42dp"
         app:layout_constraintBottom_toBottomOf="@+id/blue_back"
-        app:layout_constraintEnd_toStartOf="@+id/rightArrow"
+        app:layout_constraintEnd_toStartOf="@+id/myReserve"
         app:srcCompat="@drawable/left_arrow" />
 
     <ImageView
         android:id="@+id/rightArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="42dp"
         app:layout_constraintBottom_toBottomOf="@+id/blue_back"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/backButton"
         app:srcCompat="@drawable/right_arrow" />
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toEndOf="@+id/calendar"
+        app:layout_constraintTop_toTopOf="@+id/blue_back"
+        app:srcCompat="@drawable/back" />
 
     <TextView
         android:id="@+id/month_year"
@@ -504,7 +511,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="40dp"
         android:text="TextView"
-        android:textSize="50sp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="@+id/blue_back"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -582,7 +589,6 @@
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toStartOf="@+id/leftArrow"
         app:layout_constraintTop_toBottomOf="@+id/textView6">

@@ -26,6 +26,8 @@ public class reserveOptionsPrint extends AppCompatActivity{
     LinearLayout times;
     Button[] slot = new Button[24];
 
+
+
     EditText printName;
     EditText startDate;
     EditText employExt;
