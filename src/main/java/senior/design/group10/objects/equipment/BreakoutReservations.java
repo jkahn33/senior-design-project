@@ -65,6 +65,15 @@ public class BreakoutReservations
 		this.additionalComments = additionalComments;
 	}
 	
+	public String getresDescription()
+	{
+		return this.resDescription;
+	}
+	
+	public String getRoom()
+	{
+		return this.reservable.getRoom();
+	}
 	public Date getResSchedule()
 	{
 		return this.resSchedule;
@@ -73,5 +82,16 @@ public class BreakoutReservations
 	public Date getResScheduleEnd()
 	{
 		return this.resScheduleEnd;
+	}
+	
+	public String getEndHours()
+	{
+		String endHours  = ""+resScheduleEnd.getHours();
+		return endHours;
+	}
+	public String getStartHours()
+	{
+		String startHours  = ""+resSchedule.getHours();
+		return startHours;
 	}
 }

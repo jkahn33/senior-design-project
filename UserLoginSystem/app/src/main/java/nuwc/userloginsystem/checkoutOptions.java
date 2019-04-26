@@ -25,7 +25,7 @@ public class checkoutOptions extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent add = new Intent(checkoutOptions.this, addEquipment.class);
+                Intent add = new Intent(checkoutOptions.this, /*addEquipment*/adminAddEquip.class);
                 checkoutOptions.this.startActivity(add);
 
             }
@@ -54,7 +54,7 @@ public class checkoutOptions extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent checkin = new Intent(checkoutOptions.this, equipmentCheckin.class);
+                Intent checkin = new Intent(checkoutOptions.this, /*checkinBarcode*/adminCheckin.class);
                 checkoutOptions.this.startActivity(checkin);
 
             }

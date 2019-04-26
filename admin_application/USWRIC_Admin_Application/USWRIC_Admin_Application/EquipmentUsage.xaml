@@ -1,0 +1,14 @@
+﻿<Page x:Class="USWRIC_Admin_Application.EquipmentUsage"
+        ShowsNavigationUI="false"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:USWRIC_Admin_Application"
+        mc:Ignorable="d"
+        Title="Equipment Usage" Height="450" Width="800">
+    <Grid>
+        <Label Content="Equipment Usage Statistics" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="232,50,0,0" VerticalAlignment="Top" Height="35" Width="333" FontFamily="Arial Black" FontSize="20"/>
+
+    </Grid>
+</Page>

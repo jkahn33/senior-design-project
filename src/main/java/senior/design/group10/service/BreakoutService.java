@@ -1,7 +1,10 @@
 package senior.design.group10.service;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Optional;
 import java.util.List;
 
@@ -21,6 +24,9 @@ import senior.design.group10.objects.sent.SentBreakoutReservation;
 import senior.design.group10.objects.sent.SentPrinterReservation;
 import senior.design.group10.objects.user.Users;
 
+/**
+ * Service class to handle business logic for breakout room reservations
+ */
 @Service
 public class BreakoutService
 {
@@ -89,7 +95,7 @@ public class BreakoutService
 		Users user = usersOptional.get();
 		
 		boolean roomsAvailable[] = roomAvailable(breakout);
-		String roomString = " Room";
+		String roomString = null;
 		
 		for(int x = 0; x < breakout.getReservableIdList().size();x++)
 		{
@@ -106,7 +112,10 @@ public class BreakoutService
 			}
 		}
 
-		roomString += "Unavailable";
+		if (roomString == null)
+			roomString = "All rooms succesfully reserved";
+		else
+			roomString += " Unavailable";
 		
 		return new ResponseObject(true,roomString);
 	}
@@ -151,6 +160,29 @@ public class BreakoutService
 		}
 		//Iteratively check that the room is available
 		return roomList;
+	}
+	
+	public List<BreakoutReservations> todaysReservations()
+	{
+		//get all the reservations that have have same date as today
+		String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+		
+		// getting tomorrows date from today    
+		Calendar tomorrowDate = new GregorianCalendar();
+		// reset hour, minutes, seconds and millis
+		tomorrowDate.set(Calendar.HOUR_OF_DAY, 0);
+		tomorrowDate.set(Calendar.MINUTE, 0);
+		tomorrowDate.set(Calendar.SECOND, 0);
+		tomorrowDate.set(Calendar.MILLISECOND, 0);
+		// next day
+		tomorrowDate.add(Calendar.DAY_OF_MONTH, 1);
+		
+		Timestamp ts = new Timestamp(tomorrowDate.getTimeInMillis());
+		String tomorrow = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(ts);
+
+
+		List<BreakoutReservations> todaysReservation = breakoutDAO.getCurrentBreakoutEvents(date, tomorrow);
+		return todaysReservation;
 	}
 	
 	

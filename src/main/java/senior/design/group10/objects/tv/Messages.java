@@ -4,8 +4,6 @@ import org.hibernate.annotations.GenericGenerator;
 import senior.design.group10.objects.user.Admin;
 
 import javax.persistence.*;
-
-
 import java.sql.Timestamp;
 
 @Entity
@@ -21,17 +19,22 @@ public class Messages
 	@Column
 	private String message;
 	@Column
-	private Timestamp messageDate;
+	private Timestamp messageEndDate;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private Admin admin;
 
 	public Messages(){}
 	
-	public Messages(String message, Timestamp messageDate, Admin admin)
+	public Messages(String message, Timestamp messageEndDate, Admin admin)
 	{
 		this.message = message;
-		this.messageDate = messageDate;
+		this.messageEndDate = messageEndDate;
 		this.admin = admin;
+	}
+	
+	public String getMessage()
+	{
+		return message;
 	}
 }
