@@ -48,6 +48,8 @@ public class reserveOptionsPrint extends AppCompatActivity{
     LinearLayout times;
     Button[] slot = new Button[24];
 
+
+
     EditText printName;
     EditText startDate;
     EditText employExt;
@@ -262,13 +264,11 @@ public class reserveOptionsPrint extends AppCompatActivity{
         cancel.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
+                Intent myIntent = new Intent(reserveOptionsPrint.this, Reservations.class);
+                reserveOptionsPrint.this.startActivity(myIntent);
             }
         });
-
-
-
-
+        
         showTimeSlots(month,day,year);
 
 

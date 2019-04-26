@@ -100,6 +100,10 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
                     parentLayout.setVisibility(View.GONE);
                     Log.d("Name","Plate boy");
 
+                    Intent myIntent = new Intent(ctx, myPrintList.class);
+                    myIntent.putExtra("eventName",reservationName.getText());
+                    ctx.startActivity(myIntent);
+
                 }
             });
         }

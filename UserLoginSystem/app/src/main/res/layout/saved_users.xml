@@ -14,18 +14,20 @@
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
 
-    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/logo"
-        android:id="@+id/frameLayout">
+        android:fitsSystemWindows="true">
 
         <ImageView
-            android:layout_marginTop="20dp"
+            android:id="@+id/uswric"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/uswric"
-            android:background="@drawable/saved_users"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/saved_users" />
 
         <!--<EditText
             android:layout_width="wrap_content"
@@ -61,35 +63,36 @@
         </RelativeLayout>
 
         <!--<ImageButton-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/imageButton"-->
-            <!--android:background="@drawable/name_plate"-->
-            <!--android:adjustViewBounds="false" />-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/imageButton"-->
+        <!--android:background="@drawable/name_plate"-->
+        <!--android:adjustViewBounds="false" />-->
 
         <ImageView
+            android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView5"
             android:layout_gravity="right|top"
             android:background="@drawable/right_angle" />
 
         <ImageView
+            android:id="@+id/imageView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView6"
             android:layout_gravity="left|bottom"
             android:background="@drawable/left_angle" />
+
         <TextView
+            android:id="@+id/welcomeUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/welcomeUser"
             android:layout_gravity="center"
-            android:textSize="70sp"
-            android:textColor="#000000"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp" />
+            android:layout_marginRight="20dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000"
+            android:textSize="70sp" />
 
         <Button
             android:id="@+id/goBack"

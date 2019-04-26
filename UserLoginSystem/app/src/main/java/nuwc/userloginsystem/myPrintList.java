@@ -2,12 +2,18 @@ package nuwc.userloginsystem;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -43,38 +49,71 @@ public class myPrintList extends AppCompatActivity {
     ArrayList<PrinterReservations> reservations = new ArrayList<>();
     String employeeExt = null;
     String reserveType = null;
+    String eventName = null;
+    RelativeLayout layout;
+
+    ImageView calendarButton;
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_print_list);
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                employeeExt= null;
-                reserveType= null;
-                Log.d("NULLCHECK", "NULLNULL");
+            if (extras == null) {
+                employeeExt = null;
+                reserveType = null;
+                eventName = null;
             } else {
                 Log.d("NULLCHECK", "NULLNOTNULL");
-                employeeExt= extras.getString("employee");
-                reserveType= extras.getString("reserveType");
+                employeeExt = extras.getString("employee");
+                reserveType = extras.getString("reserveType");
+                eventName = extras.getString("eventName");
 
 
             }
         } else {
             Log.d("NULLCHECK", "NOTNULL");
-            employeeExt= (String) savedInstanceState.getSerializable("employee");
-            reserveType= (String) savedInstanceState.getSerializable("reserveType");
+            employeeExt = (String) savedInstanceState.getSerializable("employee");
+            reserveType = (String) savedInstanceState.getSerializable("reserveType");
         }
+        eventName = (String) savedInstanceState.getSerializable("eventName");
 
         try {
             fillList();
-        }
-        catch(JSONException e){
+        } catch (JSONException e) {
             Log.e("ERROR", e.toString());
         }
 
+        addReserves();
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        adapter = new AdapterPrintList(reservations, this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
 
-        //has to be called AFTER RecyclerView.setAdapter()
+        calendarButton = findViewById(R.id.calendarButton);
+
+
+        layout = findViewById(R.id.eventList);
+
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("reserveType", reserveType + "");
+                if (eventName == "breakout") {
+                    Intent myIntent = new Intent(myPrintList.this, BreakoutReservation.class);
+                    myPrintList.this.startActivity(myIntent);
+
+                } else {
+                    Intent myIntent = new Intent(myPrintList.this, Reservations.class);
+                    myPrintList.this.startActivity(myIntent);
+
+                }
+
+
+            }
+        });
     }
 
     public void addReserves() {

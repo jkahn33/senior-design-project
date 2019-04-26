@@ -267,15 +267,5 @@
         app:layout_constraintStart_toEndOf="@+id/cancel"
         app:layout_constraintTop_toTopOf="@+id/blue_back" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="588dp"
-        android:layout_marginTop="615dp"
-        android:text="End date of print:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/blue_back" />
-
 
 </android.support.constraint.ConstraintLayout>

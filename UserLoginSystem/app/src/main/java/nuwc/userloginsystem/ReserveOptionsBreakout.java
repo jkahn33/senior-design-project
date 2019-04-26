@@ -2,6 +2,7 @@ package nuwc.userloginsystem;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -113,8 +114,8 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
 
         employExt = (EditText) findViewById(R.id.employExt);
         printDetails = (EditText) findViewById(R.id.printDetails);
-        printName = (EditText) findViewById(R.id.numberGuests);
-        numPeople = (EditText) findViewById(R.id.numPeople);
+        printName = (EditText) findViewById(R.id.eventName);
+        numPeople = (EditText) findViewById(R.id.numberGuests);
         startDate = (EditText) findViewById(R.id.startDate);
 
         submit = (Button) findViewById(R.id.submit);
@@ -122,13 +123,6 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
 
         MDY = (TextView) findViewById(R.id.MDY);
         dayWeek = (TextView) findViewById(R.id.dayWeek);
-
-
-
-
-
-
-
 
         startTimeHourP = (NumberPicker) findViewById(R.id.startTimeHourP);
         String[] nums = new String[24];
@@ -288,7 +282,8 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
         cancel.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
+                Intent myIntent = new Intent(ReserveOptionsBreakout.this, BreakoutReservation.class);
+                ReserveOptionsBreakout.this.startActivity(myIntent);
             }
         });
 
