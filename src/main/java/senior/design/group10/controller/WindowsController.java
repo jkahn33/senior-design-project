@@ -245,6 +245,7 @@ public class WindowsController {
     		piService.piListFill();
     		updatePiImages();
     		piService.startSlideShow();
+    		autoUpdateMidnight();
     		return new ResponseObject(true,null);
     }
     
@@ -320,7 +321,7 @@ public class WindowsController {
 			// insert update 24 hours here
 			piService.piListFill();
 			updatePiImages();
-			//System.out.println("updates");//updates
+			System.out.println("updates");//updates
 		}
 		
 	}
