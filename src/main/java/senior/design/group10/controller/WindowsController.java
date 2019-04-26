@@ -256,6 +256,7 @@ public class WindowsController {
     @ResponseBody
     public ResponseObject startSlideshow()
     {
+    		piService.piListFill();
     		piService.startSlideShow();
     		return new ResponseObject(true,null);
     }
