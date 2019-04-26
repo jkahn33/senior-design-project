@@ -148,8 +148,13 @@ public class AndroidController {
 		
 		//Manual breakout reservation entry for testing image rendering
 		//breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-20 05:01:01", "2019-03-20 17:00:00", "2","none");
-        System.out.println("AAAAAAAAAAA");
 		return breakoutService.addBreakRes(breakoutReservation);
+    }
+
+    @PostMapping("/deletePrinterById")
+    @ResponseBody
+    public ResponseObject deletePrinterResById(@RequestBody StringWrapper id){
+        return printerService.deleteById(id.getString());
     }
 
 
@@ -236,7 +241,7 @@ public class AndroidController {
     @PostMapping("/getPrinterReservationsId")
     @ResponseBody
     public List<PrinterReservations> getPrinterReservationsId(@RequestBody List<StringWrapper> barcode){
-        log.info(barcode.get(0).getString());
+        //log.info(barcode.get(0).getString());
         return printerService.getPrinterReservationId(barcode.get(0).getString());
         //return printerService.getPrinterReservationId("12345");
     }
@@ -251,5 +256,11 @@ public class AndroidController {
     @ResponseBody
     public List<BreakoutReservations> getBreakoutReservations(){
         return breakoutService.getBreakoutReservations();
+    }
+
+    @PostMapping("/getBreakoutReservationsId")
+    @ResponseBody
+    public List<BreakoutReservations> getBreakoutReservationsId(@RequestBody List<StringWrapper> barcode){
+        return breakoutService.getBreakoutReservationId(barcode.get(0).getString());
     }
 }

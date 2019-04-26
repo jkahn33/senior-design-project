@@ -11,6 +11,7 @@ public class BreakoutReservations {
     private String startHours;
     private String endHours;
     private String resDescription;
+    private int id;
 
     public BreakoutReservations(){}
 
@@ -28,6 +29,10 @@ public class BreakoutReservations {
 
     public Date getResScheduleEnd() {
         return resScheduleEnd;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public String getStartHours() {

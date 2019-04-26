@@ -86,10 +86,19 @@ public class myPrintList extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-        try {
-            fillList();
-        } catch (JSONException e) {
-            Log.e("ERROR", e.toString());
+        if(reserveType.equals("printer")) {
+            try {
+                fillPrintList();
+            } catch (JSONException e) {
+                Log.e("ERROR", e.toString());
+            }
+        }
+        else{
+            try {
+                fillBreakoutList();
+            } catch (JSONException e) {
+                Log.e("ERROR", e.toString());
+            }
         }
 
         calendarButton = findViewById(R.id.calendarButton);
@@ -119,7 +128,7 @@ public class myPrintList extends AppCompatActivity {
         });
     }
 
-    public void fillList() throws JSONException {
+    public void fillPrintList() throws JSONException {
         Log.d("PRINTL", "Inside fill list");
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
@@ -153,9 +162,59 @@ public class myPrintList extends AppCompatActivity {
                     }
                 },
                 error -> {
-                    Log.d("ERROR", error.getMessage());
+                    Intent myIntent = new Intent(this, Reservations.class);
+                    this.startActivity(myIntent);
+                    //Log.d("ERROR", error.getMessage());
 
-                    showError(error.getMessage());
+                    //showError(error.getMessage());
+                }
+        );
+
+        requestQueue.add(request);
+    }
+
+    public void fillBreakoutList() throws JSONException {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.start();
+
+        JSONObject body = new JSONObject();
+        body.put("string", employeeExt);
+
+        JSONArray array = new JSONArray();
+        array.put(body);
+
+        Log.d("Test", "test");
+
+        Log.d("TESTYO", array.toString());
+
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.POST,
+                RequestUtil.BASE_URL + "/getBreakoutReservationsId",
+                array,
+                response -> {
+                    try {
+                        ObjectMapper mapper = new ObjectMapper();
+                        List<BreakoutReservations> listToGet = mapper.readValue(response.toString(), new TypeReference<List<BreakoutReservations>>(){});
+                        reservations.clear();
+
+                        for(BreakoutReservations res : listToGet){
+                            reservations.add(new PrinterReservations(res.getName(), res.getId()));
+                        }
+
+                        //reservations.addAll(listToGet);
+
+                        adapter.notifyDataSetChanged();
+                    }
+                    catch(Exception e){
+                        Log.d("EXCEPTION", e.toString());
+                    }
+                },
+                error -> {
+                    Intent myIntent = new Intent(this, Reservations.class);
+                    this.startActivity(myIntent);
+                    //Log.d("ERROR", error.getMessage());
+
+                    //showError(error.getMessage());
                 }
         );
 

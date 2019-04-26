@@ -313,7 +313,7 @@ public class reserveOptionsPrint extends AppCompatActivity{
                     public void onErrorResponse(VolleyError error) {
                         Log.d("ERROR", error.getMessage());
 
-                        showError(error.getMessage());
+                        //showError(error.getMessage());
                     }
                 }
         );
@@ -351,10 +351,6 @@ public class reserveOptionsPrint extends AppCompatActivity{
                     calEnd = calStart;
                     calEnd.add(Calendar.HOUR_OF_DAY,endTimehourP.getValue());
                     endDate.setText(simpleDateFormat.format(calStart.getTime()));
-
-
-
-
                 }
             });
             hour++;
@@ -365,7 +361,7 @@ public class reserveOptionsPrint extends AppCompatActivity{
     }
 
     public String getMonth(int month) {
-        return new DateFormatSymbols().getMonths()[month];
+        return new DateFormatSymbols().getMonths()[month+1];
     }
 
     public String getDayWeek(int day){
@@ -425,8 +421,8 @@ public class reserveOptionsPrint extends AppCompatActivity{
                     public void onResponse(JSONObject response) {
                         try {
                             ObjectMapper mapper = new ObjectMapper();
-                            PrinterReservations reservations = mapper.readValue(response.toString(), PrinterReservations.class);
-
+                            ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
+                            verifyResponse(responseObject);
 
                         } catch (Exception e) {
                             Log.d("EXCEPTION", e.toString());

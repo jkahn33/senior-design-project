@@ -144,7 +144,7 @@ public class newUser extends AppCompatActivity{
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.d("ERROR", error.getMessage());
+                            //Log.d("ERROR", error.getMessage());
 
                             showError(error.getMessage());
                         }

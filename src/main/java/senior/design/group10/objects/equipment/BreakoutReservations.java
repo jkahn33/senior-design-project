@@ -57,9 +57,9 @@ public class BreakoutReservations
 		this.additionalComments = additionalComments;
 	}
 	
-//	public String getBadgeId() {
-//		return user.getBadgeId();
-//	}
+	public int getId(){
+		return id;
+	}
 	
 	public String getresDescription()
 	{

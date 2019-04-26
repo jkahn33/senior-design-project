@@ -147,11 +147,11 @@ public class Reservations extends AppCompatActivity {
 
         //gives access to current time
         Calendar now = Calendar.getInstance();
-         year1 = now.get(Calendar.YEAR);
-         month1 = now.get(Calendar.MONTH); // Note: zero based!
-         day1 = now.get(Calendar.DAY_OF_MONTH);
-         hour1 = now.get(Calendar.HOUR_OF_DAY);
-         minute1 = now.get(Calendar.MINUTE);
+        year1 = now.get(Calendar.YEAR);
+        month1 = now.get(Calendar.MONTH); // Note: zero based!
+        day1 = now.get(Calendar.DAY_OF_MONTH);
+        hour1 = now.get(Calendar.HOUR_OF_DAY);
+        minute1 = now.get(Calendar.MINUTE);
 
         final String current = ((month1 - 1) + "/" + day1 + "/" + year1);
 
@@ -356,7 +356,7 @@ public class Reservations extends AppCompatActivity {
                 },
                 error -> {
                     Log.e("ERROR", "Error is: " + error.getMessage());
-                    showError(error.getMessage());
+                    //showError(error.getMessage());
 
                 }
         );

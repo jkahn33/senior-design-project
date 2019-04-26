@@ -59,9 +59,9 @@ public class PrinterReservations
 		return user.getName();
 	}
 	
-//	public String getBadgeId(){
-//		return user.getBadgeId();
-//	}
+	public int getId(){
+		return id;
+	}
 
 	public String getJobDescription(){
 		return jobDescription;

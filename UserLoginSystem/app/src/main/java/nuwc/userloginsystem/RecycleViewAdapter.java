@@ -39,10 +39,6 @@ public class RecycleViewAdapter  extends RecyclerView.Adapter<RecycleViewAdapter
         goBack = back;
     }
 
-
-
-
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listed_user, parent, false);

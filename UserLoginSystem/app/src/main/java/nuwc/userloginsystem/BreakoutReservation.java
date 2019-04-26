@@ -206,7 +206,7 @@ public class BreakoutReservation extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent checkout = new Intent(BreakoutReservation.this, myPrintList.class);
-                checkout.putExtra("employee",employeeExt.getText());
+                checkout.putExtra("employee",employeeExt.getText().toString());
                 checkout.putExtra("reserveType","breakout");
                 BreakoutReservation.this.startActivity(checkout);
 

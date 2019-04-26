@@ -1,8 +1,10 @@
 package nuwc.userloginsystem.util;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,13 +15,26 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import nuwc.userloginsystem.R;
+import nuwc.userloginsystem.Reservations;
 import nuwc.userloginsystem.ReserveOptionsBreakout;
 import nuwc.userloginsystem.editReservButton;
 import nuwc.userloginsystem.myPrintList;
 import nuwc.userloginsystem.objects.PrinterReservations;
+import nuwc.userloginsystem.objects.ResponseObject;
 import nuwc.userloginsystem.reserveOptionsPrint;
 
 import static android.content.ContentValues.TAG;
@@ -95,7 +110,7 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
             edit.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     Intent myIntent = new Intent(ctx, reserveOptionsPrint.class);
-                    myIntent.putExtra("printId",printId);
+
                     //myIntent.putExtra("secondKeyName","SecondKeyValue");
                     ctx.startActivity(myIntent);
                 }
@@ -103,7 +118,14 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
             delete.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     parentLayout.setVisibility(View.GONE);
-                    Log.d("Name","Plate boy");
+
+                    try {
+                        Log.d("THEID", Integer.toString(printId));
+                        deleteById(printId, ctx);
+                    }
+                    catch(JSONException e){
+                        Log.e("ERROR", e.toString());
+                    }
 
                     Intent myIntent = new Intent(ctx, myPrintList.class);
                     myIntent.putExtra("eventName",reservationName.getText());
@@ -113,6 +135,47 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
             });
         }
     }
+
+    public void deleteById(int printId, Context ctx) throws JSONException {
+        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+        requestQueue.start();
+
+        JSONObject body = new JSONObject();
+
+        body.put("string", Integer.toString(printId));
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                RequestUtil.BASE_URL + "/deletePrinterById",
+                body,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            ObjectMapper mapper = new ObjectMapper();
+                            ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
+                            if(responseObject.isSuccess()){
+                                Intent myIntent = new Intent(ctx, Reservations.class);
+                                ctx.startActivity(myIntent);
+                            }
+                        }
+                        catch(Exception e){
+                            Log.d("EXCEPTION", e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("ERROR", error.getMessage());
+
+                    }
+                }
+        );
+
+        requestQueue.add(request);
+    }
+
     public void removeAt(int position) {
         aReservations.remove(position);
         notifyItemRemoved(position);

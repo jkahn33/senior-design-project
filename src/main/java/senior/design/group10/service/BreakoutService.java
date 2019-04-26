@@ -184,4 +184,12 @@ public class BreakoutService
 	public List<BreakoutReservations> getBreakoutReservations(){
 		return breakoutDAO.findAll();
 	}
+
+	public List<BreakoutReservations> getBreakoutReservationId(String id){
+		Optional<Users> usersOptional = usersDAO.findById(id);
+		if(usersOptional.isPresent()){
+			return breakoutDAO.findAllByUser(usersOptional.get());
+		}
+		return null;
+	}
 }
