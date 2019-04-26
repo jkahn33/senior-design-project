@@ -352,7 +352,12 @@ public class PiService
 	
 	public ResponseObject startSlideShow()
 	{
-		execComToPi("./runslideshow.sh");
+		new Thread(() -> 
+		{
+			execComToPi("./runslideshow.sh");
+
+		    // code goes here.
+		}).start();
 		return new ResponseObject(true,null);
 	}
 
