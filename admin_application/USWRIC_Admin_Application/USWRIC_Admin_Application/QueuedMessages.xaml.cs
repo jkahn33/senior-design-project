@@ -130,8 +130,8 @@ namespace USWRIC_Admin_Application
                 ResponseObject responseObject = JsonConvert.DeserializeObject<ResponseObject>(responseString);
                 if (responseObject.Success)
                 {
-                    FillMessages();
                     MessageBox.Show("Successfully deleted messages.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
                 }
                 else
                 {
