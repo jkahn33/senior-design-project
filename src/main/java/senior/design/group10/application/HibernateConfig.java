@@ -41,7 +41,7 @@ public class HibernateConfig {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         //database url setting
-        dataSource.setUrl("jdbc:mysql://localhost:3306/user_logging_system?useSSL=false");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/user_logging_system?useSSL=false&allowPublicKeyRetrieval=true");
         //database root setting
         dataSource.setUsername("root");
         //database password setting

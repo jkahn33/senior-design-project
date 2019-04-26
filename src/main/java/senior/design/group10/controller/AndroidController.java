@@ -147,7 +147,8 @@ public class AndroidController {
 		
 		//Manual breakout reservation entry for testing image rendering
 		//breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-20 05:01:01", "2019-03-20 17:00:00", "2","none");
-        return breakoutService.addBreakRes(breakoutReservation);
+        System.out.println("AAAAAAAAAAA");
+		return breakoutService.addBreakRes(breakoutReservation);
     }
 
 

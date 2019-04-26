@@ -95,7 +95,7 @@ public class BreakoutService
 		Users user = usersOptional.get();
 		
 		boolean roomsAvailable[] = roomAvailable(breakout);
-		String roomString = null;
+		String roomString = "";
 		
 		for(int x = 0; x < breakout.getReservableIdList().size();x++)
 		{
@@ -112,7 +112,7 @@ public class BreakoutService
 			}
 		}
 
-		if (roomString == null)
+		if (roomString == "")
 			roomString = "All rooms succesfully reserved";
 		else
 			roomString += " Unavailable";
