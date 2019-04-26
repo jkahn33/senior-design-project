@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Collections;
 import java.util.List;
 
 import nuwc.userloginsystem.objects.ResponseObject;
@@ -60,17 +61,6 @@ public class savedUsers extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AddSavedUsers userThread = new AddSavedUsers("userThread");
-
-        getUserList(userThread);
-
-        try{
-            userThread.join();	//Waiting to finish
-        }catch(InterruptedException ie) {
-            Log.e("ERROR", ie.getMessage());
-        }
-        mNames = userThread.getUsers();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_users);
         welcomeUser = (TextView) findViewById(R.id.welcomeUser);
@@ -84,6 +74,8 @@ public class savedUsers extends AppCompatActivity{
 
         //has to be called AFTER RecyclerView.setAdapter()
         fastScroller.setRecyclerView(recyclerView);
+
+        getUserList();
 
         ctx = this;
 
@@ -118,7 +110,7 @@ public class savedUsers extends AppCompatActivity{
             showError(response.getMessage());
         }
     }
-    public void getUserList(AddSavedUsers threadInstance){
+    public void getUserList(){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
 
@@ -131,8 +123,7 @@ public class savedUsers extends AppCompatActivity{
                     try {
                         ObjectMapper mapper = new ObjectMapper();
                         userList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
-                        Log.d("USERS", "USER LIST GOTTEN");
-                        threadInstance.setUserList((ArrayList<Users>)userList);
+                        fillNamesList();
                     }
                     catch(Exception e){
                         Log.e("EXCEPTION", e.toString());
@@ -148,6 +139,14 @@ public class savedUsers extends AppCompatActivity{
 
         requestQueue.add(request);
     }
+    public void fillNamesList(){
+        for(Users u : userList){
+            mNames.add(u.getName());
+            Log.d("Names",u.getName());
+        }
+        Collections.sort(mNames);
+        adapter.notifyDataSetChanged();
+}
     public void logUser(String id) throws JSONException {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
