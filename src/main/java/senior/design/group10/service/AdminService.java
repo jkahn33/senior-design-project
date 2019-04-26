@@ -14,6 +14,7 @@ import senior.design.group10.objects.user.Admin;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -149,5 +150,9 @@ public class AdminService {
         }
         adminDAO.delete(adminOptional.get());
         return new ResponseObject(true, null);
+    }
+    
+    public List<Admin> getAllAdmins() {
+    	return (List<Admin>)adminDAO.findAll();
     }
 }

@@ -185,5 +185,8 @@ public class BreakoutService
 		return todaysReservation;
 	}
 	
+	public List<BreakoutReservations> getBreakoutReservations(){
+		return breakoutDAO.findAll();
+	}
 	
 }

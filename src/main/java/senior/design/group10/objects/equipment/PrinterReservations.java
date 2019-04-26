@@ -58,14 +58,26 @@ public class PrinterReservations
 	public String getName(){
 		return user.getName();
 	}
+	
+	public String getBadgeId(){
+		return user.getBadgeId();
+	}
 
 	public String getPrinter(){
 		return reservable.getRoom();
 	}
 	
+	public String getJobDescription() {
+		return jobDescription;
+	}
+	
 	public Date getJobSchedule()
 	{
 		return this.jobSchedule;
+	}
+	
+	public String getJobDuration() {
+		return jobDuration;
 	}
 	
 	public Date getJobScheduleEnd()

@@ -45,4 +45,8 @@ public class Messages
 	public Timestamp getMessageEndDate() {
 		return messageEndDate;
 	}
+	
+	public String getAdminId() {
+		return admin.getExt();
+	}
 }

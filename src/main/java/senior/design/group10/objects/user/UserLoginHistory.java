@@ -37,6 +37,14 @@ public class UserLoginHistory
 	public Users getUser() {
 		return user;
 	}
+	
+	public String getName() {
+		return user.getName();
+	}
+	
+	public String getBadgeId() {
+		return user.getBadgeId();
+	}
 
 	public Timestamp getLoginDateTime() {
 		return loginDateTime;
