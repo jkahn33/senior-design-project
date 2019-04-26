@@ -45,7 +45,7 @@ public class HibernateConfig {
         //database root setting
         dataSource.setUsername("root");
         //database password setting
-        dataSource.setPassword("neverforgetme");
+        dataSource.setPassword("root");
         return dataSource;
     }
 
