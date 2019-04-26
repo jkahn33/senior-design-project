@@ -141,39 +141,26 @@ public class PiService
 		return true;
 	}
 
-	public void autoUpdateMidnight()
+	
+	
+	public void updatePiImages(MessageService messageService, BreakoutService breakoutService, FutureService futureService )
 	{
-		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date;
-		try 
-		{
-			date = dateFormatter .parse("2012-07-06 13:05:45");
-			//Now create the time and schedule it
-			Timer timer = new Timer();
-
-			//Use this if you want to execute it once
-			timer.schedule(new TimeTask(), date);
-
-			//Use this if you want to execute it repeatedly
-			int period = 5000;//10secs
-			timer.schedule(new TimeTask(), date, period );
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		System.out.print("does it get here?");
-
-	}
-
-	private class TimeTask extends TimerTask
-	{
-		public void run()
-		{
-			// insert update 24 hours here
-			System.out.println("5 secs past");
-		}
+		System.out.println("Getting Current Messages");
+		renderMessagesImage(messageService.getCurrentMessages());
 		
+		System.out.println("Getting Current Breakout Reservation");
+		renderBreakoutImage(breakoutService.todaysReservations());
+		
+		System.out.println("Getting Future Messages");
+		renderFutureImage(futureService.getFutureMessages());
+		//Send the folder to the pi
+		piListFill();
+
+		System.out.println("Sending the Images");
+
+		
+		copyFolderToPi("PiImages", "Pictures/Slides");
+
 	}
 	
 	public boolean renderMessagesImage(List<Messages> messageList){
