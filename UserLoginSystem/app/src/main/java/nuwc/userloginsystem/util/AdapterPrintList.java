@@ -44,7 +44,6 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
     private ArrayList<PrinterReservations> aReservations = new ArrayList<>();
     private Context aContext;
 
-
     public AdapterPrintList(ArrayList<PrinterReservations> reservations, Context context){
         aReservations = reservations;
         aContext = context;
@@ -90,7 +89,6 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
         ImageView backPlate;
         TextView reservationName;
         ConstraintLayout parentLayout;
-
         int printId;
 
         Button edit;
@@ -104,17 +102,8 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
             backPlate = itemView.findViewById(R.id.backPlate);
             parentLayout = itemView.findViewById(R.id.reservationPlate);
             reservationName = itemView.findViewById(R.id.reservationName);
-            edit = itemView.findViewById(R.id.editButton);
             delete = itemView.findViewById(R.id.deleteButton);
 
-            edit.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    Intent myIntent = new Intent(ctx, reserveOptionsPrint.class);
-
-                    //myIntent.putExtra("secondKeyName","SecondKeyValue");
-                    ctx.startActivity(myIntent);
-                }
-            });
             delete.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     parentLayout.setVisibility(View.GONE);

@@ -180,7 +180,7 @@ public class addEquipment extends AppCompatActivity {
             //homeButton.setVisibility(View.VISIBLE);
 
             //confirm user request
-            equipmentSuccessBox.setText("Equipment successfully added");
+            equipmentSuccessBox.setText("Equipment added!");
         }
         else{
             showError(response.getMessage());
