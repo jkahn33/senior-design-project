@@ -141,7 +141,6 @@
 
         <NumberPicker
             android:id="@+id/startsTimeHour"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="420dp"
             android:text="Print"
@@ -270,8 +269,8 @@
 
             <LinearLayout
                 android:id="@+id/times"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:orientation="vertical"
                 tools:layout_editor_absoluteY="319dp">
 
@@ -288,10 +287,10 @@
             android:text="Back"
             app:layout_constraintBottom_toTopOf="@+id/endsDate"
             app:layout_constraintEnd_toStartOf="@+id/endsTimeMin"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.566"
             app:layout_constraintStart_toEndOf="@+id/timeSlots"
             app:layout_constraintTop_toBottomOf="@+id/endsTimeHour"
-            app:layout_constraintVertical_bias="0.6" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <RadioGroup
             android:id="@+id/radioPrinters"

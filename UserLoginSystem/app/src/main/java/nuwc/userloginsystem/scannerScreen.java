@@ -26,6 +26,7 @@ public class scannerScreen extends AppCompatActivity implements ZXingScannerView
     private ZXingScannerView scannerView;
     private static int camId = Camera.CameraInfo.CAMERA_FACING_BACK;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,27 +125,33 @@ public class scannerScreen extends AppCompatActivity implements ZXingScannerView
 
     @Override
     public void handleResult(Result result) {
-        final String myResult = result.getText();
+//        final String myResult = result.getText();
         Log.d("QRCodeScanner", result.getText());
         Log.d("QRCodeScanner", result.getBarcodeFormat().toString());
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Scan Result");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                scannerView.resumeCameraPreview(scannerScreen.this);
-            }
-        });
-        builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(myResult));
-                startActivity(browserIntent);
-            }
-        });
-        builder.setMessage(result.getText());
-        AlertDialog alert1 = builder.create();
-        alert1.show();
+        checkinBarcode.enterBox2.setText(result.getText());
+        onBackPressed();
+
+        //addEquipment.BITS.setText(result.getText());
+        //onBackPressed();
+
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Scan Result");
+//        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                scannerView.resumeCameraPreview(scannerScreen.this);
+//            }
+//        });
+//        builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(myResult));
+//                startActivity(browserIntent);
+//            }
+//        });
+//        builder.setMessage(result.getText());
+//        AlertDialog alert1 = builder.create();
+//        alert1.show();
     }
 }
