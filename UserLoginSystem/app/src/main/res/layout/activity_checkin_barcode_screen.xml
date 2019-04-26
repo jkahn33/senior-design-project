@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/commandBox2"
-        android:layout_width="587dp"
+        android:layout_width="0dp"
         android:layout_height="144dp"
         android:layout_marginStart="55dp"
         android:layout_marginTop="105dp"
@@ -24,7 +24,7 @@
 
     <EditText
         android:id="@+id/enterBox2"
-        android:layout_width="620dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="55dp"
         android:layout_marginTop="30dp"
@@ -83,8 +83,8 @@
 
     <Button
         android:id="@+id/buttonScan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
         android:layout_marginStart="340dp"
         android:layout_marginTop="39dp"
         android:layout_marginEnd="340dp"

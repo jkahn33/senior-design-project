@@ -8,9 +8,9 @@
 
     <EditText
         android:id="@+id/barcodeBox2"
-        android:layout_width="458dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginStart="74dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="135dp"
         android:layout_marginEnd="31dp"
         android:layout_marginBottom="61dp"
@@ -26,14 +26,14 @@
 
     <TextView
         android:id="@+id/commandBox2"
-        android:layout_width="639dp"
+        android:layout_width="0dp"
         android:layout_height="64dp"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="114dp"
-        android:layout_marginEnd="70dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="10dp"
         android:text="Please enter the information below:"
-        android:textSize="40sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/extensionBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
 
     <EditText
         android:id="@+id/extensionBox"
-        android:layout_width="620dp"
+        android:layout_width="0dp"
         android:layout_height="86dp"
         android:layout_marginStart="74dp"
         android:layout_marginTop="48dp"
@@ -112,7 +112,7 @@
         android:layout_height="72dp"
         android:layout_marginStart="31dp"
         android:layout_marginTop="143dp"
-        android:layout_marginEnd="74dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginBottom="111dp"
         android:text="Scan"
         app:layout_constraintBottom_toTopOf="@+id/extensionBox"
