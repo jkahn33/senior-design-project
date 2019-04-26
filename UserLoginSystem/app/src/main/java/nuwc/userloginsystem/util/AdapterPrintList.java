@@ -46,17 +46,22 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
 
     @Override
     public void onBindViewHolder(AdapterPrintList.ViewHolder holder, int position) {
-        Log.d(TAG,"onBind");
-
-        holder.reservationName.setText(aReservations.get(position).getName());
-        holder.printId = aReservations.get(position).getId();
+        try {
+            holder.reservationName.setText(aReservations.get(position).getJobDescription());
+            holder.printId = aReservations.get(position).getId();
+        }catch(Exception e){
+            Log.e("ERROR", e.getMessage());
+        }
 
     }
 
 
     @Override
     public int getItemCount() {
-        return 10;
+        if(aReservations != null){
+            return aReservations.size();
+        }
+        return 0;
     }
 
     public String getSectionTitle(int position) {
@@ -89,9 +94,9 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
 
             edit.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    Intent myIntent = new Intent(ctx, ReserveOptionsBreakout.class);
-                    myIntent.putExtra("firstKeyName","FirstKeyValue");
-                    myIntent.putExtra("secondKeyName","SecondKeyValue");
+                    Intent myIntent = new Intent(ctx, reserveOptionsPrint.class);
+                    myIntent.putExtra("printId",printId);
+                    //myIntent.putExtra("secondKeyName","SecondKeyValue");
                     ctx.startActivity(myIntent);
                 }
             });

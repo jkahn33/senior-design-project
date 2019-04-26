@@ -77,8 +77,14 @@ public class myPrintList extends AppCompatActivity {
             Log.d("NULLCHECK", "NOTNULL");
             employeeExt = (String) savedInstanceState.getSerializable("employee");
             reserveType = (String) savedInstanceState.getSerializable("reserveType");
+            eventName = (String) savedInstanceState.getSerializable("eventName");
         }
-        eventName = (String) savedInstanceState.getSerializable("eventName");
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        adapter = new AdapterPrintList(reservations, this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
 
         try {
             fillList();
@@ -86,14 +92,7 @@ public class myPrintList extends AppCompatActivity {
             Log.e("ERROR", e.toString());
         }
 
-        addReserves();
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        adapter = new AdapterPrintList(reservations, this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-
         calendarButton = findViewById(R.id.calendarButton);
-
 
         layout = findViewById(R.id.eventList);
 
@@ -101,40 +100,23 @@ public class myPrintList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("reserveType", reserveType + "");
-                if (eventName == "breakout") {
-                    Intent myIntent = new Intent(myPrintList.this, BreakoutReservation.class);
-                    myPrintList.this.startActivity(myIntent);
+                try {
+                    if (eventName.equals("breakout")) {
+                        Intent myIntent = new Intent(myPrintList.this, BreakoutReservation.class);
+                        myPrintList.this.startActivity(myIntent);
 
-                } else {
-                    Intent myIntent = new Intent(myPrintList.this, Reservations.class);
-                    myPrintList.this.startActivity(myIntent);
+                    } else {
+                        Intent myIntent = new Intent(myPrintList.this, Reservations.class);
+                        myPrintList.this.startActivity(myIntent);
 
+                    }
                 }
-
-
+                catch(NullPointerException e){
+                    Intent myIntent = new Intent(myPrintList.this, PickReservationType.class);
+                    myPrintList.this.startActivity(myIntent);
+                }
             }
         });
-    }
-
-    public void addReserves() {
-        RandNameGen nameGen = new RandNameGen();
-        Log.d("addUser","User added");
-
-//            for(int i = 0; i < 20; i ++){
-//                reservations.add(nameGen.randomIdentifier());
-//                Log.d("names",reservations.get(i));
-//
-//            }
-//        Collections.sort(reservations);
-
-    }
-
-    public void sendList(){
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        //pass sorted list of reservation ids
-        adapter = new AdapterPrintList(reservations,this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
     }
 
     public void fillList() throws JSONException {
@@ -143,17 +125,14 @@ public class myPrintList extends AppCompatActivity {
         requestQueue.start();
 
         JSONObject body = new JSONObject();
-
         body.put("string", employeeExt);
-        JSONArray array = null;
-        try{
-             array = new JSONArray(body.toString());
-        }
-        catch(Exception e){
-            Log.e("ERROR", e.toString());
-        }
+
+        JSONArray array = new JSONArray();
+        array.put(body);
 
         Log.d("Test", "test");
+
+        Log.d("TESTYO", array.toString());
 
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.POST,
@@ -162,8 +141,12 @@ public class myPrintList extends AppCompatActivity {
                 response -> {
                     try {
                         ObjectMapper mapper = new ObjectMapper();
-                        reservations = mapper.readValue(response.toString(), new TypeReference<List<PrinterReservations>>(){});
-                        sendList();
+                        List<PrinterReservations> listToGet = mapper.readValue(response.toString(), new TypeReference<List<PrinterReservations>>(){});
+                        reservations.clear();
+
+                        reservations.addAll(listToGet);
+
+                        adapter.notifyDataSetChanged();
                     }
                     catch(Exception e){
                         Log.d("EXCEPTION", e.toString());

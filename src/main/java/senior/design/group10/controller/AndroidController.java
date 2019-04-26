@@ -235,9 +235,16 @@ public class AndroidController {
 
     @PostMapping("/getPrinterReservationsId")
     @ResponseBody
-    public List<PrinterReservations> getPrinterReservationsId(@RequestBody StringWrapper stringWrapper){
-        log.info("ID: " + stringWrapper);
-        return printerService.getPrinterReservationId(stringWrapper.getString());
+    public List<PrinterReservations> getPrinterReservationsId(@RequestBody List<StringWrapper> barcode){
+        log.info(barcode.get(0).getString());
+        return printerService.getPrinterReservationId(barcode.get(0).getString());
+        //return printerService.getPrinterReservationId("12345");
+    }
+
+    @PostMapping("/getPrintById")
+    @ResponseBody
+    public PrinterReservations getPrinterReservationById(@RequestBody StringWrapper id){
+        return printerService.getPrinterReservationById(id.getString());
     }
 
     @GetMapping("/getBreakoutReservations")

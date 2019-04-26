@@ -93,7 +93,7 @@ public class checkinBarcode extends AppCompatActivity {
 
         JSONObject body = new JSONObject();
 
-        body.put("barcode", barcode);
+        body.put("string", barcode);
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,

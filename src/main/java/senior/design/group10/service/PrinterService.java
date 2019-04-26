@@ -157,4 +157,12 @@ public class PrinterService
 		}
 		return null;
 	}
+
+	public PrinterReservations getPrinterReservationById(String id){
+		Optional<PrinterReservations> resOptional = printerDAO.findById(Integer.parseInt(id));
+		if(resOptional.isPresent()) {
+			return resOptional.get();
+		}
+		return null;
+	}
 }

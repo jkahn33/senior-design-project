@@ -87,6 +87,8 @@ public class adminCheckout extends AppCompatActivity {
         body.put("ext", extension);
         body.put("password", password);
 
+        Log.d("TESTYO", body.toString());
+
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
                 RequestUtil.BASE_URL + "/validateAdmin",

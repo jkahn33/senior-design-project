@@ -29,6 +29,7 @@ import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import nuwc.userloginsystem.objects.PrinterReservations;
 import nuwc.userloginsystem.objects.ResponseObject;
 import nuwc.userloginsystem.util.RequestUtil;
 
@@ -47,9 +48,7 @@ public class reserveOptionsPrint extends AppCompatActivity{
 
     LinearLayout times;
     Button[] slot = new Button[24];
-
-
-
+    
     EditText printName;
     EditText startDate;
     EditText employExt;
@@ -69,6 +68,8 @@ public class reserveOptionsPrint extends AppCompatActivity{
     String jobSchedule;
     String jobDuration;
     String additionalCom;
+
+    int printId;
 
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm");
@@ -94,6 +95,14 @@ public class reserveOptionsPrint extends AppCompatActivity{
                 month= extras.getInt("month");
                 day= extras.getInt("day");
                 printer = extras.getString("printer");
+
+                try{
+                    printId = extras.getInt("printId");
+                    populateFields();
+                }
+                catch(Exception e){
+                    Log.e("ERROR", e.getMessage());
+                }
 
             }
         } else {
@@ -274,6 +283,44 @@ public class reserveOptionsPrint extends AppCompatActivity{
 
     }
 
+    public void populateFields() throws JSONException{
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.start();
+
+        JSONObject body = new JSONObject();
+
+        body.put("string", Integer.toString(printId));
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                RequestUtil.BASE_URL + "/getPrintById",
+                body,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            ObjectMapper mapper = new ObjectMapper();
+                            ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
+                            verifyResponse(responseObject);
+                        }
+                        catch(Exception e){
+                            Log.d("EXCEPTION", e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("ERROR", error.getMessage());
+
+                        showError(error.getMessage());
+                    }
+                }
+        );
+
+        requestQueue.add(request);
+    }
+
 
 
     public void showTimeSlots(int month, int day, int year){
@@ -378,8 +425,9 @@ public class reserveOptionsPrint extends AppCompatActivity{
                     public void onResponse(JSONObject response) {
                         try {
                             ObjectMapper mapper = new ObjectMapper();
-                            ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
-                            verifyResponse(responseObject);
+                            PrinterReservations reservations = mapper.readValue(response.toString(), PrinterReservations.class);
+
+
                         } catch (Exception e) {
                             Log.d("EXCEPTION", e.toString());
                         }
