@@ -40,12 +40,10 @@ namespace USWRIC_Admin_Application
                 ColumnDefinition messageCol = new ColumnDefinition();
                 ColumnDefinition durationCol = new ColumnDefinition();
                 ColumnDefinition checkboxCol = new ColumnDefinition();
-                ColumnDefinition editCol = new ColumnDefinition();
 
                 messagesGrid.ColumnDefinitions.Add(messageCol);
                 messagesGrid.ColumnDefinitions.Add(durationCol);
                 messagesGrid.ColumnDefinitions.Add(checkboxCol);
-                messagesGrid.ColumnDefinitions.Add(editCol);
                 
                 foreach (Messages message in messageList)
                 {
@@ -87,14 +85,6 @@ namespace USWRIC_Admin_Application
                     Grid.SetRow(deleteBox, i);
                     Grid.SetColumn(deleteBox, 2);
                     messagesGrid.Children.Add(deleteBox);
-
-                    Button editButton = new Button
-                    {
-                        Content = "Edit"
-                    };
-                    Grid.SetRow(editButton, i);
-                    Grid.SetColumn(editButton, 3);
-                    messagesGrid.Children.Add(editButton);
                 }
             }
 
@@ -131,7 +121,7 @@ namespace USWRIC_Admin_Application
                 if (responseObject.Success)
                 {
                     MessageBox.Show("Successfully deleted messages.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
+                    Window.GetWindow(this).Close();
                 }
                 else
                 {

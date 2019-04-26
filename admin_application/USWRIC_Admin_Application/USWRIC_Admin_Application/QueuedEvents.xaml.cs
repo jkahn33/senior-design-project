@@ -42,13 +42,11 @@ namespace USWRIC_Admin_Application
                 ColumnDefinition startCol = new ColumnDefinition();
                 ColumnDefinition endCol = new ColumnDefinition();
                 ColumnDefinition checkboxCol = new ColumnDefinition();
-                ColumnDefinition editCol = new ColumnDefinition();
 
                 futureGrid.ColumnDefinitions.Add(futureCol);
                 futureGrid.ColumnDefinitions.Add(startCol);
                 futureGrid.ColumnDefinitions.Add(endCol);
                 futureGrid.ColumnDefinitions.Add(checkboxCol);
-                futureGrid.ColumnDefinitions.Add(editCol);
 
                 foreach (Future future in futureList)
                 {
@@ -101,14 +99,6 @@ namespace USWRIC_Admin_Application
                     Grid.SetRow(deleteBox, i);
                     Grid.SetColumn(deleteBox, 3);
                     futureGrid.Children.Add(deleteBox);
-
-                    Button editButton = new Button
-                    {
-                        Content = "Edit"
-                    };
-                    Grid.SetRow(editButton, i);
-                    Grid.SetColumn(editButton, 4);
-                    futureGrid.Children.Add(editButton);
                 }
             }
 

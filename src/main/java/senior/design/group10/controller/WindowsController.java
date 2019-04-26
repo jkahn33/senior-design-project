@@ -325,4 +325,5 @@ public class WindowsController {
     public List<PrinterUsageUsers> getPrinterUserUsage(){
         return printerService.getUserUsage();
     }
+
 }
