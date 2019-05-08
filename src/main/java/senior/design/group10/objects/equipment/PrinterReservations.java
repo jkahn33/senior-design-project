@@ -23,7 +23,7 @@ public class PrinterReservations
 	@GeneratedValue(generator="generator")
 	private int id;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_ext")
 	private Users user;
 	@ManyToOne

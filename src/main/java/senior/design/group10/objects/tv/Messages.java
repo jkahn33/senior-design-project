@@ -20,7 +20,7 @@ public class Messages
 	private String message;
 	@Column
 	private Timestamp messageEndDate;
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Admin admin;
 

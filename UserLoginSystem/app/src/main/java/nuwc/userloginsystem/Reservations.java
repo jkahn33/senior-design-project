@@ -88,8 +88,6 @@ public class Reservations extends AppCompatActivity {
     int minute1;
 
     SimpleDateFormat fullTimeFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-    Date startDate = new Date();
-    Date endDate = new Date();
 
     boolean overallSuccess;
 
@@ -302,7 +300,7 @@ public class Reservations extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent myIntent = new Intent(Reservations.this, reserveOptionsPrint.class);
                     myIntent.putExtra("day",finalDay);
-                    myIntent.putExtra("month",month - 1);
+                    myIntent.putExtra("month",month);
                     myIntent.putExtra("year",year);
                     myIntent.putExtra("printer",checkPrinterButtons());
 
@@ -356,7 +354,7 @@ public class Reservations extends AppCompatActivity {
                 },
                 error -> {
                     Log.e("ERROR", "Error is: " + error.getMessage());
-                    //showError(error.getMessage());
+                    showError("Request Error. Please check connection.");
 
                 }
         );

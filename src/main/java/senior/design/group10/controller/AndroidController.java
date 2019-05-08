@@ -102,9 +102,7 @@ public class AndroidController {
     @PostMapping("/storeLogin")
     @ResponseBody
     public ResponseObject storeLogin(@RequestBody SentLoginHistory login) {
-    	ResponseObject response = loginService.saveNewLogin(login);
-    	System.out.println(response.isSuccess() + " " + response.getMessage());
-        return response;
+        return loginService.saveNewLogin(login);
     }    
     
     //Just for testing. UserService.getAllUsers() returns a list of all users
@@ -205,8 +203,6 @@ public class AndroidController {
     public ResponseObject checkoutEquipment(@RequestBody SentEquipment equipment){
         return equipmentService.checkout(equipment);
     }
-
-       
     
     /*
      * Saves a new event to the database.

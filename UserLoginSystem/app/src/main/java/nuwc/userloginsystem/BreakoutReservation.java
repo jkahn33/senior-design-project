@@ -278,7 +278,7 @@ public class BreakoutReservation extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent myIntent = new Intent(BreakoutReservation.this, ReserveOptionsBreakout.class);
                     myIntent.putExtra("day",finalDay);
-                    myIntent.putExtra("month",month - 1);
+                    myIntent.putExtra("month",month);
                     myIntent.putExtra("year",year);
                     BreakoutReservation.this.startActivity(myIntent);
 

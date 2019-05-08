@@ -69,6 +69,7 @@ public class myPrintList extends AppCompatActivity {
                 Log.d("NULLCHECK", "NULLNOTNULL");
                 employeeExt = extras.getString("employee");
                 reserveType = extras.getString("reserveType");
+                Log.d("RESERVE", reserveType);
                 eventName = extras.getString("eventName");
 
 
@@ -77,6 +78,7 @@ public class myPrintList extends AppCompatActivity {
             Log.d("NULLCHECK", "NOTNULL");
             employeeExt = (String) savedInstanceState.getSerializable("employee");
             reserveType = (String) savedInstanceState.getSerializable("reserveType");
+            Log.d("RESERVE", reserveType);
             eventName = (String) savedInstanceState.getSerializable("eventName");
         }
 
@@ -139,8 +141,6 @@ public class myPrintList extends AppCompatActivity {
         JSONArray array = new JSONArray();
         array.put(body);
 
-        Log.d("Test", "test");
-
         Log.d("TESTYO", array.toString());
 
         JsonArrayRequest request = new JsonArrayRequest(
@@ -201,8 +201,6 @@ public class myPrintList extends AppCompatActivity {
                             reservations.add(new PrinterReservations(res.getName(), res.getId()));
                         }
 
-                        //reservations.addAll(listToGet);
-
                         adapter.notifyDataSetChanged();
                     }
                     catch(Exception e){
@@ -214,7 +212,7 @@ public class myPrintList extends AppCompatActivity {
                     this.startActivity(myIntent);
                     //Log.d("ERROR", error.getMessage());
 
-                    //showError(error.getMessage());
+                    showError("Request Error. Please check connection.");
                 }
         );
 
