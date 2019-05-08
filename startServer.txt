@@ -1,6 +1,0 @@
-#!/bin/bash
-
-cd documents
-cd seniorDesign
-cd senior-design-project
-java -jar build/libs/senior-design-project-1.0-SNAPSHOT.jar 
