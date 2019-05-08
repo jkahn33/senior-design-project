@@ -43,7 +43,7 @@ public class UserLoginHistory
 	}
 	
 	public String getBadgeId() {
-		return user.getBadgeId();
+		return user.getBadgeID();
 	}
 
 	public Timestamp getLoginDateTime() {

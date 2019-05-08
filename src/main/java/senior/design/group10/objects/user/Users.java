@@ -13,7 +13,7 @@ public class Users
 	private Timestamp creationDate;
 	@Id
 	@Column(length=5)
-	private String badgeId;
+	private String badgeID;
 	@Column
 	private String depCode;
 
@@ -23,7 +23,7 @@ public class Users
 	{
 		this.name = name;
 		this.creationDate = creationDate;
-		this.badgeId = badgeId;
+		this.badgeID = badgeId;
 		this.depCode = depCode;
 	}
 
@@ -35,8 +35,8 @@ public class Users
 		return creationDate;
 	}
 
-	public String getBadgeId() {
-		return badgeId;
+	public String getBadgeID() {
+		return badgeID;
 	}
 
 	public String getDepCode() {
