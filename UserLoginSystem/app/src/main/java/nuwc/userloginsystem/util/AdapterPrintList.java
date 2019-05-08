@@ -63,6 +63,8 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
         try {
             holder.reservationName.setText(aReservations.get(position).getJobDescription());
             holder.printId = aReservations.get(position).getId();
+            holder.start.setText(aReservations.get(position).getJobSchedule().toString());
+            holder.start.setText(aReservations.get(position).getJobScheduleEnd().toString());
         }catch(Exception e){
             Log.e("ERROR", e.getMessage());
         }
@@ -88,6 +90,8 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
 
         ImageView backPlate;
         TextView reservationName;
+        TextView start;
+        TextView end;
         ConstraintLayout parentLayout;
         int printId;
 
@@ -102,6 +106,8 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
             backPlate = itemView.findViewById(R.id.backPlate);
             parentLayout = itemView.findViewById(R.id.reservationPlate);
             reservationName = itemView.findViewById(R.id.reservationName);
+            start = itemView.findViewById(R.id.startTime);
+            //end = itemView.findViewById(R.id.endTime);
             delete = itemView.findViewById(R.id.deleteButton);
 
             delete.setOnClickListener(new View.OnClickListener() {

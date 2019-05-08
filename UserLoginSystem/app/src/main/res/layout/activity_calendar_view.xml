@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="315dp"
         android:layout_marginTop="150dp"
-        android:text="Please enter your employee extension"
+        android:text="Please enter your employee badge ID"
         android:textSize="24sp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         android:layout_marginTop="208dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Extension"
+        android:hint="Badge ID"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

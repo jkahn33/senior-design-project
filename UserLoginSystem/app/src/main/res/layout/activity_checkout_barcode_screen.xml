@@ -51,7 +51,7 @@
         android:layout_marginEnd="74dp"
         android:layout_marginBottom="22dp"
         android:ems="10"
-        android:hint="Checkout User Extension"
+        android:hint="Checkout User Badge ID"
         android:inputType="textPersonName"
         android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/submitButton2"

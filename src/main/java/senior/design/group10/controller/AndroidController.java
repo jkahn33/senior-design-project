@@ -109,7 +109,6 @@ public class AndroidController {
     @GetMapping("/printAllUsers")
     @ResponseBody
     public List<Users> printAllUsers() {
-        log.info("GETTING USER LIST");
         return userService.getAllUsers();
     }
 

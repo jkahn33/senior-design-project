@@ -252,7 +252,7 @@ public class reserveOptionsPrint extends AppCompatActivity{
                 additionalCom = printDetails.getText().toString();
 
                 if(userExt.length() != 5){
-                    showError("Extension must be 5 digits.");
+                    showError("Badge ID must be 5 digits.");
                 }
                 else if(jobDescription == ""){
                     showError("Please enter a print name.");

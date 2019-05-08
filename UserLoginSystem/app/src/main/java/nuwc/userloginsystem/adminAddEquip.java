@@ -116,7 +116,7 @@ public class adminAddEquip extends AppCompatActivity {
             AddEquipScreen();
         }
         else{
-            showError("Extension or password is incorrect.");
+            showError("Badge ID or password is incorrect.");
         }
     }
     public void showError(String message){

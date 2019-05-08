@@ -122,7 +122,7 @@ public class adminCheckin extends AppCompatActivity {
             checkinScreen();
         }
         else{
-            showError("Extension or password is incorrect.");
+            showError("Badge ID or password is incorrect.");
         }
     }
     public void showError(String message){

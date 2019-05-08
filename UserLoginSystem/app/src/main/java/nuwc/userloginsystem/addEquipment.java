@@ -127,10 +127,10 @@ public class addEquipment extends AppCompatActivity {
         //Need to add more fields here after the database is created
         body.put("barcode", barcode);
         body.put("equipmentName", equipName);
-        body.put("manufacturer", manufacturer);
-        body.put("modelNum", modelNum);
-        body.put("serialNum", serialNum);
-        body.put("plantNum", plantNum);
+        body.put("manufacturerName", manufacturer);
+        body.put("modelNumber", modelNum);
+        body.put("serialNumber", serialNum);
+        body.put("plantNumber", plantNum);
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
@@ -174,6 +174,8 @@ public class addEquipment extends AppCompatActivity {
             plantNumBox.setVisibility(View.INVISIBLE);
             addEquipCancel.setVisibility(View.INVISIBLE);
             submitButton.setVisibility(View.INVISIBLE);
+
+            scanButton.setVisibility(View.INVISIBLE);
 
             back.setVisibility(View.VISIBLE);
 
