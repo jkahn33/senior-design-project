@@ -169,5 +169,11 @@ namespace USWRIC_Admin_Application
             QueuedMessages messages = new QueuedMessages();
             messages.Show();
         }
+
+        private void NewPiButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewPi newPi = new NewPi();
+            newPi.Show();
+        }
     }
 }

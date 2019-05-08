@@ -34,6 +34,12 @@ public class AdminService {
     public AdminService(AdminDAO adminDAO, PasswordEncoder passwordEncoder) {
         this.adminDAO = adminDAO;
         this.passwordEncoder = passwordEncoder;
+
+        //creates new default admin
+        if(getAdminById("0000") == null) {
+            NewAdmin newAdmin = new NewAdmin("admin", "0000", "admin");
+            createNewAdmin(newAdmin);
+        }
     }
 
     /**
