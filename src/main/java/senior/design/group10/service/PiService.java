@@ -1,6 +1,7 @@
 package senior.design.group10.service;
 import com.jcraft.jsch.*;
 
+import java.io.InputStream;
 import senior.design.group10.dao.PiDAO;
 import senior.design.group10.objects.equipment.BreakoutReservations;
 import senior.design.group10.objects.response.ResponseObject;
@@ -8,7 +9,6 @@ import senior.design.group10.objects.sent.SentPi;
 import senior.design.group10.objects.tv.Future;
 import senior.design.group10.objects.tv.Messages;
 import senior.design.group10.objects.tv.Pi;
-
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
@@ -17,14 +17,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +41,7 @@ public class PiService
 	{
 		this.piDAO = piDAO;
 	}
+
 
 
 	/*///////////////////////////////////////////////
@@ -135,6 +134,29 @@ public class PiService
 		}
 		return true;
 	}
+
+	
+	
+	public void updatePiImages(MessageService messageService, BreakoutService breakoutService, FutureService futureService )
+	{
+		System.out.println("Getting Current Messages");
+		renderMessagesImage(messageService.getCurrentMessages());
+		
+		System.out.println("Getting Current Breakout Reservation");
+		renderBreakoutImage(breakoutService.todaysReservations());
+		
+		System.out.println("Getting Future Messages");
+		renderFutureImage(futureService.getFutureMessages());
+		//Send the folder to the pi
+		piListFill();
+
+		System.out.println("Sending the Images");
+
+		
+		copyFolderToPi("PiImages", "Pictures/Slides");
+
+	}
+	
 	public boolean renderMessagesImage(List<Messages> messageList){
 		String headerText = "USWRIC Important Information";
 		//make size fit 1080p tv
@@ -341,7 +363,6 @@ public class PiService
 			return new ResponseObject(false, "Pi with " + sentPi.getIp() + " ip already exists");
 		}
 
-
 		Pi piToAdd = new Pi(sentPi.getIp(),sentPi.getUser(),sentPi.getPassword());
 		piDAO.save(piToAdd);
 		return new ResponseObject(true, "Pi added");
@@ -349,7 +370,12 @@ public class PiService
 	
 	public ResponseObject startSlideShow()
 	{
-		execComToPi("./runslideshow.sh");
+		new Thread(() -> 
+		{
+			execComToPi("./runslideshow.sh");
+
+		    // code goes here.
+		}).start();
 		return new ResponseObject(true,null);
 	}
 

@@ -27,7 +27,13 @@ import senior.design.group10.service.*;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
 @Controller
@@ -176,7 +182,7 @@ public class WindowsController {
 	//Checks for duplicate ip then stores to ip table
 	//if duplicate returns false object response
 	//else stores in db and will be used to connect to different pis
-	@GetMapping("/addPi")
+	@PostMapping("/addPi")
 	@ResponseBody
 	public ResponseObject addPi(/*@RequestBody SentPi sentPi*/)
 	{
@@ -188,7 +194,6 @@ public class WindowsController {
 	@GetMapping("/fillPiList")
 	public void fillPiList()
 	{
-		//piService.createPiImageFolder("PiImages");
 		piService.piListFill();
 	}
 	//Sends the command to the pi to execute through ssh command
@@ -231,10 +236,8 @@ public class WindowsController {
      * -an associated administrator account
      */
     @PostMapping("/newMessage")
-    //@GetMapping("newMessage") //for testing
     @ResponseBody
     public ResponseObject newMessage(@RequestBody SentMessage sentMessage) 
-    //public ResponseObject newMessage(SentMessage sentMessage) This is for testing
     {
         //Sending a message
         //Used for making new messages
@@ -262,22 +265,7 @@ public class WindowsController {
     @ResponseBody
     public ResponseObject updatePiImages()
     {
-    		System.out.println("Getting Current Messages");
-    		piService.renderMessagesImage(messageService.getCurrentMessages());
-    		
-    		System.out.println("Getting Current Breakout Reservation");
-    		piService.renderBreakoutImage(breakoutService.todaysReservations());
-    		
-    		System.out.println("Getting Future Messages");
-    		piService.renderFutureImage(futureService.getFutureMessages());
-    		//Send the folder to the pi
-    		piService.piListFill();
-
-    		System.out.println("Sending the Images");
-
-    		
-    		piService.copyFolderToPi("PiImages", "Pictures/Slides");
-
+    		piService.updatePiImages(messageService, breakoutService, futureService);
         return  new ResponseObject(true,null);
     }
     
@@ -285,7 +273,10 @@ public class WindowsController {
     @ResponseBody
     public ResponseObject startSlideshow()
     {
+    		piService.piListFill();
+    		updatePiImages();
     		piService.startSlideShow();
+    		autoUpdateMidnight();
     		return new ResponseObject(true,null);
     }
     @GetMapping("/printerUsage")
@@ -296,11 +287,10 @@ public class WindowsController {
     
     @GetMapping("/getMessages")
     @ResponseBody
-    public List<Messages> getMesssages()
-    {
+    public List<Messages> getMesssages() {
         return messageService.getCurrentMessages();
     }
-    
+
     @PostMapping("/deleteMessagesById")
     @ResponseBody
     public ResponseObject deleteMessageById(@RequestBody IdWrapper ids)
@@ -317,6 +307,7 @@ public class WindowsController {
         return futureService.getFutureMessages();
     }
     
+
     @PostMapping("/deleteFuturesById")
     @ResponseBody
     public ResponseObject deleteFutureById(@RequestBody IdWrapper ids)
@@ -353,8 +344,50 @@ public class WindowsController {
 
 	@RequestMapping(value = "/csv/printerres", produces = "text/csv")
 	public void exportPrinterRes(HttpServletResponse response) throws IOException {
-		List<PrinterReservations> res = printerService.getPrinterReservations();
-		CSVExport.exportPrinterRes(response.getWriter(), res);
+        List<PrinterReservations> res = printerService.getPrinterReservations();
+        CSVExport.exportPrinterRes(response.getWriter(), res);
+    }
+    @GetMapping("/setAutoUpdate")
+    @ResponseBody
+    public ResponseObject setAutoUpdate()
+    {
+    		autoUpdateMidnight();
+    		return new ResponseObject(true, null);
+    }
+    
+    public void autoUpdateMidnight()
+	{
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date;
+		try 
+		{
+			date = dateFormatter.parse("2019-01-01 1:00:00");
+			//Now create the time and schedule it
+			Timer timer = new Timer();
+
+			//Use this if you want to execute it once
+			timer.schedule(new TimeTask(), date);
+
+			//Use this if you want to execute it repeatedly
+			int period = 86400000;//24hours
+			timer.schedule(new TimeTask(), date, period );
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+	}
+
+	private class TimeTask extends TimerTask
+	{
+		public void run()
+		{
+			// insert update 24 hours here
+			piService.piListFill();
+			updatePiImages();
+			System.out.println("updates");//updates
+		}
 	}
 
 	@RequestMapping(value = "/csv/logins", produces = "text/csv")
