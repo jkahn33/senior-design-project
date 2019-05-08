@@ -31,10 +31,13 @@ public class addEquipment extends AppCompatActivity {
 
     String equipName;
     String barcode;
+    String manufacturer;
+    String modelNum;
+    String serialNum;
+    String plantNum;
+
 
     static EditText BITS;
-
-    EditText barcodeBox;
     EditText equipmentNameBox;
     EditText manufacturerBox;
     EditText modelNumBox;
@@ -57,7 +60,6 @@ public class addEquipment extends AppCompatActivity {
         BITS = (EditText) findViewById(R.id.barcodeBox2);
         submitButton = (Button) findViewById(R.id.submitButton2);
         scanButton = (Button) findViewById(R.id.scanButton);
-        barcodeBox = (EditText) findViewById(R.id.barcodeBox2);
         equipmentNameBox = (EditText) findViewById(R.id.equipmentName);
         manufacturerBox= (EditText) findViewById(R.id.manufacturerBox);
         modelNumBox = (EditText) findViewById(R.id.modelNumBox);
@@ -71,15 +73,26 @@ public class addEquipment extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //get the barcode from user
-                barcode = barcodeBox.getText().toString();
+                barcode = BITS.getText().toString();
                 equipName = equipmentNameBox.getText().toString();
+                manufacturer = manufacturerBox.getText().toString();
+                modelNum = modelNumBox.getText().toString();
+                serialNum = serialNumBox.getText().toString();
+                plantNum = plantNumBox.getText().toString();
 
-                try {
-                    sendEquipment();
+                if(barcode.equals("")){
+                    showError("Barcode cannot be empty.");
                 }
-                catch(JSONException e){
-                    showError("JSON formatting error.");
-                    Log.e("EXCEPTION", e.toString());
+                else if(equipName.equals("")){
+                    showError("Equipment name cannot empty");
+                }
+                else {
+                    try {
+                        sendEquipment();
+                    } catch (JSONException e) {
+                        showError("JSON formatting error.");
+                        Log.e("EXCEPTION", e.toString());
+                    }
                 }
             }
         });
@@ -111,8 +124,13 @@ public class addEquipment extends AppCompatActivity {
 
         JSONObject body = new JSONObject();
 
+        //Need to add more fields here after the database is created
         body.put("barcode", barcode);
         body.put("equipmentName", equipName);
+        body.put("manufacturerName", manufacturer);
+        body.put("modelNumber", modelNum);
+        body.put("serialNumber", serialNum);
+        body.put("plantNumber", plantNum);
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
@@ -148,17 +166,23 @@ public class addEquipment extends AppCompatActivity {
     public void verifyResponse(ResponseObject response){
         if(response.isSuccess()){
             //make editTexts disappear
-            barcodeBox.setVisibility(View.INVISIBLE);
+            BITS.setVisibility(View.INVISIBLE);
             equipmentNameBox.setVisibility(View.INVISIBLE);
+            manufacturerBox.setVisibility(View.INVISIBLE);
+            modelNumBox.setVisibility(View.INVISIBLE);
+            serialNumBox.setVisibility(View.INVISIBLE);
+            plantNumBox.setVisibility(View.INVISIBLE);
             addEquipCancel.setVisibility(View.INVISIBLE);
             submitButton.setVisibility(View.INVISIBLE);
+
+            scanButton.setVisibility(View.INVISIBLE);
 
             back.setVisibility(View.VISIBLE);
 
             //homeButton.setVisibility(View.VISIBLE);
 
             //confirm user request
-            equipmentSuccessBox.setText("Equipment successfully added");
+            equipmentSuccessBox.setText("Equipment added!");
         }
         else{
             showError(response.getMessage());

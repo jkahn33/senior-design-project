@@ -1,11 +1,15 @@
 package nuwc.userloginsystem;
 
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,16 +19,29 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.lang.*;
 
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
 
+import nuwc.userloginsystem.objects.BreakoutReservations;
 import nuwc.userloginsystem.objects.CalenImport;
-
+import nuwc.userloginsystem.objects.PrinterReservations;
+import nuwc.userloginsystem.util.RequestUtil;
 
 
 public class BreakoutReservation extends AppCompatActivity {
@@ -42,6 +59,7 @@ public class BreakoutReservation extends AppCompatActivity {
     ImageView leftArrow;
     ImageView rightArrow;
     ImageView myReserve;
+    ImageView backButton;
 
     TableLayout table;
 
@@ -61,12 +79,6 @@ public class BreakoutReservation extends AppCompatActivity {
     int day1;
     int hour1;
     int minute1;
-
-
-
-
-
-
 
     SimpleDateFormat fullTimeFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
     Date startDate = new Date();
@@ -90,11 +102,10 @@ public class BreakoutReservation extends AppCompatActivity {
         rightArrow = (ImageView) findViewById(R.id.rightArrow);
         myReserve = (ImageView) findViewById(R.id.myReserve);
 
+        backButton = (ImageView) findViewById(R.id.backButton);
+
         submit = (Button) findViewById(R.id.submit);
         cancel = (Button) findViewById(R.id.cancel);
-
-
-
 
         table = (TableLayout) findViewById(R.id.calendar);
 
@@ -112,14 +123,6 @@ public class BreakoutReservation extends AppCompatActivity {
             days[i] = ((View) findViewById(resID));
         }
         textDay = new TextView[calSize];
-
-
-
-
-
-
-
-
 
         //All fields in reservation page
 
@@ -147,9 +150,18 @@ public class BreakoutReservation extends AppCompatActivity {
         displayCalendar(month1,day1,year1);
 
         //Click listeners used for navigating calendar
+        backButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent checkout = new Intent(BreakoutReservation.this, PickReservationType.class);
+                BreakoutReservation.this.startActivity(checkout);
+
+            }
+        });
         leftArrow.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                hideCurrentViews();
                 if(month1 - 1 == 0){
                     month1 = 12;
                     year1 --;
@@ -158,13 +170,12 @@ public class BreakoutReservation extends AppCompatActivity {
                     displayCalendar(month1 - 1,day1,year1);
                     month1 = month1 - 1;
                 }
-
-
             }
         });
         rightArrow.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                hideCurrentViews();
                 if(month1 + 1  == 13){
                     month1 = 1;
                     year1 ++;
@@ -195,7 +206,7 @@ public class BreakoutReservation extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent checkout = new Intent(BreakoutReservation.this, myPrintList.class);
-                checkout.putExtra("employee",employeeExt.getText());
+                checkout.putExtra("employee",employeeExt.getText().toString());
                 checkout.putExtra("reserveType","breakout");
                 BreakoutReservation.this.startActivity(checkout);
 
@@ -213,10 +224,7 @@ public class BreakoutReservation extends AppCompatActivity {
 
             }
         });
-
     }
-
-
 
     public void displayCalendar(int month, int day, int year){
         CalenImport calendar = new CalenImport();
@@ -234,7 +242,7 @@ public class BreakoutReservation extends AppCompatActivity {
         if(1 < dayOfWeek) {
             hideDays(1,dayOfWeek);
         }
-        printDays(dayOfWeek,calendar.lastDay(month,year),month,day,year);
+        getReservationList(dayOfWeek, calendar.lastDay(month,year), month, year);
     }
 
     public void hideDays(int start, int end){
@@ -242,20 +250,30 @@ public class BreakoutReservation extends AppCompatActivity {
             textDay[i] = (TextView) days[i].findViewById(R.id.date);
             textDay[i].setText("");
             days[i].setOnClickListener(null);
-
-
         }
-
-
     }
 
-    public void printDays(int start,int end, int month,int day,int year) {
+    public void printDays(List<BreakoutReservations> resList, int start,int end, int month, int year) {
         int d = 1;
+
+        //HashMap<DateWrapper, List<BreakoutReservations>> breakoutList = new HashMap<>();
+//        for(BreakoutReservation res : resList){
+//
+//        }
 
         for(int i = 1; i <= end; i ++){
             textDay[i] = (TextView) days[start].findViewById(R.id.date);
-            textDay[i].setText(d + "th");
+            textDay[i].setText(d + " ");
             int finalDay = d;
+
+            Date date = new GregorianCalendar(year, month-1, i).getTime();
+
+            for(BreakoutReservations res : resList){
+                if(dayContained(date, res.getResSchedule(), res.getResScheduleEnd())){
+                    addEventBubble(days[start], res.getRoom());
+                }
+            }
+
             days[start].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     Intent myIntent = new Intent(BreakoutReservation.this, ReserveOptionsBreakout.class);
@@ -273,6 +291,102 @@ public class BreakoutReservation extends AppCompatActivity {
         hideDays(start,calSize);
     }
 
+    public boolean dayContained(Date current, Date start, Date end){
+        Calendar currCal = new GregorianCalendar();
+        Calendar startCal = new GregorianCalendar();
+        Calendar endCal = new GregorianCalendar();
+
+        currCal.setTime(current);
+        startCal.setTime(start);
+        endCal.setTime(end);
+
+        boolean startCond = startCal.get(Calendar.DAY_OF_MONTH) <= currCal.get(Calendar.DAY_OF_MONTH)
+                && startCal.get(Calendar.MONTH) <= currCal.get(Calendar.MONTH);
+        boolean endCond = currCal.get(Calendar.DAY_OF_MONTH) <= endCal.get(Calendar.DAY_OF_MONTH)
+                && currCal.get(Calendar.MONTH) <= endCal.get(Calendar.MONTH);
+
+        return startCond && endCond;
+    }
+
+    private void showError(String message){
+        Context context = this;
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle("Error")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    public void getReservationList(int dayOfWeek, int end, int month, int year){
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.start();
+
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                RequestUtil.BASE_URL + "/getBreakoutReservations",
+                null,
+                response -> {
+                    try {
+                        ObjectMapper mapper = new ObjectMapper();
+                        List<BreakoutReservations> resList = mapper.readValue(response.toString(), new TypeReference<List<BreakoutReservations>>(){});
+
+                        printDays(resList, dayOfWeek,end, month, year);
+                    }
+                    catch(Exception e){
+                        Log.e("EXCEPTION", e.toString());
+                        //showError("Object mapping error. Please check logs.");
+                    }
+                },
+                error -> {
+                    Log.e("ERROR", "Error is: " + error.getMessage());
+                    showError(error.getMessage());
+
+                }
+        );
+        requestQueue.add(request);
+    }
+
+    public void hideCurrentViews(){
+        for(View v1 : days){
+            if(v1 != null) {
+                TextView view = (TextView) v1.findViewById(R.id.bubb);
+                if (view != null) {
+                    view.setText("HELLO");
+                    view.setVisibility(View.INVISIBLE);
+                }
+            }
+        }
+    }
+
+    public void addEventBubble(View day, String name){
+        TextView view = (TextView) day.findViewById(R.id.bubb);
+        view.setVisibility(View.VISIBLE);
+        String text = view.getText().toString();
+
+        if(text.equals("HELLO")){
+            view.setText(name + " reserved.");
+        }
+        else{
+//            String[] splitVals = text.split(",");
+//            String[] rooms = new String[splitVals.length-1];
+//            for(int i = 0; i < rooms.length; i++){
+//                rooms[i] = splitVals[i];
+//            }
+//            Arrays.sort(rooms);
+//            view.setText(rooms[0]);
+//            for(int i = 1; i < rooms.length; i++){
+//                view.setText(view.getText().toString() + ", " + rooms[i]);
+//            }
+            view.setText(name + " " + view.getText().toString());
+        }
+
+    }
 
     public String dayOfWeekID(int dayOfWeek){
         String dayID = null;
@@ -304,6 +418,4 @@ public class BreakoutReservation extends AppCompatActivity {
                 return dayID;
         }
     }
-
-
 }

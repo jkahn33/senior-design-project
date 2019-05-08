@@ -8,7 +8,7 @@ public class SentBreakoutReservation
 {
 	private String userExt;
 	private String reservableType;
-	private List <String> reservableIdList;
+	private String reservableIdList;
 	private String resDescription;
 	private String resStart;
 	private String resEnd;
@@ -17,10 +17,10 @@ public class SentBreakoutReservation
 
 	public SentBreakoutReservation(){}
 	
-	public SentBreakoutReservation(String userExt, String reservableType, List <String> reservableIdList, String resDescription, String resStart, String resEnd,String numPeople, String additionalCom)
+	public SentBreakoutReservation(String userExt, String reservableType, String reservableIdList, String resDescription, String resStart, String resEnd,String numPeople, String additionalCom)
 	{
 		this.userExt = userExt;
-		this.reservableIdList = new ArrayList<String>(reservableIdList);
+		this.reservableIdList = reservableIdList;
 		this.reservableType = reservableType;
 		this.resDescription= resDescription;
 		this.resStart = resStart;
@@ -62,6 +62,19 @@ public class SentBreakoutReservation
 
 
 	public List <String> getReservableIdList() {
-		return reservableIdList;
+    	List<String> ret = new ArrayList<String>();
+    	System.out.println(reservableIdList);
+    	String currentItem = "";
+    	for(int i = 0; i < reservableIdList.length(); i++) {
+    		if(reservableIdList.charAt(i) == ',') {
+    			ret.add(currentItem);
+    			currentItem = "";
+    		} else if(reservableIdList.charAt(i) != ' ') {
+    			currentItem += reservableIdList.charAt(i);
+    		}
+    	}
+    	ret.add(currentItem);
+    	System.out.println("FDKSJLLSKDFJLKSDJF" + ret);
+    	return ret;
 	}
 }

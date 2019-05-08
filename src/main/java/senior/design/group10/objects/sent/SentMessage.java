@@ -3,14 +3,14 @@ package senior.design.group10.objects.sent;
 
 public class SentMessage {
     private String message;
-    private String endDate;
+    private Integer duration;
     private String adminID;
 
     public SentMessage() {}
     
-    public SentMessage(String message, String adminID, String endDate){
+    public SentMessage(String message, String adminID, Integer duration){
         this.message = message;
-        this.endDate = endDate;
+        this.duration = duration;
         this.adminID = adminID;
     }
 
@@ -22,8 +22,8 @@ public class SentMessage {
         return adminID;
     }
 
-	public String getEndDate() {
-		return endDate;
+	public Integer getDuration() {
+		return duration;
 	}
 
 }

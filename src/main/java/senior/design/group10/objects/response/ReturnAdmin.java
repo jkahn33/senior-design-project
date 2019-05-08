@@ -2,21 +2,21 @@ package senior.design.group10.objects.response;
 
 public class ReturnAdmin {
     private String name;
-    private String fiveDigExt;
+    private String badgeId;
 
     public ReturnAdmin(){}
 
-    public ReturnAdmin( String name, String fiveDigExt)
+    public ReturnAdmin( String name, String badgeId)
     {
         this.name = name;
-        this.fiveDigExt = fiveDigExt;
+        this.badgeId = badgeId;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getFiveDigExt() {
-        return fiveDigExt;
+    public String getBadgeId() {
+        return badgeId;
     }
 }

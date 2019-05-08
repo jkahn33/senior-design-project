@@ -32,8 +32,10 @@ namespace USWRIC_Admin_Application
         {
             HttpClient client = Globals.GetHttpClient();
 
-            JObject o = new JObject();
-            o.Add("oldExt", Globals.BadgeId);
+            JObject o = new JObject
+            {
+                { "oldExt", Globals.BadgeId }
+            };
 
             var response = await client.PostAsync(
                     Globals.GetBaseUrl() + "/getAdmin",
@@ -45,7 +47,7 @@ namespace USWRIC_Admin_Application
                 ReturnAdmin returnAdmin = JsonConvert.DeserializeObject<ReturnAdmin>(responseString);
 
                 txtEditName.Text = returnAdmin.Name;
-                txtEditBadgeId.Text = returnAdmin.FiveDigExt;
+                txtEditBadgeId.Text = returnAdmin.BadgeId;
             }
         }
 

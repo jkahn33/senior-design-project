@@ -7,16 +7,10 @@ package senior.design.group10.service;
  * 
  */
 
-import java.awt.*;
-import java.awt.geom.Line2D;
-import java.awt.image.BufferedImage;
-import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,31 +18,37 @@ import org.springframework.stereotype.Service;
 
 import senior.design.group10.dao.MessageDAO;
 import senior.design.group10.dao.AdminDAO;
-import senior.design.group10.objects.equipment.BreakoutReservations;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.sent.SentMessage;
 import senior.design.group10.objects.tv.Messages;
-import senior.design.group10.objects.tv.Pi;
 import senior.design.group10.objects.user.Admin;
-
-import javax.imageio.ImageIO;
 
 @Service
 public class MessageService {
 	private final static Logger log = Logger.getLogger(MessageService.class.getName());
 	private final MessageDAO messageDAO;
 	private final AdminDAO adminDAO;
+	private final PiService piService;
+	private final BreakoutService breakoutService;
+	private final FutureService futureService;
 
 	@Autowired
-	public MessageService(MessageDAO messageDAO, AdminDAO adminDAO) {
+	public MessageService(MessageDAO messageDAO, AdminDAO adminDAO, PiService piService, BreakoutService breakoutService, FutureService futureService) {
 		this.messageDAO = messageDAO;
 		this.adminDAO = adminDAO;
+		this.piService = piService;
+		this.futureService = futureService;
+		this.breakoutService = breakoutService;
 	}
 
 	//Message includes end date to describe how long the message will last for
 	public ResponseObject createNewMessage(SentMessage message){
-		Date date = new Date();
-		Timestamp currentTime = new Timestamp(date.getTime());
+		//uses the Calendar API to add days to today's current date
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, message.getDuration());
+		Date date = calendar.getTime();
+
+		Timestamp endTime = new Timestamp(date.getTime());
 
 		//find the user attached to the five digit extension
 		Optional<Admin> adminOptional = adminDAO.findById(message.getAdminID());
@@ -56,9 +56,13 @@ public class MessageService {
 		if(!adminOptional.isPresent())
 			return new ResponseObject(false, "Admin with ID " + message.getAdminID() + " cannot be found.");
 
-		Messages newMessage = new Messages(message.getMessage(), Timestamp.valueOf(message.getEndDate()), adminOptional.get());
-		log.info("admin ID: " + message.getAdminID() + ", time: " + currentTime);
+		Messages newMessage = new Messages(message.getMessage(), endTime, adminOptional.get());
 		messageDAO.save(newMessage);
+
+		piService.renderMessagesImage(getCurrentMessages());
+
+		piService.piListFill();
+		piService.copyFolderToPi("PiImages", "Pictures/Slides");
 
 		return new ResponseObject(true, adminOptional.get().getName());
 	}
@@ -88,14 +92,12 @@ public class MessageService {
 		//Remove the messages less than today
 		deletePastMessages();
 		//Return everything else
-		List <Messages> messageList = new ArrayList<Messages>();
+		List <Messages> messageList = new ArrayList<>();
 
 		Iterable <Messages> messagesIt = messageDAO.findAll();
 
 
 		//get the breakout reservations for today
-
-
 		for (Messages message : messagesIt)
 			messageList.add(message);
 		// Or like this...
@@ -103,6 +105,14 @@ public class MessageService {
 			System.out.println(messageList.get(i).getMessage());
 		}*/
 		return messageList;
-
 	}
+	
+	/**
+	 * Gets a list of all of the messages in the database.
+	 * @return list of all messages.
+	 */
+    public List<Messages> getAllMessages() {
+    	return (List<Messages>)messageDAO.findAll();
+    }
+
 }

@@ -6,13 +6,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:USWRIC_Admin_Application"
         mc:Ignorable="d"
-        Title="Homepage" Height="450" Width="800">
-    <Grid>
-        <Label Content="Administrator Homepage" HorizontalAlignment="Left" HorizontalContentAlignment="center" Height="37" Margin="192,47,0,0" VerticalAlignment="Top" Width="415" FontFamily="Arial Black" FontSize="20"/>
-        <Button x:Name="btnStatistics" Content="Statistics" HorizontalAlignment="Left" Height="39" Margin="60,193,0,0" VerticalAlignment="Top" Width="281" Click="BtnStatistics_Click"/>
-        <Button x:Name="btnEdit" Content="Edit Personal Information" HorizontalAlignment="Left" Height="39" Margin="450,193,0,0" VerticalAlignment="Top" Width="281" Click="BtnEdit_Click"/>
-        <Button x:Name="btnUserAdminMgmt"  Content="User and Admin Management" HorizontalAlignment="Left" Height="39" Margin="450,274,0,0" VerticalAlignment="Top" Width="281" Click="BtnUserAdminMgmt_Click"/>
-        <Button x:Name="btnDisplayMgmt" Content="Display Management" HorizontalAlignment="Left" Height="39" Margin="60,274,0,0" VerticalAlignment="Top" Width="281" Click="BtnDisplayMgmt_Click"/>
-        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="358,361,0,0" VerticalAlignment="Top" Width="75" Click="BtnLogout_Click"/> 
-    </Grid>
+        Title="Homepage" Height="Auto" Width="Auto">
+    <Viewbox>
+        <Grid Height="450" Width="800">
+            <Image Source="/images/RIC.png" Height="Auto" Width="Auto" Margin="171,10,171,271" />
+            <Button Background="Black" Margin="308,233,446,169" BorderThickness="0" Click="BtnDisplayMgmt_Click">
+                <StackPanel>
+                    <Image Source="/images/Display.png" Height="36" Width="44" />
+                </StackPanel>
+            </Button>
+            <Button Background="Black" Margin="171,233,583,169" BorderThickness="0" Click="BtnStatistics_Click">
+                <StackPanel>
+                    <Image Source="/images/Statistics.png" Height="36" Width="44" />
+                </StackPanel>
+            </Button>
+            <Button Background="Black" Margin="583,233,171,169" BorderThickness="0" Click="BtnEdit_Click">
+                <StackPanel>
+                    <Image Source="/images/Personal.png" Height="36" Width="44" />
+                </StackPanel>
+            </Button>
+            <Button Background="Black" Margin="445,233,309,169" BorderThickness="0" Click="BtnUserAdminMgmt_Click">
+                <StackPanel>
+                    <Image Source="/images/Users.png" Height="36" Width="44" />
+                </StackPanel>
+            </Button>
+            <Button Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="715,10,0,0" VerticalAlignment="Top" Width="75" Click="BtnLogout_Click" BorderBrush="Black" Foreground="White" Background="Black"/>
+            <TextBox Background="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" Height="11" Margin="167,286,0,0" TextWrapping="Wrap" Text="Statistics" VerticalAlignment="Top" Width="56" FontSize="9" FontFamily="Arial Black" Foreground="White"/>
+            <TextBox Background="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" Height="21" Margin="295,286,0,0" TextWrapping="Wrap" Text="Display Management" VerticalAlignment="Top" Width="70" FontSize="9" FontFamily="Arial Black" Foreground="White"/>
+            <TextBox Background="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" Height="21" Margin="571,286,0,0" TextWrapping="Wrap" Text="Personal Information" VerticalAlignment="Top" Width="70" FontSize="9" FontFamily="Arial Black" Foreground="White"/>
+            <TextBox Background="Black" BorderThickness="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" Height="40" Margin="433,286,0,0" TextWrapping="Wrap" Text="User and Admin Management" VerticalAlignment="Top" Width="70" FontSize="9" FontFamily="Arial Black" Foreground="White"/>
+
+            <Image Source="/images/PurpleBridge.jpg" Margin="-38,362,-38,-5"/>
+        </Grid>
+    </Viewbox>
 </Page>

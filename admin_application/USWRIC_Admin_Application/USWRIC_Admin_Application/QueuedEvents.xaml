@@ -1,0 +1,24 @@
+﻿<Window x:Class="USWRIC_Admin_Application.QueuedEvents"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:USWRIC_Admin_Application"
+        mc:Ignorable="d"
+        Title="QueuedEvents" Height="450" Width="800"
+        Background="Black">
+    
+    <Grid Name="futureGrid">
+        <Grid Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+          Height="20">
+            <Button Content="Delete Checked Events" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Margin="327,390,0,-392" Height="22" Click="Button_Click"/>
+            <Border BorderThickness="5" BorderBrush="Gray" Name="WorkingBar" Visibility="Hidden" Width="204" Height="142" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" Margin="302,150,287.6,-272">
+                <StackPanel Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="/images/Loading.png" Height="60" Width="70"/>
+                    <TextBlock Text="Working..." FontFamily="Arial Black" FontSize="30" Foreground="Black"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+    </Grid>
+</Window>

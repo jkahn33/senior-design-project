@@ -52,7 +52,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="450dp"
             android:background="@drawable/first_name"
-            android:hint="Extension"
+            android:hint="Badge ID"
             android:textSize="40dp" />
 
         <EditText

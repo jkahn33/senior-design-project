@@ -35,12 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlRenderer, Version=1.5.0.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.5\lib\net45\HtmlRenderer.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlRenderer.WPF, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlRenderer.WPF.1.5.0.6\lib\net45\HtmlRenderer.WPF.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -69,7 +63,13 @@
     <Compile Include="ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DisplayGenerate.cs" />
+    <Compile Include="CheckedOutEquipment.cs" />
+    <Compile Include="CheckedOutEquipment.xaml.cs">
+      <DependentUpon>CheckedOutEquipment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DisplayManagement.xaml.cs">
+      <DependentUpon>DisplayManagement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditAdmin.xaml.cs">
       <DependentUpon>EditAdmin.xaml</DependentUpon>
     </Compile>
@@ -77,11 +77,28 @@
       <DependentUpon>EquipmentUsage.xaml</DependentUpon>
     </Compile>
     <Compile Include="EquipmentUsageResponse.cs" />
+    <Compile Include="Future.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LoginHistory.xaml.cs">
+      <DependentUpon>LoginHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Messages.cs" />
     <Compile Include="NewAdmin.xaml.cs">
       <DependentUpon>NewAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PrinterUsageStatistics.xaml.cs">
+      <DependentUpon>PrinterUsageStatistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QueuedEvents.xaml.cs">
+      <DependentUpon>QueuedEvents.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QueuedMessages.xaml.cs">
+      <DependentUpon>QueuedMessages.xaml</DependentUpon>
     </Compile>
     <Compile Include="RemoveAdmin.xaml.cs">
       <DependentUpon>RemoveAdmin.xaml</DependentUpon>
@@ -90,6 +107,7 @@
       <DependentUpon>RemoveUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReturnAdmin.cs" />
+    <Compile Include="SpecificUserResponse.cs" />
     <Compile Include="StatisticsHome.xaml.cs">
       <DependentUpon>StatisticsHome.xaml</DependentUpon>
     </Compile>
@@ -97,7 +115,19 @@
     <Compile Include="UserAdminMgmt.xaml.cs">
       <DependentUpon>UserAdminMgmt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserSearch.xaml.cs">
+      <DependentUpon>UserSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UsersStatisticsResponse.cs" />
     <Page Include="ChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CheckedOutEquipment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DisplayManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,7 +156,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="LoginHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NewAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrinterUsageStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QueuedEvents.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QueuedMessages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserAdminMgmt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -175,8 +229,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NewFolder1\" />
-    <Folder Include="NewFolder2\" />
+    <Resource Include="images\Personal.png" />
+    <Resource Include="images\Statistics.png" />
+    <Resource Include="images\Users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Display.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\RIC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\PurpleBridge.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Loading.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

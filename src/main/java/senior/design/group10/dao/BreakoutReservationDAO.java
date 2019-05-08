@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import senior.design.group10.objects.equipment.BreakoutReservations;
+import senior.design.group10.objects.user.Users;
 
 /**
  * DAO to handle database access for breakout_res table
@@ -16,6 +17,8 @@ import senior.design.group10.objects.equipment.BreakoutReservations;
 public interface BreakoutReservationDAO extends JpaRepository <BreakoutReservations, Integer>
 {
 	//Modify the query so that it takes the printer res into consideration
+
+		public List<BreakoutReservations> findAllByUser(Users users);
 
 		//Returns the dates between two entered dates
 		@Query(value= "Select * from breakout_res where (resSchedule between :startTime and :endTime or resScheduleEnd between :startTime and :endTime) and reservable_type = 'Breakout' and reservable_id = :res_id", nativeQuery = true)

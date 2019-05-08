@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using USWRIC_Admin_Application.util;
 
 namespace USWRIC_Admin_Application
 {
@@ -27,7 +26,7 @@ namespace USWRIC_Admin_Application
 
         private void BtnStatistics_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new StatisticsHome());
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
@@ -42,13 +41,7 @@ namespace USWRIC_Admin_Application
 
         private void BtnDisplayMgmt_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            DisplayGenerate generate = new DisplayGenerate();
-            generate.GenerateAdminMessagePage();
+            this.NavigationService.Navigate(new DisplayManagement());
         }
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)

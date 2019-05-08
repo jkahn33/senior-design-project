@@ -13,21 +13,11 @@
         android:background="@drawable/rsrvtn_grey_button" />
 
     <Button
-        android:id="@+id/editButton"
-        android:layout_width="102dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="96dp"
-        android:background="@drawable/edit_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/deleteButton"
         android:layout_width="102dp"
         android:layout_height="42dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/delete_button"
         app:layout_constraintBottom_toBottomOf="@+id/backPlate"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -50,17 +40,6 @@
         android:layout_marginStart="350dp"
         android:layout_marginTop="28dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/endTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="350dp"
-        android:layout_marginTop="68dp"
-        android:text="TextView"
-        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

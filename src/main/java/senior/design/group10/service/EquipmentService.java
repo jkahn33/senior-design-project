@@ -43,10 +43,13 @@ public class EquipmentService {
      * @return {@code true} if equipment is added successfully
      */
     public ResponseObject addNewEquipment(Equipment equipment){
+        Date date = new Date();
+        Timestamp currentTime = new Timestamp(date.getTime());
+
         //verifies that the equipment does not already exist
         if(!equipmentDAO.existsById(equipment.getBarcode())){
-            equipment.setInStock(true);
-            equipmentDAO.save(equipment);
+            Equipment equipmentToSave = new Equipment(equipment.getBarcode(), equipment.getEquipmentName(), equipment.getManufacturerName(), equipment.getModelNumber(), equipment.getSerialNumber(), equipment.getPlantNumber(), true, currentTime);
+            equipmentDAO.save(equipmentToSave);
             return new ResponseObject(true, null);
         }
         //returns if equipment already exists
@@ -157,5 +160,13 @@ public class EquipmentService {
      */
     public List<CheckedOutEquipment> getCheckedOutEquipment(){
         return equipmentDAO.getCheckedOutEquipment();
+    }
+    
+    /**
+     * Gets a list of all of the equipment in the database.
+     * @return List of all equipment in the database.
+     */
+    public List<Equipment> getAllEquipment() {
+    	return (List<Equipment>) equipmentDAO.findAll();
     }
 }

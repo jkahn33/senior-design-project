@@ -1,28 +1,48 @@
 package nuwc.userloginsystem;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.Timestamp;
 import java.text.DateFormatSymbols;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
+
+import nuwc.userloginsystem.objects.ResponseObject;
+import nuwc.userloginsystem.util.RequestUtil;
 
 /**
  * Created by Vinny on 11/5/18.
  */
 public class ReserveOptionsBreakout extends AppCompatActivity{
+
+    Button submit;
+    Button cancel;
 
     NumberPicker startTimeHourP;
     NumberPicker startTimeMinP;
@@ -34,19 +54,32 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
 
     EditText printName;
     EditText startDate;
+    EditText numPeople;
     EditText employExt;
     EditText printDetails;
 
     TextView endDate;
     TextView MDY;
     TextView dayWeek;
-    TextView selectedPrinter;
+
+    CheckBox aBreakout;
+    CheckBox bBreakout;
+    CheckBox cBreakout;
+    CheckBox dBreakout;
 
     int year = 1997;
     int month = 0;
     int day = 19;
     String printer = "A";
 
+    String userExt;
+    List<String> reservableIdList;
+    String reservableIdString;
+    String resDescription;
+    String resStart;
+    String resEnd;
+    String numPeopleStr = "default";
+    String additionalCom;
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm");
     Calendar calStart = Calendar.getInstance();
@@ -87,20 +120,20 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
 
         employExt = (EditText) findViewById(R.id.employExt);
         printDetails = (EditText) findViewById(R.id.printDetails);
-        printName = (EditText) findViewById(R.id.printName);
+        printName = (EditText) findViewById(R.id.eventName);
+        numPeople = (EditText) findViewById(R.id.numberGuests);
         startDate = (EditText) findViewById(R.id.startDate);
+
+        submit = (Button) findViewById(R.id.submit);
+        cancel = (Button) findViewById(R.id.cancel);
 
         MDY = (TextView) findViewById(R.id.MDY);
         dayWeek = (TextView) findViewById(R.id.dayWeek);
-        selectedPrinter = (TextView) findViewById(R.id.selectedPrinter);
-        selectedPrinter.setText("Selected Printer: " + printer);
 
-
-
-
-
-
-
+        aBreakout = findViewById(R.id.Abreakout);
+        bBreakout = findViewById(R.id.Bbreakout);
+        cBreakout = findViewById(R.id.Cbreakout);
+        dBreakout = findViewById(R.id.Dbreakout);
 
         startTimeHourP = (NumberPicker) findViewById(R.id.startTimeHourP);
         String[] nums = new String[24];
@@ -125,12 +158,12 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
         startTimeMinP.setValue(0);
 
         endTimehourP = (NumberPicker) findViewById(R.id.endTimehourP);
-        String[] nums3 = new String[200];
+        String[] nums3 = new String[24];
         for(int i=0; i<nums3.length; i++)
             nums3[i] = Integer.toString(i);
 
         endTimehourP.setMinValue(0);
-        endTimehourP.setMaxValue(199);
+        endTimehourP.setMaxValue(23);
         endTimehourP.setWrapSelectorWheel(true);
         endTimehourP.setDisplayedValues(nums3);
         endTimehourP.setValue(0);
@@ -162,9 +195,6 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
                 calStart.set(Calendar.HOUR_OF_DAY,i2);
                 startDate.setText(simpleDateFormat.format(calStart.getTime()));
 
-                calEnd = calStart;
-                endDate.setText(simpleDateFormat.format(calStart.getTime()));
-
 
             }
         });
@@ -175,9 +205,6 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
                 calStart.set(Calendar.MINUTE,i2);
                 startDate.setText(simpleDateFormat.format(calStart.getTime()));
 
-                calEnd = calStart;
-                endDate.setText(simpleDateFormat.format(calStart.getTime()));
-
 
             }
         });
@@ -185,8 +212,7 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i2) {
 
-                calStart.add(Calendar.HOUR_OF_DAY,-i);
-                calStart.add(Calendar.HOUR_OF_DAY,i2);
+                calEnd.set(Calendar.HOUR_OF_DAY,i2);
                 endDate.setText(simpleDateFormat.format(calEnd.getTime()));
 
             }
@@ -196,13 +222,87 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i2) {
 
-                calStart.add(Calendar.MINUTE,-i);
-                calStart.add(Calendar.MINUTE,i2);
+                calEnd.set(Calendar.MINUTE,i2);
                 endDate.setText(simpleDateFormat.format(calEnd.getTime()));
 
             }
         });
 
+        submit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                userExt = employExt.getText().toString();
+                //printer = ;
+                resDescription = printName.getText().toString();
+
+                //generate the timestamp string according to JDBC timestamp standard
+                String resDay = String.valueOf(day);
+                String resMonth = String.valueOf(month + 1);
+                String resHour = String.valueOf(startTimeHourP.getValue());
+                String resMin = String.valueOf(startTimeMinP.getValue());
+                if(resDay.length() == 1) resDay = "0" + resDay;
+                if(resMonth.length() == 1) resMonth = "0"+ resMonth;
+                if(resHour.length() == 1) resHour = "0"+ resHour;
+                if(resMin.length() == 1) resMin = "0"+ resMin;
+                resStart = year + "-" + resMonth + "-" + resDay + " " +  resHour + ":" + resMin + ":00";
+
+                resHour = String.valueOf(endTimehourP.getValue());
+                resMin = String.valueOf(endTimeMinP.getValue());
+                if(resHour.length() == 1) resHour = "0"+ resHour;
+                if(resMin.length() == 1) resMin = "0"+ resMin;
+                resEnd = year + "-" + resMonth + "-" + resDay + " " +  resHour + ":" + resMin + ":00";
+
+                //add the appropriate rooms here
+                reservableIdList = new ArrayList<String>();
+                //reservableIdList.add("A");
+
+                Log.d("f", "M" + reservableIdString + "M");
+
+                numPeopleStr = numPeople.getText().toString();
+                additionalCom = printDetails.getText().toString();
+
+                if(userExt.length() != 5){
+                    showError("Badge ID must be 5 digits.");
+                }
+                else if(resDescription == ""){
+                    showError("Please enter a print name.");
+                }
+                else if(!Timestamp.valueOf(resEnd).after(Timestamp.valueOf(resStart))){
+                    showError("A reservation must end after it starts.");
+                }
+                else if(numPeopleStr == "" || Integer.valueOf(numPeopleStr) <= 0) {
+                    showError("Please enter a positive number of attendants.");
+                }
+                else {
+                    if(aBreakout.isChecked()){
+                        reservableIdList.add("A");
+                    }
+                    if(bBreakout.isChecked()){
+                        reservableIdList.add("B");
+                    }
+                    if(cBreakout.isChecked()){
+                        reservableIdList.add("C");
+                    }
+                    if(dBreakout.isChecked()){
+                        reservableIdList.add("D");
+                    }
+                    getRoomList();
+                    try {
+                        addBreakoutReservation();
+                    } catch (JSONException e) {
+                        showError("JSON Format Error");
+                        Log.e("EXCEPTION", e.toString());
+                    }
+                }
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(ReserveOptionsBreakout.this, BreakoutReservation.class);
+                ReserveOptionsBreakout.this.startActivity(myIntent);
+            }
+        });
 
         showTimeSlots(month,day,year);
 
@@ -236,9 +336,6 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
                     calStart.set(Calendar.HOUR_OF_DAY,time);
                     startDate.setText(simpleDateFormat.format(calStart.getTime()));
 
-                    calEnd = calStart;
-                    calEnd.add(Calendar.HOUR_OF_DAY,endTimehourP.getValue());
-                    endDate.setText(simpleDateFormat.format(calStart.getTime()));
 
 
 
@@ -290,6 +387,89 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
         return theDay;
     }
 
+    public void addBreakoutReservation() throws JSONException {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.start();
 
+        JSONObject body = new JSONObject();
 
+        body.put("userExt", userExt);
+        body.put("reservableType", "Breakout");
+        body.put("reservableIdList", reservableIdString);
+        body.put("resDescription", resDescription);
+        body.put("resStart", resStart);
+        body.put("resEnd", resEnd);
+        body.put("numPeople", numPeopleStr);
+        body.put("additionalCom", additionalCom);
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                RequestUtil.BASE_URL + "/newBreakoutReservation",
+                body,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            ObjectMapper mapper = new ObjectMapper();
+                            ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
+                            verifyResponse(responseObject);
+                        } catch (Exception e) {
+                            Log.d("EXCEPTION", e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("ERROR", error.getMessage());
+                        //showError(error.getMessage());
+                    }
+                }
+        );
+        requestQueue.add(request);
+    }
+
+    public void getRoomList(){
+        //lists cannot be sent with current JSON configuration
+        //serialize the string manually
+        reservableIdString = "";
+        try {
+            reservableIdString += reservableIdList.get(0);
+            for (int i = 1; i < reservableIdList.size(); i++) {
+                reservableIdString += "," + reservableIdList.get(i);
+            }
+        }
+        catch(IndexOutOfBoundsException e){
+            showError("At least one room must be checked");
+        }
+    }
+
+    public void verifyResponse(ResponseObject response) {
+        String title = "Error";
+        if(response.isSuccess()) title = "Success";
+        Context context = this;
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle(title)
+                .setMessage(response.getMessage())
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {}
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+    }
+
+    public void showError(String message){
+        Context context = this;
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle("Error")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {}
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 }

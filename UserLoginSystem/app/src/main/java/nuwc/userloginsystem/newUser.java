@@ -81,7 +81,7 @@ public class newUser extends AppCompatActivity{
                     showError("Last name cannot empty");
                 }
                 else if(ext.length() != 5){
-                    showError("Extension must be 5 digits.");
+                    showError("Badge ID must be 5 digits.");
                 }
                 else if(depCode.length() != 2 && depCode.length() != 4){
                     showError("Deparment code must be either 2 or 4 digits.");
@@ -144,7 +144,7 @@ public class newUser extends AppCompatActivity{
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.d("ERROR", error.getMessage());
+                            //Log.d("ERROR", error.getMessage());
 
                             showError(error.getMessage());
                         }

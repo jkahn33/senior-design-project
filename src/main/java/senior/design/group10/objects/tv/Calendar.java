@@ -21,7 +21,7 @@ public class Calendar
 	private String eventName;
 	@Column
 	private Timestamp eventDate;
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Admin admin;
 

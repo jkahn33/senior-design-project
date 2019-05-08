@@ -8,9 +8,9 @@
 
     <EditText
         android:id="@+id/serialNumBox2"
-        android:layout_width="620dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
         android:ems="10"
@@ -24,9 +24,9 @@
 
     <EditText
         android:id="@+id/plantNumBox"
-        android:layout_width="620dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="19dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="8dp"
@@ -41,9 +41,9 @@
 
     <EditText
         android:id="@+id/modelNumBox"
-        android:layout_width="620dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="50dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
@@ -57,9 +57,9 @@
 
     <EditText
         android:id="@+id/manufacturerBox"
-        android:layout_width="620dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="16dp"
@@ -74,9 +74,9 @@
 
     <EditText
         android:id="@+id/equipmentName"
-        android:layout_width="620dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="8dp"
@@ -91,9 +91,9 @@
 
     <EditText
         android:id="@+id/barcodeBox2"
-        android:layout_width="406dp"
+        android:layout_width="0dp"
         android:layout_height="76dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
@@ -138,10 +138,10 @@
 
     <TextView
         android:id="@+id/commandBox2"
-        android:layout_width="521dp"
+        android:layout_width="0dp"
         android:layout_height="63dp"
-        android:layout_marginStart="133dp"
-        android:layout_marginEnd="114dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:text="Enter the equipment info:"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/equipmentName"

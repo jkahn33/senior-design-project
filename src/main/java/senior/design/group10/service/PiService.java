@@ -2,12 +2,6 @@ package senior.design.group10.service;
 import com.jcraft.jsch.*;
 
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 import senior.design.group10.dao.PiDAO;
 import senior.design.group10.objects.equipment.BreakoutReservations;
 import senior.design.group10.objects.response.ResponseObject;
@@ -39,7 +33,7 @@ public class PiService
 
 	private final
 	PiDAO piDAO;
-	List<Pi> piList = new ArrayList<Pi>();
+	List<Pi> piList = new ArrayList<>();
 	private final static Logger log = Logger.getLogger(PiService.class.getName());
 
 	@Autowired
@@ -52,7 +46,7 @@ public class PiService
 
 	/*///////////////////////////////////////////////
 	 * Image Rendering
-	 */////////////////////////////////////////////
+	 *//////////////////////////////////////////////
 
 	public boolean renderBreakoutImage(List<BreakoutReservations> breakoutList)
 	{
@@ -83,7 +77,7 @@ public class PiService
 		FontMetrics fm = g2d.getFontMetrics();
 		int x = ((width - fm.stringWidth(headerText)) / 2);
 
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.WHITE);
 		g2d.drawString(headerText, x, 150);
 
 		//rendering of administrative messages
@@ -107,7 +101,7 @@ public class PiService
 		font = new Font("Arial", Font.BOLD, 48);
 		g2d.setFont(font);
 
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.WHITE);
 
 		for(String s : testArr) {
 			String[] splits = s.split(" ");
@@ -188,7 +182,7 @@ public class PiService
 		FontMetrics fm = g2d.getFontMetrics();
 		int x = ((width - fm.stringWidth(headerText)) / 2);
 
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.WHITE);
 		g2d.drawString(headerText, x, 150);
 
 		//rendering of administrative messages
@@ -208,7 +202,7 @@ public class PiService
 		font = new Font("Arial", Font.BOLD, 48);
 		g2d.setFont(font);
 
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.WHITE);
 
 		for(String s : testArr) {
 			String[] splits = s.split(" ");
@@ -267,7 +261,7 @@ public class PiService
 		FontMetrics fm = g2d.getFontMetrics();
 		int x = ((width - fm.stringWidth(headerText)) / 2);
 
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.WHITE);
 		g2d.drawString(headerText, x, 150);
 
 		//rendering of administrative messages
@@ -283,7 +277,7 @@ public class PiService
 		{
 			for( int loop = 0; loop< futureList.size();loop++)
 			{
-				String future = futureList.get(loop).getFuture()
+				String future = futureList.get(loop).getFutureMessage()
 						+ ", From " + futureList.get(loop).getStartDate()+ " to "+ futureList.get(loop).getEndDate();
 				testArr.add(future);
 			}
@@ -294,7 +288,7 @@ public class PiService
 		font = new Font("Arial", Font.BOLD, 48);
 		g2d.setFont(font);
 
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.WHITE);
 
 		for(String s : testArr) {
 			String[] splits = s.split(" ");
@@ -604,6 +598,7 @@ public class PiService
 
 				String fileLocation = lFolder+ "/" +listOfFiles[i].getName();
 				copyImgToPi(fileLocation, rfile);
+				System.out.println("finished");
 			} else if (listOfFiles[i].isDirectory()) 
 			{
 				System.out.println("Directory " + listOfFiles[i].getName());

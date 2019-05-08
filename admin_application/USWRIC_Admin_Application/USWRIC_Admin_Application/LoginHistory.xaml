@@ -1,0 +1,17 @@
+﻿<Page x:Class="USWRIC_Admin_Application.LoginHistory"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:USWRIC_Admin_Application"
+      mc:Ignorable="d" 
+      Height="Auto" Width="Auto"
+      Title="LoginHistory">
+    <Viewbox>
+        <Grid Height="450" Width="800">
+            <Label Content="USWRIC Login History" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="232,50,0,0" VerticalAlignment="Top" Height="35" Width="333" FontFamily="Arial Black" FontSize="20"/>
+            <DataGrid Name="LoginHistGrid" ItemsSource="{Binding}" AutoGenerateColumns="True" IsReadOnly="True" ColumnWidth="*" CanUserAddRows="False" Margin="0,85,0,34.6" />
+            <Button Name="LoginHistBack" Content="Back" HorizontalAlignment="Left" Margin="362,420,0,0" VerticalAlignment="Top" Width="75" Click="LoginHistBack_Click"/>
+        </Grid>
+    </Viewbox>
+</Page>
