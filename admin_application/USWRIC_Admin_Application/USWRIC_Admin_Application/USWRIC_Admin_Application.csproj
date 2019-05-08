@@ -91,6 +91,9 @@
     <Compile Include="NewAdmin.xaml.cs">
       <DependentUpon>NewAdmin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NewPi.xaml.cs">
+      <DependentUpon>NewPi.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PrinterUsageStatistics.xaml.cs">
       <DependentUpon>PrinterUsageStatistics.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NewAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewPi.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

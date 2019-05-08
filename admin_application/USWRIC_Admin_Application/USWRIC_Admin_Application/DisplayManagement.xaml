@@ -52,6 +52,7 @@
                     <TextBlock Text="Working..." FontFamily="Arial Black" FontSize="30" Foreground="Black"/>
                 </StackPanel>
             </Border>
+            <Button Content="Add New Raspberry Pi" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="57,23,0,0" Click="NewPiButton_Click"/>
         </Grid>
     </Viewbox>
 </Page>
