@@ -10,7 +10,6 @@ import senior.design.group10.objects.sent.EditAdmin;
 import senior.design.group10.objects.sent.NewAdmin;
 import senior.design.group10.objects.sent.SentMessage;
 import senior.design.group10.objects.user.Admin;
-import senior.design.group10.objects.user.DebugUser;
 import senior.design.group10.objects.user.UserLoginHistory;
 import senior.design.group10.objects.tv.Calendar;
 import senior.design.group10.objects.tv.Future;
@@ -167,12 +166,6 @@ public class WindowsController {
     public SpecificUserResponse getSpecificUser(@RequestBody StringWrapper stringWrapper){
         //StringWrapper stringWrapper = new StringWrapper("12345");
         return userService.statsByUser(stringWrapper.getString());
-    }
-
-    @GetMapping("/debug")
-    @ResponseBody
-    public DebugUser debugUser(){
-        return userService.debugUser();
     }
 
 	////////////////////////////////////////////////

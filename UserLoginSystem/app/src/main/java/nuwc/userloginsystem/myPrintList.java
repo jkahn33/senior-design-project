@@ -36,6 +36,7 @@ import java.util.List;
 
 import nuwc.userloginsystem.objects.BreakoutReservations;
 import nuwc.userloginsystem.objects.PrinterReservations;
+import nuwc.userloginsystem.objects.ReservationWrapper;
 import nuwc.userloginsystem.objects.ResponseObject;
 import nuwc.userloginsystem.util.AdapterPrintList;
 import nuwc.userloginsystem.util.RandNameGen;
@@ -46,15 +47,13 @@ public class myPrintList extends AppCompatActivity {
     RecyclerView recyclerView;
     AdapterPrintList adapter;
     FastScroller fastScroller;
-    ArrayList<PrinterReservations> reservations = new ArrayList<>();
+    ArrayList<ReservationWrapper> reservations = new ArrayList<>();
     String employeeExt = null;
     String reserveType = null;
     String eventName = null;
     RelativeLayout layout;
 
     ImageView calendarButton;
-
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +68,6 @@ public class myPrintList extends AppCompatActivity {
                 Log.d("NULLCHECK", "NULLNOTNULL");
                 employeeExt = extras.getString("employee");
                 reserveType = extras.getString("reserveType");
-                Log.d("RESERVE", reserveType);
                 eventName = extras.getString("eventName");
 
 
@@ -78,12 +76,11 @@ public class myPrintList extends AppCompatActivity {
             Log.d("NULLCHECK", "NOTNULL");
             employeeExt = (String) savedInstanceState.getSerializable("employee");
             reserveType = (String) savedInstanceState.getSerializable("reserveType");
-            Log.d("RESERVE", reserveType);
             eventName = (String) savedInstanceState.getSerializable("eventName");
         }
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        adapter = new AdapterPrintList(reservations, this);
+        adapter = new AdapterPrintList(employeeExt, reservations, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
@@ -95,7 +92,7 @@ public class myPrintList extends AppCompatActivity {
                 Log.e("ERROR", e.toString());
             }
         }
-        else{
+        else if(reserveType.equals("breakout")){
             try {
                 fillBreakoutList();
             } catch (JSONException e) {
@@ -110,9 +107,8 @@ public class myPrintList extends AppCompatActivity {
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("reserveType", reserveType + "");
                 try {
-                    if (eventName.equals("breakout")) {
+                    if (reserveType.equals("breakout")) {
                         Intent myIntent = new Intent(myPrintList.this, BreakoutReservation.class);
                         myPrintList.this.startActivity(myIntent);
 
@@ -153,7 +149,9 @@ public class myPrintList extends AppCompatActivity {
                         List<PrinterReservations> listToGet = mapper.readValue(response.toString(), new TypeReference<List<PrinterReservations>>(){});
                         reservations.clear();
 
-                        reservations.addAll(listToGet);
+                        for(PrinterReservations res : listToGet){
+                            reservations.add(new ReservationWrapper(res.getJobDescription(), res.getId(), res.getJobSchedule(), reserveType));
+                        }
 
                         adapter.notifyDataSetChanged();
                     }
@@ -164,9 +162,7 @@ public class myPrintList extends AppCompatActivity {
                 error -> {
                     Intent myIntent = new Intent(this, Reservations.class);
                     this.startActivity(myIntent);
-                    //Log.d("ERROR", error.getMessage());
-
-                    //showError(error.getMessage());
+                    showError("Cannot find user.");
                 }
         );
 
@@ -194,11 +190,12 @@ public class myPrintList extends AppCompatActivity {
                 response -> {
                     try {
                         ObjectMapper mapper = new ObjectMapper();
+                        Log.d("BREAKOUTRES", response.toString());
                         List<BreakoutReservations> listToGet = mapper.readValue(response.toString(), new TypeReference<List<BreakoutReservations>>(){});
                         reservations.clear();
 
                         for(BreakoutReservations res : listToGet){
-                            reservations.add(new PrinterReservations(res.getName(), res.getId()));
+                            reservations.add(new ReservationWrapper(res.getRoom(), res.getId(), res.getResSchedule(), reserveType));
                         }
 
                         adapter.notifyDataSetChanged();
@@ -208,11 +205,9 @@ public class myPrintList extends AppCompatActivity {
                     }
                 },
                 error -> {
-                    Intent myIntent = new Intent(this, Reservations.class);
+                    Intent myIntent = new Intent(this, BreakoutReservation.class);
                     this.startActivity(myIntent);
-                    //Log.d("ERROR", error.getMessage());
-
-                    showError("Request Error. Please check connection.");
+                    showError("Cannot find user.");
                 }
         );
 

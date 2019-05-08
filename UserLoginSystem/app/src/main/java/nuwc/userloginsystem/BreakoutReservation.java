@@ -263,10 +263,10 @@ public class BreakoutReservation extends AppCompatActivity {
 
         for(int i = 1; i <= end; i ++){
             textDay[i] = (TextView) days[start].findViewById(R.id.date);
-            textDay[i].setText(d + "th");
+            textDay[i].setText(d + " ");
             int finalDay = d;
 
-            Date date = new GregorianCalendar(year, month, i).getTime();
+            Date date = new GregorianCalendar(year, month-1, i).getTime();
 
             for(BreakoutReservations res : resList){
                 if(dayContained(date, res.getResSchedule(), res.getResScheduleEnd())){
@@ -278,7 +278,7 @@ public class BreakoutReservation extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent myIntent = new Intent(BreakoutReservation.this, ReserveOptionsBreakout.class);
                     myIntent.putExtra("day",finalDay);
-                    myIntent.putExtra("month",month);
+                    myIntent.putExtra("month",month - 1);
                     myIntent.putExtra("year",year);
                     BreakoutReservation.this.startActivity(myIntent);
 
@@ -357,6 +357,7 @@ public class BreakoutReservation extends AppCompatActivity {
             if(v1 != null) {
                 TextView view = (TextView) v1.findViewById(R.id.bubb);
                 if (view != null) {
+                    view.setText("HELLO");
                     view.setVisibility(View.INVISIBLE);
                 }
             }

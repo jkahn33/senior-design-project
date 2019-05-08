@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -30,24 +29,20 @@ import java.util.ArrayList;
 
 import nuwc.userloginsystem.R;
 import nuwc.userloginsystem.Reservations;
-import nuwc.userloginsystem.ReserveOptionsBreakout;
-import nuwc.userloginsystem.editReservButton;
 import nuwc.userloginsystem.myPrintList;
-import nuwc.userloginsystem.objects.PrinterReservations;
+import nuwc.userloginsystem.objects.ReservationWrapper;
 import nuwc.userloginsystem.objects.ResponseObject;
-import nuwc.userloginsystem.reserveOptionsPrint;
-
-import static android.content.ContentValues.TAG;
 
 public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.ViewHolder>{
 
-    private ArrayList<PrinterReservations> aReservations = new ArrayList<>();
+    private ArrayList<ReservationWrapper> aReservations = new ArrayList<>();
     private Context aContext;
+    private String empExt;
 
-    public AdapterPrintList(ArrayList<PrinterReservations> reservations, Context context){
-        aReservations = reservations;
-        aContext = context;
-
+    public AdapterPrintList(String empExt, ArrayList<ReservationWrapper> reservations, Context context){
+        this.aReservations = reservations;
+        this.aContext = context;
+        this.empExt = empExt;
     }
 
     @Override
@@ -61,10 +56,10 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
     @Override
     public void onBindViewHolder(AdapterPrintList.ViewHolder holder, int position) {
         try {
-            holder.reservationName.setText(aReservations.get(position).getJobDescription());
-            holder.printId = aReservations.get(position).getId();
-            holder.start.setText(aReservations.get(position).getJobSchedule().toString());
-            holder.start.setText(aReservations.get(position).getJobScheduleEnd().toString());
+            holder.reservationName.setText(aReservations.get(position).getName());
+            holder.resId = aReservations.get(position).getId();
+            holder.start.setText(aReservations.get(position).getDate().toString());
+            holder.resType = aReservations.get(position).getResType();
         }catch(Exception e){
             Log.e("ERROR", e.getMessage());
         }
@@ -84,16 +79,16 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
         return getItem(position).substring(0, 1);
     }
 
-    private String getItem(int position) { return aReservations.get(position).getJobDescription(); }
+    private String getItem(int position) { return aReservations.get(position).getName(); }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView backPlate;
         TextView reservationName;
         TextView start;
-        TextView end;
         ConstraintLayout parentLayout;
-        int printId;
+        int resId;
+        String resType;
 
         Button edit;
         Button delete;
@@ -107,7 +102,6 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
             parentLayout = itemView.findViewById(R.id.reservationPlate);
             reservationName = itemView.findViewById(R.id.reservationName);
             start = itemView.findViewById(R.id.startTime);
-            //end = itemView.findViewById(R.id.endTime);
             delete = itemView.findViewById(R.id.deleteButton);
 
             delete.setOnClickListener(new View.OnClickListener() {
@@ -115,15 +109,16 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
                     parentLayout.setVisibility(View.GONE);
 
                     try {
-                        Log.d("THEID", Integer.toString(printId));
-                        deleteById(printId, ctx);
+                        deleteById(resId, ctx, resType, getAdapterPosition());
                     }
                     catch(JSONException e){
                         Log.e("ERROR", e.toString());
                     }
 
                     Intent myIntent = new Intent(ctx, myPrintList.class);
+                    myIntent.putExtra("employee", empExt);
                     myIntent.putExtra("eventName",reservationName.getText());
+                    myIntent.putExtra("reserveType", resType);
                     ctx.startActivity(myIntent);
 
                 }
@@ -131,7 +126,7 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
         }
     }
 
-    public void deleteById(int printId, Context ctx) throws JSONException {
+    public void deleteById(int printId, Context ctx, String type, int position) throws JSONException {
         RequestQueue requestQueue = Volley.newRequestQueue(ctx);
         requestQueue.start();
 
@@ -139,39 +134,90 @@ public class AdapterPrintList extends RecyclerView.Adapter<AdapterPrintList.View
 
         body.put("string", Integer.toString(printId));
 
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                RequestUtil.BASE_URL + "/deletePrinterById",
-                body,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            ObjectMapper mapper = new ObjectMapper();
-                            ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
-                            if(responseObject.isSuccess()){
-                                Intent myIntent = new Intent(ctx, Reservations.class);
-                                ctx.startActivity(myIntent);
+        JsonObjectRequest request;
+
+        if(type.equals("printer")) {
+            request = new JsonObjectRequest(
+                    Request.Method.POST,
+                    RequestUtil.BASE_URL + "/deletePrinterById",
+                    body,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                ObjectMapper mapper = new ObjectMapper();
+                                ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
+                                if (responseObject.isSuccess()) {
+                                    removeAt(position);
+                                }
+                                else{
+                                    showError(responseObject.getMessage(), ctx);
+                                }
+                            } catch (Exception e) {
+                                Log.d("EXCEPTION", e.toString());
                             }
                         }
-                        catch(Exception e){
-                            Log.d("EXCEPTION", e.toString());
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("ERROR", error.getMessage());
+
                         }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("ERROR", error.getMessage());
+            );
+        }
+        else{
+            request = new JsonObjectRequest(
+                    Request.Method.POST,
+                    RequestUtil.BASE_URL + "/deleteBreakoutById",
+                    body,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                ObjectMapper mapper = new ObjectMapper();
+                                ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
+                                if (responseObject.isSuccess()) {
+                                    Log.d("POSITION", Integer.toString(position));
+                                    removeAt(position);
+                                }
+                                else{
+                                    showError(responseObject.getMessage(), ctx);
+                                }
+                            } catch (Exception e) {
+                                Log.d("EXCEPTION", e.toString());
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("ERROR", error.getMessage());
 
+                        }
                     }
-                }
-        );
+            );
+        }
 
         requestQueue.add(request);
     }
 
-    public void removeAt(int position) {
+    private void showError(String message, Context ctx){
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(ctx);
+        builder.setTitle("Error")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    private void removeAt(int position) {
         aReservations.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, aReservations.size());

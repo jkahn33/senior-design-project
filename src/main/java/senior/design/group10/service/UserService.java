@@ -8,14 +8,10 @@ import senior.design.group10.objects.response.SpecificUserResponse;
 import senior.design.group10.objects.response.UsersStatisticResponse;
 import senior.design.group10.objects.sent.SentUser;
 import senior.design.group10.objects.sent.StatisticsRequest;
-import senior.design.group10.objects.sent.StringWrapper;
-import senior.design.group10.objects.user.DebugUser;
 import senior.design.group10.objects.user.SpecifcUserSearch;
-import senior.design.group10.objects.user.UserLoginHistory;
 import senior.design.group10.objects.user.Users;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -123,9 +119,5 @@ public class UserService {
             return new SpecificUserResponse(true, search.getName(), search.getDept(), search.getOccurrences(), search.getLastEntered(), search.getCreationDate());
         }
         return new SpecificUserResponse(false);
-    }
-
-    public DebugUser debugUser(){
-        return usersDAO.testDebug();
     }
 }

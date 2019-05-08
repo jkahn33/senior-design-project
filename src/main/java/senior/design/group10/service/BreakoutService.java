@@ -192,4 +192,14 @@ public class BreakoutService
 		}
 		return null;
 	}
+
+	public ResponseObject deleteById(String id){
+		int theId = Integer.parseInt(id);
+		Optional<BreakoutReservations> resOptional = breakoutDAO.findById(theId);
+		if(resOptional.isPresent()){
+			breakoutDAO.deleteById(theId);
+			return new ResponseObject(true, null);
+		}
+		return new ResponseObject(false, "Cannot find breakout reservation.");
+	}
 }

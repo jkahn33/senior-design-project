@@ -2,6 +2,7 @@ package senior.design.group10.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -55,8 +56,6 @@ public class AndroidController {
 	private final
 	EquipmentService equipmentService;
     private final
-    MessageService messageService;
-    private final
     CalendarService calendarService;
 
     @Autowired
@@ -67,7 +66,6 @@ public class AndroidController {
                              BreakoutService breakoutService,
                              ReservablesService reservablesService,
                              EquipmentService equipmentService,
-                             MessageService messageService,
                              CalendarService calendarService) {
         this.userService = userService;
         this.adminService = adminService;
@@ -76,7 +74,6 @@ public class AndroidController {
         this.breakoutService = breakoutService;
         this.reservablesService = reservablesService;
         this.equipmentService = equipmentService;
-        this.messageService = messageService;
         this.calendarService = calendarService;
     }
 
@@ -145,6 +142,7 @@ public class AndroidController {
 		
 		//Manual breakout reservation entry for testing image rendering
 		//breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-20 05:01:01", "2019-03-20 17:00:00", "2","none");
+        log.info(Arrays.toString(breakoutReservation.getReservableIdList().toArray()));
 		return breakoutService.addBreakRes(breakoutReservation);
     }
 
@@ -152,6 +150,12 @@ public class AndroidController {
     @ResponseBody
     public ResponseObject deletePrinterResById(@RequestBody StringWrapper id){
         return printerService.deleteById(id.getString());
+    }
+
+    @PostMapping("/deleteBreakoutById")
+    @ResponseBody
+    public ResponseObject deleteBreakoutResById(@RequestBody StringWrapper id){
+	    return breakoutService.deleteById(id.getString());
     }
 
 

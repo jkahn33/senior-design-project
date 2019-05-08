@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
@@ -60,6 +61,11 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
     TextView endDate;
     TextView MDY;
     TextView dayWeek;
+
+    CheckBox aBreakout;
+    CheckBox bBreakout;
+    CheckBox cBreakout;
+    CheckBox dBreakout;
 
     int year = 1997;
     int month = 0;
@@ -123,6 +129,11 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
 
         MDY = (TextView) findViewById(R.id.MDY);
         dayWeek = (TextView) findViewById(R.id.dayWeek);
+
+        aBreakout = findViewById(R.id.Abreakout);
+        bBreakout = findViewById(R.id.Bbreakout);
+        cBreakout = findViewById(R.id.Cbreakout);
+        dBreakout = findViewById(R.id.Dbreakout);
 
         startTimeHourP = (NumberPicker) findViewById(R.id.startTimeHourP);
         String[] nums = new String[24];
@@ -243,22 +254,15 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
 
                 //add the appropriate rooms here
                 reservableIdList = new ArrayList<String>();
-                reservableIdList.add("A");
+                //reservableIdList.add("A");
 
-                //lists cannot be sent with current JSON configuration
-                //serialize the string manually
-                reservableIdString = "";
-                reservableIdString += reservableIdList.get(0);
-                for(int i = 1; i < reservableIdList.size(); i++) {
-                    reservableIdString += "," + reservableIdList.get(i);
-                }
                 Log.d("f", "M" + reservableIdString + "M");
 
                 numPeopleStr = numPeople.getText().toString();
                 additionalCom = printDetails.getText().toString();
 
                 if(userExt.length() != 5){
-                    showError("Extension must be 5 digits.");
+                    showError("Badge ID must be 5 digits.");
                 }
                 else if(resDescription == ""){
                     showError("Please enter a print name.");
@@ -270,6 +274,19 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
                     showError("Please enter a positive number of attendants.");
                 }
                 else {
+                    if(aBreakout.isChecked()){
+                        reservableIdList.add("A");
+                    }
+                    if(bBreakout.isChecked()){
+                        reservableIdList.add("B");
+                    }
+                    if(cBreakout.isChecked()){
+                        reservableIdList.add("C");
+                    }
+                    if(dBreakout.isChecked()){
+                        reservableIdList.add("D");
+                    }
+                    getRoomList();
                     try {
                         addBreakoutReservation();
                     } catch (JSONException e) {
@@ -412,6 +429,21 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
         requestQueue.add(request);
     }
 
+    public void getRoomList(){
+        //lists cannot be sent with current JSON configuration
+        //serialize the string manually
+        reservableIdString = "";
+        try {
+            reservableIdString += reservableIdList.get(0);
+            for (int i = 1; i < reservableIdList.size(); i++) {
+                reservableIdString += "," + reservableIdList.get(i);
+            }
+        }
+        catch(IndexOutOfBoundsException e){
+            showError("At least one room must be checked");
+        }
+    }
+
     public void verifyResponse(ResponseObject response) {
         String title = "Error";
         if(response.isSuccess()) title = "Success";
@@ -425,6 +457,7 @@ public class ReserveOptionsBreakout extends AppCompatActivity{
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+
     }
 
     public void showError(String message){
