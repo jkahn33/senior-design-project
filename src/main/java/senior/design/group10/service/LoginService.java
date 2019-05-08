@@ -12,6 +12,7 @@ import senior.design.group10.objects.user.Users;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.Optional;
 
@@ -44,5 +45,9 @@ public class LoginService {
         log.info("ext: " + login.getExt() + ", time: " + currentTime);
         userLoginHistoryDAO.save(loginToSave);
         return new ResponseObject(true, usersOptional.get().getName());
+    }
+    
+    public List<UserLoginHistory> getAllLogins() {
+    	return (List<UserLoginHistory>)userLoginHistoryDAO.findAll();
     }
 }

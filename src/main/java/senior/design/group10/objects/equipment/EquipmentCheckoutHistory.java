@@ -17,17 +17,17 @@ public class EquipmentCheckoutHistory
     @GenericGenerator(name="generator", strategy="increment")
     @GeneratedValue(generator="generator")
     private int id;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="barcode")
     private Equipment equipment;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_ext")
     private Users user;
     @Column
     private Timestamp checkoutDate;
     @Column
     private Timestamp checkinDate;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="admin_ext")
     private Admin admin;
 

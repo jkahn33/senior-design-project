@@ -2,22 +2,15 @@ package senior.design.group10.objects.equipment;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import senior.design.group10.objects.user.Users;
+
+import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table( name = "breakout_res")
@@ -29,10 +22,9 @@ public class BreakoutReservations
 	@GeneratedValue(generator="generator")
 	private int id;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_ext")
 	private Users user;
-	//@MapsId("reserable")
 	@ManyToOne
 	//@JoinColumn(name = "reservable")
 	private Reservables reservable;
@@ -65,19 +57,32 @@ public class BreakoutReservations
 		this.additionalComments = additionalComments;
 	}
 	
+	public int getId(){
+		return id;
+	}
+	
 	public String getresDescription()
 	{
 		return this.resDescription;
 	}
-	
+
+	public String getName(){
+		return user.getName();
+	}
+
 	public String getRoom()
 	{
-		return this.reservable.getRoom();
+		return reservable.getRoom();
 	}
+
 	public Date getResSchedule()
 	{
 		return this.resSchedule;
 	}
+	
+//	public String getNumPeople() {
+//		return numPeople;
+//	}
 	
 	public Date getResScheduleEnd()
 	{
@@ -86,12 +91,10 @@ public class BreakoutReservations
 	
 	public String getEndHours()
 	{
-		String endHours  = ""+resScheduleEnd.getHours();
-		return endHours;
+		return ""+resScheduleEnd.getHours();
 	}
 	public String getStartHours()
 	{
-		String startHours  = ""+resSchedule.getHours();
-		return startHours;
+		return ""+resSchedule.getHours();
 	}
 }

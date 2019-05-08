@@ -8,26 +8,23 @@
     <NumberPicker
         android:id="@+id/endTimehourP"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="724dp"
-        android:layout_marginTop="388dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="100dp"
         android:text="Print"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/startsDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <NumberPicker
         android:id="@+id/endTimeMinP"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="880dp"
-        android:layout_marginTop="388dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="20dp"
         android:text="Print"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/startsDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/endTimehourP" />
 
     <DatePicker
         android:id="@+id/date_picker"
@@ -45,36 +42,32 @@
         android:id="@+id/startDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="728dp"
         android:layout_marginTop="116dp"
         android:ems="10"
         android:hint="Start Date"
         android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toTopOf="parent" />
 
     <NumberPicker
         android:id="@+id/startTimeMinP"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="880dp"
-        android:layout_marginTop="192dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="36dp"
         android:text="Print"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/startsDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/startTimeHourP" />
 
     <NumberPicker
         android:id="@+id/startTimeHourP"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="724dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="192dp"
         android:text="Print"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/startsDate"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -126,135 +119,153 @@
     </ScrollView>
 
     <EditText
-        android:id="@+id/printName"
+        android:id="@+id/numberGuests"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="292dp"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Print Name"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/selectedPrinter" />
 
     <TextView
         android:id="@+id/endDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="788dp"
-        android:layout_marginTop="608dp"
+        android:layout_marginTop="50dp"
         android:text="End Date"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/endTimehourP"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
         android:id="@+id/employExt"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginStart="292dp"
-        android:layout_marginTop="372dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Employee Extension"
+        android:hint="Employee Badge ID"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/numberGuests" />
 
     <EditText
         android:id="@+id/printDetails"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginStart="292dp"
-        android:layout_marginTop="448dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Extra details"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/employExt" />
 
     <Button
         android:id="@+id/submit"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginStart="292dp"
-        android:layout_marginTop="520dp"
+        android:layout_marginTop="10dp"
         android:text="Submit"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/printDetails" />
 
     <Button
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="440dp"
-        android:layout_marginTop="520dp"
+        android:layout_marginStart="420dp"
+        android:layout_marginTop="8dp"
         android:text="Cancel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/printDetails" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="176dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="35dp"
         android:text="Start Time:"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/startTimeHourP"
-        app:layout_constraintTop_toBottomOf="@+id/blue_back" />
+        app:layout_constraintStart_toEndOf="@+id/cancel"
+        app:layout_constraintTop_toTopOf="@+id/startTimeHourP" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="364dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="40dp"
         android:text="Duration:"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/endTimehourP"
-        app:layout_constraintTop_toBottomOf="@+id/blue_back" />
+        app:layout_constraintStart_toEndOf="@+id/cancel"
+        app:layout_constraintTop_toTopOf="@+id/endTimehourP" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="40dp"
         android:text="Hours"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/endTimehourP"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="@+id/endTimehourP" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="40dp"
         android:text="Minutes"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/endTimeMinP"
-        app:layout_constraintTop_toBottomOf="@+id/startTimeMinP" />
+        app:layout_constraintTop_toTopOf="@+id/endTimeMinP" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="30dp"
         android:text=":"
         android:textSize="30sp"
         app:layout_constraintStart_toEndOf="@+id/startTimeHourP"
-        app:layout_constraintTop_toBottomOf="@+id/startDate" />
+        app:layout_constraintTop_toTopOf="@+id/startTimeHourP" />
 
     <TextView
         android:id="@+id/selectedPrinter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/printName"
+        app:layout_constraintStart_toStartOf="@+id/numberGuests"
         app:layout_constraintTop_toBottomOf="@+id/blue_back" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
+        android:text="End date of print:"
+        app:layout_constraintStart_toEndOf="@+id/cancel"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:text="Start date of print:"
+        app:layout_constraintStart_toEndOf="@+id/cancel"
+        app:layout_constraintTop_toTopOf="@+id/blue_back" />
 
 
 </android.support.constraint.ConstraintLayout>

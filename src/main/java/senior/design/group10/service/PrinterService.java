@@ -144,4 +144,35 @@ public class PrinterService
 	public List<PrinterUsageUsers> getUserUsage(){
 		return printerDAO.getUserUsage();
 	}
+
+	public List<PrinterReservations> getPrinterReservations(){
+		return printerDAO.findAll();
+	}
+
+	public List<PrinterReservations> getPrinterReservationId(String id){
+		log.info("ID IS: " + id);
+		Optional<Users> usersOptional = usersDAO.findById(id);
+		if(usersOptional.isPresent()){
+			return printerDAO.getAllByUser(usersOptional.get());
+		}
+		return null;
+	}
+
+	public PrinterReservations getPrinterReservationById(String id){
+		Optional<PrinterReservations> resOptional = printerDAO.findById(Integer.parseInt(id));
+		if(resOptional.isPresent()) {
+			return resOptional.get();
+		}
+		return null;
+	}
+
+	public ResponseObject deleteById(String id){
+		int theId = Integer.parseInt(id);
+		Optional<PrinterReservations> resOptional = printerDAO.findById(theId);
+		if(resOptional.isPresent()){
+			printerDAO.deleteById(theId);
+			return new ResponseObject(true, null);
+		}
+		return new ResponseObject(false, "Cannot find printer reservation.");
+	}
 }

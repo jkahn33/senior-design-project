@@ -6,7 +6,7 @@ public class Users
 {
     private String name;
     private Timestamp creationDate;
-    private String fiveDigExt;
+    private String badgeId;
     private String depCode;
 
     public Users(){}
@@ -15,7 +15,7 @@ public class Users
     {
         this.name = name;
         this.creationDate = creationDate;
-        this.fiveDigExt = fiveDigExt;
+        this.badgeId = fiveDigExt;
         this.depCode = depCode;
     }
 
@@ -27,8 +27,8 @@ public class Users
         return creationDate;
     }
 
-    public String getFiveDigExt() {
-        return fiveDigExt;
+    public String getBadgeId() {
+        return badgeId;
     }
 
     public String getDepCode() {

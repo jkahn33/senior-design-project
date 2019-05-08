@@ -87,6 +87,8 @@ public class adminCheckout extends AppCompatActivity {
         body.put("ext", extension);
         body.put("password", password);
 
+        Log.d("TESTYO", body.toString());
+
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
                 RequestUtil.BASE_URL + "/validateAdmin",
@@ -122,7 +124,7 @@ public class adminCheckout extends AppCompatActivity {
             checkoutScreen();
         }
         else{
-            showError("Extension or password is incorrect.");
+            showError("Badge ID or password is incorrect.");
         }
     }
     public void showError(String message){

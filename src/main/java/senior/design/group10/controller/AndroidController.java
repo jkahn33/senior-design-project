@@ -2,13 +2,16 @@ package senior.design.group10.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import senior.design.group10.objects.equipment.BreakoutReservations;
 import senior.design.group10.objects.equipment.Equipment;
+import senior.design.group10.objects.equipment.PrinterReservations;
 import senior.design.group10.objects.response.ResponseObject;
 import senior.design.group10.objects.response.ValidateWrapper;
 import senior.design.group10.objects.sent.AdminInQuestion;
@@ -53,8 +56,6 @@ public class AndroidController {
 	private final
 	EquipmentService equipmentService;
     private final
-    MessageService messageService;
-    private final
     CalendarService calendarService;
 
     @Autowired
@@ -65,7 +66,6 @@ public class AndroidController {
                              BreakoutService breakoutService,
                              ReservablesService reservablesService,
                              EquipmentService equipmentService,
-                             MessageService messageService,
                              CalendarService calendarService) {
         this.userService = userService;
         this.adminService = adminService;
@@ -74,7 +74,6 @@ public class AndroidController {
         this.breakoutService = breakoutService;
         this.reservablesService = reservablesService;
         this.equipmentService = equipmentService;
-        this.messageService = messageService;
         this.calendarService = calendarService;
     }
 
@@ -100,9 +99,7 @@ public class AndroidController {
     @PostMapping("/storeLogin")
     @ResponseBody
     public ResponseObject storeLogin(@RequestBody SentLoginHistory login) {
-    	ResponseObject response = loginService.saveNewLogin(login);
-    	System.out.println(response.isSuccess() + " " + response.getMessage());
-        return response;
+        return loginService.saveNewLogin(login);
     }    
     
     //Just for testing. UserService.getAllUsers() returns a list of all users
@@ -111,8 +108,7 @@ public class AndroidController {
     public List<Users> printAllUsers() {
         return userService.getAllUsers();
     }
-    
-	@PostMapping("/newPrinterReservation")
+
     /*
      * Printer reservation takes in a sent printer reservation which is composed of the following variables
      * String for user extension, String for type of reservable, string for reservable id, string for job description
@@ -120,6 +116,7 @@ public class AndroidController {
      * String for job duration in the following format: "HH:MM" since the time is parsed base on the colon
      * String for the additional comments
      */
+	@PostMapping("/newPrinterReservation")
 	@ResponseBody
 	public ResponseObject newPrinterReservation(@RequestBody SentPrinterReservation printerReservation)
 	{	
@@ -135,17 +132,30 @@ public class AndroidController {
 	 * String for the additional comments
 	 */
 	@PostMapping("/newBreakoutReservation")
-	//@GetMapping("/newBreakoutReservation")
 	@ResponseBody
-    public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation) 
+    public ResponseObject newBreakoutReservation(@RequestBody SentBreakoutReservation breakoutReservation)
 	{
 		//List for passing in in sent breakout reservation
-		//List<String> reservableIdList = new ArrayList<String>(); used for testing
-		//reservableIdList.add("C");
+		List<String> reservableIdList = new ArrayList<>(); //used for testing
+		reservableIdList.add("B");
+		reservableIdList.add("D");
 		
 		//Manual breakout reservation entry for testing image rendering
 		//breakoutReservation = new SentBreakoutReservation("11111","Breakout",reservableIdList,"celebrate good times", "2019-03-20 05:01:01", "2019-03-20 17:00:00", "2","none");
-        return breakoutService.addBreakRes(breakoutReservation);
+        log.info(Arrays.toString(breakoutReservation.getReservableIdList().toArray()));
+		return breakoutService.addBreakRes(breakoutReservation);
+    }
+
+    @PostMapping("/deletePrinterById")
+    @ResponseBody
+    public ResponseObject deletePrinterResById(@RequestBody StringWrapper id){
+        return printerService.deleteById(id.getString());
+    }
+
+    @PostMapping("/deleteBreakoutById")
+    @ResponseBody
+    public ResponseObject deleteBreakoutResById(@RequestBody StringWrapper id){
+	    return breakoutService.deleteById(id.getString());
     }
 
 
@@ -196,8 +206,6 @@ public class AndroidController {
     public ResponseObject checkoutEquipment(@RequestBody SentEquipment equipment){
         return equipmentService.checkout(equipment);
     }
-
-       
     
     /*
      * Saves a new event to the database.
@@ -221,5 +229,37 @@ public class AndroidController {
     @ResponseBody
     public List<Calendar> getEventsByDate(Timestamp ts) {
         return calendarService.getEventsByDate(ts);
+    }
+
+    @GetMapping("/getPrinterReservations")
+    @ResponseBody
+    public List<PrinterReservations> getPrinterReservations(){
+        return printerService.getPrinterReservations();
+    }
+
+    @PostMapping("/getPrinterReservationsId")
+    @ResponseBody
+    public List<PrinterReservations> getPrinterReservationsId(@RequestBody List<StringWrapper> barcode){
+        //log.info(barcode.get(0).getString());
+        return printerService.getPrinterReservationId(barcode.get(0).getString());
+        //return printerService.getPrinterReservationId("12345");
+    }
+
+    @PostMapping("/getPrintById")
+    @ResponseBody
+    public PrinterReservations getPrinterReservationById(@RequestBody StringWrapper id){
+        return printerService.getPrinterReservationById(id.getString());
+    }
+
+    @GetMapping("/getBreakoutReservations")
+    @ResponseBody
+    public List<BreakoutReservations> getBreakoutReservations(){
+        return breakoutService.getBreakoutReservations();
+    }
+
+    @PostMapping("/getBreakoutReservationsId")
+    @ResponseBody
+    public List<BreakoutReservations> getBreakoutReservationsId(@RequestBody List<StringWrapper> barcode){
+        return breakoutService.getBreakoutReservationId(barcode.get(0).getString());
     }
 }

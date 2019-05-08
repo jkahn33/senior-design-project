@@ -91,26 +91,20 @@ public class adminAddEquip extends AppCompatActivity {
                 Request.Method.POST,
                 RequestUtil.BASE_URL + "/validateAdmin",
                 body,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            ObjectMapper mapper = new ObjectMapper();
-                            ValidateWrapper success = mapper.readValue(response.toString(), ValidateWrapper.class);
-                            verifyResponse(success.isSuccess());
-                        }
-                        catch(Exception e){
-                            Log.d("EXCEPTION", e.toString());
-                        }
+                response -> {
+                    try {
+                        ObjectMapper mapper = new ObjectMapper();
+                        ValidateWrapper success = mapper.readValue(response.toString(), ValidateWrapper.class);
+                        verifyResponse(success.isSuccess());
+                    }
+                    catch(Exception e){
+                        Log.d("EXCEPTION", e.toString());
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("ERROR", error.getMessage());
+                error -> {
+                    Log.d("ERROR", error.getMessage());
 
-                        showError(error.getMessage());
-                    }
+                    showError(error.getMessage());
                 }
         );
 
@@ -122,7 +116,7 @@ public class adminAddEquip extends AppCompatActivity {
             AddEquipScreen();
         }
         else{
-            showError("Extension or password is incorrect.");
+            showError("Badge ID or password is incorrect.");
         }
     }
     public void showError(String message){

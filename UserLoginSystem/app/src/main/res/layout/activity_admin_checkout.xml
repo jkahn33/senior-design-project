@@ -15,7 +15,7 @@
         android:layout_marginEnd="159dp"
         android:layout_marginBottom="41dp"
         android:ems="10"
-        android:hint="Extension"
+        android:hint="Badge ID"
         android:inputType="textPersonName"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/passwordBox2"

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import senior.design.group10.objects.equipment.PrinterReservations;
 import senior.design.group10.objects.equipment.PrinterUsageHours;
 import senior.design.group10.objects.equipment.PrinterUsageUsers;
+import senior.design.group10.objects.user.Users;
 
 /**
  * DAO to handle database access for printer_res table
@@ -20,6 +21,8 @@ import senior.design.group10.objects.equipment.PrinterUsageUsers;
 @Repository
 public interface PrinterReservationDAO extends JpaRepository<PrinterReservations, Integer>
 {
+	List<PrinterReservations> getAllByUser(Users user);
+
 	//Modify the query so that it takes the printer res into consideration
 	
 	//Returns the dates between two entered dates

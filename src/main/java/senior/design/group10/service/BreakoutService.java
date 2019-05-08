@@ -2,11 +2,7 @@ package senior.design.group10.service;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Optional;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,7 +91,7 @@ public class BreakoutService
 		Users user = usersOptional.get();
 		
 		boolean roomsAvailable[] = roomAvailable(breakout);
-		String roomString = null;
+		String roomString = "";
 		
 		for(int x = 0; x < breakout.getReservableIdList().size();x++)
 		{
@@ -112,7 +108,7 @@ public class BreakoutService
 			}
 		}
 
-		if (roomString == null)
+		if (roomString == "")
 			roomString = "All rooms succesfully reserved";
 		else
 			roomString += " Unavailable";
@@ -185,5 +181,25 @@ public class BreakoutService
 		return todaysReservation;
 	}
 	
-	
+	public List<BreakoutReservations> getBreakoutReservations(){
+		return breakoutDAO.findAll();
+	}
+
+	public List<BreakoutReservations> getBreakoutReservationId(String id){
+		Optional<Users> usersOptional = usersDAO.findById(id);
+		if(usersOptional.isPresent()){
+			return breakoutDAO.findAllByUser(usersOptional.get());
+		}
+		return null;
+	}
+
+	public ResponseObject deleteById(String id){
+		int theId = Integer.parseInt(id);
+		Optional<BreakoutReservations> resOptional = breakoutDAO.findById(theId);
+		if(resOptional.isPresent()){
+			breakoutDAO.deleteById(theId);
+			return new ResponseObject(true, null);
+		}
+		return new ResponseObject(false, "Cannot find breakout reservation.");
+	}
 }

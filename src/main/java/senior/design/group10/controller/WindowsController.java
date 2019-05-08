@@ -9,19 +9,31 @@ import senior.design.group10.objects.sent.AdminInQuestion;
 import senior.design.group10.objects.sent.EditAdmin;
 import senior.design.group10.objects.sent.NewAdmin;
 import senior.design.group10.objects.sent.SentMessage;
-import senior.design.group10.objects.user.DebugUser;
+import senior.design.group10.objects.user.Admin;
+import senior.design.group10.objects.user.UserLoginHistory;
+import senior.design.group10.objects.tv.Calendar;
 import senior.design.group10.objects.tv.Future;
 import senior.design.group10.objects.tv.Messages;
 import senior.design.group10.service.AdminService;
 import senior.design.group10.service.MessageService;
+import senior.design.group10.objects.equipment.BreakoutReservations;
 import senior.design.group10.objects.equipment.Equipment;
+import senior.design.group10.objects.equipment.PrinterReservations;
 import senior.design.group10.objects.equipment.PrinterUsageUsers;
 import senior.design.group10.objects.response.*;
 import senior.design.group10.objects.sent.*;
 import senior.design.group10.objects.user.Users;
 import senior.design.group10.service.*;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
 @Controller
@@ -37,6 +49,8 @@ public class WindowsController {
     private final PiService piService;
     private final BreakoutService breakoutService;
     private final FutureService futureService;
+    private final LoginService loginService;
+    private final CalendarService calendarService;
 
     @Autowired
     public WindowsController(AdminService adminService,
@@ -46,7 +60,9 @@ public class WindowsController {
                              PrinterService printerService,
 							  PiService piService,
 							  BreakoutService breakoutService,
-                             FutureService futureService) {
+                             FutureService futureService,
+                             LoginService loginService,
+                             CalendarService calendarService) {
         this.adminService = adminService;
         this.userService = userService;
         this.equipmentService = equipmentService;
@@ -55,6 +71,8 @@ public class WindowsController {
         this.piService = piService;
         this.breakoutService = breakoutService;
         this.futureService = futureService;
+        this.loginService = loginService;
+        this.calendarService = calendarService;
     }
 
     @PostMapping("/newAdmin")
@@ -156,12 +174,6 @@ public class WindowsController {
         return userService.statsByUser(stringWrapper.getString());
     }
 
-    @GetMapping("/debug")
-    @ResponseBody
-    public DebugUser debugUser(){
-        return userService.debugUser();
-    }
-
 	////////////////////////////////////////////////
 	//Pi commands
 	//
@@ -182,7 +194,6 @@ public class WindowsController {
 	@GetMapping("/fillPiList")
 	public void fillPiList()
 	{
-		//piService.createPiImageFolder("PiImages");
 		piService.piListFill();
 	}
 	//Sends the command to the pi to execute through ssh command
@@ -225,10 +236,8 @@ public class WindowsController {
      * -an associated administrator account
      */
     @PostMapping("/newMessage")
-    //@GetMapping("newMessage") //for testing
     @ResponseBody
     public ResponseObject newMessage(@RequestBody SentMessage sentMessage) 
-    //public ResponseObject newMessage(SentMessage sentMessage) This is for testing
     {
         //Sending a message
         //Used for making new messages
@@ -256,22 +265,7 @@ public class WindowsController {
     @ResponseBody
     public ResponseObject updatePiImages()
     {
-    		System.out.println("Getting Current Messages");
-    		piService.renderMessagesImage(messageService.getCurrentMessages());
-    		
-    		System.out.println("Getting Current Breakout Reservation");
-    		piService.renderBreakoutImage(breakoutService.todaysReservations());
-    		
-    		System.out.println("Getting Future Messages");
-    		piService.renderFutureImage(futureService.getFutureMessages());
-    		//Send the folder to the pi
-    		piService.piListFill();
-
-    		System.out.println("Sending the Images");
-
-    		
-    		piService.copyFolderToPi("PiImages", "Pictures/Slides");
-
+    		piService.updatePiImages(messageService, breakoutService, futureService);
         return  new ResponseObject(true,null);
     }
     
@@ -279,7 +273,10 @@ public class WindowsController {
     @ResponseBody
     public ResponseObject startSlideshow()
     {
+    		piService.piListFill();
+    		updatePiImages();
     		piService.startSlideShow();
+    		autoUpdateMidnight();
     		return new ResponseObject(true,null);
     }
     @GetMapping("/printerUsage")
@@ -290,11 +287,10 @@ public class WindowsController {
     
     @GetMapping("/getMessages")
     @ResponseBody
-    public List<Messages> getMesssages()
-    {
+    public List<Messages> getMesssages() {
         return messageService.getCurrentMessages();
     }
-    
+
     @PostMapping("/deleteMessagesById")
     @ResponseBody
     public ResponseObject deleteMessageById(@RequestBody IdWrapper ids)
@@ -311,6 +307,7 @@ public class WindowsController {
         return futureService.getFutureMessages();
     }
     
+
     @PostMapping("/deleteFuturesById")
     @ResponseBody
     public ResponseObject deleteFutureById(@RequestBody IdWrapper ids)
@@ -325,5 +322,95 @@ public class WindowsController {
     public List<PrinterUsageUsers> getPrinterUserUsage(){
         return printerService.getUserUsage();
     }
+    
+    /*CSV Export Endpoints*/
+    @RequestMapping(value = "/csv/users", produces = "text/csv")
+	public void exportUsers(HttpServletResponse response) throws IOException {
+		List<Users> users = userService.getAllUsers();
+		CSVExport.exportUsers(response.getWriter(), users);
+	}
 
+	@RequestMapping(value = "/csv/breakoutres", produces = "text/csv")
+	public void exportBreakoutRes(HttpServletResponse response) throws IOException {
+		List<BreakoutReservations> res = breakoutService.getBreakoutReservations();
+		CSVExport.exportBreakoutRes(response.getWriter(), res);
+	}
+
+	@RequestMapping(value = "/csv/equipment", produces = "text/csv")
+	public void exportEquipment(HttpServletResponse response) throws IOException {
+		List<Equipment> equipment = equipmentService.getAllEquipment();
+		CSVExport.exportEquipment(response.getWriter(), equipment);
+	}
+
+	@RequestMapping(value = "/csv/printerres", produces = "text/csv")
+	public void exportPrinterRes(HttpServletResponse response) throws IOException {
+        List<PrinterReservations> res = printerService.getPrinterReservations();
+        CSVExport.exportPrinterRes(response.getWriter(), res);
+    }
+    @GetMapping("/setAutoUpdate")
+    @ResponseBody
+    public ResponseObject setAutoUpdate()
+    {
+    		autoUpdateMidnight();
+    		return new ResponseObject(true, null);
+    }
+    
+    public void autoUpdateMidnight()
+	{
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date;
+		try 
+		{
+			date = dateFormatter.parse("2019-01-01 1:00:00");
+			//Now create the time and schedule it
+			Timer timer = new Timer();
+
+			//Use this if you want to execute it once
+			timer.schedule(new TimeTask(), date);
+
+			//Use this if you want to execute it repeatedly
+			int period = 86400000;//24hours
+			timer.schedule(new TimeTask(), date, period );
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+	}
+
+	private class TimeTask extends TimerTask
+	{
+		public void run()
+		{
+			// insert update 24 hours here
+			piService.piListFill();
+			updatePiImages();
+			System.out.println("updates");//updates
+		}
+	}
+
+	@RequestMapping(value = "/csv/logins", produces = "text/csv")
+	public void exportLogins(HttpServletResponse response) throws IOException {
+		List<UserLoginHistory> logins = loginService.getAllLogins();
+		CSVExport.exportLogins(response.getWriter(), logins);
+	}    
+
+	@RequestMapping(value = "/csv/messages", produces = "text/csv")
+	public void exportMessages(HttpServletResponse response) throws IOException {
+		List<Messages> messages = messageService.getAllMessages();
+		CSVExport.exportMessages(response.getWriter(), messages);
+	}
+
+	@RequestMapping(value = "/csv/events", produces = "text/csv")
+	public void exportEvents(HttpServletResponse response) throws IOException {
+		List<Calendar> events = calendarService.getAllEvents();
+		CSVExport.exportEvents(response.getWriter(), events);
+	}
+
+	@RequestMapping(value = "/csv/admins", produces = "text/csv")
+	public void exportAdmins(HttpServletResponse response) throws IOException {
+		List<Admin> admins = adminService.getAllAdmins();
+		CSVExport.exportAdmins(response.getWriter(), admins);
+	}
 }

@@ -67,4 +67,8 @@ public class CalendarService {
 		
 		return calendarDAO.getEventsByTime(Timestamp.valueOf(startString), Timestamp.valueOf(endString));
     }
+    
+    public List<Calendar> getAllEvents() {
+    	return calendarDAO.findAll();
+    }
 }

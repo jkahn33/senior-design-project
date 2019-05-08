@@ -24,7 +24,7 @@ public class Future
 	private Timestamp futureEndDate;
 	@Column
 	private Timestamp futureStartDate;
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Admin admin;
 	

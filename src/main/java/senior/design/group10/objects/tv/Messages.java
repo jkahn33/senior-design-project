@@ -20,7 +20,7 @@ public class Messages
 	private String message;
 	@Column
 	private Timestamp messageEndDate;
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Admin admin;
 
@@ -44,5 +44,9 @@ public class Messages
 
 	public Timestamp getMessageEndDate() {
 		return messageEndDate;
+	}
+	
+	public String getAdminId() {
+		return admin.getExt();
 	}
 }

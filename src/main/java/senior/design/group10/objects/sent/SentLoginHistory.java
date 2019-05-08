@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class SentLoginHistory {
-    @XmlElement
+
     private String ext;
 
     public SentLoginHistory(){}

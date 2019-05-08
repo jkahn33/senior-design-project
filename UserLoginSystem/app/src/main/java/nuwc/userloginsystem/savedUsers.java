@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -26,6 +27,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import nuwc.userloginsystem.objects.ResponseObject;
@@ -47,47 +50,33 @@ public class savedUsers extends AppCompatActivity{
     RecyclerView recyclerView;
     RecycleViewAdapter adapter;
     FastScroller fastScroller;
-    ArrayList<String> mNames = new ArrayList<>();
-    String ext;
 
     TextView welcomeUser;
     String signedIn = null;
     String name;
+    Button goBack;
 
-
-    private List<Users> userList = null;
-
-
-
-
+    private ArrayList<Users> userList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AddSavedUsers userThread = new AddSavedUsers("userThread");
-
-        try{
-            userThread.join();	//Waiting to finish
-        }catch(InterruptedException ie) {
-
-        }
-        mNames = userThread.getUsers();
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_users);
+        welcomeUser = (TextView) findViewById(R.id.welcomeUser);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        adapter = new RecycleViewAdapter(mNames,this);
         fastScroller = (FastScroller) findViewById(R.id.fastscroll);
+        goBack = (Button) findViewById(R.id.goBack);
+
+        adapter = new RecycleViewAdapter(userList,this,recyclerView,fastScroller,welcomeUser,goBack);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-        welcomeUser = (TextView) findViewById(R.id.welcomeUser);
 
         //has to be called AFTER RecyclerView.setAdapter()
         fastScroller.setRecyclerView(recyclerView);
 
-        ctx = this;
+        getUserList();
 
+        ctx = this;
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -97,24 +86,17 @@ public class savedUsers extends AppCompatActivity{
 
 
             } else {
-                name= extras.getString("name");
-                signedIn= extras.getString("signedIn");
+                name = extras.getString("name");
+                signedIn = extras.getString("signedIn");
                 recyclerView.setVisibility(View.INVISIBLE);
                 fastScroller.setVisibility(View.INVISIBLE);
                 welcomeUser.setText("Welcome " + name + "!");
-
-
             }
         } else {
             name= (String) savedInstanceState.getSerializable("name");
             signedIn= (String) savedInstanceState.getSerializable("signedIn");
-
-
         }
     }
-
-
-
 
     public void verifyResponse(ResponseObject response){
         if(response.isSuccess()){
@@ -139,71 +121,35 @@ public class savedUsers extends AppCompatActivity{
                 response -> {
                     try {
                         ObjectMapper mapper = new ObjectMapper();
-                        userList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
+                        List<Users> responseList = mapper.readValue(response.toString(), new TypeReference<List<Users>>(){});
+                        userList.addAll(responseList);
+                        fillNamesList();
                     }
                     catch(Exception e){
                         Log.e("EXCEPTION", e.toString());
-                        showError("Object mapping error. Please check logs.");
+                        showError("Unknown error. Please check logs.");
                     }
                 },
                 error -> {
                     Log.e("ERROR", error.getMessage());
-                    showError("Unknown error. Please check logs.");
-
+                    showError("Request error. Please check connection.");
                 }
         );
 
         requestQueue.add(request);
     }
-    public void logUser(String id) throws JSONException {
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.start();
-
-        JSONObject body = new JSONObject();
-
-        body.put("ext", id);
-
-        ext = id;
-
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                RequestUtil.BASE_URL + "/storeLogin",
-                body,
-                response -> {
-                    try {
-                        ObjectMapper mapper = new ObjectMapper();
-                        Log.d("RESPONSE", response.toString());
-                        ResponseObject responseObject = mapper.readValue(response.toString(), ResponseObject.class);
-                        verifyResponse(responseObject);
-                    }
-                    catch(Exception e){
-                        showError("User logging object mapping error, please check logs.");
-                        Log.d("EXCEPTION", e.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("ERROR", error.getMessage());
-
-                        showError(error.getMessage());
-                    }
-                }
-        );
-
-        requestQueue.add(request);
+    public void fillNamesList(){
+        Collections.sort(userList, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+        adapter.notifyDataSetChanged();
     }
+
     private void showError(String message){
         Context context = this;
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("Error")
                 .setMessage(message)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> {})
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
@@ -216,7 +162,4 @@ public class savedUsers extends AppCompatActivity{
     public void setFirstName(String firstName){
         this.name = firstName;
     }
-
-
-
 }

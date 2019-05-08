@@ -5,7 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import senior.design.group10.objects.response.UsersStatisticResponse;
-import senior.design.group10.objects.user.DebugUser;
 import senior.design.group10.objects.user.SpecifcUserSearch;
 import senior.design.group10.objects.user.Users;
 
@@ -42,7 +41,4 @@ public interface UsersDAO extends CrudRepository<Users, String> {
             "where ulh.loginDateTime=(select MAX(loginDateTime) from user_login_hist ulh2 where ulh.user_ext = ulh2.user_ext) and users.name= :userName " +
             "group by users.name, users.depCode, ulh.loginDateTime, users.creationDate, ulh.user_ext", nativeQuery=true)
     SpecifcUserSearch getSpecificUserStatsByName(@Param("userName") String userName);
-
-    @Query(value = "select MAX(loginDateTime) as count from user_login_hist ulh2 where user_ext = '12345'", nativeQuery = true)
-    DebugUser testDebug();
 }

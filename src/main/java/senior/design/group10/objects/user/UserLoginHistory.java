@@ -16,7 +16,7 @@ public class UserLoginHistory
 	private int id;
 
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_ext")
 	private Users user;
 	@Column
@@ -36,6 +36,14 @@ public class UserLoginHistory
 
 	public Users getUser() {
 		return user;
+	}
+	
+	public String getName() {
+		return user.getName();
+	}
+	
+	public String getBadgeId() {
+		return user.getBadgeId();
 	}
 
 	public Timestamp getLoginDateTime() {

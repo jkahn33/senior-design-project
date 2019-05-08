@@ -23,7 +23,7 @@ public class PrinterReservations
 	@GeneratedValue(generator="generator")
 	private int id;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_ext")
 	private Users user;
 	@ManyToOne
@@ -54,10 +54,30 @@ public class PrinterReservations
 		this.jobScheduleEnd = jobScheduleEnd;
 		this.additionalComments = additionalComments;
 	}
+
+	public String getName(){
+		return user.getName();
+	}
+	
+	public int getId(){
+		return id;
+	}
+
+	public String getJobDescription(){
+		return jobDescription;
+	}
+
+	public String getPrinter(){
+		return reservable.getRoom();
+	}
 	
 	public Date getJobSchedule()
 	{
 		return this.jobSchedule;
+	}
+	
+	public String getJobDuration() {
+		return jobDuration;
 	}
 	
 	public Date getJobScheduleEnd()
